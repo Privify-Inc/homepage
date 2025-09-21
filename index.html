@@ -238,6 +238,52 @@
             justify-content: center;
             align-items: center;
         }
+/* Animated Logo */
+.animated-logo {
+    animation: subtle-float 8s ease-in-out infinite;
+}
+
+@keyframes subtle-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Logo fill animation */
+.logo-fill {
+    transition: fill 0.5s ease;
+}
+
+/* Slower heartbeat and shake effect */
+@keyframes heartbeat-shake {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg); 
+    }
+    20% { 
+        transform: scale(1.08) rotate(-0.5deg); 
+    }
+    40% { 
+        transform: scale(0.95) rotate(0.5deg); 
+    }
+    60% { 
+        transform: scale(1.05) rotate(-0.3deg); 
+    }
+    80% { 
+        transform: scale(1) rotate(0deg); 
+    }
+}
+
+.animated-logo.heartbeat {
+    animation: heartbeat-shake 1.5s ease-in-out;
+}
+
+.animated-logo.heartbeat .logo-fill {
+    fill: rgba(247, 64, 64, 0.3);
+}
+
+/* Spear styling - bright gold color */
+.spear, .spear-glow, .spear-trail {
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1));
+}
 
         .visual-grid {
             display: grid;
@@ -634,7 +680,8 @@
                     </div>
 		</div>
                 </div>
-                <div class="hero-visual fade-in delay-3">
+                <!--
+		<div class="hero-visual fade-in delay-3">
                     <div class="visual-grid">
                         <div class="grid-item"></div>
                         <div class="grid-item"></div>
@@ -663,6 +710,54 @@
                         <div class="grid-item"></div>
                     </div>
                 </div>
+		-->
+		<div class="hero-visual fade-in delay-3">
+    <svg class="animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="600" height="600">
+        <!-- Your exact Privify logo scaled up -->
+        <g transform="scale(0.2) translate(200, 200)">
+            <path id="privify-logo-path" d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" 
+                          fill="none" 
+                          stroke="rgba(247, 64, 64, 0.2)" 
+                          stroke-width="20"/>
+            
+            <!-- Fill version for heartbeat -->
+            <path class="logo-fill" d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" 
+                          fill="rgba(247, 64, 64, 0.05)"/>
+        </g>
+        
+        <!-- Animated spear that follows the logo outline - bright yellow/gold color -->
+        <circle class="spear" r="10" fill="#FFD700">
+            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#privify-logo-path"/>
+            </animateMotion>
+        </circle>
+        
+        <!-- Glow effect -->
+        <circle class="spear-glow" r="20" fill="rgba(255, 215, 0, 0.4)" filter="url(#glow)">
+            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#privify-logo-path"/>
+            </animateMotion>
+        </circle>
+        
+        <!-- Trail effect -->
+        <circle class="spear-trail" r="6" fill="rgba(255, 215, 0, 0.6)">
+            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto" begin="-0.2s">
+                <mpath href="#privify-logo-path"/>
+            </animateMotion>
+        </circle>
+        
+        <!-- SVG filters -->
+        <defs>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+    </svg>
+</div>
             </div>
         </section>
     </main>
@@ -702,7 +797,27 @@
             lastScroll = currentScroll;
         });
 
-        // Visual grid animation
+        // Logo heartbeat animation
+function setupLogoAnimation() {
+    const logo = document.querySelector('.animated-logo');
+    
+    if (!logo) return;
+    
+    // Trigger heartbeat every 4 seconds (matching spear animation)
+    setInterval(() => {
+        logo.classList.add('heartbeat');
+        setTimeout(() => {
+            logo.classList.remove('heartbeat');
+        }, 1500); // Match the CSS animation duration
+    }, 4000);
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', () => {
+    setupLogoAnimation();
+});
+	<!--
+	// Visual grid animation
         const gridItems = document.querySelectorAll('.grid-item');
         
         function animateGrid() {
@@ -719,6 +834,7 @@
 
         // Run animation every 2 seconds
         setInterval(animateGrid, 2000);
+	-->
 
         // Intersection Observer for fade-in animations
         const observerOptions = {
