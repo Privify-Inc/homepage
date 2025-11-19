@@ -189,6 +189,52 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-toggle {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            font: inherit;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px); /* avoid hover gap so menu doesn't disappear */
+            right: 0;
+            min-width: 220px;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            padding: 0.5rem;
+            display: none;
+            z-index: 1001;
+        }
+        .dropdown.open .dropdown-menu { display: block; }
+        .dropdown-item {
+            display: block;
+            padding: 0.6rem 0.8rem;
+            border-radius: 8px;
+            color: var(--gray-800);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .dropdown-item:hover {
+            background: #f6f6f6;
+        }
+        .dropdown-item.disabled {
+            color: var(--gray-400);
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -600,12 +646,20 @@
                     <span>PRIVIFY</span>
                 </a>
                 <div class="nav-links">
-                    <!-- 
-		    <a href="/product" class="nav-link">Product</a>
-                    <a href="/pricing" class="nav-link">Pricing</a>
-                    <a href="/about" class="nav-link">About</a>
-                    <a href="/learn" class="nav-link">Learn</a>
-		    -->
+                    <a href="coming-soon.html" class="nav-link">Product</a>
+                    <a href="coming-soon.html" class="nav-link">Pricing</a>
+                    <a href="coming-soon.html" class="nav-link">Docs</a>
+                    <a href="coming-soon.html" class="nav-link">Downloads</a>
+                    <div class="dropdown">
+                        <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="tools-menu">
+                            Tools
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                        </button>
+                        <div id="tools-menu" class="dropdown-menu" role="menu" aria-label="Tools">
+                            <a class="dropdown-item" href="tools/photoScrubber/index.html">Photo Scrubber</a>
+                            <a class="dropdown-item" href="coming-soon.html" title="Coming soon">Other tools (coming soon)</a>
+                        </div>
+                    </div>
                     <a href="#waitlist" class="nav-cta">Request an Invite</a>
                 </div>
                 <button class="mobile-menu-btn" aria-label="Open menu">
@@ -815,6 +869,45 @@ function setupLogoAnimation() {
 // Call on page load
 document.addEventListener('DOMContentLoaded', () => {
     setupLogoAnimation();
+});
+// Dropdown click-to-open behavior
+document.addEventListener('DOMContentLoaded', () => {
+    const dropdown = document.querySelector('.dropdown');
+    if (!dropdown) return;
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    const menu = dropdown.querySelector('.dropdown-menu');
+
+    const closeMenu = () => {
+        dropdown.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+    };
+
+    const openMenu = () => {
+        dropdown.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+    };
+
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (dropdown.classList.contains('open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
 });
 	<!--
 	// Visual grid animation

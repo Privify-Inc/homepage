@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tools · Privify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --red:#E85D54; --card:#0f0f0f; --border: rgba(255,255,255,0.08); --muted:#9CA3AF; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background:#000; color:#fff; }
+    .header { position: fixed; top:0; left:0; right:0; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 1.5rem 0; z-index:1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  nav { display:flex; justify-content: space-between; align-items: center; }
+  .nav-links { display:flex; align-items:center; gap: 3rem; }
+  .nav-link { color:#4B5563; text-decoration:none; font-weight:500; }
+  .nav-link:hover { color:#000; }
+  .nav-cta { background:#000; color:#fff; padding:.5rem 1rem; border-radius:8px; text-decoration:none; font-weight:600; }
+  .dropdown { position: relative; }
+  .dropdown-toggle { color:#4B5563; text-decoration:none; font-weight:500; display:inline-flex; align-items:center; gap:.4rem; background:transparent; border:none; cursor:pointer; padding:0; font:inherit; }
+  .dropdown-menu { position:absolute; top: calc(100% + 8px); right:0; min-width:220px; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.12); padding:.5rem; display:none; z-index:1001; }
+  .dropdown.open .dropdown-menu { display:block; }
+  .dropdown-item { display:block; padding:.6rem .8rem; border-radius:8px; color:#111827; text-decoration:none; font-weight:500; }
+  .dropdown-item:hover { background:#f6f6f6; }
+  .logo { display:flex; gap:.75rem; align-items:center; color:#000; text-decoration:none; font-weight:700; font-size:1.5rem; }
+  main { padding: 3rem 1rem; padding-top: 112px; }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: .5rem; }
+    p.lead { color: var(--muted); margin:0 0 1.5rem; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .card { background: var(--card); border:1px solid var(--border); border-radius: 14px; padding:1.25rem; }
+    .card h3 { margin:.25rem 0 .25rem; }
+    .card p { color: var(--muted); margin:0; }
+    .card a { display:inline-block; margin-top:.75rem; text-decoration:none; font-weight:600; color:#fff; background: #1b1b1b; border:1px solid var(--border); padding:.55rem .8rem; border-radius:10px; }
+    .badge { display:inline-block; padding:.25rem .55rem; border:1px solid var(--border); color:#ddd; border-radius:999px; font-size:.8rem; }
+    .disabled { opacity:.55; pointer-events:none; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav>
+        <a class="logo" href="../index.html" aria-label="Privify home">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="36" width="36" aria-hidden="true">
+            <g transform="scale(0.025)">
+              <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
+            </g>
+          </svg>
+          <span>PRIVIFY</span>
+        </a>
+        <div class="nav-links">
+          <a class="nav-link" href="../index.html">Home</a>
+          <a class="nav-link" href="../coming-soon.html">Product</a>
+          <a class="nav-link" href="../coming-soon.html">Pricing</a>
+          <a class="nav-link" href="../coming-soon.html">Docs</a>
+          <a class="nav-link" href="../coming-soon.html">Downloads</a>
+          <div class="dropdown">
+            <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="tools-menu">
+              Tools
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div id="tools-menu" class="dropdown-menu" role="menu" aria-label="Tools">
+              <a class="dropdown-item" href="./photoScrubber/index.html">Photo Scrubber</a>
+              <a class="dropdown-item" href="../coming-soon.html" title="Coming soon">Other tools (coming soon)</a>
+            </div>
+          </div>
+          <a class="nav-cta" href="../index.html#waitlist">Request an Invite</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <h1>Tools</h1>
+      <p class="lead">Utilities to protect your data and privacy.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="badge">Available</span>
+          <h3>Photo Scrubber</h3>
+          <p>Remove metadata and analyze images privately in your browser.</p>
+          <a href="photoScrubber/index.html">Open Photo Scrubber</a>
+        </div>
+        <div class="card disabled" aria-disabled="true">
+          <span class="badge">Coming soon</span>
+          <h3>Other tools</h3>
+          <p>More privacy tools are on the way.</p>
+          <a href="/coming-soon.html" aria-disabled="true">Coming soon</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <style>
+    /* Footer styles like main */
+    .footer { padding: 4rem 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 6rem; }
+    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { display: flex; align-items: center; gap: 1rem; color: #9CA3AF; font-size: 0.875rem; }
+  </style>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="24" width="24" style="opacity: 0.5;">
+          <g transform="scale(0.025)">
+            <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
+          </g>
+        </svg>
+        <span>© 2025 Privify Inc., All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Dropdown behavior (match main)
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdown = document.querySelector('.dropdown');
+      if (!dropdown) return;
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const closeMenu = () => { dropdown.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); };
+      const openMenu = () => { dropdown.classList.add('open'); toggle.setAttribute('aria-expanded','true'); };
+      toggle.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); dropdown.classList.contains('open') ? closeMenu() : openMenu(); });
+      document.addEventListener('click', (e)=>{ if(!dropdown.contains(e.target)) closeMenu(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+    });
+  </script>
+</body>
+</html>
