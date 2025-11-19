@@ -25,6 +25,17 @@
   .dropdown-item { display:block; padding:.6rem .8rem; border-radius:8px; color:#111827; text-decoration:none; font-weight:500; }
   .dropdown-item:hover { background:#f6f6f6; }
   .logo { display:flex; gap:.75rem; align-items:center; color:#000; text-decoration:none; font-weight:700; font-size:1.5rem; }
+  .mobile-menu-btn { display:none; background:none; border:none; color:#000; cursor:pointer; padding:.5rem; }
+  .mobile-menu { display:none; position:fixed; top:72px; left:0; right:0; background:#fff; border-top:1px solid rgba(0,0,0,0.08); box-shadow:0 10px 30px rgba(0,0,0,0.12); z-index:999; }
+  .mobile-menu.open { display:block; }
+  .mobile-menu .mobile-menu-inner { padding:1rem 2rem; }
+  .mobile-menu a { display:block; padding:.75rem 0; color:#4B5563; text-decoration:none; font-weight:500; }
+  .mobile-menu a:hover { color:#000; }
+  .mobile-tools { margin-top:.25rem; }
+  .mobile-submenu-toggle{ display:flex; align-items:center; justify-content:space-between; width:100%; padding:.75rem 0; background:none; border:none; color:#4B5563; font-weight:600; cursor:pointer; }
+  .mobile-submenu{ padding-left:.75rem; border-left:2px solid rgba(0,0,0,0.06); }
+  .mobile-submenu a{ padding:.5rem 0; }
+  @media (max-width:768px){ .nav-links{ display:none; } .mobile-menu-btn{ display:block; } }
   main { padding: 3rem 1rem; padding-top: 112px; }
     h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: .5rem; }
     p.lead { color: var(--muted); margin:0 0 1.5rem; }
@@ -63,14 +74,39 @@
             </button>
             <div id="tools-menu" class="dropdown-menu" role="menu" aria-label="Tools">
               <a class="dropdown-item" href="./photoScrubber/index.html">Photo Scrubber</a>
-              <a class="dropdown-item" href="../coming-soon.html" title="Coming soon">Other tools (coming soon)</a>
             </div>
           </div>
           <a class="nav-cta" href="../index.html#waitlist">Request an Invite</a>
         </div>
+        <button class="mobile-menu-btn" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
       </nav>
     </div>
   </header>
+  <!-- Mobile menu content -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner container">
+      <a href="../index.html">Home</a>
+      <a href="../coming-soon.html">Product</a>
+      <a href="../coming-soon.html">Pricing</a>
+      <a href="../coming-soon.html">Docs</a>
+      <a href="../coming-soon.html">Downloads</a>
+      <a href="../coming-soon.html">Careers</a>
+      <div class="mobile-tools">
+        <button class="mobile-submenu-toggle" aria-expanded="false" aria-controls="mobile-tools-menu">
+          <span>Tools</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div id="mobile-tools-menu" class="mobile-submenu" hidden>
+          <a href="./photoScrubber/index.html">Photo Scrubber</a>
+        </div>
+      </div>
+      <a href="../index.html#waitlist">Request an Invite</a>
+    </div>
+  </div>
   <main>
     <div class="container">
       <h1>Tools</h1>
@@ -81,12 +117,6 @@
           <h3>Photo Scrubber</h3>
           <p>Remove metadata and analyze images privately in your browser.</p>
           <a href="photoScrubber/index.html">Open Photo Scrubber</a>
-        </div>
-        <div class="card disabled" aria-disabled="true">
-          <span class="badge">Coming soon</span>
-          <h3>Other tools</h3>
-          <p>More privacy tools are on the way.</p>
-          <a href="../coming-soon.html" aria-disabled="true">Coming soon</a>
         </div>
       </div>
     </div>
@@ -120,6 +150,42 @@
       toggle.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); dropdown.classList.contains('open') ? closeMenu() : openMenu(); });
       document.addEventListener('click', (e)=>{ if(!dropdown.contains(e.target)) closeMenu(); });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+    });
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.querySelector('.mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      const toggleMenu = () => {
+        const isOpen = menu.classList.toggle('open');
+        menu.setAttribute('aria-hidden', String(!isOpen));
+      };
+      btn.addEventListener('click', (e) => { e.preventDefault(); toggleMenu(); });
+      document.addEventListener('click', (e) => {
+        if (!menu.classList.contains('open')) return;
+        const header = document.querySelector('.header');
+        if (header && !header.contains(e.target) && !menu.contains(e.target)) {
+          menu.classList.remove('open');
+          menu.setAttribute('aria-hidden','true');
+        }
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } });
+    });
+  </script>
+  <script>
+    // Mobile submenu (Tools) toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = btn.getAttribute('aria-controls');
+          const panel = id && document.getElementById(id);
+          if (!panel) return;
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          panel.hidden = expanded;
+        });
+      });
     });
   </script>
 </body>

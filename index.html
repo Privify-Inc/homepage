@@ -530,6 +530,45 @@
             padding: 0.5rem;
         }
 
+        /* Mobile menu panel */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            z-index: 999;
+        }
+        .mobile-menu.open { display: block; }
+        .mobile-menu .mobile-menu-inner { padding: 1rem 2rem; }
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .mobile-menu a:hover { color: var(--black); }
+        /* Mobile submenu (Tools) */
+        .mobile-tools { margin-top: .25rem; }
+        .mobile-submenu-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0.75rem 0;
+            background: none;
+            border: none;
+            color: var(--gray-600);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .mobile-submenu { padding-left: .75rem; border-left: 2px solid rgba(0,0,0,0.06); }
+        .mobile-submenu a { padding: 0.5rem 0; }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .hero-content {
@@ -658,7 +697,6 @@
                         </button>
                         <div id="tools-menu" class="dropdown-menu" role="menu" aria-label="Tools">
                             <a class="dropdown-item" href="tools/photoScrubber/index.html">Photo Scrubber</a>
-                            <a class="dropdown-item" href="coming-soon.html" title="Coming soon">Other tools (coming soon)</a>
                         </div>
                     </div>
                     <a href="#waitlist" class="nav-cta">Request an Invite</a>
@@ -816,6 +854,26 @@
             </div>
         </section>
     </main>
+    <!-- Mobile menu content -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-inner container">
+            <a href="coming-soon.html">Product</a>
+            <a href="coming-soon.html">Pricing</a>
+            <a href="coming-soon.html">Docs</a>
+            <a href="coming-soon.html">Downloads</a>
+            <a href="coming-soon.html">Careers</a>
+            <div class="mobile-tools">
+                <button class="mobile-submenu-toggle" aria-expanded="false" aria-controls="mobile-tools-menu">
+                    <span>Tools</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div id="mobile-tools-menu" class="mobile-submenu" hidden>
+                    <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
+                </div>
+            </div>
+            <a href="#waitlist">Request an Invite</a>
+        </div>
+    </div>
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-left">
@@ -870,6 +928,47 @@ function setupLogoAnimation() {
 // Call on page load
 document.addEventListener('DOMContentLoaded', () => {
     setupLogoAnimation();
+});
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+    const toggleMenu = () => {
+        const isOpen = menu.classList.toggle('open');
+        menu.setAttribute('aria-hidden', String(!isOpen));
+    };
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleMenu();
+    });
+    document.addEventListener('click', (e) => {
+        if (!menu.classList.contains('open')) return;
+        const header = document.getElementById('header');
+        if (header && !header.contains(e.target) && !menu.contains(e.target)) {
+            menu.classList.remove('open');
+            menu.setAttribute('aria-hidden', 'true');
+        }
+    });
+});
+// Mobile submenu (Tools) toggle
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const controls = btn.getAttribute('aria-controls');
+            if (!controls) return;
+            const panel = document.getElementById(controls);
+            if (!panel) return;
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!expanded));
+            if (expanded) {
+                panel.hidden = true;
+            } else {
+                panel.hidden = false;
+            }
+        });
+    });
 });
 // Dropdown click-to-open behavior
 document.addEventListener('DOMContentLoaded', () => {
