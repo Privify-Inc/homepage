@@ -1,0 +1,10 @@
+{
+  "github.copilot.advanced": {
+    "context": {
+      "include": ["global_rules.md"]
+    }
+  },
+  "chatgpt.defaultModel": "gpt-5",
+  "chatgpt.preferredAgent": "gpt-5",
+  "chatgpt.model": "gpt-5"
+}

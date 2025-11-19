@@ -1,0 +1,240 @@
+<!--
+  Copyright (c) 2025 Privify Inc.
+  Licensed under the MIT License.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Photo Scrubber</title>
+  <!-- Fonts for header to match index2 top bar -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    /* Top navigation to match main site */
+    .header { position: fixed; top: 0; left: 0; right: 0; padding: 1.5rem 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 1000; transition: all 0.3s ease; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    nav { display:flex; justify-content: space-between; align-items: center; }
+    .logo { display:flex; align-items:center; gap: .75rem; text-decoration:none; color:#000; font-weight:700; font-size:1.5rem; }
+  .nav-links { display:flex; align-items:center; gap: 3rem; }
+    .nav-link { color:#4B5563; text-decoration:none; font-weight:500; }
+    .nav-link:hover { color:#000; }
+    .nav-cta { background:#000; color:#fff; padding:.5rem 1rem; border-radius:8px; text-decoration:none; font-weight:600; }
+    .dropdown { position: relative; }
+    .dropdown-toggle { color:#4B5563; text-decoration:none; font-weight:500; display:inline-flex; align-items:center; gap:.4rem; background:transparent; border:none; cursor:pointer; padding:0; font:inherit; }
+    .dropdown-menu { position:absolute; top: calc(100% + 8px); right:0; min-width:220px; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.12); padding:.5rem; display:none; z-index:1001; }
+    .dropdown.open .dropdown-menu { display:block; }
+    .dropdown-item { display:block; padding:.6rem .8rem; border-radius:8px; color:#111827; text-decoration:none; font-weight:500; }
+    .dropdown-item:hover { background:#f6f6f6; }
+    @media (max-width: 768px){ .nav-links{ display:none; } }
+
+    /* Footer styles to match main site */
+    .footer { padding: 4rem 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 6rem; }
+    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { display: flex; align-items: center; gap: 1rem; color: #9CA3AF; font-size: 0.875rem; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-link { color: #9CA3AF; text-decoration: none; font-size: 0.875rem; }
+    .footer-link:hover { color: #ffffff; }
+  </style>
+</head>
+<body>
+  <!-- Header replicated to match index2 top white bar exactly -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav>
+        <a href="../../index.html" class="logo" aria-label="Privify home">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="36" width="36" aria-hidden="true" focusable="false">
+            <g transform="scale(0.025)">
+              <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
+            </g>
+          </svg>
+          <span>PRIVIFY</span>
+        </a>
+        <div class="nav-links">
+          <a class="nav-link" href="../../index.html">Home</a>
+          <a class="nav-link" href="../../coming-soon.html">Product</a>
+          <a class="nav-link" href="../../coming-soon.html">Pricing</a>
+          <a class="nav-link" href="../../coming-soon.html">Docs</a>
+          <a class="nav-link" href="../../coming-soon.html">Downloads</a>
+          <div class="dropdown">
+            <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="tools-menu">
+              Tools
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div id="tools-menu" class="dropdown-menu" role="menu" aria-label="Tools">
+              <a class="dropdown-item" href="./index.html">Photo Scrubber</a>
+              <a class="dropdown-item" href="../../coming-soon.html" title="Coming soon">Other tools (coming soon)</a>
+            </div>
+          </div>
+          <a class="nav-cta" href="../../index.html#waitlist">Request an Invite</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 96px;">
+    <header class="headerbar">
+      <h1>Photo Scrubber</h1>
+      <p class="privacy-note">All processing happens in your browser. Nothing is uploaded.</p>
+    </header>
+
+    <main class="panel">
+      <section class="main-layout">
+        <div class="image-area">
+          <input id="fileInput" type="file" accept="image/*" class="visually-hidden" />
+          <div id="dropZone" class="dropzone" role="button" tabindex="0" aria-label="Select or drop an image">Drop image here or click to pick</div>
+          <p class="muted small-note">Supported: JPG, PNG, WebP, AVIF, GIF, BMP</p>
+          <p id="heicNote" class="muted small-note hidden"></p>
+          <img id="preview" class="preview hidden" alt="Selected preview" />
+        </div>
+
+        <div class="v-sep" aria-hidden="true"></div>
+
+        <div class="right-area">
+          <h3 class="field">AI Photo Insight</h3>
+          
+          <div id="localProgress" class="progress hidden" aria-live="polite" aria-label="Local analysis progress">
+            <div class="progress-bar" id="localProgressBar" style="width:0%"></div>
+            <div class="progress-label" id="localProgressLabel">Preparing…</div>
+          </div>
+          <article id="storyBox" class="story" aria-live="polite">
+            <div id="storyText" class="content"></div>
+            <div id="storyBadges" class="badges" aria-label="Key photo facts"></div>
+            <div id="importantInStory" class="important-inline"></div>
+            <div id="analysisInStory" class="analysis-lines"></div>
+          </article>
+        </div>
+      </section>
+
+      <div class="cta-row">
+        <button id="stripBtn" class="btn-primary" title="Remove common metadata by re-encoding via canvas">Strip metadata and download</button>
+      </div>
+      <div class="h-sep" aria-hidden="true"></div>
+
+      <!-- Optional important note area used by scripts when EXIF is missing -->
+      <p id="important" class="center-note muted"></p>
+
+      <section class="meta-row" aria-label="Metadata panels">
+        <div class="meta-panel">
+          <div class="meta-header">
+            <h3 class="field" id="basicInfoTitle">Basic file info</h3>
+            <button class="toggle-btn" type="button" aria-controls="basicInfo" aria-expanded="true" data-target="basicInfo" title="Collapse section" aria-label="Collapse Basic file info">−</button>
+          </div>
+          <pre id="basicInfo" aria-label="Basic file info">No file chosen</pre>
+        </div>
+        <div class="meta-panel">
+          <div class="meta-header">
+            <h3 class="field" id="exifInfoTitle">EXIF and other tags</h3>
+            <button class="toggle-btn" type="button" aria-controls="exifInfo" aria-expanded="true" data-target="exifInfo" title="Collapse section" aria-label="Collapse EXIF and other tags">−</button>
+          </div>
+          <pre id="exifInfo" aria-label="EXIF and other tags">No EXIF data parsed</pre>
+        </div>
+      </section>
+
+      <div class="bottom-cta-row">
+        <button id="copyBtn" class="btn-primary" title="Copy metadata JSON to clipboard">Copy metadata to clipboard</button>
+      </div>
+
+      <div class="h-sep" aria-hidden="true"></div>
+      <!-- Bulk ZIP cleaning section (bottom) -->
+      <section class="zip-section" aria-label="Bulk clean images from a ZIP">
+        <h3 class="field">Clean All Your Photos in One Go</h3>
+        <input id="zipInput" type="file" accept=".zip" class="visually-hidden" />
+        <div id="zipDropZone" class="dropzone" role="button" tabindex="0" aria-label="Drop a ZIP of images or click to pick">Drop ZIP here or click to pick</div>
+        <p class="muted small-note">We’ll clean JPG, PNG and WEBP in-browser and download a new ZIP.</p>
+        <p id="zipStatus" class="muted"></p>
+      </section>
+    </main>
+
+  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="24" width="24" style="opacity: 0.5;">
+          <g transform="scale(0.025)">
+            <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
+          </g>
+        </svg>
+        <span>© 2025 Privify Inc., All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App modal (custom popup) -->
+  <div id="appModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-overlay" data-close="true"></div>
+    <div class="modal-content" role="document">
+      <h3 id="modalTitle" class="modal-title">Notice</h3>
+      <div id="modalMessage" class="modal-message"></div>
+      <div class="modal-actions">
+        <button id="modalOk" class="btn-primary" autofocus>OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- External libraries and app script -->
+  <script defer src="https://unpkg.com/exifr/dist/full.umd.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.13.0/dist/tf.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <!-- High-accuracy local recognition (zero-shot) via Transformers.js (models load to browser; image is not uploaded) -->
+  <script type="module">
+    import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers/dist/transformers.min.js';
+    // Ensure models load from CDN and run locally (WebGPU/WebGL/WASM)
+    env.allowLocalModels = false;
+    // Expose a loader for the zero-shot image classification pipeline
+    window.__loadZeroShotImageClassifier = async () => {
+      if (window.__zeroShotPipeline) return window.__zeroShotPipeline;
+      window.__zeroShotPipeline = await pipeline('zero-shot-image-classification', 'Xenova/clip-vit-base-patch32');
+      return window.__zeroShotPipeline;
+    };
+    // Expose a loader for an on-device image captioning pipeline
+    window.__loadImageCaptioner = async () => {
+      if (window.__imageCaptionPipeline) return window.__imageCaptionPipeline;
+      // Use a lightweight captioning model compatible with Transformers.js
+      window.__imageCaptionPipeline = await pipeline('image-to-text', 'Xenova/vit-gpt2-image-captioning');
+      return window.__imageCaptionPipeline;
+    };
+    // Expose a loader for an on-device text generator to synthesize a detailed 3-section insight
+    window.__loadLocalTextGenerator = async () => {
+      if (window.__localTextGenPipeline) return window.__localTextGenPipeline;
+      // Prefer a text2text model; fall back to text-generation if needed
+      try {
+        window.__localTextGenPipeline = await pipeline('text2text-generation', 'Xenova/LaMini-T5-738M');
+      } catch (e) {
+        try {
+          window.__localTextGenPipeline = await pipeline('text2text-generation', 'Xenova/LaMini-T5-61M');
+        } catch (e2) {
+          window.__localTextGenPipeline = await pipeline('text-generation', 'Xenova/LaMini-GPT-124M');
+        }
+      }
+      return window.__localTextGenPipeline;
+    };
+  </script>
+  <script defer src="./app.js"></script>
+  <script>
+    // Dropdown click behavior (match main site)
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdown = document.querySelector('.dropdown');
+      if (!dropdown) return;
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const closeMenu = () => { dropdown.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); };
+      const openMenu = () => { dropdown.classList.add('open'); toggle.setAttribute('aria-expanded','true'); };
+      toggle.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); dropdown.classList.contains('open') ? closeMenu() : openMenu(); });
+      document.addEventListener('click', (e)=>{ if(!dropdown.contains(e.target)) closeMenu(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+    });
+  </script>
+</body>
+</html>
+
