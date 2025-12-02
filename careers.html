@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Careers · Privify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+  <style>
+    :root { --red:#E85D54; --black:#000; --white:#fff; --muted:#9CA3AF; --border: rgba(255,255,255,0.08); }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background:#000; color:#fff; }
+    .header { position: fixed; top:0; left:0; right:0; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 1.5rem 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    nav { display:flex; justify-content: space-between; align-items: center; }
+    .logo { display:flex; gap:.75rem; align-items:center; color:#000; text-decoration:none; font-weight:700; font-size:1.5rem; }
+    .nav-links { display:flex; align-items:center; gap: 3rem; }
+    .nav-link { color:#4B5563; text-decoration:none; font-weight:500; }
+    .nav-link:hover, .nav-link.active { color:#000; }
+    .nav-cta { background:#000; color:#fff; padding: 0.625rem 1.5rem; border-radius: 8px; text-decoration:none; font-weight:600; }
+    .dropdown { position: relative; }
+    .dropdown-toggle { color:#4B5563; text-decoration:none; font-weight:500; display:inline-flex; align-items:center; gap:.4rem; background:transparent; border:none; cursor:pointer; padding:0; font:inherit; }
+    .dropdown-menu { position:absolute; top: calc(100% + 8px); right:0; min-width:220px; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.12); padding:.5rem; display:none; z-index:1001; }
+    .dropdown.open .dropdown-menu { display:block; }
+    .dropdown-item { display:block; padding:.6rem .8rem; border-radius:8px; color:#111827; text-decoration:none; font-weight:500; }
+    .dropdown-item:hover { background:#f6f6f6; }
+
+    /* Mobile menu */
+    .mobile-menu-btn { display:none; background:none; border:none; color:#000; cursor:pointer; padding:.5rem; }
+    .mobile-menu { display:none; position:fixed; top:72px; left:0; right:0; background:#fff; border-top:1px solid rgba(0,0,0,0.08); box-shadow:0 10px 30px rgba(0,0,0,0.12); z-index:999; }
+    .mobile-menu.open { display:block; }
+    .mobile-menu .mobile-menu-inner { padding:1rem 2rem; }
+    .mobile-menu a { display:block; padding:.75rem 0; color:#4B5563; text-decoration:none; font-weight:500; }
+    .mobile-menu a:hover { color:#000; }
+    .mobile-tools { margin-top:.25rem; }
+    .mobile-submenu-toggle{ display:flex; align-items:center; justify-content:space-between; width:100%; padding:.75rem 0; background:none; border:none; color:#4B5563; font-weight:600; cursor:pointer; }
+    .mobile-submenu{ padding-left:.75rem; border-left:2px solid rgba(0,0,0,0.06); }
+    .mobile-submenu a{ padding:.5rem 0; }
+
+    main { padding: 3rem 1rem; padding-top: 112px; }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 .75rem; }
+    p.lead { color: var(--muted); margin:0 0 2rem; }
+
+    .jobs { display:flex; flex-direction:column; gap: 1rem; }
+    .job-index { display:flex; gap:.5rem; flex-wrap:wrap; margin: 1rem 0 1.5rem; }
+    .job-index a { display:inline-block; padding:.45rem .7rem; border:1px solid var(--border); border-radius:999px; text-decoration:none; color:#ddd; font-size:.9rem; background:#0f0f0f; }
+    .job-index a:hover { border-color:rgba(255,255,255,0.2); }
+
+    .apply-cta { display:flex; align-items:center; gap:.75rem; background:#0f0f0f; border:1px solid var(--border); border-radius:12px; padding:1rem 1.25rem; margin: 1rem 0 1.5rem; }
+    .apply-cta .label { color:#9CA3AF; }
+    .apply-cta .email { color:#eee; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    .apply-cta a.cta { color:#fff; text-decoration:none; background:#111; border:1px solid var(--border); padding:.5rem .8rem; border-radius:8px; font-weight:600; }
+
+    .job-card { background:#0f0f0f; border:1px solid var(--border); border-radius:14px; padding:1rem 1.25rem; }
+    .job-card.expanded { border-color: rgba(255,255,255,0.2); }
+    .job-header { display:grid; grid-template-columns: 1fr auto; gap:.5rem 1rem; align-items:center; cursor:pointer; }
+    .job-title { margin:0; font-size:1.25rem; }
+    .job-meta { color:#9CA3AF; margin:0; }
+    .job-location { color:#9CA3AF; font-size:.95rem; }
+    .expand-btn { background:#111; color:#fff; border:1px solid var(--border); border-radius:10px; padding:.4rem .7rem; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:.35rem; }
+    .expand-btn svg { transition: transform .2s ease; }
+    .job-card.expanded .expand-btn svg { transform: rotate(180deg); }
+    .job-content { display:none; margin-top: .75rem; }
+    .job-card.expanded .job-content { display:block; }
+    .job-section { margin: 1rem 0; }
+    .job-section h3 { margin:.25rem 0 .5rem; font-size:1rem; color:#ddd; letter-spacing:.02em; text-transform:uppercase; }
+    .job-section p { margin:0; color:#d1d5db; line-height:1.6; }
+    .job-section ul { margin:.25rem 0 0 1.1rem; color:#d1d5db; line-height:1.6; }
+    .apply-link { display:inline-block; text-decoration:none; font-weight:600; color:#fff; background:#111; border:1px solid var(--border); padding:.55rem .9rem; border-radius:10px; }
+
+    /* Footer to match main */
+    .footer { padding: 4rem 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 6rem; }
+    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { display: flex; align-items: center; gap: 1rem; color: #9CA3AF; font-size: 0.875rem; }
+
+    @media (max-width:768px){
+      .nav-links{ display:none; }
+      .mobile-menu-btn{ display:block; }
+      .job-index{ overflow-x:auto; -webkit-overflow-scrolling:touch; white-space:nowrap; padding-bottom:.25rem; margin-right:-1rem; padding-right:1rem; }
+      .job-index a{ white-space:nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="container">
+      <nav>
+        <a class="logo" href="index.html" aria-label="Privify home">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="36" width="36" aria-hidden="true">
+            <g transform="scale(0.025)">
+              <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
+            </g>
+          </svg>
+          <span>PRIVIFY</span>
+        </a>
+        <div class="nav-links">
+          <a class="nav-link" href="coming-soon.html">Product</a>
+          <a class="nav-link" href="coming-soon.html">Pricing</a>
+          <a class="nav-link" href="coming-soon.html">Docs</a>
+          <a class="nav-link" href="coming-soon.html">Downloads</a>
+          <a class="nav-link active" href="careers.html">Careers</a>
+          <div class="dropdown">
+            <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="tools-menu">
+              Tools
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div id="tools-menu" class="dropdown-menu" role="menu" aria-label="Tools">
+              <a class="dropdown-item" href="tools/photoScrubber/index.html">Photo Scrubber</a>
+            </div>
+          </div>
+          <a class="nav-cta" href="index.html#waitlist">Request an Invite</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile menu content -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner container">
+      <a href="index.html">Home</a>
+      <a href="coming-soon.html">Product</a>
+      <a href="coming-soon.html">Pricing</a>
+      <a href="coming-soon.html">Docs</a>
+      <a href="coming-soon.html">Downloads</a>
+      <a href="careers.html">Careers</a>
+      <div class="mobile-tools">
+        <button class="mobile-submenu-toggle" aria-expanded="false" aria-controls="mobile-tools-menu">
+          <span>Tools</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div id="mobile-tools-menu" class="mobile-submenu" hidden>
+          <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
+        </div>
+      </div>
+      <a href="index.html#waitlist">Request an Invite</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+      <h1>Careers at Privify</h1>
+      <p class="lead">Join us in building privacy-first products that protect users across platforms.</p>
+      <article class="job-card" role="region" aria-labelledby="why-privify-title" style="margin: 1rem 0 1.5rem;">
+        <h2 id="why-privify-title" class="job-title" style="margin:0 0 .5rem; font-size:1.1rem;">Why work at Privify</h2>
+        <div class="job-section" style="margin:.5rem 0 0;">
+          <ul>
+            <li>Mission-driven: build privacy-first products that protect people and data.</li>
+            <li>High ownership: small, senior team with outsized product impact.</li>
+            <li>Multi-platform scope: design and ship across desktop, iOS and Android.</li>
+            <li>Pragmatic engineering: modern stack, fast iteration, quality and security minded.</li>
+            <li>Hybrid collaboration: teammates in San Jose, California and Hyderabad, India.</li>
+            <li>Every full-time team member receives competitive pay and a meaningful equity grant because we believe in shared ownership.</li>
+          </ul>
+        </div>
+      </article>
+      <div class="apply-cta" role="note" aria-label="Application instructions">
+        <span class="label">Send resume to</span>
+        <span class="email">talent@dataprivify.com</span>
+        <a class="cta" href="mailto:talent@dataprivify.com?subject=Application%3A%20Privify">Open email</a>
+      </div>
+      <nav class="job-index" aria-label="Open roles index">
+        <a href="#ux-designer">UX Designer</a>
+        <a href="#senior-ux-designer">Senior UX Designer</a>
+        <a href="#senior-frontend-engineer">Senior Frontend Engineer</a>
+        <a href="#senior-backend-engineer">Senior Backend Engineer</a>
+        <a href="#marketing-specialist">Marketing Specialist</a>
+        <a href="#sales-executive">Sales Executive</a>
+      </nav>
+      <section class="jobs" aria-label="Open roles">
+        <article class="job-card" id="ux-designer">
+          <div class="job-header" role="button" tabindex="0" aria-controls="ux-designer-content" aria-expanded="false">
+            <div>
+              <h2 class="job-title">UX Designer (2 to 5 years experience)</h2>
+              <p class="job-meta">Design • Multi-platform • Full-time</p>
+              <p class="job-location">Hybrid role in San Jose, California or Hyderabad, India</p>
+            </div>
+            <button class="expand-btn" aria-label="Toggle details" aria-expanded="false" aria-controls="ux-designer-content">
+              Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="job-content" id="ux-designer-content" hidden>
+            <div class="job-section">
+              <h3>Role Overview</h3>
+              <p>You will design user experiences for a multi‑platform product that runs on desktop (macOS, Windows), iOS and Android. You will join an early‑stage team where design decisions shape the full product journey. You will convert ideas into intuitive flows, refine complex security‑driven use cases, and help build a consistent experience across platforms. You will collaborate closely with product, engineering and founders, working in a fast‑moving startup culture with high ownership and rapid iteration.</p>
+            </div>
+            <div class="job-section">
+              <h3>Responsibilities</h3>
+              <ul>
+                <li>Design end‑to‑end workflows, wireframes, prototypes and high‑fidelity UI</li>
+                <li>Create smooth interactions for desktop and mobile platforms</li>
+                <li>Conduct user interviews and usability tests to validate assumptions</li>
+                <li>Maintain and grow a cross‑platform design system</li>
+                <li>Work with engineers to ensure design accuracy during implementation</li>
+                <li>Use behavioural data and user feedback to refine flows</li>
+                <li>Document design decisions and contribute to product direction</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>Requirements</h3>
+              <ul>
+                <li>2 to 5 years in UX or Product Design</li>
+                <li>Strong portfolio showing UX thinking and interaction design</li>
+                <li>Proficiency in Figma</li>
+                <li>Experience in multi‑device or multi‑platform design</li>
+                <li>Ability to thrive in early‑stage environments with shifting priorities</li>
+              </ul>
+            </div>
+              <div class="job-section">
+                <h3>How to apply</h3>
+                <a class="apply-link" href="mailto:talent@dataprivify.com?subject=Application%3A%20UX%20Designer">Email talent@dataprivify.com</a>
+              </div>
+          </div>
+        </article>
+
+        <article class="job-card" id="senior-ux-designer">
+          <div class="job-header" role="button" tabindex="0" aria-controls="senior-ux-content" aria-expanded="false">
+            <div>
+              <h2 class="job-title">Senior UX Designer (5+ years experience)</h2>
+              <p class="job-meta">Design • Multi-platform • Full-time</p>
+              <p class="job-location">Hybrid role in San Jose, California or Hyderabad, India</p>
+            </div>
+            <button class="expand-btn" aria-label="Toggle details" aria-expanded="false" aria-controls="senior-ux-content">
+              Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="job-content" id="senior-ux-content" hidden>
+            <div class="job-section">
+              <h3>Role Overview</h3>
+              <p>You will lead UX for a multi‑platform security and analytics product used across macOS, Windows, iOS, Android and desktop. You will define structure, navigation, workflows and interaction patterns that work seamlessly across devices. You will partner with founders, engineering leadership and customers to shape the long‑term UX strategy. You will also guide designers and ensure consistent design quality across the organisation.</p>
+            </div>
+            <div class="job-section">
+              <h3>Responsibilities</h3>
+              <ul>
+                <li>Own UX strategy and design direction for major product modules</li>
+                <li>Lead research and convert insights into navigation improvements and product decisions</li>
+                <li>Build and evolve a design system that supports desktop and mobile</li>
+                <li>Create flows for complex, high‑trust, security‑driven features</li>
+                <li>Collaborate with engineering leadership on planning and feature design</li>
+                <li>Present UX rationale to stakeholders and influence roadmap decisions</li>
+                <li>Mentor designers and uphold design quality standards</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>Requirements</h3>
+              <ul>
+                <li>5+ years in UX or Product Design</li>
+                <li>Portfolio showing strong problem solving and system‑level thinking</li>
+                <li>Experience designing multi‑platform experiences</li>
+                <li>Ability to simplify complex workflows and technical concepts</li>
+                <li>Strong communication and storytelling skills</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>How to apply</h3>
+              <a class="apply-link" href="mailto:talent@dataprivify.com?subject=Application%3A%20Senior%20UX%20Designer">Email talent@dataprivify.com</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="job-card" id="senior-frontend-engineer">
+          <div class="job-header" role="button" tabindex="0" aria-controls="senior-fe-content" aria-expanded="false">
+            <div>
+              <h2 class="job-title">Senior Frontend Engineer (5+ years experience)</h2>
+              <p class="job-meta">Engineering • Frontend • Full-time</p>
+              <p class="job-location">Hybrid role in San Jose, California or Hyderabad, India</p>
+            </div>
+            <button class="expand-btn" aria-label="Toggle details" aria-expanded="false" aria-controls="senior-fe-content">
+              Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="job-content" id="senior-fe-content" hidden>
+            <div class="job-section">
+              <h3>Role Overview</h3>
+              <p>You will own frontend architecture for a security and privacy platform that operates across desktop and mobile. You will build fast, reliable and visually consistent interfaces that power monitoring, analytics and user interaction systems. You will work closely with UX and backend teams and will have a major influence on technical decisions and engineering culture in an early‑stage startup.</p>
+            </div>
+            <div class="job-section">
+              <h3>Responsibilities</h3>
+              <ul>
+                <li>Architect and build key frontend modules using React or Vue</li>
+                <li>Convert designs into high‑quality responsive UI for web and desktop wrappers</li>
+                <li>Optimise performance, load times and rendering</li>
+                <li>Build reusable components and strengthen internal UI libraries</li>
+                <li>Integrate cleanly with backend APIs</li>
+                <li>Drive engineering best practices, testing and code reviews</li>
+                <li>Work with product and design to plan and implement features</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>Requirements</h3>
+              <ul>
+                <li>5+ years in frontend engineering</li>
+                <li>Expertise in React or Vue and TypeScript</li>
+                <li>Strong understanding of state management and frontend architecture</li>
+                <li>Experience building complex dashboards or interactive views</li>
+                <li>Ability to lead decisions and mentor engineers</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>How to apply</h3>
+              <a class="apply-link" href="mailto:talent@dataprivify.com?subject=Application%3A%20Senior%20Frontend%20Engineer">Email talent@dataprivify.com</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="job-card" id="senior-backend-engineer">
+          <div class="job-header" role="button" tabindex="0" aria-controls="senior-be-content" aria-expanded="false">
+            <div>
+              <h2 class="job-title">Senior Backend Engineer (5+ years experience)</h2>
+              <p class="job-meta">Engineering • Backend • Full-time</p>
+              <p class="job-location">Hybrid role in San Jose, California or Hyderabad, India</p>
+            </div>
+            <button class="expand-btn" aria-label="Toggle details" aria-expanded="false" aria-controls="senior-be-content">
+              Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="job-content" id="senior-be-content" hidden>
+            <div class="job-section">
+              <h3>Role Overview</h3>
+              <p>You will lead backend architecture for an AI‑driven data security product that works across macOS, Windows, Android and iOS. You will build scalable APIs, data pipelines, authentication systems, logging infrastructure and core backend logic that powers user insights and security features. This role has deep ownership and requires clean design, strong systems thinking and the ability to work with a product that must be reliable and secure across platforms.</p>
+            </div>
+            <div class="job-section">
+              <h3>Responsibilities</h3>
+              <ul>
+                <li>Architect backend services and APIs that support multi‑platform clients</li>
+                <li>Design data models for logs, analytics, workflows and events</li>
+                <li>Work on authentication, authorisation, key security and role systems</li>
+                <li>Build background jobs and automation pipelines</li>
+                <li>Improve system performance, reliability and observability</li>
+                <li>Collaborate with product, engineering and founders on technical decisions</li>
+                <li>Mentor engineers and maintain backend quality</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>Requirements</h3>
+              <ul>
+                <li>5+ years of backend engineering experience</li>
+                <li>Strong knowledge of Python, Node, Go or Java</li>
+                <li>Hands‑on experience with SQL and NoSQL systems</li>
+                <li>Experience with microservices, caching, queues and monitoring</li>
+                <li>Ability to design systems for security, scale and reliability</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>How to apply</h3>
+              <a class="apply-link" href="mailto:talent@dataprivify.com?subject=Application%3A%20Senior%20Backend%20Engineer">Email talent@dataprivify.com</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="job-card" id="marketing-specialist">
+          <div class="job-header" role="button" tabindex="0" aria-controls="marketing-content" aria-expanded="false">
+            <div>
+              <h2 class="job-title">Marketing Specialist (2+ years experience)</h2>
+              <p class="job-meta">Marketing • Growth • Full-time</p>
+              <p class="job-location">Hybrid role in San Jose, California or Hyderabad, India</p>
+            </div>
+            <button class="expand-btn" aria-label="Toggle details" aria-expanded="false" aria-controls="marketing-content">
+              Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="job-content" id="marketing-content" hidden>
+            <div class="job-section">
+              <h3>Role Overview</h3>
+              <p>You will lead marketing execution for an AI and data security startup. You will work on messaging, campaigns, content and product storytelling across digital channels. You will collaborate with sales, product and design to communicate the value of a multi‑platform security product that runs on desktop and mobile. This role offers creative freedom, ownership and rapid learning.</p>
+            </div>
+            <div class="job-section">
+              <h3>Responsibilities</h3>
+              <ul>
+                <li>Plan and run marketing campaigns on web, email and social platforms</li>
+                <li>Create content for macOS, Windows, Android, iOS and web users</li>
+                <li>Manage calendars and coordinate with design teams</li>
+                <li>Track campaign results and improve performance</li>
+                <li>Support sales with collateral, case studies and product messaging</li>
+                <li>Conduct competitor mapping and positioning analysis</li>
+                <li>Support events and partner programmes</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>Requirements</h3>
+              <ul>
+                <li>2+ years in marketing</li>
+                <li>Strong writing and communication skills</li>
+                <li>Experience with analytics and marketing tools</li>
+                <li>Ability to create simple messaging for technical products</li>
+                <li>SaaS or cybersecurity experience is a plus</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>How to apply</h3>
+              <a class="apply-link" href="mailto:talent@dataprivify.com?subject=Application%3A%20Marketing%20Specialist">Email talent@dataprivify.com</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="job-card" id="sales-executive">
+          <div class="job-header" role="button" tabindex="0" aria-controls="sales-content" aria-expanded="false">
+            <div>
+              <h2 class="job-title">Sales Executive - AI and Data Security (2+ years experience)</h2>
+              <p class="job-meta">Sales • GTM • Full-time</p>
+              <p class="job-location">Hybrid role in San Jose, California or Hyderabad, India</p>
+            </div>
+            <button class="expand-btn" aria-label="Toggle details" aria-expanded="false" aria-controls="sales-content">
+              Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="job-content" id="sales-content" hidden>
+            <div class="job-section">
+              <h3>Role Overview</h3>
+              <p>You will manage sales for a security platform powered by AI. You will engage prospects, run demos, explain platform capabilities and guide customers through adoption. You will need to communicate technical concepts simply and build trust with customers in a domain where security, accuracy and reliability matter. This is a high‑ownership sales role in a fast‑moving startup.</p>
+            </div>
+            <div class="job-section">
+              <h3>Responsibilities</h3>
+              <ul>
+                <li>Identify and qualify leads across SMB and enterprise</li>
+                <li>Run product demos focused on AI‑driven insights and multi‑platform security features</li>
+                <li>Understand customer needs and communicate product value clearly</li>
+                <li>Manage CRM updates, outreach and follow ups</li>
+                <li>Work with marketing on targeted campaigns</li>
+                <li>Provide customer feedback to product and engineering</li>
+                <li>Support onboarding and ensure adoption success</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>Requirements</h3>
+              <ul>
+                <li>2+ years in sales with experience in SaaS, cybersecurity or AI products</li>
+                <li>Strong communication and relationship skills</li>
+                <li>Ability to explain technical capabilities in simple language</li>
+                <li>Experience running demos and handling objections</li>
+                <li>Comfort working in early‑stage teams</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>How to apply</h3>
+              <a class="apply-link" href="mailto:talent@dataprivify.com?subject=Application%3A%20Sales%20Executive">Email talent@dataprivify.com</a>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="24" width="24" style="opacity: 0.5;">
+          <g transform="scale(0.025)">
+            <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
+          </g>
+        </svg>
+        <span>© 2025 Privify Inc., All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Dropdown click behavior (match main site)
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdown = document.querySelector('.dropdown');
+      if (!dropdown) return;
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const closeMenu = () => { dropdown.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); };
+      const openMenu = () => { dropdown.classList.add('open'); toggle.setAttribute('aria-expanded','true'); };
+      toggle.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); dropdown.classList.contains('open') ? closeMenu() : openMenu(); });
+      document.addEventListener('click', (e)=>{ if(!dropdown.contains(e.target)) closeMenu(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+    });
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.querySelector('.mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      const toggleMenu = () => {
+        const isOpen = menu.classList.toggle('open');
+        menu.setAttribute('aria-hidden', String(!isOpen));
+      };
+      btn.addEventListener('click', (e) => { e.preventDefault(); toggleMenu(); });
+      document.addEventListener('click', (e) => {
+        if (!menu.classList.contains('open')) return;
+        const header = document.getElementById('header');
+        if (header && !header.contains(e.target) && !menu.contains(e.target)) {
+          menu.classList.remove('open');
+          menu.setAttribute('aria-hidden','true');
+        }
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } });
+    });
+    // Mobile submenu (Tools) toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = btn.getAttribute('aria-controls');
+          const panel = id && document.getElementById(id);
+          if (!panel) return;
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          panel.hidden = expanded;
+        });
+      });
+    });
+  </script>
+  <script>
+    // Expand/collapse job cards (button and header are interactive)
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.job-card');
+      cards.forEach(card => {
+        const header = card.querySelector('.job-header');
+        const btn = card.querySelector('.expand-btn');
+        const contentId = btn && btn.getAttribute('aria-controls');
+        const content = contentId ? document.getElementById(contentId) : null;
+        const setExpanded = (expanded) => {
+          card.classList.toggle('expanded', expanded);
+          if (btn) btn.setAttribute('aria-expanded', String(expanded));
+          if (header) header.setAttribute('aria-expanded', String(expanded));
+          if (content) content.hidden = !expanded;
+        };
+        const toggle = () => setExpanded(!card.classList.contains('expanded'));
+        if (header) header.addEventListener('click', toggle);
+        if (header) header.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); toggle(); }});
+        if (btn) btn.addEventListener('click', (e)=>{ e.stopPropagation(); toggle(); });
+      });
+    });
+  </script>
+</body>
+</html>
