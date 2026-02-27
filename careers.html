@@ -178,6 +178,7 @@
         <a href="#senior-backend-engineer">Senior Backend Engineer</a>
         <a href="#marketing-specialist">Marketing Specialist</a>
         <a href="#sales-executive">Sales Executive</a>
+        <a href="#mobile-app-developer">Mobile App Developer</a>
       </nav>
       <section class="jobs" aria-label="Open roles">
         <article class="job-card" id="ux-designer">
@@ -455,6 +456,50 @@
             </div>
           </div>
         </article>
+        <article class="job-card" id="mobile-app-developer">
+          <div class="job-header" role="button" tabindex="0" aria-controls="mobile-app-content" aria-expanded="false">
+            <div>
+              <h2 class="job-title">Mobile App Developer (4–8 years experience)</h2>
+              <p class="job-meta">Engineering • Mobile • Full-time</p>
+              <p class="job-location">Hybrid role in San Jose, California or Hyderabad, India</p>
+            </div>
+            <button class="expand-btn" aria-label="Toggle details" aria-expanded="false" aria-controls="mobile-app-content">
+              Details
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="job-content" id="mobile-app-content" hidden>
+            <div class="job-section">
+              <h3>Role Overview</h3>
+              <p>We are looking for a Mobile App Developer with hands-on experience in Android and/or iOS development to build, enhance, and maintain high-quality mobile applications. The role involves working closely with designers, backend teams, and product managers to deliver reliable and scalable mobile solutions.</p>
+            </div>
+            <div class="job-section">
+              <h3>Key Responsibilities</h3>
+              <ul>
+                <li>Develop and maintain Android (Kotlin/Java) and/or iOS (Swift) applications</li>
+                <li>Implement UI designs and ensure performance, stability, and responsiveness</li>
+                <li>Integrate REST APIs and third-party SDKs</li>
+                <li>Debug, optimize, and improve app performance</li>
+                <li>Participate in code reviews and release cycles</li>
+                <li>Collaborate with product, backend, and QA teams</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>Requirements</h3>
+              <ul>
+                <li>4–8 years experience in Android and iOS development</li>
+                <li>Proficiency in Kotlin/Java (Android) and/or Swift (iOS)</li>
+                <li>Experience with REST APIs, JSON, and mobile app architecture</li>
+                <li>Familiarity with Git and version control workflows</li>
+                <li>Understanding of app store deployment (Play Store / App Store)</li>
+              </ul>
+            </div>
+            <div class="job-section">
+              <h3>How to apply</h3>
+              <a class="apply-link" href="mailto:talent@dataprivify.com?subject=Application%3A%20Mobile%20App%20Developer">Email talent@dataprivify.com</a>
+            </div>
+          </div>
+        </article>
       </section>
     </div>
   </main>
@@ -539,6 +584,30 @@
         if (header) header.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); toggle(); }});
         if (btn) btn.addEventListener('click', (e)=>{ e.stopPropagation(); toggle(); });
       });
+      // Expand a job card if the URL hash targets its id (supports encoded hashes and hash changes)
+      const expandJobFromHash = () => {
+        try {
+          const raw = decodeURIComponent(window.location.hash || '');
+          const id = raw.replace(/^#/, '');
+          if (!id) return;
+          const target = document.getElementById(id);
+          if (!target || !target.classList || !target.classList.contains('job-card')) return;
+          const btn = target.querySelector('.expand-btn');
+          const contentId = btn && btn.getAttribute('aria-controls');
+          const content = contentId ? document.getElementById(contentId) : null;
+          target.classList.add('expanded');
+          if (btn) btn.setAttribute('aria-expanded','true');
+          const header = target.querySelector('.job-header');
+          if (header) header.setAttribute('aria-expanded','true');
+          if (content) content.hidden = false;
+          setTimeout(()=>{ target.scrollIntoView({behavior:'smooth', block:'start'}); }, 50);
+        } catch (e) {
+          // ignore malformed URI sequences
+        }
+      };
+      // Run on initial load and when the fragment changes
+      expandJobFromHash();
+      window.addEventListener('hashchange', expandJobFromHash);
     });
   </script>
 </body>
