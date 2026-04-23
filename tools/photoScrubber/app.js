@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025 Privify Inc.
+ * Copyright (c) 2026 Privify Inc.
  * Licensed under the MIT License.
  */
 

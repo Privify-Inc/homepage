@@ -1,5 +1,5 @@
 <!--
-  Copyright (c) 2025 Privify Inc.
+  Copyright (c) 2026 Privify Inc.
   Licensed under the MIT License.
 -->
 <!doctype html>
@@ -21,30 +21,30 @@
   </script>
   <style>
     /* Top navigation to match main site */
-    .header { position: fixed; top: 0; left: 0; right: 0; padding: 1.5rem 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 1000; transition: all 0.3s ease; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); }
+    .header { position: fixed; top: 0; left: 0; right: 0; padding: 1.25rem 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: 1000; transition: all 0.3s ease; border-bottom: 1px solid rgba(255,255,255,0.07); }
   .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     nav { display:flex; justify-content: space-between; align-items: center; }
-    .logo { display:flex; align-items:center; gap: .75rem; text-decoration:none; color:#000; font-weight:700; font-size:1.5rem; }
+    .logo { display:flex; align-items:center; gap: .75rem; text-decoration:none; color:#fff; font-weight:700; font-size:1.375rem; letter-spacing:-0.02em; }
   .nav-links { display:flex; align-items:center; gap: 3rem; }
-    .nav-link { color:#4B5563; text-decoration:none; font-weight:500; }
-    .nav-link:hover { color:#000; }
-    .nav-cta { background:#000; color:#fff; padding:.5rem 1rem; border-radius:8px; text-decoration:none; font-weight:600; }
+    .nav-link { color:#9CA3AF; text-decoration:none; font-weight:500; font-size:0.875rem; }
+    .nav-link:hover { color:#fff; }
+    .nav-cta { background:#E85D54; color:#fff; padding:0.5rem 1.25rem; border-radius:6px; text-decoration:none; font-weight:600; font-size:0.85rem; }
     .dropdown { position: relative; }
-    .dropdown-toggle { color:#4B5563; text-decoration:none; font-weight:500; display:inline-flex; align-items:center; gap:.4rem; background:transparent; border:none; cursor:pointer; padding:0; font:inherit; }
-    .dropdown-menu { position:absolute; top: calc(100% + 8px); right:0; min-width:220px; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.12); padding:.5rem; display:none; z-index:1001; }
+    .dropdown-toggle { color:#9CA3AF; text-decoration:none; font-weight:500; display:inline-flex; align-items:center; gap:.35rem; background:transparent; border:none; cursor:pointer; padding:0; font:inherit; font-size:0.875rem; }
+    .dropdown-menu { position:absolute; top: calc(100% + 8px); right:0; min-width:220px; background:#1a1a1a; border:1px solid rgba(255,255,255,0.07); border-radius:10px; box-shadow:0 16px 48px rgba(0,0,0,0.6); padding:.5rem; display:none; z-index:1001; }
     .dropdown.open .dropdown-menu { display:block; }
-    .dropdown-item { display:block; padding:.6rem .8rem; border-radius:8px; color:#111827; text-decoration:none; font-weight:500; }
-    .dropdown-item:hover { background:#f6f6f6; }
+    .dropdown-item { display:block; padding:.625rem .875rem; border-radius:6px; color:#9CA3AF; text-decoration:none; }
+    .dropdown-item:hover { background:rgba(255,255,255,0.05); color:#fff; }
   .mobile-menu-btn { display: none; background: none; border: none; color: #000; cursor: pointer; padding: .5rem; }
-  .mobile-menu { display:none; position: fixed; top:72px; left:0; right:0; background:#fff; border-top:1px solid rgba(0,0,0,0.08); box-shadow:0 10px 30px rgba(0,0,0,0.12); z-index:999; }
+  .mobile-menu { display:none; position: fixed; top:68px; left:0; right:0; background:#0d0d0d; border-top:1px solid rgba(255,255,255,0.07); z-index:999; }
   .mobile-menu.open { display:block; }
-  .mobile-menu .mobile-menu-inner { padding:1rem 2rem; }
-  .mobile-menu a { display:block; padding:.75rem 0; color:#4B5563; text-decoration:none; font-weight:500; }
+  .mobile-menu .mobile-menu-inner { padding:1rem 2rem 1.5rem; }
+  .mobile-menu a { display:block; padding:.7rem 0; color:#9CA3AF; text-decoration:none; font-weight:500; border-bottom:1px solid rgba(255,255,255,0.07); }
   .mobile-tools { margin-top:.25rem; }
-  .mobile-submenu-toggle{ display:flex; align-items:center; justify-content:space-between; width:100%; padding:.75rem 0; background:none; border:none; color:#4B5563; font-weight:600; cursor:pointer; }
+  .mobile-submenu-toggle{ display:flex; align-items:center; justify-content:space-between; width:100%; padding:.75rem 0; background:none; border:none; color:#9CA3AF; font-weight:600; cursor:pointer; font:inherit; }
   .mobile-submenu{ padding-left:.75rem; border-left:2px solid rgba(0,0,0,0.06); }
   .mobile-submenu a{ padding:.5rem 0; }
-  .mobile-menu a:hover { color:#000; }
+  .mobile-menu a:hover { color:#fff; }
   @media (max-width: 768px){ .nav-links{ display:none; } .mobile-menu-btn{ display:block; } }
 
     /* Footer styles to match main site */
@@ -70,22 +70,27 @@
           <span>PRIVIFY</span>
         </a>
         <div class="nav-links">
-          <a class="nav-link" href="../../index.html">Home</a>
-          <a class="nav-link" href="../../coming-soon.html">Product</a>
-          <a class="nav-link" href="../../coming-soon.html">Pricing</a>
-          <a class="nav-link" href="../../coming-soon.html">Docs</a>
-          <a class="nav-link" href="../../coming-soon.html">Downloads</a>
-          <a class="nav-link" href="../../careers.html">Careers</a>
           <div class="dropdown">
-            <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="tools-menu">
-              Tools
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              Products
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div id="tools-menu" class="dropdown-menu" role="menu" aria-label="Tools">
-              <a class="dropdown-item" href="./index.html">Photo Scrubber</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="../../platform/index.html" style="display:block;padding:0.625rem 0.875rem;border-radius:6px;text-decoration:none;"><div style="font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:2px">FORGE</div><div style="font-size:0.75rem;color:#4B5563">Federated Oversight &amp; Risk Governance Engine</div></a>
+              <a class="dropdown-item" href="../../privacy/index.html" style="display:block;padding:0.625rem 0.875rem;border-radius:6px;text-decoration:none;"><div style="font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:2px">SHIELD</div><div style="font-size:0.75rem;color:#4B5563">Sovereignty Hub for Individual Liberty and Data</div></a>
             </div>
           </div>
-          <a class="nav-cta" href="../../index.html#waitlist">Request an Invite</a>
+          <a class="nav-link" href="../../careers.html">Careers</a>
+          <div class="dropdown">
+            <button type="button" class="dropdown-toggle" style="color:#fff" aria-haspopup="true" aria-expanded="false">
+              Tools
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="./index.html" style="display:block;padding:0.625rem 0.875rem;border-radius:6px;text-decoration:none;"><div style="font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:2px">Photo Scrubber</div><div style="font-size:0.75rem;color:#4B5563">Remove metadata from images</div></a>
+            </div>
+          </div>
+          <a class="nav-cta" href="../../platform/index.html#interest">Request Access</a>
         </div>
         <button class="mobile-menu-btn" aria-label="Open menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -99,11 +104,8 @@
   <!-- Mobile menu content -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner container">
-      <a href="../../index.html">Home</a>
-      <a href="../../coming-soon.html">Product</a>
-      <a href="../../coming-soon.html">Pricing</a>
-      <a href="../../coming-soon.html">Docs</a>
-      <a href="../../coming-soon.html">Downloads</a>
+      <a href="../../platform/index.html">FORGE</a>
+      <a href="../../privacy/index.html">SHIELD</a>
       <a href="../../careers.html">Careers</a>
       <div class="mobile-tools">
         <button class="mobile-submenu-toggle" aria-expanded="false" aria-controls="mobile-tools-menu">
@@ -114,7 +116,7 @@
           <a href="./index.html">Photo Scrubber</a>
         </div>
       </div>
-      <a href="../../index.html#waitlist">Request an Invite</a>
+      <a href="../../platform/index.html#interest" style="background:#E85D54;color:#fff;border-radius:6px;padding:0.7rem 1rem;text-align:center;margin-top:0.75rem;font-weight:600;display:block;">Request Access</a>
     </div>
   </div>
 
@@ -201,7 +203,7 @@
             <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
           </g>
         </svg>
-        <span>© 2025 Privify Inc., All rights reserved.</span>
+        <span>© 2026 Privify Inc., All rights reserved.</span>
       </div>
     </div>
   </footer>
