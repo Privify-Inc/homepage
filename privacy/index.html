@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Privify Data Privacy — Protect your data from unethical AI training and start earning rewards. Your data, your rules, your rewards.">
-    <meta property="og:title" content="Data Privacy — Privify">
-    <meta property="og:description" content="Protect your data from unethical AI training and earn rewards from ethical data usage.">
-    <title>Data Privacy — Privify</title>
+    <meta name="description" content="Privify SHIELD — Protect your data from unethical AI training and start earning rewards. Your data, your rules, your rewards.">
+    <meta property="og:title" content="SHIELD — Privify">
+    <meta property="og:description" content="SHIELD — Sovereignty Hub for Individual Liberty and Data. Your data, your rights, your rewards.">
+    <title>SHIELD — Privify</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,8 +125,41 @@
         .fade-in{animation:fadeUp 0.7s ease-out both;}
         .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s}
 
+        
+        @media(max-width:768px) { .shield-overlay-content{padding:2rem 1.5rem;} .shield-overlay-title{font-size:1.1rem;} .shield-image-overlay{background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.5) 50%,rgba(0,0,0,0.1) 100%);align-items:flex-end;} }
         @media(max-width:1024px){.hero-content{grid-template-columns:1fr;text-align:center;gap:3rem;}.hero-visual{order:-1;}.hero-sub,.hero-actions,.trust-items{margin-left:auto;margin-right:auto;justify-content:center;}.footer-top{grid-template-columns:1fr;gap:2rem;}.footer-cols{grid-template-columns:repeat(2,1fr);}}
         @media(max-width:768px){.nav-links{display:none;}.mobile-menu-btn{display:block;}.features-grid{grid-template-columns:1fr;}.footer-cols{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:0.75rem;text-align:center;}}
+
+        /* SHIELD IMAGE SECTION */
+        .shield-image-section { background:var(--black); overflow:hidden; }
+        .shield-image-full { position:relative; width:100%; }
+        .shield-hero-img { width:100%; height:auto; display:block; max-height:720px; object-fit:cover; object-position:center; }
+        .shield-image-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(to right,
+                rgba(0,0,0,0.82) 0%,
+                rgba(0,0,0,0.6) 35%,
+                rgba(0,0,0,0.1) 65%,
+                rgba(0,0,0,0) 100%);
+            display:flex; align-items:center;
+        }
+        .shield-overlay-content {
+            max-width:480px; padding:3rem 4rem;
+        }
+        .shield-overlay-tag {
+            font-size:0.72rem; font-weight:700; text-transform:uppercase;
+            letter-spacing:0.12em; color:#60A5FA; margin-bottom:1rem;
+        }
+        .shield-overlay-title {
+            font-size:clamp(1.25rem,2.2vw,1.75rem); font-weight:800;
+            color:#fff; line-height:1.25; letter-spacing:-0.02em;
+            margin-bottom:0.875rem;
+        }
+        .shield-overlay-sub {
+            font-size:0.9rem; color:rgba(255,255,255,0.65);
+            line-height:1.65;
+        }
+
     </style>
 </head>
 <body>
@@ -148,12 +181,12 @@
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="../platform/index.html">
-                            <div class="di-title">AI Governance Platform</div>
-                            <div class="di-sub">Discover, observe and govern AI agents</div>
+                            <div class="di-title">FORGE</div>
+                            <div class="di-sub">Federated Oversight &amp; Risk Governance Engine</div>
                         </a>
                         <a class="dropdown-item" href="index.html">
-                            <div class="di-title">Data Privacy</div>
-                            <div class="di-sub">Protect your data, earn rewards</div>
+                            <div class="di-title">SHIELD</div>
+                            <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
                         </a>
                     </div>
                 </div>
@@ -171,8 +204,8 @@
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner container">
         <div class="mob-section">Products</div>
-        <a href="../platform/index.html">AI Governance Platform</a>
-        <a href="index.html">Data Privacy</a>
+        <a href="../platform/index.html">FORGE</a>
+        <a href="index.html">SHIELD</a>
         <div class="mob-section">Company</div>
         <a href="../careers.html">Careers</a>
         <a href="../contact.html">Contact</a>
@@ -194,11 +227,11 @@
                 <span class="red">Your rewards.</span>
             </h1>
             <p class="hero-sub fade-in delay-2">
-                Every day, AI companies train models on your personal data without your consent. Privify gives you the tools to take back control — and earn from ethical data usage.
+                Large technology companies use your personal data to train AI models — your photos, messages, health records — without asking. Without paying you. SHIELD gives you the tools to say no, and the right to benefit when you choose to say yes.
             </p>
             <div class="hero-actions fade-in delay-3">
-                <a href="#waitlist" class="btn-primary">Join the waitlist</a>
-                <a href="../platform/index.html" class="btn-secondary">See our enterprise platform</a>
+                <a href="#waitlist" class="btn-primary">Join the SHIELD waitlist</a>
+                <a href="../platform/index.html" class="btn-secondary">Explore FORGE</a>
             </div>
             <div class="trust-items fade-in delay-3">
                 <div class="trust-item"><i class="fa-solid fa-lock"></i> Invite-only platform</div>
@@ -240,12 +273,28 @@
     </div>
 </section>
 
+<!--  SHIELD HERO IMAGE  -->
+<section class="shield-image-section">
+    <div class="shield-image-full fade-in">
+        <img src="shield_hero.png" alt="SHIELD — a person standing protected inside a glowing sphere while faceless corporate entities with grasping claws are held back" class="shield-hero-img"/>
+        <div class="shield-image-overlay">
+            <div class="shield-overlay-content">
+                <div class="shield-overlay-tag">by Privify</div>
+                <h2 class="shield-overlay-title">Large corporations are harvesting your personal life to train their AI. Without asking. Without paying you.</h2>
+                <p class="shield-overlay-sub">SHIELD puts a barrier between you and them — and puts you in control of what you share, when, and on your terms.</p>
+                <a href="#waitlist" class="btn-primary" style="margin-top:1.25rem;display:inline-block">Join the SHIELD waitlist</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <section class="features-section">
     <div class="container">
         <div class="section-header">
-            <div class="section-eyebrow">What Privify Data Privacy does</div>
-            <h2 class="section-title">Control your digital footprint</h2>
-            <p class="section-sub">Three tools that give you back what AI companies have been taking without asking.</p>
+            <div class="section-eyebrow">What SHIELD does for you</div>
+            <h2 class="section-title">Your personal data. Your terms.</h2>
+            <p class="section-sub">Three capabilities that put you back in the position AI companies have quietly taken from you.</p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
@@ -273,7 +322,7 @@
             <div class="coming-soon-badge">
                 <i class="fa-regular fa-clock fa-xs"></i> Coming soon
             </div>
-            <h2>Join the waitlist</h2>
+            <h2>Join the SHIELD waitlist</h2>
             <p>We are rolling out access in weekly cohorts. Sign in with your account to reserve your spot — we will notify you when your invite is ready.</p>
             <div class="waitlist-form">
                 <input type="email" class="waitlist-input" placeholder="Your email address">
@@ -299,8 +348,8 @@
             <div class="footer-cols">
                 <div class="footer-col">
                     <div class="footer-col-title">Products</div>
-                    <a href="../platform/index.html" class="footer-link">AI Governance Platform</a>
-                    <a href="index.html" class="footer-link">Data Privacy</a>
+                    <a href="../platform/index.html" class="footer-link">FORGE</a>
+                    <a href="index.html" class="footer-link">SHIELD</a>
                     <a href="../tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
                 </div>
                 <div class="footer-col">
@@ -354,13 +403,47 @@ function setupLogoAnimation() {
 }
 document.addEventListener('DOMContentLoaded', setupLogoAnimation);
 
-function handleWaitlist(btn) {
+//  SHIELD waitlist — sends to vishal.saxena@privify.io + bhaskar.tallamraju@privify.io
+//  Powered by Formspree (free, works on GitHub Pages, no backend needed)
+//  Setup: go to https://formspree.io → New Form → copy your endpoint ID
+//  Replace YOUR_SHIELD_FORM_ID below with your actual Formspree form ID
+const SHIELD_FORM_ENDPOINT = 'https://formspree.io/f/xzdykoey';
+
+async function handleWaitlist(btn) {
     const input = document.querySelector('.waitlist-input');
     const email = input ? input.value.trim() : '';
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
-    btn.textContent = 'Adding you...'; btn.disabled = true;
-    setTimeout(() => { btn.textContent = 'You are on the list'; input.value = ''; }, 1200);
-    if (window.plausible) plausible('WaitlistSignup');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    btn.textContent = 'Adding you...';
+    btn.disabled = true;
+
+    try {
+        const res = await fetch(SHIELD_FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+                _subject: 'SHIELD Waitlist Request — ' + email,
+                email,
+                _replyto: email,
+                product: 'SHIELD — Personal Data Privacy'
+            })
+        });
+
+        if (res.ok) {
+            btn.textContent = 'You are on the list';
+            input.value = '';
+            if (window.plausible) plausible('WaitlistSignup');
+        } else {
+            throw new Error('Submission failed');
+        }
+    } catch (err) {
+        btn.textContent = 'Request invite';
+        btn.disabled = false;
+        alert('Something went wrong. Please email us at vishal.saxena@privify.io');
+    }
 }
 document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if (!t) return; e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); });
