@@ -2,1157 +2,350 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Privify - Protect your data from unethical AI training and start earning rewards. Your data, your rules, your rewards.">
-    <meta name="keywords" content="data privacy, AI protection, earn rewards, data control">
-    <meta property="og:title" content="Privify - Your Data, Your Rules, Your Rewards">
-    <meta property="og:description" content="Protect your data from unethical AI training and start earning rewards.">
-    <meta property="og:image" content="/images/og-image.png">
-    <meta property="og:url" content="https://dataprivify.com">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <title>Privify - Your Data, Your Rules, Your Rewards</title>
-    
-    <!-- Favicon -->
+    <meta name="description" content="Privify — Building tools that put people and enterprises in control of AI. FORGE and SHIELD products.">
+    <meta property="og:title" content="Privify — Control Your AI">
+    <meta property="og:description" content="Enterprise AI agent governance and personal data privacy. Two products. One mission.">
+    <title>Privify — Control Your AI</title>
     <link rel="icon" type="image/png" href="/favicon.png">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <!-- Privacy-friendly analytics by Plausible -->
-        <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
-        <script>
-            window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-            plausible.init()
-        </script>
-    
+    <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+    <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
     <style>
-	/* Coming Soon Overlay */
-	.coming-soon-wrapper {
-    	 position: relative;
-	}
-
-	.coming-soon-overlay {
-    	 position: absolute;
-    	 top: 0;
-	 left: 0;
-    	 right: 0;
-    	 bottom: 0;
-    	 background: rgba(0, 0, 0, 0.7);
-    	 backdrop-filter: blur(3px);
-    	 display: flex;
-    	 align-items: center;
-    	 justify-content: center;
-    	 border-radius: 8px;
-    	 z-index: 10;
-	}
-
-	.coming-soon-text {
-    	 color: var(--white);
-    	 font-size: 1.25rem;
-    	 font-weight: 600;
-    	 letter-spacing: 0.05em;
-    	 text-transform: uppercase;
-    	 padding: 0.75rem 1.5rem;
-    	 border: 2px solid var(--red);
-    	 border-radius: 6px;
-    	 background: rgba(0, 0, 0, 0.5);
-	}
-
-	/* Disable pointer events on covered elements */
-	.coming-soon-wrapper .waitlist-section {
-    	 pointer-events: none;
-    	 filter: blur(0.5px);
-	}
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         :root {
-            --red: #E85D54;
-            --red-hover: #D74A41;
-            --black: #000000;
-            --white: #FFFFFF;
-            --gray-100: #F5F5F5;
-            --gray-400: #9CA3AF;
-            --gray-500: #6B7280;
-            --gray-600: #4B5563;
-            --gray-800: #1F2937;
-            --gray-900: #111827;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--black);
-            color: var(--white);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Subtle gradient background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at top right, rgba(232, 93, 84, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at bottom left, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .header.scrolled {
-            padding: 1rem 0;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--black);
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        .logo img { height: 36px; width: auto; }
-        .logo svg { height: 36px; width: auto; display: block; }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-        }
-
-        .nav-link {
-            color: var(--gray-600);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--black);
-        }
-
-        .nav-cta {
-            background: var(--black);
-            color: var(--white);
-            padding: 0.625rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .nav-cta:hover {
-            background: var(--gray-900);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Dropdown */
-        .dropdown {
-            position: relative;
-        }
-        .dropdown-toggle {
-            color: var(--gray-600);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            font: inherit;
-        }
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 8px); /* avoid hover gap so menu doesn't disappear */
-            right: 0;
-            min-width: 220px;
-            background: #ffffff;
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-            padding: 0.5rem;
-            display: none;
-            z-index: 1001;
-        }
-        .dropdown.open .dropdown-menu { display: block; }
-        .dropdown-item {
-            display: block;
-            padding: 0.6rem 0.8rem;
-            border-radius: 8px;
-            color: var(--gray-800);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .dropdown-item:hover {
-            background: #f6f6f6;
-        }
-        .dropdown-item.disabled {
-            color: var(--gray-400);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 2rem 4rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-        }
-
-        .hero-text {
-            max-width: 600px;
-        }
-
-        h1 {
-            font-size: clamp(2.25rem, 4.5vw, 3.75rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 2rem;
-        }
-
-        .highlight {
-            color: var(--red);
-        }
-
-        .hero-subtitle {
-            font-size: 1.375rem;
-            color: var(--gray-400);
-            line-height: 1.6;
-            margin-bottom: 3rem;
-            font-weight: 400;
-        }
-
-        /* Visual Element */
-        .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-/* Animated Logo */
-.animated-logo {
-    animation: subtle-float 8s ease-in-out infinite;
-}
-
-@keyframes subtle-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-/* Logo fill animation */
-.logo-fill {
-    transition: fill 0.5s ease;
-}
-
-/* Slower heartbeat and shake effect */
-@keyframes heartbeat-shake {
-    0%, 100% { 
-        transform: scale(1) rotate(0deg); 
-    }
-    20% { 
-        transform: scale(1.08) rotate(-0.5deg); 
-    }
-    40% { 
-        transform: scale(0.95) rotate(0.5deg); 
-    }
-    60% { 
-        transform: scale(1.05) rotate(-0.3deg); 
-    }
-    80% { 
-        transform: scale(1) rotate(0deg); 
-    }
-}
-
-.animated-logo.heartbeat {
-    animation: heartbeat-shake 1.5s ease-in-out;
-}
-
-.animated-logo.heartbeat .logo-fill {
-    fill: rgba(247, 64, 64, 0.3);
-}
-
-/* Spear styling - bright gold color */
-.spear, .spear-glow, .spear-trail {
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1));
-}
-
-        .visual-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 0.5rem;
-            transform: rotate(45deg);
-        }
-
-        .grid-item {
-            width: 40px;
-            height: 40px;
-            background: var(--gray-900);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .grid-item.active {
-            background: var(--red);
-            transform: scale(1.1);
-        }
-
-        .grid-item:hover {
-            background: var(--red);
-            transform: scale(1.2);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .waitlist-section {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .waitlist-label {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--white);
-        }
-
-        .social-login-buttons {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .social-login-btn {
-            width: 44px;
-            height: 44px;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-login-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-login-btn img {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* Individual platform styles */
-        .social-login-btn.google {
-            background: #FFFFFF;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .social-login-btn.google:hover {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .social-login-btn.facebook {
-            background: #1877F2;
-        }
-
-        .social-login-btn.facebook:hover {
-            background: #166FE5;
-        }
-
-        .social-login-btn.linkedin {
-            background: #0A66C2;
-        }
-
-        .social-login-btn.linkedin:hover {
-            background: #004182;
-        }
-
-        .social-login-btn.pinterest {
-            background: #E60023;
-        }
-
-        .social-login-btn.pinterest:hover {
-            background: #CC001F;
-        }
-
-        .social-login-btn.twitter {
-            background: #000000;
-        }
-
-        .social-login-btn.twitter:hover {
-            background: #1A1A1A;
-        }
-
-        .social-login-btn.amazon {
-            background: #FF9900;
-        }
-
-        .social-login-btn.amazon:hover {
-            background: #FF8800;
-        }
-
-        .trust-badges {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--gray-500);
-            font-size: 0.875rem;
-        }
-
-        .badge-icon {
-            color: var(--red);
-        }
-
-        /* Footer */
-        .footer {
-            padding: 4rem 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 6rem;
-        }
-
-        .footer-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--gray-500);
-            font-size: 0.875rem;
-        }
-
-        .footer-left img {
-            height: 24px;
-            opacity: 0.5;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .footer-link {
-            color: var(--gray-500);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.2s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--white);
-        }
-
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--black);
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        /* Mobile menu panel */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 72px;
-            left: 0;
-            right: 0;
-            background: #ffffff;
-            border-top: 1px solid rgba(0,0,0,0.08);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-            z-index: 999;
-        }
-        .mobile-menu.open { display: block; }
-        .mobile-menu .mobile-menu-inner { padding: 1rem 2rem; }
-        .mobile-menu a {
-            display: block;
-            padding: 0.75rem 0;
-            color: var(--gray-600);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .mobile-menu a:hover { color: var(--black); }
-        /* Mobile submenu (Tools) */
-        .mobile-tools { margin-top: .25rem; }
-        .mobile-submenu-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0.75rem 0;
-            background: none;
-            border: none;
-            color: var(--gray-600);
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .mobile-submenu { padding-left: .75rem; border-left: 2px solid rgba(0,0,0,0.06); }
-        .mobile-submenu a { padding: 0.5rem 0; }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-visual {
-                order: -1;
-                margin-bottom: 2rem;
-            }
-
-            .waitlist-section {
-                justify-content: center;
-            }
-
-            .trust-badges {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            h1 { font-size: 2rem; line-height: 1.15; }
-
-            .hero-subtitle { font-size: 1rem; }
-
-            .waitlist-section {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .social-login-buttons {
-                justify-content: center;
-            }
-
-            .trust-badges {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            /* Header/logo sizing on mobile */
-            .logo { font-size: 1.25rem; gap: 0.5rem; }
-            .logo svg { height: 30px; }
-
-            /* Hero spacing */
-            .hero { min-height: auto; padding: 6rem 1.25rem 3rem; }
-            .container { padding: 0 1.25rem; }
-            .hero-visual svg { max-width: 85vw; height: auto; }
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 1.75rem; }
-            .logo { font-size: 1.1rem; }
-            .logo svg { height: 28px; }
-            .hero { padding: 5.5rem 1rem 2.5rem; }
-            .container { padding: 0 1rem; }
-            .mobile-menu { top: 66px; }
-            .hero-visual svg { max-width: 80vw; }
-        }
-
-        /* Ensure hero SVG is responsive by default */
-        .hero-visual svg { max-width: 100%; height: auto; display: block; }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-
-        /* Loading state */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid transparent;
-            border-top-color: var(--white);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            --red:#E85D54; --red-dim:rgba(232,93,84,0.1); --red-glow:rgba(232,93,84,0.22);
+            --black:#000; --white:#fff;
+            --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-600:#4B5563;
+            --gray-700:#374151; --gray-800:#1F2937;
+            --surface:#0d0d0d; --surface-2:#111111; --surface-3:#161616;
+            --border:rgba(255,255,255,0.07); --border-h:rgba(255,255,255,0.14);
+        }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Inter',-apple-system,sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+        body::before { content:''; position:fixed; top:0;left:0;right:0;bottom:0; background:radial-gradient(ellipse 80% 60% at 70% -10%,rgba(232,93,84,0.07) 0%,transparent 60%); pointer-events:none; z-index:1; }
+        .container { max-width:1200px; margin:0 auto; padding:0 2rem; position:relative; z-index:2; }
+
+        /* NAV */
+        .header { position:fixed;top:0;left:0;right:0;padding:1.25rem 0;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid var(--border);transition:all 0.3s; }
+        .header.scrolled { padding:0.875rem 0;background:rgba(0,0,0,0.96); }
+        nav { display:flex;justify-content:space-between;align-items:center; }
+        .logo { display:flex;align-items:center;gap:0.625rem;text-decoration:none;color:var(--white);font-weight:700;font-size:1.375rem;letter-spacing:-0.02em; }
+        .nav-links { display:flex;align-items:center;gap:2.25rem; }
+        .nav-link { color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.875rem;transition:color 0.2s; }
+        .nav-link:hover { color:var(--white); }
+        .nav-pill { background:var(--red);color:var(--white);padding:0.5rem 1.25rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;transition:all 0.2s; }
+        .nav-pill:hover { background:#d44e46;transform:translateY(-1px); }
+        .dropdown { position:relative; }
+        .dropdown-toggle { color:var(--gray-400);font-weight:500;font-size:0.875rem;display:inline-flex;align-items:center;gap:0.35rem;background:transparent;border:none;cursor:pointer;font:inherit; }
+        .dropdown-toggle:hover { color:var(--white); }
+        .dropdown-menu { position:absolute;top:calc(100% + 10px);left:0;min-width:220px;background:#1a1a1a;border:1px solid var(--border);border-radius:10px;box-shadow:0 16px 48px rgba(0,0,0,0.6);padding:0.5rem;display:none;z-index:1001; }
+        .dropdown.open .dropdown-menu { display:block; }
+        .dropdown-item { display:block;padding:0.625rem 0.875rem;border-radius:6px;color:var(--gray-400);text-decoration:none; }
+        .dropdown-item:hover { background:rgba(255,255,255,0.05);color:var(--white); }
+        .di-title { font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px; }
+        .di-sub { font-size:0.75rem;color:var(--gray-600); }
+        .mobile-menu-btn { display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:0.5rem; }
+        .mobile-menu { display:none;position:fixed;top:68px;left:0;right:0;background:#0d0d0d;border-top:1px solid var(--border);z-index:999; }
+        .mobile-menu.open { display:block; }
+        .mobile-menu-inner { padding:1rem 2rem 1.5rem; }
+        .mobile-menu a { display:block;padding:0.7rem 0;color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.9rem;border-bottom:1px solid var(--border); }
+        .mobile-menu a:hover { color:var(--white); }
+        .mob-section { font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray-700);padding:1rem 0 0.25rem; }
+        .mob-cta { background:var(--red);color:var(--white) !important;border-radius:6px;padding:0.7rem 1rem;text-align:center;margin-top:0.75rem;font-weight:600; }
+
+        /* HERO */
+        .hero { min-height:100vh;display:flex;align-items:center;padding:7rem 2rem 5rem; }
+        .hero-inner { max-width:720px; }
+        .eyebrow { display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem; }
+        .eyebrow-dot { width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+        h1 { font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-0.03em;margin-bottom:1.5rem; }
+        .red { color:var(--red); }
+        .hero-sub { font-size:1.125rem;color:var(--gray-400);line-height:1.7;margin-bottom:2.5rem;max-width:560px; }
+        .hero-actions { display:flex;gap:1rem;flex-wrap:wrap; }
+        .btn-primary { background:var(--red);color:var(--white);padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s; }
+        .btn-primary:hover { background:#d44e46;transform:translateY(-2px);box-shadow:0 6px 24px var(--red-glow); }
+        .btn-secondary { background:transparent;color:var(--white);padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;border:1px solid var(--border-h);transition:all 0.2s; }
+        .btn-secondary:hover { background:rgba(255,255,255,0.05); }
+
+        /* PRODUCTS */
+        .products { padding:5rem 0;background:var(--surface); }
+        .products-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem; }
+        .product-card { background:var(--black);border:1px solid var(--border);border-radius:16px;padding:2.5rem;text-decoration:none;color:inherit;display:block;transition:all 0.25s;position:relative;overflow:hidden; }
+        .product-card:hover { border-color:var(--border-h);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+        .product-card.featured { border-color:rgba(232,93,84,0.3); }
+        .product-card.featured:hover { border-color:rgba(232,93,84,0.6); }
+        .product-label { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.25rem; }
+        .product-label.enterprise { color:var(--red); }
+        .product-label.consumer { color:var(--gray-500); }
+        .product-card h3 { font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem; }
+        .product-card p { font-size:0.9rem;color:var(--gray-500);line-height:1.65;margin-bottom:1.75rem; }
+        .product-features { list-style:none;display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.75rem; }
+        .product-features li { font-size:0.82rem;color:var(--gray-500);display:flex;align-items:flex-start;gap:0.5rem; }
+        .product-features li::before { content:'—';color:var(--red);font-size:0.75rem;margin-top:1px;flex-shrink:0; }
+        .product-cta { display:inline-flex;align-items:center;gap:0.4rem;font-size:0.875rem;font-weight:600;color:var(--white);transition:gap 0.2s; }
+        .product-card:hover .product-cta { gap:0.6rem; }
+        .product-card.featured .product-cta { color:var(--red); }
+        .pc-glow { position:absolute;bottom:-60px;right:-60px;width:160px;height:160px;border-radius:50%;opacity:0.04;background:var(--red); }
+
+        /* MISSION */
+        .mission { padding:5rem 0; }
+        .mission-inner { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
+        .mission h2 { font-size:clamp(1.75rem,3vw,2.25rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:1rem; }
+        .mission p { font-size:0.95rem;color:var(--gray-400);line-height:1.75; }
+        .mission-stats { display:grid;grid-template-columns:repeat(2,1fr);gap:1rem; }
+        .m-stat { background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:1.25rem; }
+        .m-stat-num { font-size:2rem;font-weight:700;color:var(--white);letter-spacing:-0.02em; }
+        .m-stat-label { font-size:0.8rem;color:var(--gray-600);margin-top:3px; }
+
+        /* FOOTER */
+        .footer { padding:3rem 0 1.5rem;border-top:1px solid var(--border); }
+        .footer-top { display:grid;grid-template-columns:280px 1fr;gap:4rem;margin-bottom:2.5rem; }
+        .footer-logo { display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--gray-500);font-weight:700;font-size:1rem;margin-bottom:0.875rem; }
+        .footer-tagline { font-size:0.8rem;color:var(--gray-700);line-height:1.6; }
+        .footer-cols { display:grid;grid-template-columns:repeat(3,1fr);gap:2rem; }
+        .footer-col-title { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-600);margin-bottom:0.875rem; }
+        .footer-col { display:flex;flex-direction:column;gap:0.5rem; }
+        .footer-link { color:var(--gray-600);text-decoration:none;font-size:0.825rem;transition:color 0.2s; }
+        .footer-link:hover { color:var(--white); }
+        .footer-bottom { display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.8rem;color:var(--gray-700); }
+
+        @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in { animation:fadeUp 0.7s ease-out both; }
+        .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s}
+
+        @media(max-width:768px) {
+            .nav-links{display:none;} .mobile-menu-btn{display:block;}
+            .products-grid{grid-template-columns:1fr;}
+            .mission-inner{grid-template-columns:1fr;gap:3rem;}
+            .footer-top{grid-template-columns:1fr;gap:2rem;}
+            .footer-cols{grid-template-columns:repeat(2,1fr);}
+            .footer-bottom{flex-direction:column;gap:0.75rem;text-align:center;}
         }
     </style>
 </head>
 <body>
-    <header class="header" id="header">
-        <div class="container">
-            <nav>
-                <a href="/" class="logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="36" width="36">
-                        <g transform="scale(0.025)">
-                            <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
-                        </g>
-                    </svg>
-                    <span>PRIVIFY</span>
-                </a>
-                <div class="nav-links">
-                    <a href="coming-soon.html" class="nav-link">Product</a>
-                    <a href="coming-soon.html" class="nav-link">Pricing</a>
-                    <a href="coming-soon.html" class="nav-link">Docs</a>
-                    <a href="coming-soon.html" class="nav-link">Downloads</a>
-                    <a href="careers.html" class="nav-link">Careers</a>
-                    <div class="dropdown">
-                        <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="tools-menu">
-                            Tools
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                        </button>
-                        <div id="tools-menu" class="dropdown-menu" role="menu" aria-label="Tools">
-                            <a class="dropdown-item" href="tools/photoScrubber/index.html">Photo Scrubber</a>
-                        </div>
-                    </div>
-                    <a href="#waitlist" class="nav-cta">Request an Invite</a>
-                </div>
-                <button class="mobile-menu-btn" aria-label="Open menu">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 12h18M3 6h18M3 18h18"/>
-                    </svg>
-                </button>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-text fade-in">
-                    <h1>
-                        Protect your data from
-                        <span class="highlight">unethical AI training</span>
-                        and start earning rewards
-                    </h1>
-                    
-                    <p class="hero-subtitle fade-in delay-1">
-                        Privify's data protection API makes it simple to take control of your digital privacy while earning rewards from ethical data usage.
-                    </p>
+<header class="header" id="header">
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="32" width="32">
+                    <g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g>
+                </svg>
+                PRIVIFY
+            </a>
+            <div class="nav-links">
+                <div class="dropdown">
+                    <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                        Products
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="platform/index.html">
+                            <div class="di-title">FORGE</div>
+                            <div class="di-sub">Federated Oversight &amp; Risk Governance Engine</div>
+                        </a>
+                        <a class="dropdown-item" href="privacy/index.html">
+                            <div class="di-title">SHIELD</div>
+                            <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
+                        </a>
+                    </div>
+                </div>
+                <a href="platform/index.html#deployment" class="nav-link">Deployment</a>
+                <a href="platform/index.html#compliance" class="nav-link">Compliance</a>
+                <a href="careers.html" class="nav-link">Careers</a>
+                <div class="dropdown">
+                    <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                        Tools
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="tools/photoScrubber/index.html">
+                            <div class="di-title">Photo Scrubber</div>
+                            <div class="di-sub">Remove metadata from images</div>
+                        </a>
+                    </div>
+                </div>
+                <a href="platform/index.html#interest" class="nav-pill">Request Access</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Open menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+        </nav>
+    </div>
+</header>
 
-                    <div class="cta-section fade-in delay-2" id="waitlist">
-		    <div class="coming-soon-wrapper">
-                        <div class="waitlist-section">
-                            <p class="waitlist-label">Request an Invite</p>
-                            <div class="social-login-buttons">
-                                <button class="social-login-btn google" aria-label="Join with Google" onclick="handleSocialLogin('google')">
-                                    <!--<img src="/images/icons/google-icon.png" alt="Google">-->
-				    <i class="fa-brands fa-google fa-xl fa-fade"></i>
-                                </button>
-                                <button class="social-login-btn facebook" aria-label="Join with Facebook" onclick="handleSocialLogin('facebook')">
-                                    <!--<img src="/images/icons/facebook-icon.png" alt="Facebook">-->
-				    <i class="fa-brands fa-facebook fa-beat fa-xl"></i>
-                                </button>
-                                <button class="social-login-btn linkedin" aria-label="Join with LinkedIn" onclick="handleSocialLogin('linkedin')">
-                                    <!--<img src="/images/icons/linkedin-icon.png" alt="LinkedIn">-->
-				    <i class="fa-brands fa-linkedin fa-xl"></i>
-                                </button>
-                                <button class="social-login-btn pinterest" aria-label="Join with Pinterest" onclick="handleSocialLogin('pinterest')">
-                                    <!--<img src="/images/icons/pinterest-icon.png" alt="Pinterest">-->
-				    <i class="fa-brands fa-pinterest fa-xl fa-shake"></i>
-                                </button>
-                                <button class="social-login-btn twitter" aria-label="Join with X" onclick="handleSocialLogin('twitter')">
-                                    <!--<img src="/images/icons/x-icon.png" alt="X">-->
-				    <i class="fa-brands fa-x-twitter fa-xl fa-bounce" style="color: #ffffff;"></i>
-                                </button>
-                                <button class="social-login-btn amazon" aria-label="Join with Amazon" onclick="handleSocialLogin('amazon')">
-                                    <!--<img src="/images/icons/amazon-icon.png" alt="Amazon">-->
-				    <i class="fa-brands fa-amazon fa-xl"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="trust-badges">
-                            <div class="badge">
-                                <span class="badge-icon">🔒</span>
-                                <span>Invite-only platform</span>
-                            </div>
-                                <span class="badge-icon">✓</span>
-                                <span><span class="user-count" data-target="24022">0</span> users already joined</span>
-			    <div class="badge">
-				<span class="badge-icon">📧</span>
-                                <span>We roll out invites weekly, keep an eye out for invite</span>
-                            </div>
-                        </div>
-			<div class="coming-soon-overlay">
-            			<span class="coming-soon-text">Coming Soon</span>
-        		</div>
-                    </div>
-		</div>
-                </div>
-                <!--
-		<div class="hero-visual fade-in delay-3">
-                    <div class="visual-grid">
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item active"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item active"></div>
-                        <div class="grid-item active"></div>
-                        <div class="grid-item active"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item active"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item"></div>
-                        <div class="grid-item active"></div>
-                        <div class="grid-item"></div>
-                    </div>
-                </div>
-		-->
-		<div class="hero-visual fade-in delay-3">
-    <svg class="animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="600" height="600">
-        <!-- Your exact Privify logo scaled up -->
-        <g transform="scale(0.2) translate(200, 200)">
-            <path id="privify-logo-path" d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" 
-                          fill="none" 
-                          stroke="rgba(247, 64, 64, 0.2)" 
-                          stroke-width="20"/>
-            
-            <!-- Fill version for heartbeat -->
-            <path class="logo-fill" d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" 
-                          fill="rgba(247, 64, 64, 0.05)"/>
-        </g>
-        
-        <!-- Animated spear that follows the logo outline - bright yellow/gold color -->
-        <circle class="spear" r="10" fill="#FFD700">
-            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
-                <mpath href="#privify-logo-path"/>
-            </animateMotion>
-        </circle>
-        
-        <!-- Glow effect -->
-        <circle class="spear-glow" r="20" fill="rgba(255, 215, 0, 0.4)" filter="url(#glow)">
-            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
-                <mpath href="#privify-logo-path"/>
-            </animateMotion>
-        </circle>
-        
-        <!-- Trail effect -->
-        <circle class="spear-trail" r="6" fill="rgba(255, 215, 0, 0.6)">
-            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto" begin="-0.2s">
-                <mpath href="#privify-logo-path"/>
-            </animateMotion>
-        </circle>
-        
-        <!-- SVG filters -->
-        <defs>
-            <filter id="glow">
-                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
-                <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-            </filter>
-        </defs>
-    </svg>
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner container">
+        <div class="mob-section">Products</div>
+        <a href="platform/index.html">FORGE</a>
+        <a href="privacy/index.html">SHIELD</a>
+        <div class="mob-section">Company</div>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact</a>
+        <div class="mob-section">Tools</div>
+        <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
+        <a href="platform/index.html#interest" class="mob-cta">Request Access</a>
+    </div>
 </div>
+
+<main>
+<section class="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <div class="eyebrow fade-in"><span class="eyebrow-dot"></span>Two products. One mission.</div>
+            <h1 class="fade-in delay-1">
+                Put people and<br>enterprises in<br>
+                <span class="red">control of AI</span>
+            </h1>
+            <p class="hero-sub fade-in delay-2">
+                Privify builds tools for a world where AI is everywhere. For enterprises running hundreds of agents. For individuals whose data trains models without consent.
+            </p>
+            <div class="hero-actions fade-in delay-3">
+                <a href="platform/index.html" class="btn-primary">See the platform</a>
+                <a href="#products" class="btn-secondary">Our products</a>
             </div>
-        </section>
-    </main>
-    <!-- Mobile menu content -->
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-        <div class="mobile-menu-inner container">
-            <a href="coming-soon.html">Product</a>
-            <a href="coming-soon.html">Pricing</a>
-            <a href="coming-soon.html">Docs</a>
-            <a href="coming-soon.html">Downloads</a>
-            <a href="careers.html">Careers</a>
-            <div class="mobile-tools">
-                <button class="mobile-submenu-toggle" aria-expanded="false" aria-controls="mobile-tools-menu">
-                    <span>Tools</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div id="mobile-tools-menu" class="mobile-submenu" hidden>
-                    <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
-                </div>
-            </div>
-            <a href="#waitlist">Request an Invite</a>
         </div>
     </div>
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-left">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="24" width="24" style="opacity: 0.5;">
-                    <g transform="scale(0.025)">
-                        <path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#F74040"/>
-                    </g>
-                </svg>
-                <span>© 2025 Privify Inc., All rights reserved.</span>
-            </div>
-           <!-- <ul class="footer-links">
-                <li><a href="./privacy.html" class="footer-link">Privacy</a></li>
-                <li><a href="./terms.html" class="footer-link">Terms</a></li>
-                <li><a href="./security.html" class="footer-link">Security</a></li>
-                <li><a href="./contact.html" class="footer-link">Contact</a></li>
-            </ul> -->
+</section>
+
+<section class="products" id="products">
+    <div class="container">
+        <div style="text-align:center;margin-bottom:0.5rem">
+            <div class="section-eyebrow" style="display:inline-flex">What we build</div>
         </div>
-    </footer>
+        <h2 class="section-title" style="text-align:center;font-size:clamp(1.5rem,2.5vw,2rem)">Two products. Both in early access.</h2>
+        <div class="products-grid">
 
-    <script>
-        // Header scroll effect
-        const header = document.getElementById('header');
-        let lastScroll = 0;
+            <a href="platform/index.html" class="product-card featured">
+                <div class="product-label enterprise">Enterprise — Early access</div>
+                <h3>FORGE</h3>
+                <p>Discover every AI agent in your enterprise, map every interaction, and enforce policy in real time. Three pillars: Discovery, Observability, Governance.</p>
+                <ul class="product-features">
+                    <li>Automatic shadow AI detection — endpoint, network and file probes</li>
+                    <li>Full interaction graph: human to agent, agent to agent, agent to tool</li>
+                    <li>Real-time DLP, AI firewall, and human-in-the-loop approvals</li>
+                    <li>11 compliance frameworks including GDPR, HIPAA, DPDP Act (India)</li>
+                    <li>11 SIEM integrations — CEF, LEEF, STIX 2.1, ECS</li>
+                </ul>
+                <span class="product-cta">Explore FORGE <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                <div class="pc-glow"></div>
+            </a>
 
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            
-            lastScroll = currentScroll;
-        });
+            <a href="privacy/index.html" class="product-card">
+                <div class="product-label consumer">Consumer — Coming soon</div>
+                <h3>SHIELD</h3>
+                <p>Your data trains AI models every day without your consent. Privify's data protection tools let you opt out, stay in control, and earn rewards from ethical data usage.</p>
+                <ul class="product-features">
+                    <li>Opt out of AI training datasets</li>
+                    <li>See which services are using your data</li>
+                    <li>Earn rewards from ethical data licensing</li>
+                    <li>Works with Google, LinkedIn, Amazon and more</li>
+                </ul>
+                <span class="product-cta">Join the SHIELD waitlist <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                <div class="pc-glow"></div>
+            </a>
 
-        // Logo heartbeat animation
-function setupLogoAnimation() {
-    const logo = document.querySelector('.animated-logo');
-    
-    if (!logo) return;
-    
-    // Trigger heartbeat every 4 seconds (matching spear animation)
-    setInterval(() => {
-        logo.classList.add('heartbeat');
-        setTimeout(() => {
-            logo.classList.remove('heartbeat');
-        }, 1500); // Match the CSS animation duration
-    }, 4000);
-}
+        </div>
+    </div>
+</section>
 
-// Call on page load
-document.addEventListener('DOMContentLoaded', () => {
-    setupLogoAnimation();
-});
-// Mobile menu toggle
+<section class="mission">
+    <div class="container">
+        <div class="mission-inner">
+            <div>
+                <div class="section-eyebrow">Our mission</div>
+                <h2>AI is moving faster than governance. We are closing that gap.</h2>
+                <p style="margin-top:0">Enterprises are deploying hundreds of AI agents with no visibility into what they do, who they talk to, or what data they handle. Individuals are training AI models with their most personal data without knowing it. Privify builds the infrastructure layer that makes both of these problems solvable.</p>
+            </div>
+            <div class="mission-stats">
+                <div class="m-stat">
+                    <div class="m-stat-num">66</div>
+                    <div class="m-stat-label">API endpoints in the governance platform</div>
+                </div>
+                <div class="m-stat">
+                    <div class="m-stat-num">116</div>
+                    <div class="m-stat-label">AI providers in our risk registry</div>
+                </div>
+                <div class="m-stat">
+                    <div class="m-stat-num">11</div>
+                    <div class="m-stat-label">Compliance frameworks supported</div>
+                </div>
+                <div class="m-stat">
+                    <div class="m-stat-num">24</div>
+                    <div class="m-stat-label">Production-ready platform features</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="22" width="22" style="opacity:0.4"><g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g></svg>
+                    PRIVIFY
+                </a>
+                <p class="footer-tagline">Building tools that put people and enterprises in control of AI.</p>
+            </div>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <div class="footer-col-title">Products</div>
+                    <a href="platform/index.html" class="footer-link">FORGE</a>
+                    <a href="privacy/index.html" class="footer-link">SHIELD</a>
+                    <a href="tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Platform</div>
+                    <a href="platform/index.html#deployment" class="footer-link">Deployment</a>
+                    <a href="platform/index.html#compliance" class="footer-link">Compliance</a>
+                    <a href="platform/index.html#integrations" class="footer-link">Integrations</a>
+                    <a href="platform/index.html#interest" class="footer-link">Request Access</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Company</div>
+                    <a href="careers.html" class="footer-link">Careers</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="terms.html" class="footer-link">Terms</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Privify Inc. All rights reserved.</span>
+            <a href="security.html" class="footer-link">Security</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.pageYOffset > 50));
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('.mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    if (!btn || !menu) return;
-    const toggleMenu = () => {
-        const isOpen = menu.classList.toggle('open');
-        menu.setAttribute('aria-hidden', String(!isOpen));
-    };
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleMenu();
-    });
-    document.addEventListener('click', (e) => {
-        if (!menu.classList.contains('open')) return;
-        const header = document.getElementById('header');
-        if (header && !header.contains(e.target) && !menu.contains(e.target)) {
-            menu.classList.remove('open');
-            menu.setAttribute('aria-hidden', 'true');
-        }
-    });
+    if (!btn||!menu) return;
+    btn.addEventListener('click', e => { e.preventDefault(); const open = menu.classList.toggle('open'); menu.setAttribute('aria-hidden', String(!open)); });
+    document.addEventListener('click', e => { if (!menu.classList.contains('open')) return; if (!hdr.contains(e.target)&&!menu.contains(e.target)) { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } });
 });
-// Mobile submenu (Tools) toggle
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const controls = btn.getAttribute('aria-controls');
-            if (!controls) return;
-            const panel = document.getElementById(controls);
-            if (!panel) return;
-            const expanded = btn.getAttribute('aria-expanded') === 'true';
-            btn.setAttribute('aria-expanded', String(!expanded));
-            if (expanded) {
-                panel.hidden = true;
-            } else {
-                panel.hidden = false;
-            }
-        });
+    document.querySelectorAll('.dropdown').forEach(dd => {
+        const toggle = dd.querySelector('.dropdown-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); const isOpen = dd.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(isOpen)); document.querySelectorAll('.dropdown').forEach(o => { if(o!==dd){o.classList.remove('open');const t=o.querySelector('.dropdown-toggle');if(t)t.setAttribute('aria-expanded','false');}}); });
     });
+    document.addEventListener('click', () => document.querySelectorAll('.dropdown').forEach(dd => { dd.classList.remove('open'); const t=dd.querySelector('.dropdown-toggle');if(t)t.setAttribute('aria-expanded','false'); }));
 });
-// Dropdown click-to-open behavior
-document.addEventListener('DOMContentLoaded', () => {
-    const dropdown = document.querySelector('.dropdown');
-    if (!dropdown) return;
-    const toggle = dropdown.querySelector('.dropdown-toggle');
-    const menu = dropdown.querySelector('.dropdown-menu');
-
-    const closeMenu = () => {
-        dropdown.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-    };
-
-    const openMenu = () => {
-        dropdown.classList.add('open');
-        toggle.setAttribute('aria-expanded', 'true');
-    };
-
-    toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (dropdown.classList.contains('open')) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
-    });
-
-    // Close on outside click
-    document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target)) {
-            closeMenu();
-        }
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-    });
-});
-	<!--
-	// Visual grid animation
-        const gridItems = document.querySelectorAll('.grid-item');
-        
-        function animateGrid() {
-            const randomIndex = Math.floor(Math.random() * gridItems.length);
-            gridItems.forEach((item, index) => {
-                if (index === randomIndex) {
-                    item.classList.add('active');
-                    setTimeout(() => {
-                        item.classList.remove('active');
-                    }, 1000);
-                }
-            });
-        }
-
-        // Run animation every 2 seconds
-        setInterval(animateGrid, 2000);
-	-->
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.8s ease-out';
-            observer.observe(el);
-        });
-
-        // Handle social login
-        function handleSocialLogin(provider) {
-            // Add loading state to button
-            const button = event.target.closest('button');
-            const originalContent = button.innerHTML;
-            button.innerHTML = '<span class="loading"></span>';
-            button.disabled = true;
-
-            // Simulate API call - replace with actual OAuth implementation
-            setTimeout(() => {
-                // In production, redirect to OAuth provider
-                switch(provider) {
-                    case 'google':
-                        window.location.href = '/auth/google';
-                        break;
-                    case 'facebook':
-                        window.location.href = '/auth/facebook';
-                        break;
-                    case 'linkedin':
-                        window.location.href = '/auth/linkedin';
-                        break;
-                    case 'pinterest':
-                        window.location.href = '/auth/pinterest';
-                        break;
-                    case 'twitter':
-                        window.location.href = '/auth/twitter';
-                        break;
-                    case 'amazon':
-                        window.location.href = '/auth/amazon';
-                        break;
-                }
-            }, 500);
-        }
-
-        // Smooth scroll to waitlist
-// Animated counter for user count
-function animateCounter() {
-    const counter = document.querySelector('.user-count');
-    if (!counter) return;
-    
-    const target = parseInt(counter.getAttribute('data-target'));
-    const duration = 2500; // 2 seconds
-    const increment = target / (duration / 16); // 60fps
-    let current = 0;
-    
-    const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-            counter.textContent = Math.floor(current).toLocaleString();
-            requestAnimationFrame(updateCounter);
-        } else {
-            counter.textContent = target.toLocaleString();
-        }
-    };
-    
-    // Start animation when element is visible
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                updateCounter();
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    
-    observer.observe(counter);
-}
-
-// Call counter animation after page loads
-document.addEventListener('DOMContentLoaded', animateCounter);
-        document.querySelectorAll('a[href="#waitlist"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector('#waitlist').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            });
-        });
-    </script>
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);} }), {threshold:0.08});
+document.querySelectorAll('.product-card, .m-stat').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
+</script>
 </body>
 </html>

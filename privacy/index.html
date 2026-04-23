@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privify SHIELD — Protect your data from unethical AI training and start earning rewards. Your data, your rules, your rewards.">
+    <meta property="og:title" content="SHIELD — Privify">
+    <meta property="og:description" content="SHIELD — Sovereignty Hub for Individual Liberty and Data. Your data, your rights, your rewards.">
+    <title>SHIELD — Privify</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+    <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        :root{
+            --red:#E85D54;--red-dim:rgba(232,93,84,0.1);--red-glow:rgba(232,93,84,0.22);
+            --black:#000;--white:#fff;
+            --gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;
+            --surface:#0d0d0d;--surface-2:#111111;--surface-3:#161616;
+            --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);
+        }
+        html{scroll-behavior:smooth;}
+        body{font-family:'Inter',-apple-system,sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+        body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 60% at 70% -10%,rgba(232,93,84,0.07) 0%,transparent 60%);pointer-events:none;z-index:1;}
+        .container{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:2;}
+        .header{position:fixed;top:0;left:0;right:0;padding:1.25rem 0;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid var(--border);transition:all 0.3s;}
+        .header.scrolled{padding:0.875rem 0;background:rgba(0,0,0,0.96);}
+        nav{display:flex;justify-content:space-between;align-items:center;}
+        .logo{display:flex;align-items:center;gap:0.625rem;text-decoration:none;color:var(--white);font-weight:700;font-size:1.375rem;letter-spacing:-0.02em;}
+        .nav-links{display:flex;align-items:center;gap:2.25rem;}
+        .nav-link{color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.875rem;transition:color 0.2s;}
+        .nav-link:hover{color:var(--white);}
+        .nav-pill{background:var(--red);color:var(--white);padding:0.5rem 1.25rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;transition:all 0.2s;}
+        .nav-pill:hover{background:#d44e46;transform:translateY(-1px);}
+        .dropdown{position:relative;}
+        .dropdown-toggle{color:var(--gray-400);font-weight:500;font-size:0.875rem;display:inline-flex;align-items:center;gap:0.35rem;background:transparent;border:none;cursor:pointer;font:inherit;}
+        .dropdown-toggle:hover{color:var(--white);}
+        .dropdown-menu{position:absolute;top:calc(100% + 10px);left:0;min-width:220px;background:#1a1a1a;border:1px solid var(--border);border-radius:10px;box-shadow:0 16px 48px rgba(0,0,0,0.6);padding:0.5rem;display:none;z-index:1001;}
+        .dropdown.open .dropdown-menu{display:block;}
+        .dropdown-item{display:block;padding:0.625rem 0.875rem;border-radius:6px;color:var(--gray-400);text-decoration:none;}
+        .dropdown-item:hover{background:rgba(255,255,255,0.05);color:var(--white);}
+        .di-title{font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px;}
+        .di-sub{font-size:0.75rem;color:var(--gray-600);}
+        .mobile-menu-btn{display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:0.5rem;}
+        .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:#0d0d0d;border-top:1px solid var(--border);z-index:999;}
+        .mobile-menu.open{display:block;}
+        .mobile-menu-inner{padding:1rem 2rem 1.5rem;}
+        .mobile-menu a{display:block;padding:0.7rem 0;color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.9rem;border-bottom:1px solid var(--border);}
+        .mobile-menu a:hover{color:var(--white);}
+        .mob-section{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray-700);padding:1rem 0 0.25rem;}
+        .mob-cta{background:var(--red);color:var(--white) !important;border-radius:6px;padding:0.7rem 1rem;text-align:center;margin-top:0.75rem;font-weight:600;}
+
+        /* HERO */
+        .hero{min-height:100vh;display:flex;align-items:center;padding:7rem 2rem 5rem;}
+        .hero-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+        .eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem;}
+        .eyebrow-dot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s infinite;}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+        h1{font-size:clamp(2.25rem,4.5vw,3.5rem);font-weight:800;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.5rem;}
+        .red{color:var(--red);}
+        .hero-sub{font-size:1.0625rem;color:var(--gray-400);line-height:1.7;margin-bottom:2.5rem;max-width:520px;}
+        .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+        .btn-primary{background:var(--red);color:var(--white);padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s;border:none;cursor:pointer;font-family:inherit;}
+        .btn-primary:hover{background:#d44e46;transform:translateY(-2px);box-shadow:0 6px 24px var(--red-glow);}
+        .btn-secondary{background:transparent;color:var(--white);padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;border:1px solid var(--border-h);transition:all 0.2s;display:inline-block;}
+        .btn-secondary:hover{background:rgba(255,255,255,0.05);}
+        .trust-items{display:flex;gap:1.75rem;flex-wrap:wrap;}
+        .trust-item{font-size:0.8rem;color:var(--gray-600);display:flex;align-items:center;gap:0.375rem;}
+        .trust-item i{color:var(--red);font-size:0.7rem;}
+
+        /* ANIMATED LOGO VISUAL */
+        .hero-visual{display:flex;justify-content:center;align-items:center;}
+        .animated-logo{animation:float 8s ease-in-out infinite;}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+        .logo-fill{transition:fill 0.5s ease;}
+        @keyframes heartbeat-shake{0%,100%{transform:scale(1) rotate(0deg)}20%{transform:scale(1.08) rotate(-0.5deg)}40%{transform:scale(0.95) rotate(0.5deg)}60%{transform:scale(1.05) rotate(-0.3deg)}80%{transform:scale(1) rotate(0deg)}}
+        .animated-logo.heartbeat{animation:heartbeat-shake 1.5s ease-in-out;}
+        .animated-logo.heartbeat .logo-fill{fill:rgba(247,64,64,0.3);}
+
+        /* FEATURES */
+        .features-section{padding:5rem 0;background:var(--surface);}
+        .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+        .feature-card{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:1.75rem;transition:all 0.25s;}
+        .feature-card:hover{border-color:var(--border-h);transform:translateY(-2px);}
+        .feature-icon{width:36px;height:36px;background:var(--red-dim);border:1px solid rgba(232,93,84,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:var(--red);font-size:0.875rem;}
+        .feature-card h4{font-size:0.975rem;font-weight:700;margin-bottom:0.5rem;}
+        .feature-card p{font-size:0.85rem;color:var(--gray-500);line-height:1.65;}
+
+        /* WAITLIST */
+        .waitlist-section{padding:5rem 0;}
+        .waitlist-inner{background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:4rem;text-align:center;position:relative;overflow:hidden;max-width:680px;margin:0 auto;}
+        .waitlist-inner::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,84,0.07) 0%,transparent 70%);pointer-events:none;}
+        .waitlist-inner h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:0.875rem;}
+        .waitlist-inner p{font-size:0.95rem;color:var(--gray-400);margin-bottom:2.5rem;line-height:1.65;}
+        .waitlist-form{display:flex;gap:0.75rem;max-width:440px;margin:0 auto 1.25rem;flex-wrap:wrap;justify-content:center;}
+        .waitlist-input{flex:1;min-width:200px;background:var(--surface-3);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem;color:var(--white);font-size:0.9rem;font-family:inherit;outline:none;transition:border-color 0.2s;}
+        .waitlist-input::placeholder{color:var(--gray-600);}
+        .waitlist-input:focus{border-color:rgba(232,93,84,0.4);}
+        .waitlist-note{font-size:0.75rem;color:var(--gray-700);}
+        .coming-soon-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);color:#fbbf24;padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem;}
+
+        .section-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;color:var(--red);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.875rem;}
+        .section-title{font-size:clamp(1.75rem,3vw,2.25rem);font-weight:800;letter-spacing:-0.025em;line-height:1.12;margin-bottom:1rem;}
+        .section-sub{font-size:1rem;color:var(--gray-400);line-height:1.7;max-width:540px;}
+        .section-header{text-align:center;margin-bottom:3.5rem;}
+        .section-header .section-sub{margin:0 auto;}
+
+        /* FOOTER */
+        .footer{padding:3rem 0 1.5rem;border-top:1px solid var(--border);}
+        .footer-top{display:grid;grid-template-columns:280px 1fr;gap:4rem;margin-bottom:2.5rem;}
+        .footer-logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--gray-500);font-weight:700;font-size:1rem;margin-bottom:0.875rem;}
+        .footer-tagline{font-size:0.8rem;color:var(--gray-700);line-height:1.6;}
+        .footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+        .footer-col-title{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-600);margin-bottom:0.875rem;}
+        .footer-col{display:flex;flex-direction:column;gap:0.5rem;}
+        .footer-link{color:var(--gray-600);text-decoration:none;font-size:0.825rem;transition:color 0.2s;}
+        .footer-link:hover{color:var(--white);}
+        .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.8rem;color:var(--gray-700);}
+
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .fade-in{animation:fadeUp 0.7s ease-out both;}
+        .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s}
+
+        
+        @media(max-width:768px) { .shield-overlay-content{padding:2rem 1.5rem;} .shield-overlay-title{font-size:1.1rem;} .shield-image-overlay{background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.5) 50%,rgba(0,0,0,0.1) 100%);align-items:flex-end;} }
+        @media(max-width:1024px){.hero-content{grid-template-columns:1fr;text-align:center;gap:3rem;}.hero-visual{order:-1;}.hero-sub,.hero-actions,.trust-items{margin-left:auto;margin-right:auto;justify-content:center;}.footer-top{grid-template-columns:1fr;gap:2rem;}.footer-cols{grid-template-columns:repeat(2,1fr);}}
+        @media(max-width:768px){.nav-links{display:none;}.mobile-menu-btn{display:block;}.features-grid{grid-template-columns:1fr;}.footer-cols{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:0.75rem;text-align:center;}}
+
+        /* SHIELD IMAGE SECTION */
+        .shield-image-section { background:var(--black); overflow:hidden; }
+        .shield-image-full { position:relative; width:100%; }
+        .shield-hero-img { width:100%; height:auto; display:block; max-height:720px; object-fit:cover; object-position:center; }
+        .shield-image-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(to right,
+                rgba(0,0,0,0.82) 0%,
+                rgba(0,0,0,0.6) 35%,
+                rgba(0,0,0,0.1) 65%,
+                rgba(0,0,0,0) 100%);
+            display:flex; align-items:center;
+        }
+        .shield-overlay-content {
+            max-width:480px; padding:3rem 4rem;
+        }
+        .shield-overlay-tag {
+            font-size:0.72rem; font-weight:700; text-transform:uppercase;
+            letter-spacing:0.12em; color:#60A5FA; margin-bottom:1rem;
+        }
+        .shield-overlay-title {
+            font-size:clamp(1.25rem,2.2vw,1.75rem); font-weight:800;
+            color:#fff; line-height:1.25; letter-spacing:-0.02em;
+            margin-bottom:0.875rem;
+        }
+        .shield-overlay-sub {
+            font-size:0.9rem; color:rgba(255,255,255,0.65);
+            line-height:1.65;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="header" id="header">
+    <div class="container">
+        <nav>
+            <a href="../index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="32" width="32">
+                    <g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g>
+                </svg>
+                PRIVIFY
+            </a>
+            <div class="nav-links">
+                <div class="dropdown">
+                    <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                        Products
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="../platform/index.html">
+                            <div class="di-title">FORGE</div>
+                            <div class="di-sub">Federated Oversight &amp; Risk Governance Engine</div>
+                        </a>
+                        <a class="dropdown-item" href="index.html">
+                            <div class="di-title">SHIELD</div>
+                            <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
+                        </a>
+                    </div>
+                </div>
+                <a href="../careers.html" class="nav-link">Careers</a>
+                <a href="../tools/photoScrubber/index.html" class="nav-link">Tools</a>
+                <a href="#waitlist" class="nav-pill">Join Waitlist</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Open menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner container">
+        <div class="mob-section">Products</div>
+        <a href="../platform/index.html">FORGE</a>
+        <a href="index.html">SHIELD</a>
+        <div class="mob-section">Company</div>
+        <a href="../careers.html">Careers</a>
+        <a href="../contact.html">Contact</a>
+        <div class="mob-section">Tools</div>
+        <a href="../tools/photoScrubber/index.html">Photo Scrubber</a>
+        <a href="#waitlist" class="mob-cta">Join Waitlist</a>
+    </div>
+</div>
+
+<main>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <div class="eyebrow fade-in"><span class="eyebrow-dot"></span>Coming soon</div>
+            <h1 class="fade-in delay-1">
+                Your data.<br>
+                Your rules.<br>
+                <span class="red">Your rewards.</span>
+            </h1>
+            <p class="hero-sub fade-in delay-2">
+                Large technology companies use your personal data to train AI models — your photos, messages, health records — without asking. Without paying you. SHIELD gives you the tools to say no, and the right to benefit when you choose to say yes.
+            </p>
+            <div class="hero-actions fade-in delay-3">
+                <a href="#waitlist" class="btn-primary">Join the SHIELD waitlist</a>
+                <a href="../platform/index.html" class="btn-secondary">Explore FORGE</a>
+            </div>
+            <div class="trust-items fade-in delay-3">
+                <div class="trust-item"><i class="fa-solid fa-lock"></i> Invite-only platform</div>
+                <div class="trust-item"><i class="fa-solid fa-circle-check"></i> No data sold without consent</div>
+                <div class="trust-item"><i class="fa-solid fa-clock"></i> Waitlist open now</div>
+            </div>
+        </div>
+        <div class="hero-visual fade-in delay-3">
+            <svg class="animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="480" height="480">
+                <g transform="scale(0.2) translate(200, 200)">
+                    <path id="privify-logo-path" d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z"
+                          fill="none" stroke="rgba(232,93,84,0.2)" stroke-width="20"/>
+                    <path class="logo-fill" d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z"
+                          fill="rgba(232,93,84,0.05)"/>
+                </g>
+                <circle r="10" fill="#FFD700" filter="url(#glow)">
+                    <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#privify-logo-path"/>
+                    </animateMotion>
+                </circle>
+                <circle r="20" fill="rgba(255,215,0,0.35)" filter="url(#glow)">
+                    <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#privify-logo-path"/>
+                    </animateMotion>
+                </circle>
+                <circle r="6" fill="rgba(255,215,0,0.6)">
+                    <animateMotion dur="4s" repeatCount="indefinite" rotate="auto" begin="-0.2s">
+                        <mpath href="#privify-logo-path"/>
+                    </animateMotion>
+                </circle>
+                <defs>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!--  SHIELD HERO IMAGE  -->
+<section class="shield-image-section">
+    <div class="shield-image-full fade-in">
+        <img src="shield_hero.png" alt="SHIELD — a person standing protected inside a glowing sphere while faceless corporate entities with grasping claws are held back" class="shield-hero-img"/>
+        <div class="shield-image-overlay">
+            <div class="shield-overlay-content">
+                <div class="shield-overlay-tag">by Privify</div>
+                <h2 class="shield-overlay-title">Large corporations are harvesting your personal life to train their AI. Without asking. Without paying you.</h2>
+                <p class="shield-overlay-sub">SHIELD puts a barrier between you and them — and puts you in control of what you share, when, and on your terms.</p>
+                <a href="#waitlist" class="btn-primary" style="margin-top:1.25rem;display:inline-block">Join the SHIELD waitlist</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">What SHIELD does for you</div>
+            <h2 class="section-title">Your personal data. Your terms.</h2>
+            <p class="section-sub">Three capabilities that put you back in the position AI companies have quietly taken from you.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>Opt out of AI training</h4>
+                <p>Automatically send opt-out requests to AI companies using your data for model training. Works across Google, Meta, LinkedIn, Amazon, and hundreds of data brokers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-chart-bar"></i></div>
+                <h4>See who has your data</h4>
+                <p>A complete picture of which companies hold your personal data, what they are using it for, and which AI models it may have trained. Transparency, finally.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-coins"></i></div>
+                <h4>Earn from ethical usage</h4>
+                <p>When you choose to participate in ethical, consented data programmes, Privify ensures you are compensated fairly. Your data has value — you should benefit from it.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="waitlist-section" id="waitlist">
+    <div class="container">
+        <div class="waitlist-inner">
+            <div class="coming-soon-badge">
+                <i class="fa-regular fa-clock fa-xs"></i> Coming soon
+            </div>
+            <h2>Join the SHIELD waitlist</h2>
+            <p>We are rolling out access in weekly cohorts. Sign in with your account to reserve your spot — we will notify you when your invite is ready.</p>
+            <div class="waitlist-form">
+                <input type="email" class="waitlist-input" placeholder="Your email address">
+                <button class="btn-primary" onclick="handleWaitlist(this)">Request invite</button>
+            </div>
+            <div class="waitlist-note">We send invites weekly. No spam. Unsubscribe any time.</div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div>
+                <a href="../index.html" class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="22" width="22" style="opacity:0.4"><g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g></svg>
+                    PRIVIFY
+                </a>
+                <p class="footer-tagline">Building tools that put people and enterprises in control of AI.</p>
+            </div>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <div class="footer-col-title">Products</div>
+                    <a href="../platform/index.html" class="footer-link">FORGE</a>
+                    <a href="index.html" class="footer-link">SHIELD</a>
+                    <a href="../tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Company</div>
+                    <a href="../careers.html" class="footer-link">Careers</a>
+                    <a href="../contact.html" class="footer-link">Contact</a>
+                    <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="../terms.html" class="footer-link">Terms</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Enterprise</div>
+                    <a href="../platform/index.html#deployment" class="footer-link">Deployment</a>
+                    <a href="../platform/index.html#compliance" class="footer-link">Compliance</a>
+                    <a href="../platform/index.html#interest" class="footer-link">Request Access</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Privify Inc. All rights reserved.</span>
+            <a href="../security.html" class="footer-link">Security</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.pageYOffset > 50));
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn||!menu) return;
+    btn.addEventListener('click', e => { e.preventDefault(); const open=menu.classList.toggle('open'); menu.setAttribute('aria-hidden',String(!open)); });
+    document.addEventListener('click', e => { if (!menu.classList.contains('open')) return; if (!hdr.contains(e.target)&&!menu.contains(e.target)){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } });
+});
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.dropdown').forEach(dd => {
+        const toggle = dd.querySelector('.dropdown-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); const isOpen=dd.classList.toggle('open'); toggle.setAttribute('aria-expanded',String(isOpen)); document.querySelectorAll('.dropdown').forEach(o=>{if(o!==dd){o.classList.remove('open');}}); });
+    });
+    document.addEventListener('click', () => document.querySelectorAll('.dropdown').forEach(dd=>dd.classList.remove('open')));
+});
+// Logo heartbeat
+function setupLogoAnimation() {
+    const logo = document.querySelector('.animated-logo');
+    if (!logo) return;
+    setInterval(() => {
+        logo.classList.add('heartbeat');
+        setTimeout(() => logo.classList.remove('heartbeat'), 1500);
+    }, 4000);
+}
+document.addEventListener('DOMContentLoaded', setupLogoAnimation);
+
+//  SHIELD waitlist — sends to vishal.saxena@privify.io + bhaskar.tallamraju@privify.io
+//  Powered by Formspree (free, works on GitHub Pages, no backend needed)
+//  Setup: go to https://formspree.io → New Form → copy your endpoint ID
+//  Replace YOUR_SHIELD_FORM_ID below with your actual Formspree form ID
+const SHIELD_FORM_ENDPOINT = 'https://formspree.io/f/xzdykoey';
+
+async function handleWaitlist(btn) {
+    const input = document.querySelector('.waitlist-input');
+    const email = input ? input.value.trim() : '';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    btn.textContent = 'Adding you...';
+    btn.disabled = true;
+
+    try {
+        const res = await fetch(SHIELD_FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+                _subject: 'SHIELD Waitlist Request — ' + email,
+                email,
+                _replyto: email,
+                product: 'SHIELD — Personal Data Privacy'
+            })
+        });
+
+        if (res.ok) {
+            btn.textContent = 'You are on the list';
+            input.value = '';
+            if (window.plausible) plausible('WaitlistSignup');
+        } else {
+            throw new Error('Submission failed');
+        }
+    } catch (err) {
+        btn.textContent = 'Request invite';
+        btn.disabled = false;
+        alert('Something went wrong. Please email us at vishal.saxena@privify.io');
+    }
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if (!t) return; e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); });
+});
+</script>
+</body>
+</html>
