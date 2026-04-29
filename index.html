@@ -24,8 +24,8 @@
             --surface:#0d0d0d; --surface-2:#111111; --surface-3:#161616;
             --border:rgba(255,255,255,0.07); --border-h:rgba(255,255,255,0.14);
         }
-        html { scroll-behavior:smooth; }
-        body { font-family:'Inter',-apple-system,sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+        html { scroll-behavior:smooth; overflow-x:hidden; }
+        body { font-family:'Inter',-apple-system,sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; -webkit-font-smoothing:antialiased; max-width:100%; }
         body::before { content:''; position:fixed; top:0;left:0;right:0;bottom:0; background:radial-gradient(ellipse 80% 60% at 70% -10%,rgba(232,93,84,0.07) 0%,transparent 60%); pointer-events:none; z-index:1; }
         .container { max-width:1200px; margin:0 auto; padding:0 2rem; position:relative; z-index:2; }
 
@@ -119,12 +119,26 @@
         .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s}
 
         @media(max-width:768px) {
-            .nav-links{display:none;} .mobile-menu-btn{display:block;}
+            .nav-links{display:none;}
+            .mobile-menu-btn{display:block;}
+            /* Prevent any overflow from the nav */
+            .header .container{padding:0 1rem;}
+            nav{width:100%;max-width:100%;}
+            /* Page layout */
+            .container{padding:0 1.25rem;}
+            .hero{padding:5.5rem 1.25rem 3rem;}
             .products-grid{grid-template-columns:1fr;}
+            .hero-actions{flex-direction:column;align-items:stretch;}
+            .btn-primary,.btn-secondary{text-align:center;}
             .mission-inner{grid-template-columns:1fr;gap:3rem;}
             .footer-top{grid-template-columns:1fr;gap:2rem;}
             .footer-cols{grid-template-columns:repeat(2,1fr);}
             .footer-bottom{flex-direction:column;gap:0.75rem;text-align:center;}
+        }
+        @media(max-width:480px){
+            .header .container{padding:0 0.875rem;}
+            h1{font-size:2.25rem;}
+            .footer-cols{grid-template-columns:1fr;}
         }
     </style>
 </head>
@@ -191,7 +205,6 @@
         <a href="privacy/index.html">SHIELD</a>
         <div class="mob-section">Company</div>
         <a href="careers.html">Careers</a>
-        <a href="contact.html">Contact</a>
         <div class="mob-section">Tools</div>
         <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
         <a href="platform/index.html#interest" class="mob-cta">Request Access</a>
@@ -211,8 +224,7 @@
                 Privify builds tools for a world where AI is everywhere. For enterprises running hundreds of agents. For individuals whose data trains models without consent.
             </p>
             <div class="hero-actions fade-in delay-3">
-                <a href="platform/index.html" class="btn-primary">See the platform</a>
-                <a href="#products" class="btn-secondary">Our products</a>
+                <a href="#products" class="btn-primary">Our products</a>
             </div>
         </div>
     </div>
@@ -321,7 +333,6 @@
                 <div class="footer-col">
                     <div class="footer-col-title">Company</div>
                     <a href="careers.html" class="footer-link">Careers</a>
-                    <a href="contact.html" class="footer-link">Contact</a>
                     <a href="privacy.html" class="footer-link">Privacy Policy</a>
                     <a href="terms.html" class="footer-link">Terms</a>
                 </div>
