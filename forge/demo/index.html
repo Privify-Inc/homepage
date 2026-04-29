@@ -524,9 +524,51 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   .fw-card{width:calc(50% - 4px);}
   .w-logo{font-size:44px;}
 }
+
+/* — MOBILE WARNING — */
+#mobile-warning{
+  display:none;position:fixed;inset:0;z-index:10000;
+  background:var(--bg);flex-direction:column;align-items:center;justify-content:center;
+  padding:32px 24px;text-align:center;
+}
+.mw-logo{font-size:48px;font-weight:900;color:var(--primary);letter-spacing:-3px;
+  font-family:var(--font-mono);text-shadow:0 0 40px rgba(255,46,46,0.3);margin-bottom:24px;}
+.mw-icon{font-size:40px;margin-bottom:16px;}
+.mw-title{font-size:20px;font-weight:800;margin-bottom:10px;}
+.mw-body{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:300px;margin-bottom:28px;}
+.mw-body strong{color:rgba(255,255,255,0.8);}
+.mw-divider{width:40px;height:2px;background:var(--primary);border-radius:1px;margin:0 auto 28px;}
+.mw-btn-primary{
+  background:var(--primary);color:#fff;border:none;border-radius:7px;
+  padding:13px 28px;font-size:13px;font-weight:700;cursor:pointer;
+  font-family:inherit;width:100%;max-width:280px;margin-bottom:10px;
+  box-shadow:0 4px 16px rgba(255,46,46,0.3);
+}
+.mw-btn-secondary{
+  background:transparent;color:rgba(255,255,255,0.35);border:1px solid var(--border);
+  border-radius:7px;padding:11px 28px;font-size:12px;cursor:pointer;
+  font-family:inherit;width:100%;max-width:280px;
+}
+.mw-btn-secondary:hover{color:rgba(255,255,255,0.6);}
+@media(max-width:900px){
+  #mobile-warning{display:flex;}
+}
 </style>
 </head>
 <body>
+
+<!-- MOBILE WARNING -->
+<div id="mobile-warning">
+  <div class="mw-logo">FORGE</div>
+  <div class="mw-icon">🖥</div>
+  <div class="mw-title">Best on a larger screen</div>
+  <div class="mw-divider"></div>
+  <div class="mw-body">
+    This interactive demo is a <strong>live dashboard</strong> with traces, charts, and real-time event streams — designed for desktop or tablet in landscape mode.
+  </div>
+  <button class="mw-btn-primary" onclick="dismissMobileWarning()">Continue anyway</button>
+  <button class="mw-btn-secondary" onclick="window.location.href='../../platform/index.html'">Back to Privify</button>
+</div>
 
 <a href="../../platform/index.html" id="back-link">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
@@ -1462,6 +1504,11 @@ function initParticles() {
     @keyframes float-2{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-15px) translateX(-10px);}100%{transform:translateY(0) translateX(0);}}
   `;
   document.head.appendChild(style);
+}
+
+// MOBILE WARNING
+function dismissMobileWarning() {
+  document.getElementById('mobile-warning').style.display = 'none';
 }
 
 // SIDEBAR TOGGLE (mobile)
