@@ -115,6 +115,43 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 }
 .nav-item .ni-icon{font-size:15px;flex-shrink:0;}
 .nav-item.active .ni-icon{color:var(--primary);}
+
+/* — LOCKED NAV ITEMS — */
+.nav-item.locked{
+  opacity:0.35;cursor:default;
+  position:relative;
+}
+.nav-item.locked:hover{
+  opacity:0.55;background:rgba(255,255,255,0.02);color:rgba(255,255,255,0.45);
+}
+.nav-item.locked .ni-lock{
+  margin-left:auto;font-size:9px;opacity:0.5;flex-shrink:0;
+}
+
+/* — LOCKED TOAST — */
+#locked-toast{
+  position:fixed;bottom:28px;right:24px;z-index:9500;
+  background:#0E0E1E;border:1px solid rgba(255,46,46,0.35);border-radius:8px;
+  padding:12px 16px;max-width:280px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  transform:translateY(10px);opacity:0;pointer-events:none;
+  transition:opacity 0.2s ease,transform 0.2s ease;
+}
+#locked-toast.show{
+  transform:translateY(0);opacity:1;pointer-events:all;
+}
+.lt-label{font-size:9px;color:var(--primary);font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:5px;}
+.lt-body{font-size:11.5px;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:10px;}
+.lt-link{
+  display:inline-block;background:var(--primary);color:#fff;text-decoration:none;
+  font-size:11px;font-weight:700;padding:5px 12px;border-radius:4px;
+  transition:background 0.15s;
+}
+.lt-link:hover{background:#FF4444;}
+.lt-close{float:right;background:none;border:none;color:rgba(255,255,255,0.3);
+  cursor:pointer;font-size:14px;line-height:1;padding:0;margin-left:8px;}
+.lt-close:hover{color:rgba(255,255,255,0.6);}
+
 .sb-footer{padding:10px 16px;border-top:1px solid var(--border);font-size:9.5px;color:rgba(255,255,255,0.2);}
 .sb-footer a{color:rgba(255,46,46,0.6);text-decoration:none;}
 
@@ -236,9 +273,11 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .fw-ctrl-row:last-child{border-bottom:none;}
 .fw-ctrl-id{font-size:10px;font-weight:700;font-family:var(--font-mono);color:rgba(255,255,255,0.5);}
 .fw-ctrl-name{font-size:11px;color:rgba(255,255,255,0.65);flex:1;margin:0 12px;}
-.fw-ctrl-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:2px;}
-.fw-ctrl-badge.pass{background:rgba(0,201,122,0.2);color:var(--green);}
-.fw-ctrl-badge.fail{background:rgba(255,46,46,0.2);color:var(--primary);}
+.fw-ctrl-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+.fw-ctrl-badge.evidence{background:rgba(0,201,122,0.18);color:var(--green);}
+.fw-ctrl-badge.partial{background:rgba(240,165,0,0.18);color:var(--yellow);}
+.fw-ctrl-badge.process{background:rgba(120,120,160,0.18);color:rgba(200,200,220,0.5);}
+.fw-ctrl-desc{font-size:10px;color:rgba(255,255,255,0.3);line-height:1.5;margin-top:3px;}
 
 /* — POLICIES — */
 .policies-body{flex:1;overflow-y:auto;padding:20px 24px;}
@@ -625,10 +664,17 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
     </div>
     <nav class="sb-nav">
       <button class="nav-item active" data-view="dashboard"><span class="ni-icon">⬡</span>Dashboard</button>
-      <button class="nav-item" data-view="logs"><span class="ni-icon">▤</span>Event Logs</button>
+      <button class="nav-item locked" onclick="showLockedToast('Interactions')"><span class="ni-icon">◉</span>Interactions<span class="ni-lock">🔒</span></button>
       <button class="nav-item" data-view="traces"><span class="ni-icon">↗</span>Traces</button>
-      <button class="nav-item" data-view="compliance"><span class="ni-icon">◎</span>Compliance</button>
+      <button class="nav-item locked" onclick="showLockedToast('Participants')"><span class="ni-icon">◎</span>Participants<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('Quality')"><span class="ni-icon">★</span>Quality<span class="ni-lock">🔒</span></button>
       <button class="nav-item" data-view="policies"><span class="ni-icon">⚙</span>Policies</button>
+      <button class="nav-item locked" onclick="showLockedToast('MCP Servers')"><span class="ni-icon">⬢</span>MCP Servers<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('Probe Control')"><span class="ni-icon">◈</span>Probe Control<span class="ni-lock">🔒</span></button>
+      <button class="nav-item" data-view="logs"><span class="ni-icon">▤</span>Event Logs</button>
+      <button class="nav-item" data-view="compliance"><span class="ni-icon">✓</span>Compliance</button>
+      <button class="nav-item locked" onclick="showLockedToast('Reports & SIEM')"><span class="ni-icon">⊞</span>Reports &amp; SIEM<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('Feedback')"><span class="ni-icon">✉</span>Feedback<span class="ni-lock">🔒</span></button>
     </nav>
     <div class="sb-footer">
       FORGE v0.1.3 &nbsp;&middot;&nbsp; <a href="https://privify.io">privify.io</a>
@@ -952,6 +998,14 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   </div>
 </div>
 
+<!-- LOCKED PANEL TOAST -->
+<div id="locked-toast">
+  <button class="lt-close" onclick="hideLockedToast()">×</button>
+  <div class="lt-label">Full Platform Feature</div>
+  <div class="lt-body" id="lt-body">See this in action in a live demo.</div>
+  <a class="lt-link" href="https://privify.io/forge/demo" target="_blank">Book a Live Demo →</a>
+</div>
+
 <script>
 // STATE
 const state = {
@@ -1225,41 +1279,64 @@ function startReplay() {
 }
 
 // COMPLIANCE
+// Evidence tiers:
+//   'evidence' — FORGE directly implements or produces this control
+//   'partial'  — FORGE contributes data/logging that informs this control; org process also required
+//   'process'  — Organisational/legal process; FORGE provides supporting audit trail only
 const FRAMEWORKS = [
-  {id:'eu_ai_act', name:'EU AI Act',   score:87, color:'#9B59FF', controls:[
-    {id:'AIA-4.1', name:'Risk categorisation system', st:'pass'},
-    {id:'AIA-4.2', name:'Technical documentation',    st:'pass'},
-    {id:'AIA-4.3', name:'Human oversight mechanisms', st:'pass'},
-    {id:'AIA-4.4', name:'Transparency obligations',   st:'fail'},
-    {id:'AIA-4.5', name:'Post-market monitoring',     st:'pass'},
+  {id:'eu_ai_act', name:'EU AI Act', score:78, color:'#9B59FF', controls:[
+    {id:'Art. 9',  st:'evidence', name:'Risk management system',
+     desc:'FORGE\'s policy engine, DLP scanning, threat signatures, and anomaly detection constitute the ongoing risk management and monitoring layer required for AI deployments.'},
+    {id:'Art. 12', st:'evidence', name:'Logging & record-keeping',
+     desc:'Every LLM API call, agent action, and interaction is captured with timestamps, model versions, token counts, and full context — directly satisfying Art.12 logging obligations.'},
+    {id:'Art. 14', st:'evidence', name:'Human oversight mechanisms',
+     desc:'FORGE\'s human-in-the-loop workflow is a direct implementation of Art.14 — high-risk agent actions are paused and require human approval before execution continues.'},
+    {id:'Art. 15', st:'evidence', name:'Accuracy & robustness monitoring',
+     desc:'Quality scoring, SLA breach detection, loop detection, and anomaly alerts provide the post-deployment monitoring mandated under Art.15.'},
+    {id:'Art. 11', st:'partial',  name:'Technical documentation support',
+     desc:'FORGE generates an AI system inventory (models, API endpoints, agent configurations, versions) that forms the factual basis for Art.11 documentation. The documentation itself must be authored by your compliance or legal team.'},
   ]},
-  {id:'gdpr', name:'GDPR',      score:94, color:'#3D8BFF', controls:[
-    {id:'GDPR-5',  name:'Data minimisation',           st:'pass'},
-    {id:'GDPR-25', name:'Data protection by design',   st:'pass'},
-    {id:'GDPR-32', name:'Security of processing',      st:'pass'},
-    {id:'GDPR-35', name:'Data protection impact assessment', st:'pass'},
+  {id:'gdpr', name:'GDPR', score:62, color:'#3D8BFF', controls:[
+    {id:'Art. 32', st:'evidence', name:'Security of AI data processing',
+     desc:'DLP scanning, AI firewall, and 10 threat signatures provide technical security measures for personal data processed through AI — directly addressing Art.32 obligations.'},
+    {id:'Art. 5',  st:'partial',  name:'Data minimisation in AI pipelines',
+     desc:'FORGE DLP detects when excessive personal data (PII, SSN, health records) is transmitted to AI models and can alert or block. Does not enforce upstream data collection policies.'},
+    {id:'Art. 25', st:'partial',  name:'Data protection by design',
+     desc:'FORGE operates as a monitoring and enforcement layer that contributes to DPbD. Architectural decisions around data retention and purpose limitation are made outside FORGE.'},
+    {id:'Art. 35', st:'partial',  name:'DPIA evidence trail',
+     desc:'FORGE\'s event logs and DLP match records support DPIA documentation for AI processing activities. Scoping and conducting the DPIA itself is an organisational responsibility.'},
   ]},
-  {id:'soc2', name:'SOC 2',     score:91, color:'#FF2E2E', controls:[
-    {id:'CC6.1', name:'Logical access controls',       st:'pass'},
-    {id:'CC6.7', name:'Data transmission restrictions', st:'pass'},
-    {id:'CC7.2', name:'Anomaly and threat monitoring', st:'pass'},
-    {id:'CC9.1', name:'Risk mitigation activities',    st:'fail'},
+  {id:'soc2', name:'SOC 2', score:84, color:'#FF2E2E', controls:[
+    {id:'CC7.2', st:'evidence', name:'System monitoring & anomaly detection',
+     desc:'Continuous event streaming across 17 event types, threat signature matching, and real-time alerting directly implements the SOC2 CC7.2 monitoring requirement.'},
+    {id:'CC6.7', st:'evidence', name:'Restrict data transmission to AI services',
+     desc:'FORGE monitors all outbound traffic to LLM APIs, enforces model allowlists, and blocks transmissions to unauthorised AI endpoints.'},
+    {id:'CC7.3', st:'evidence', name:'Incident response for AI security events',
+     desc:'Automated policy enforcement, HITL approvals, SIEM push to 11 platforms, and a full audit trail support SOC2 CC7.3 incident identification and response.'},
+    {id:'CC9.1', st:'partial',  name:'AI vendor risk mitigation',
+     desc:'FORGE surfaces Shadow AI vendors and monitors approved API usage. Formal vendor risk assessments and contract reviews are organisational processes outside FORGE\'s scope.'},
   ]},
-  {id:'dpdp', name:'DPDP',      score:78, color:'#F97316', controls:[
-    {id:'DPDP-4',  name:'Grounds for processing',      st:'pass'},
-    {id:'DPDP-8',  name:'Rights of data principals',   st:'fail'},
-    {id:'DPDP-9',  name:"Processing children's data",  st:'pass'},
-    {id:'DPDP-12', name:'Data fiduciary obligations',  st:'fail'},
+  {id:'dpdp', name:'DPDP', score:54, color:'#F97316', controls:[
+    {id:'Sec. 8(5)', st:'evidence', name:'Data fiduciary audit trail for AI',
+     desc:'FORGE logs all personal data processed by AI agents — what data, which model, which agent, and when — fulfilling the data fiduciary\'s accountability obligations under DPDP.'},
+    {id:'Sec. 4',   st:'partial',  name:'Lawful processing evidence for AI',
+     desc:'FORGE logs AI data processing activities with context, supporting demonstration of lawful basis. Determining and recording the actual legal basis requires a separate legal process.'},
+    {id:'Sec. 8(1)', st:'process', name:'Data principal rights fulfilment',
+     desc:'Rights of access, correction, and erasure are organisational processes. FORGE\'s logs inform these responses, but consumer request handling is outside the platform\'s scope.'},
   ]},
-  {id:'hipaa', name:'HIPAA',    score:89, color:'#00C97A', controls:[
-    {id:'164.312a', name:'Access controls',             st:'pass'},
-    {id:'164.312b', name:'Audit controls',              st:'pass'},
-    {id:'164.312e', name:'Transmission security',       st:'fail'},
+  {id:'hipaa', name:'HIPAA', score:79, color:'#00C97A', controls:[
+    {id:'§164.312(b)',    st:'evidence', name:'Audit controls for PHI in AI',
+     desc:'FORGE logs all AI interactions that may involve PHI — agent, model, timestamp, and content context — providing the audit controls required under the HIPAA Security Rule.'},
+    {id:'§164.312(e)(1)', st:'evidence', name:'PHI transmission monitoring',
+     desc:'DLP pattern matching detects protected health information (diagnoses, MRN, insurance data) in AI prompts and responses before PHI leaves the perimeter.'},
+    {id:'§164.308(a)(1)', st:'partial',  name:'AI-specific security risk analysis',
+     desc:'FORGE\'s threat detection and anomaly monitoring contribute evidence for the required risk analysis. Full HIPAA risk analysis encompasses broader technical and organisational scope.'},
   ]},
-  {id:'ccpa', name:'CCPA',      score:92, color:'#06b6d4', controls:[
-    {id:'CCPA-1798.100', name:'Right to know',          st:'pass'},
-    {id:'CCPA-1798.105', name:'Right to delete',        st:'pass'},
-    {id:'CCPA-1798.120', name:'Right to opt-out',       st:'pass'},
+  {id:'ccpa', name:'CCPA', score:66, color:'#06b6d4', controls:[
+    {id:'§1798.150', st:'evidence', name:'Detect personal data exposure via AI',
+     desc:'DLP scanning and threat detection identify when California residents\' personal data is exposed through AI interactions, enabling timely breach response obligations.'},
+    {id:'§1798.100', st:'partial',  name:'AI data processing log for right-to-know',
+     desc:'FORGE logs what personal data AI systems process, supporting the audit trail for right-to-know requests. Consumer request handling itself is an organisational process.'},
   ]},
 ];
 
@@ -1273,16 +1350,18 @@ function renderCompliance() {
     {label:'Security',      ids:['soc2','hipaa']},
   ];
 
+  const BADGE_LABEL = {evidence:'EVIDENCE', partial:'PARTIAL', process:'PROCESS'};
+
   let html = groups.map(g => {
     const cards = g.ids.map(id => {
       const fw = FRAMEWORKS.find(f => f.id === id);
       if (!fw) return '';
-      const scoreColor = fw.score >= 90 ? 'var(--green)' : fw.score >= 80 ? 'var(--yellow)' : 'var(--primary)';
-      const barW = fw.score;
+      const scoreColor = fw.score >= 75 ? 'var(--green)' : fw.score >= 55 ? 'var(--yellow)' : 'var(--primary)';
       return `<div class="fw-card${fw.id === selectedFw ? ' selected' : ''}" onclick="selectFw('${fw.id}')">
         <div class="fw-name" style="color:${fw.color}">${fw.name}</div>
         <div class="fw-score" style="color:${scoreColor}">${fw.score}%</div>
-        <div class="fw-bar-bg"><div class="fw-bar-fill" style="width:${barW}%;background:${scoreColor};"></div></div>
+        <div style="font-size:8.5px;color:rgba(255,255,255,0.25);margin-top:2px;">coverage</div>
+        <div class="fw-bar-bg"><div class="fw-bar-fill" style="width:${fw.score}%;background:${scoreColor};"></div></div>
       </div>`;
     }).join('');
     return `<div class="fw-group"><div class="fw-group-label">${g.label}</div><div class="fw-cards">${cards}</div></div>`;
@@ -1290,12 +1369,21 @@ function renderCompliance() {
 
   const fw = FRAMEWORKS.find(f => f.id === selectedFw);
   if (fw) {
-    html += `<div style="margin-top:4px;font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px;">${fw.name} — ${fw.controls.filter(c=>c.st==='pass').length}/${fw.controls.length} controls passing</div>`;
+    const evidenceCount = fw.controls.filter(c => c.st === 'evidence').length;
+    const partialCount  = fw.controls.filter(c => c.st === 'partial').length;
+    html += `<div style="margin-top:4px;margin-bottom:6px;display:flex;align-items:center;gap:12px;">
+      <span style="font-size:11px;color:rgba(255,255,255,0.5);">${fw.name} — applicable controls covered by FORGE</span>
+      <span style="font-size:10px;color:var(--green);">● ${evidenceCount} direct</span>
+      <span style="font-size:10px;color:var(--yellow);">● ${partialCount} partial</span>
+    </div>`;
     html += `<div class="fw-controls">${fw.controls.map(c => `
-      <div class="fw-ctrl-row">
-        <span class="fw-ctrl-id">${c.id}</span>
-        <span class="fw-ctrl-name">${c.name}</span>
-        <span class="fw-ctrl-badge ${c.st}">${c.st.toUpperCase()}</span>
+      <div class="fw-ctrl-row" style="align-items:flex-start;">
+        <span class="fw-ctrl-id" style="padding-top:2px;">${c.id}</span>
+        <div class="fw-ctrl-name" style="flex:1;margin:0 12px;">
+          <div>${c.name}</div>
+          <div class="fw-ctrl-desc">${c.desc}</div>
+        </div>
+        <span class="fw-ctrl-badge ${c.st}" style="margin-top:2px;">${BADGE_LABEL[c.st]}</span>
       </div>`).join('')}</div>`;
   }
 
@@ -1532,6 +1620,33 @@ document.querySelectorAll('.nav-item').forEach(btn => {
     if (window.innerWidth <= 768) closeSidebar();
   });
 });
+
+// ── LOCKED PANEL TOAST ──────────────────
+const LOCKED_DESCRIPTIONS = {
+  'Interactions':   'Deep-dive into individual LLM conversations — prompt/response pairs, token counts, latency, and quality scores per interaction.',
+  'Participants':   'Map every human and AI agent in your org: who is using which models, what data they\'re accessing, and their risk profile.',
+  'Quality':        'Quality SLA enforcement — track response accuracy scores, hallucination rates, and per-agent SLA breach alerts over time.',
+  'MCP Servers':    'Enumerate and govern every Model Context Protocol server — see which tools are exposed to which agents and block unauthorized access.',
+  'Probe Control':  'Configure and manage the 4 host-level probes: Process, Network, File I/O, and MCP monitoring — tune sensitivity per environment.',
+  'Reports & SIEM': 'One-click compliance reports and push to 11 SIEM platforms: Splunk, Elastic, Datadog, QRadar, Sentinel, and more.',
+  'Feedback':       'Collect human feedback on agent responses to improve quality scoring models and tune policy thresholds.',
+};
+let toastTimer = null;
+
+function showLockedToast(panelName) {
+  if (state.tourStep >= 0) return;
+  const desc = LOCKED_DESCRIPTIONS[panelName] || 'See this panel in action in a live demo.';
+  document.getElementById('lt-body').textContent = desc;
+  const toast = document.getElementById('locked-toast');
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(hideLockedToast, 6000);
+}
+
+function hideLockedToast() {
+  document.getElementById('locked-toast').classList.remove('show');
+  clearTimeout(toastTimer);
+}
 
 // INIT
 initParticles();
