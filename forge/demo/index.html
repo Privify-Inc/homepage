@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FORGE interactive demo — see how Privify discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance.">
+<meta property="og:title" content="FORGE Interactive Demo | Privify">
+<meta property="og:description" content="Experience the platform that discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance.">
+<title>FORGE — Interactive Product Demo | Privify</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
+<style>
+:root {
+  --bg:          #06060B;
+  --panel:       #0D0D16;
+  --panel2:      #111120;
+  --border:      rgba(255,255,255,0.07);
+  --primary:     #FF2E2E;
+  --primary-glow:rgba(255,46,46,0.10);
+  --primary-dim: rgba(255,46,46,0.55);
+  --text:        #E8E8F0;
+  --text-muted:  #666688;
+  --text-dim:    #44445a;
+  --green:       #00C97A;
+  --yellow:      #F0A500;
+  --blue:        #3D8BFF;
+  --purple:      #9B59FF;
+  --orange:      #F97316;
+  --font-mono:   'JetBrains Mono','Fira Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:13px;}
+
+/* — DEMO BADGE — */
+#demo-badge{
+  position:fixed;top:10px;right:14px;z-index:9000;
+  background:rgba(240,165,0,0.15);border:1px solid rgba(240,165,0,0.4);
+  color:#F0A500;font-size:10px;font-weight:700;letter-spacing:0.12em;
+  padding:3px 10px;border-radius:3px;pointer-events:none;
+}
+
+/* — BACK LINK — */
+#back-link{
+  position:fixed;top:10px;left:14px;z-index:9000;
+  display:flex;align-items:center;gap:6px;
+  color:rgba(255,255,255,0.4);font-size:11px;font-weight:500;
+  text-decoration:none;transition:color 0.15s;
+}
+#back-link:hover{color:rgba(255,255,255,0.75);}
+#back-link svg{width:14px;height:14px;}
+
+/* — WELCOME SCREEN — */
+#welcome{
+  position:fixed;inset:0;z-index:8000;
+  background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:0;
+}
+#welcome .particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+#welcome .content{position:relative;text-align:center;max-width:540px;padding:0 24px;}
+.w-logo{font-size:72px;font-weight:900;color:var(--primary);letter-spacing:-4px;line-height:1;
+  text-shadow:0 0 60px rgba(255,46,46,0.35);}
+.w-sub{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.25em;text-transform:uppercase;margin-top:6px;}
+.w-tagline{font-size:22px;font-weight:300;color:rgba(255,255,255,0.85);margin-top:24px;line-height:1.4;}
+.w-tagline strong{color:var(--primary);font-weight:800;}
+.w-desc{font-size:12px;color:rgba(255,255,255,0.4);margin-top:14px;line-height:1.7;}
+.w-pillars{display:flex;gap:0;margin-top:28px;border:1px solid rgba(255,46,46,0.2);border-radius:6px;overflow:hidden;}
+.w-pillar{flex:1;padding:10px 0;text-align:center;border-right:1px solid rgba(255,46,46,0.15);}
+.w-pillar:last-child{border-right:none;}
+.w-pillar-name{font-size:10px;font-weight:700;color:var(--primary);letter-spacing:0.2em;}
+.w-pillar-sub{font-size:8.5px;color:rgba(255,255,255,0.28);margin-top:2px;}
+.w-buttons{display:flex;gap:12px;margin-top:32px;justify-content:center;}
+.btn-tour{background:var(--primary);color:#fff;border:none;border-radius:6px;
+  padding:13px 28px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:0.03em;
+  transition:all 0.15s;box-shadow:0 4px 20px rgba(255,46,46,0.3);}
+.btn-tour:hover{background:#FF4444;transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,46,46,0.4);}
+.btn-explore{background:transparent;color:rgba(255,255,255,0.55);border:1px solid var(--border);
+  border-radius:6px;padding:13px 24px;font-size:13px;cursor:pointer;transition:all 0.15s;}
+.btn-explore:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+
+/* — APP SHELL — */
+#app{display:none;height:100vh;flex-direction:row;}
+#app.visible{display:flex;}
+
+/* — SIDEBAR — */
+.sidebar{
+  width:200px;flex-shrink:0;background:var(--panel);
+  border-right:1px solid var(--border);display:flex;flex-direction:column;
+  height:100vh;overflow-y:auto;
+}
+.sb-logo{padding:44px 16px 12px;border-bottom:1px solid var(--border);}
+.sb-logo-name{font-size:20px;font-weight:900;color:var(--primary);letter-spacing:-1px;font-family:var(--font-mono);}
+.sb-logo-full{font-size:9px;color:rgba(255,255,255,0.25);letter-spacing:0.08em;margin-top:2px;line-height:1.4;}
+.sb-status{padding:8px 16px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:5px;}
+.sb-stat{display:flex;justify-content:space-between;align-items:center;font-size:11px;}
+.sb-stat-label{color:rgba(255,255,255,0.35);letter-spacing:0.05em;}
+.sb-stat-val{font-weight:700;font-family:var(--font-mono);}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);}
+.sb-nav{flex:1;padding:6px 0;}
+.nav-item{
+  width:100%;display:flex;align-items:center;gap:10px;
+  padding:9px 16px;background:transparent;border:none;
+  border-left:2px solid transparent;color:rgba(255,255,255,0.35);
+  cursor:pointer;font-size:12.5px;text-align:left;transition:all 0.12s;
+  font-family:inherit;
+}
+.nav-item:hover{color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.03);}
+.nav-item.active{
+  background:var(--primary-glow);border-left-color:var(--primary);
+  color:var(--text);
+}
+.nav-item .ni-icon{font-size:15px;flex-shrink:0;}
+.nav-item.active .ni-icon{color:var(--primary);}
+.sb-footer{padding:10px 16px;border-top:1px solid var(--border);font-size:9.5px;color:rgba(255,255,255,0.2);}
+.sb-footer a{color:rgba(255,46,46,0.6);text-decoration:none;}
+
+/* — MAIN AREA — */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+
+/* — VIEWS — */
+.view{display:none;flex:1;overflow:hidden;flex-direction:column;}
+.view.active{display:flex;}
+.view-header{
+  padding:14px 24px 12px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+}
+.view-title{font-size:17px;font-weight:700;letter-spacing:-0.4px;}
+.view-sub{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;}
+
+/* — STAT CARDS — */
+.stat-cards{display:flex;gap:12px;padding:16px 24px;flex-shrink:0;}
+.stat-card{
+  flex:1;background:var(--panel);border:1px solid var(--border);
+  border-radius:6px;padding:14px 16px;
+}
+.stat-label{font-size:9.5px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.stat-val{font-size:26px;font-weight:900;font-family:var(--font-mono);line-height:1;}
+.stat-sub{font-size:10px;color:rgba(255,255,255,0.25);margin-top:4px;}
+
+/* — CHART — */
+.chart-box{
+  margin:0 24px 16px;background:var(--panel);border:1px solid var(--border);
+  border-radius:6px;padding:14px 16px;flex-shrink:0;
+}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.chart-title{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;}
+.chart-toggles{display:flex;gap:4px;}
+.chart-toggle{
+  padding:3px 10px;border-radius:3px;border:1px solid var(--border);
+  background:transparent;color:rgba(255,255,255,0.35);font-size:10px;font-weight:700;
+  cursor:pointer;transition:all 0.1s;font-family:inherit;
+}
+.chart-toggle.active{background:var(--primary-dim);color:#fff;border-color:transparent;}
+#chart-bars{display:flex;align-items:flex-end;gap:4px;height:80px;}
+.chart-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;}
+.chart-bar-label{font-size:9px;color:rgba(255,255,255,0.25);height:14px;line-height:14px;font-family:var(--font-mono);}
+.chart-bar{width:100%;border-radius:2px 2px 0 0;transition:height 0.4s ease;min-height:0;}
+.chart-bar-type{font-size:7px;color:rgba(255,255,255,0.2);margin-top:3px;text-align:center;
+  writing-mode:vertical-lr;transform:rotate(180deg);height:52px;overflow:hidden;line-height:1.1;}
+
+/* — EVENTS LIST — */
+.events-scroll{flex:1;overflow-y:auto;}
+.event-row{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:6px 24px;border-bottom:1px solid rgba(255,255,255,0.035);
+  cursor:pointer;transition:background 0.1s;
+}
+.event-row:hover{background:var(--panel2);}
+.event-row.new-flash{animation:flashin 0.5s ease;}
+@keyframes flashin{from{background:rgba(255,46,46,0.12);}to{background:transparent;}}
+.ev-type{font-size:10px;font-family:var(--font-mono);flex-shrink:0;min-width:175px;padding-top:1px;}
+.ev-detail{font-size:11px;color:rgba(255,255,255,0.45);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ev-conf{font-size:10px;color:rgba(255,255,255,0.25);flex-shrink:0;width:36px;text-align:right;}
+.ev-time{font-size:10px;color:rgba(255,255,255,0.2);flex-shrink:0;font-family:var(--font-mono);}
+
+/* — TRACES — */
+.traces-layout{flex:1;display:flex;overflow:hidden;}
+.traces-list{width:220px;flex-shrink:0;border-right:1px solid var(--border);overflow-y:auto;}
+.trace-row{
+  padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;
+  transition:background 0.1s;
+}
+.trace-row:hover,.trace-row.active{background:var(--primary-glow);}
+.trace-row.active{border-left:2px solid var(--primary);}
+.trace-id{font-size:10px;font-family:var(--font-mono);color:rgba(255,255,255,0.6);}
+.trace-meta{font-size:10px;color:rgba(255,255,255,0.3);margin-top:3px;}
+.trace-status{display:inline-block;font-size:9px;font-weight:700;padding:1px 6px;border-radius:2px;margin-top:4px;}
+.trace-status.ok{background:rgba(0,201,122,0.15);color:var(--green);}
+.trace-status.warn{background:rgba(240,165,0,0.15);color:var(--yellow);}
+.traces-dag{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.dag-toolbar{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.btn-replay{
+  background:var(--primary);color:#fff;border:none;border-radius:4px;
+  padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;
+  transition:all 0.15s;
+}
+.btn-replay:hover{background:#FF4444;}
+.btn-replay:disabled{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);cursor:default;}
+.dag-status{font-size:11px;color:rgba(255,255,255,0.35);}
+#dag-svg{flex:1;width:100%;}
+
+/* DAG node states */
+.dag-node-bg{fill:rgba(255,255,255,0.04);stroke:rgba(255,255,255,0.12);stroke-width:1.5;transition:all 0.4s;}
+.dag-node-bg.running{fill:rgba(255,165,0,0.15);stroke:#F0A500;stroke-width:2;}
+.dag-node-bg.done{fill:rgba(0,201,122,0.12);stroke:var(--green);stroke-width:2;}
+.dag-node-label{fill:rgba(255,255,255,0.55);font-size:11px;font-family:var(--font-mono);}
+.dag-node-label.running{fill:#F0A500;}
+.dag-node-label.done{fill:var(--green);}
+.dag-edge{stroke:rgba(255,255,255,0.12);stroke-width:1.5;fill:none;stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 0.5s ease, stroke 0.4s;}
+.dag-edge.active{stroke:rgba(255,255,255,0.35);stroke-dashoffset:0;}
+.dag-timing{fill:rgba(255,255,255,0.25);font-size:9px;font-family:var(--font-mono);}
+.dag-timing.done{fill:var(--green);}
+.dag-type-label{fill:rgba(255,255,255,0.28);font-size:9px;font-family:var(--font-mono);}
+
+/* — COMPLIANCE — */
+.compliance-body{flex:1;overflow-y:auto;padding:20px 24px;}
+.fw-group{margin-bottom:18px;}
+.fw-group-label{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;}
+.fw-cards{display:flex;gap:10px;flex-wrap:wrap;}
+.fw-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:6px;
+  padding:14px 16px;width:155px;cursor:pointer;transition:all 0.15s;
+}
+.fw-card:hover{border-color:rgba(255,255,255,0.15);}
+.fw-card.selected{border-color:var(--primary);background:var(--primary-glow);}
+.fw-name{font-size:11px;font-weight:700;margin-bottom:8px;}
+.fw-score{font-size:22px;font-weight:900;font-family:var(--font-mono);}
+.fw-bar-bg{height:4px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden;}
+.fw-bar-fill{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);}
+.fw-controls{margin-top:18px;background:var(--panel);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.fw-ctrl-row{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid var(--border);}
+.fw-ctrl-row:last-child{border-bottom:none;}
+.fw-ctrl-id{font-size:10px;font-weight:700;font-family:var(--font-mono);color:rgba(255,255,255,0.5);}
+.fw-ctrl-name{font-size:11px;color:rgba(255,255,255,0.65);flex:1;margin:0 12px;}
+.fw-ctrl-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:2px;}
+.fw-ctrl-badge.pass{background:rgba(0,201,122,0.2);color:var(--green);}
+.fw-ctrl-badge.fail{background:rgba(255,46,46,0.2);color:var(--primary);}
+
+/* — POLICIES — */
+.policies-body{flex:1;overflow-y:auto;padding:20px 24px;}
+.policy-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:6px;
+  padding:14px 16px;margin-bottom:10px;
+}
+.policy-card.triggered{border-color:var(--yellow);background:rgba(240,165,0,0.06);}
+.policy-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.policy-name{font-size:13px;font-weight:700;}
+.policy-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:0.06em;}
+.policy-badge.active{background:rgba(0,201,122,0.15);color:var(--green);}
+.policy-badge.triggered{background:rgba(240,165,0,0.2);color:var(--yellow);}
+.policy-desc{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.6;}
+.policy-meta{display:flex;gap:16px;margin-top:8px;}
+.policy-meta-item{font-size:10px;color:rgba(255,255,255,0.3);}
+.policy-meta-item span{color:rgba(255,255,255,0.55);}
+.policy-trigger-banner{
+  background:rgba(240,165,0,0.12);border:1px solid rgba(240,165,0,0.3);
+  border-radius:6px;padding:12px 16px;margin-bottom:14px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.ptb-text{font-size:12px;color:var(--yellow);}
+.btn-review{
+  background:var(--yellow);color:#000;border:none;border-radius:4px;
+  padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;
+  white-space:nowrap;
+}
+
+/* — APPROVAL MODAL — */
+#approval-modal{
+  display:none;position:fixed;inset:0;z-index:6600;
+  background:rgba(0,0,0,0.75);align-items:center;justify-content:center;
+}
+#approval-modal.open{display:flex;}
+.modal-box{
+  background:#0E0E1C;border:1px solid rgba(240,165,0,0.4);
+  border-radius:10px;padding:28px 32px;width:520px;max-width:95vw;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+.modal-title{font-size:13px;font-weight:700;color:var(--yellow);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.modal-headline{font-size:18px;font-weight:800;margin-bottom:18px;}
+.modal-field{margin-bottom:10px;}
+.modal-field-label{font-size:9.5px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;}
+.modal-field-val{font-size:12px;color:rgba(255,255,255,0.75);font-family:var(--font-mono);background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:4px;}
+.modal-risk{display:flex;gap:10px;margin:14px 0;}
+.risk-chip{padding:4px 12px;border-radius:4px;font-size:11px;font-weight:700;}
+.risk-high{background:rgba(255,46,46,0.2);color:var(--primary);border:1px solid rgba(255,46,46,0.3);}
+.risk-info{background:rgba(61,139,255,0.15);color:var(--blue);border:1px solid rgba(61,139,255,0.3);}
+.modal-actions{display:flex;gap:12px;margin-top:22px;}
+.btn-deny{flex:1;background:rgba(255,46,46,0.15);color:var(--primary);border:1px solid rgba(255,46,46,0.3);
+  border-radius:6px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.btn-deny:hover{background:rgba(255,46,46,0.25);}
+.btn-approve{flex:1;background:rgba(0,201,122,0.15);color:var(--green);border:1px solid rgba(0,201,122,0.3);
+  border-radius:6px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.btn-approve:hover{background:rgba(0,201,122,0.25);}
+
+/* — TOUR OVERLAY — */
+#tour-overlay{
+  display:none;position:fixed;inset:0;z-index:6000;
+  background:rgba(0,0,0,0.55);pointer-events:none;
+}
+#tour-overlay.active{display:block;}
+
+.tour-highlight{
+  position:relative;z-index:6001;
+  box-shadow:0 0 0 3px var(--primary),0 0 30px rgba(255,46,46,0.25)!important;
+  border-radius:6px;
+  animation:tour-pulse 2s infinite;
+}
+@keyframes tour-pulse{
+  0%,100%{box-shadow:0 0 0 3px var(--primary),0 0 20px rgba(255,46,46,0.2);}
+  50%{box-shadow:0 0 0 4px var(--primary),0 0 36px rgba(255,46,46,0.4);}
+}
+
+#tour-tooltip{
+  display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  z-index:6002;pointer-events:all;
+  background:#0C0C1E;border:1px solid var(--primary);border-radius:10px;
+  padding:20px 24px;width:500px;
+  box-shadow:0 12px 48px rgba(0,0,0,0.6),0 0 0 1px rgba(255,46,46,0.2);
+}
+#tour-tooltip.active{display:block;}
+.tt-step{font-size:9.5px;color:var(--primary);font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;
+  display:flex;justify-content:space-between;align-items:center;}
+.tt-skip{color:rgba(255,255,255,0.25);cursor:pointer;font-size:9.5px;font-weight:400;letter-spacing:0.05em;}
+.tt-skip:hover{color:rgba(255,255,255,0.55);}
+.tt-title{font-size:16px;font-weight:800;margin-bottom:8px;}
+.tt-body{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.7;}
+.tt-actions{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.tt-dots{display:flex;gap:5px;}
+.tt-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.15);cursor:pointer;}
+.tt-dot.active{background:var(--primary);}
+.tt-buttons{display:flex;gap:8px;}
+.tt-back{background:transparent;color:rgba(255,255,255,0.35);border:1px solid var(--border);
+  border-radius:5px;padding:7px 16px;font-size:12px;cursor:pointer;font-family:inherit;}
+.tt-back:hover{color:var(--text);}
+.tt-next{background:var(--primary);color:#fff;border:none;border-radius:5px;
+  padding:7px 20px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;
+  box-shadow:0 2px 12px rgba(255,46,46,0.3);}
+.tt-next:hover{background:#FF4444;}
+
+/* — END SCREEN — */
+#end-screen{
+  display:none;position:fixed;inset:0;z-index:7500;
+  background:rgba(6,6,11,0.97);align-items:center;justify-content:center;
+}
+#end-screen.open{display:flex;}
+.end-box{text-align:center;max-width:500px;padding:0 24px;}
+.end-check{font-size:52px;margin-bottom:20px;}
+.end-title{font-size:28px;font-weight:900;}
+.end-sub{font-size:14px;color:rgba(255,255,255,0.45);margin-top:10px;line-height:1.6;}
+.end-stats{display:flex;gap:28px;justify-content:center;margin:28px 0;}
+.end-stat-val{font-size:22px;font-weight:900;font-family:var(--font-mono);}
+.end-stat-label{font-size:9.5px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;margin-top:2px;}
+.end-buttons{display:flex;gap:12px;justify-content:center;margin-top:28px;}
+.btn-cta-primary{background:var(--primary);color:#fff;border:none;border-radius:7px;
+  padding:14px 30px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
+  box-shadow:0 4px 20px rgba(255,46,46,0.3);transition:all 0.15s;}
+.btn-cta-primary:hover{background:#FF4444;transform:translateY(-1px);}
+.btn-cta-sec{background:transparent;color:rgba(255,255,255,0.55);border:1px solid var(--border);
+  border-radius:7px;padding:14px 26px;font-size:14px;cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.btn-cta-sec:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.end-footnote{font-size:11px;color:rgba(255,255,255,0.25);margin-top:20px;}
+
+/* — SCROLLBAR — */
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px;}
+
+/* — PULSE — */
+.pulse{animation:pulse-anim 2s infinite;}
+@keyframes pulse-anim{0%,100%{opacity:1;}50%{opacity:0.5;}}
+
+/* — LOGS HEADER — */
+.logs-toolbar{padding:10px 24px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:8px;}
+.time-filters,.type-filters{display:flex;gap:4px;flex-wrap:wrap;align-items:center;}
+.filter-btn{padding:3px 9px;border-radius:3px;border:1px solid var(--border);background:transparent;
+  color:rgba(255,255,255,0.35);font-size:10px;font-weight:700;cursor:pointer;font-family:var(--font-mono);transition:all 0.1s;}
+.filter-btn.active{background:var(--primary-dim);color:#fff;border-color:transparent;}
+.filter-sep{font-size:10px;color:rgba(255,255,255,0.15);padding:0 4px;}
+
+/* — Compliance summary bar — */
+.summary-bar{display:flex;gap:12px;padding:12px 24px;flex-shrink:0;}
+.sum-card{flex:1;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px 14px;}
+.sum-label{font-size:9.5px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase;}
+.sum-val{font-size:20px;font-weight:900;font-family:var(--font-mono);margin-top:3px;}
+</style>
+</head>
+<body>
+
+<a href="../../platform/index.html" id="back-link">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+  Back to Privify
+</a>
+
+<div id="demo-badge">SIMULATED DEMO</div>
+
+<!-- WELCOME SCREEN -->
+<div id="welcome">
+  <div class="particles" id="particles"></div>
+  <div class="content">
+    <div class="w-logo">FORGE</div>
+    <div class="w-sub">Federated Oversight &amp; Risk Governance Engine</div>
+    <div class="w-tagline">Every AI agent. Every interaction.<br><strong>Governed.</strong></div>
+    <div class="w-desc">Experience the platform that discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance — all in one place.</div>
+    <div class="w-pillars">
+      <div class="w-pillar"><div class="w-pillar-name">DISCOVER</div><div class="w-pillar-sub">4 host-level probes</div></div>
+      <div class="w-pillar"><div class="w-pillar-name">OBSERVE</div><div class="w-pillar-sub">Full trace DAG replay</div></div>
+      <div class="w-pillar"><div class="w-pillar-name">GOVERN</div><div class="w-pillar-sub">13 compliance frameworks</div></div>
+    </div>
+    <div class="w-buttons">
+      <button class="btn-tour" onclick="startTour()">&#9654; Start Interactive Tour</button>
+      <button class="btn-explore" onclick="startFree()">Explore Freely &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-name">FORGE</div>
+      <div class="sb-logo-full">Federated Oversight &amp;<br>Risk Governance Engine</div>
+    </div>
+    <div class="sb-status">
+      <div class="sb-stat">
+        <span class="sb-stat-label">LIVE FEED</span>
+        <span class="live-dot pulse"></span>
+      </div>
+      <div class="sb-stat">
+        <span class="sb-stat-label">AGENTS</span>
+        <span class="sb-stat-val" id="sb-agents" style="color:var(--primary)">24</span>
+      </div>
+      <div class="sb-stat">
+        <span class="sb-stat-label">EVENTS</span>
+        <span class="sb-stat-val" id="sb-events" style="color:rgba(255,255,255,0.45)">0</span>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <button class="nav-item active" data-view="dashboard"><span class="ni-icon">⬡</span>Dashboard</button>
+      <button class="nav-item" data-view="logs"><span class="ni-icon">▤</span>Event Logs</button>
+      <button class="nav-item" data-view="traces"><span class="ni-icon">↗</span>Traces</button>
+      <button class="nav-item" data-view="compliance"><span class="ni-icon">◎</span>Compliance</button>
+      <button class="nav-item" data-view="policies"><span class="ni-icon">⚙</span>Policies</button>
+    </nav>
+    <div class="sb-footer">
+      FORGE v0.1.3 &nbsp;&middot;&nbsp; <a href="https://privify.io">privify.io</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+      <div class="view-header">
+        <div>
+          <div class="view-title">Dashboard</div>
+          <div class="view-sub" id="dash-sub">Monitoring 24 active agents</div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.25);font-family:var(--font-mono)" id="dash-time"></div>
+      </div>
+      <div class="stat-cards" id="stat-cards">
+        <div class="stat-card">
+          <div class="stat-label">Active Agents</div>
+          <div class="stat-val" id="s-agents" style="color:var(--primary)">24</div>
+          <div class="stat-sub">3 local LLMs detected</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Events (24h)</div>
+          <div class="stat-val" id="s-events" style="color:var(--yellow)">847</div>
+          <div class="stat-sub" id="s-events-sub">+12 last minute</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">DLP Matches</div>
+          <div class="stat-val" id="s-dlp" style="color:var(--purple)">12</div>
+          <div class="stat-sub">SSN &middot; email &middot; API keys</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Policy Violations</div>
+          <div class="stat-val" id="s-violations" style="color:var(--yellow)">3</div>
+          <div class="stat-sub" id="s-violations-sub">1 pending approval</div>
+        </div>
+      </div>
+      <div class="chart-box" id="chart-box">
+        <div class="chart-header">
+          <span class="chart-title">Event Distribution</span>
+          <div class="chart-toggles">
+            <button class="chart-toggle" onclick="setChartRange(1)">1h</button>
+            <button class="chart-toggle active" onclick="setChartRange(6)">6h</button>
+            <button class="chart-toggle" onclick="setChartRange(12)">12h</button>
+          </div>
+        </div>
+        <div id="chart-bars"></div>
+        <div id="chart-time-label" style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:6px;font-family:var(--font-mono);"></div>
+      </div>
+      <div style="padding:0 24px 6px;flex-shrink:0;">
+        <div style="font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;text-transform:uppercase;">Recent Events</div>
+      </div>
+      <div class="events-scroll" id="dash-events"></div>
+    </div>
+
+    <!-- EVENT LOGS -->
+    <div class="view" id="view-logs">
+      <div class="view-header">
+        <div>
+          <div class="view-title">Event Logs</div>
+          <div class="view-sub" id="logs-sub">Live stream &mdash; all event types</div>
+        </div>
+      </div>
+      <div class="logs-toolbar">
+        <div class="time-filters">
+          <span style="font-size:10px;color:rgba(255,255,255,0.25);margin-right:4px;">RANGE</span>
+          <button class="filter-btn" onclick="setLogRange(1)">1h</button>
+          <button class="filter-btn active" onclick="setLogRange(6)">6h</button>
+          <button class="filter-btn" onclick="setLogRange(24)">24h</button>
+          <button class="filter-btn" onclick="setLogRange(168)">7d</button>
+          <button class="filter-btn" onclick="setLogRange(null)">All</button>
+        </div>
+        <div class="type-filters" id="type-filters">
+          <span style="font-size:10px;color:rgba(255,255,255,0.25);margin-right:2px;">TYPE</span>
+          <button class="filter-btn active" onclick="setTypeFilter('ALL')">ALL</button>
+        </div>
+      </div>
+      <div class="events-scroll" id="logs-events"></div>
+    </div>
+
+    <!-- TRACES -->
+    <div class="view" id="view-traces">
+      <div class="view-header">
+        <div>
+          <div class="view-title">Traces</div>
+          <div class="view-sub">Session-level agent call chain visualization</div>
+        </div>
+      </div>
+      <div class="traces-layout">
+        <div class="traces-list" id="traces-list"></div>
+        <div class="traces-dag">
+          <div class="dag-toolbar">
+            <button class="btn-replay" id="btn-replay" onclick="startReplay()">&#9654; Replay Session</button>
+            <span class="dag-status" id="dag-status">Select a session and click Replay</span>
+          </div>
+          <svg id="dag-svg" viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,255,255,0.25)"/>
+              </marker>
+              <marker id="arrow-active" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,255,255,0.5)"/>
+              </marker>
+            </defs>
+            <!-- Edges -->
+            <line class="dag-edge" id="e-u-o"  x1="110" y1="60"  x2="220" y2="120" marker-end="url(#arrow)"/>
+            <line class="dag-edge" id="e-o-ws" x1="280" y1="145" x2="190" y2="210" marker-end="url(#arrow)"/>
+            <line class="dag-edge" id="e-o-ce" x1="330" y1="145" x2="420" y2="210" marker-end="url(#arrow)"/>
+            <line class="dag-edge" id="e-ws-m" x1="205" y1="255" x2="285" y2="308" marker-end="url(#arrow)"/>
+            <line class="dag-edge" id="e-ce-m" x1="430" y1="250" x2="345" y2="308" marker-end="url(#arrow)"/>
+
+            <!-- Node: User Input -->
+            <rect class="dag-node-bg" id="n-u"  x="40"  y="28"  width="140" height="40" rx="5"/>
+            <text class="dag-node-label" id="nl-u"  x="110" y="43"  text-anchor="middle" dy="5">User Query</text>
+            <text class="dag-type-label" x="110" y="63"  text-anchor="middle">input</text>
+
+            <!-- Node: Orchestrator -->
+            <rect class="dag-node-bg" id="n-o"  x="220" y="112" width="160" height="44" rx="5"/>
+            <text class="dag-node-label" id="nl-o"  x="300" y="129" text-anchor="middle" dy="5">Orchestrator Agent</text>
+            <text class="dag-type-label" x="300" y="150" text-anchor="middle">llm &middot; claude-3-5-sonnet</text>
+            <text class="dag-timing"     id="nt-o" x="300" y="104" text-anchor="middle"></text>
+
+            <!-- Node: Web Search -->
+            <rect class="dag-node-bg" id="n-ws" x="120" y="210" width="140" height="40" rx="5"/>
+            <text class="dag-node-label" id="nl-ws" x="190" y="225" text-anchor="middle" dy="5">Web Search Tool</text>
+            <text class="dag-type-label" x="190" y="244" text-anchor="middle">tool &middot; tavily-api</text>
+            <text class="dag-timing"     id="nt-ws" x="190" y="205" text-anchor="middle"></text>
+
+            <!-- Node: Code Executor -->
+            <rect class="dag-node-bg" id="n-ce" x="360" y="210" width="145" height="40" rx="5"/>
+            <text class="dag-node-label" id="nl-ce" x="432" y="225" text-anchor="middle" dy="5">Code Executor</text>
+            <text class="dag-type-label" x="432" y="244" text-anchor="middle">tool &middot; python-sandbox</text>
+            <text class="dag-timing"     id="nt-ce" x="432" y="205" text-anchor="middle"></text>
+
+            <!-- Node: Synthesizer -->
+            <rect class="dag-node-bg" id="n-m"  x="230" y="310" width="160" height="44" rx="5"/>
+            <text class="dag-node-label" id="nl-m"  x="310" y="327" text-anchor="middle" dy="5">Response Synthesizer</text>
+            <text class="dag-type-label" x="310" y="347" text-anchor="middle">llm &middot; output</text>
+            <text class="dag-timing"     id="nt-m" x="310" y="305" text-anchor="middle"></text>
+
+            <!-- DLP badge (appears during replay) -->
+            <rect id="dlp-badge" x="0" y="0" width="0" height="0" rx="3" fill="rgba(251,146,60,0.2)" stroke="#FB923C" stroke-width="1"/>
+            <text id="dlp-text" x="0" y="0" fill="#FB923C" font-size="9" font-family="monospace"></text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLIANCE -->
+    <div class="view" id="view-compliance">
+      <div class="view-header">
+        <div>
+          <div class="view-title">Compliance &amp; Cost Governance</div>
+          <div class="view-sub">13 frameworks &middot; Automated evidence collection</div>
+        </div>
+      </div>
+      <div class="summary-bar">
+        <div class="sum-card"><div class="sum-label">Total Cost</div><div class="sum-val" style="color:var(--orange)">$2.47</div></div>
+        <div class="sum-card"><div class="sum-label">DLP Matches</div><div class="sum-val" style="color:var(--primary)">12</div></div>
+        <div class="sum-card"><div class="sum-label">Policy Violations</div><div class="sum-val" style="color:var(--yellow)">3</div></div>
+        <div class="sum-card"><div class="sum-label">Open Anomalies</div><div class="sum-val" style="color:var(--purple)">5</div></div>
+      </div>
+      <div class="compliance-body" id="compliance-body"></div>
+    </div>
+
+    <!-- POLICIES -->
+    <div class="view" id="view-policies">
+      <div class="view-header">
+        <div>
+          <div class="view-title">Policies</div>
+          <div class="view-sub">5 active rules &middot; 1 triggered</div>
+        </div>
+      </div>
+      <div class="policies-body">
+        <div class="policy-trigger-banner" id="approval-banner">
+          <div class="ptb-text">&#9888;&nbsp; <strong>APPROVAL REQUIRED</strong> &mdash; Agent action intercepted and paused. Review now.</div>
+          <button class="btn-review" onclick="openApproval()">Review &amp; Decide &rarr;</button>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">DLP &mdash; Sensitive Data Guard</div>
+            <span class="policy-badge active">ACTIVE</span>
+          </div>
+          <div class="policy-desc">Scans all LLM prompts and responses for PII, SSN, credit card numbers, API keys, and PHI. Actions: alert + redact on match.</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Patterns: <span>12</span></div>
+            <div class="policy-meta-item">Action: <span>Alert + Redact</span></div>
+            <div class="policy-meta-item">Triggers today: <span>12</span></div>
+          </div>
+        </div>
+        <div class="policy-card triggered">
+          <div class="policy-header">
+            <div class="policy-name">Human-in-the-Loop &mdash; High-Risk File Write</div>
+            <span class="policy-badge triggered">TRIGGERED</span>
+          </div>
+          <div class="policy-desc">Intercept and pause any agent action that attempts to write to system-level file paths (/etc, /usr, /bin) or modify cron jobs. Requires human approval before execution continues.</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Risk threshold: <span>High (&ge;80)</span></div>
+            <div class="policy-meta-item">Action: <span>Pause + Request Approval</span></div>
+            <div class="policy-meta-item">Last trigger: <span>just now</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">Cost Cap &mdash; Per-Agent Budget</div>
+            <span class="policy-badge active">ACTIVE</span>
+          </div>
+          <div class="policy-desc">Enforces $1.00 per-session token spend limit. Automatically terminates sessions that exceed budget and logs a COST_ALERT event.</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Limit: <span>$1.00 / session</span></div>
+            <div class="policy-meta-item">Action: <span>Terminate + Alert</span></div>
+            <div class="policy-meta-item">Triggers today: <span>2</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">Loop Detection</div>
+            <span class="policy-badge active">ACTIVE</span>
+          </div>
+          <div class="policy-desc">Detects agent sessions with more than 5 consecutive self-calls or tool calls in a tight loop. Kills the loop and emits LOOP_DETECTED.</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Threshold: <span>5 iterations</span></div>
+            <div class="policy-meta-item">Action: <span>Kill + Alert</span></div>
+            <div class="policy-meta-item">Triggers today: <span>1</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .main -->
+</div><!-- end #app -->
+
+<!-- APPROVAL MODAL -->
+<div id="approval-modal">
+  <div class="modal-box">
+    <div class="modal-title">&#9888; Human Approval Required</div>
+    <div class="modal-headline">Agent wants to modify system cron</div>
+    <div class="modal-field">
+      <div class="modal-field-label">Agent</div>
+      <div class="modal-field-val">orchestrator-agent &middot; session a7f2-9c1d</div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-field-label">Requested Action</div>
+      <div class="modal-field-val">WriteFile("/etc/crontab", "*/5 * * * * /tmp/.forge_payload")</div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-field-label">Triggering Prompt</div>
+      <div class="modal-field-val">"Schedule this script to run automatically every 5 minutes at startup..."</div>
+    </div>
+    <div class="modal-risk">
+      <span class="risk-chip risk-high">Risk Score: 94%</span>
+      <span class="risk-chip risk-info">Policy: system-file-write</span>
+      <span class="risk-chip risk-info">DLP: CLEAN</span>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;border-top:1px solid var(--border);padding-top:12px;">
+      The agent is currently <strong style="color:var(--yellow)">paused</strong>. Your decision will be logged with your user ID and timestamp for the audit trail.
+    </div>
+    <div class="modal-actions">
+      <button class="btn-deny" onclick="resolveApproval('deny')">&#10005;&nbsp; Deny &amp; Block</button>
+      <button class="btn-approve" onclick="resolveApproval('approve')">&#10003;&nbsp; Approve</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOUR OVERLAY -->
+<div id="tour-overlay"></div>
+<div id="tour-tooltip">
+  <div class="tt-step">
+    <span id="tt-step-label">STEP 1 OF 5</span>
+    <span class="tt-skip" onclick="skipTour()">Skip tour</span>
+  </div>
+  <div class="tt-title" id="tt-title"></div>
+  <div class="tt-body"  id="tt-body"></div>
+  <div class="tt-actions">
+    <div class="tt-dots" id="tt-dots"></div>
+    <div class="tt-buttons">
+      <button class="tt-back" id="tt-back" onclick="tourBack()">&larr; Back</button>
+      <button class="tt-next" id="tt-next" onclick="tourNext()">Next &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- END SCREEN -->
+<div id="end-screen">
+  <div class="end-box">
+    <div class="end-check">🛡</div>
+    <div class="end-title">That's FORGE.</div>
+    <div class="end-sub">Discover every AI agent. Observe every interaction.<br>Govern every policy. Prove every compliance control.</div>
+    <div class="end-stats">
+      <div><div class="end-stat-val" style="color:var(--primary)">4</div><div class="end-stat-label">PROBE TYPES</div></div>
+      <div><div class="end-stat-val" style="color:var(--yellow)">13</div><div class="end-stat-label">FRAMEWORKS</div></div>
+      <div><div class="end-stat-val" style="color:var(--blue)">11</div><div class="end-stat-label">SIEM PLATFORMS</div></div>
+      <div><div class="end-stat-val" style="color:var(--green)">30m</div><div class="end-stat-label">TO DEPLOY</div></div>
+    </div>
+    <div class="end-buttons">
+      <button class="btn-cta-primary" onclick="window.location.href='../../platform/index.html#interest'">Request Early Access &rarr;</button>
+      <button class="btn-cta-sec" onclick="document.getElementById('end-screen').classList.remove('open')">Continue Exploring</button>
+    </div>
+    <div class="end-footnote">enterprise@privify.io &nbsp;&middot;&nbsp; privify.io</div>
+  </div>
+</div>
+
+<script>
+// STATE
+const state = {
+  currentView: 'dashboard',
+  tourStep: -1,
+  totalEvents: 847,
+  dlpCount: 12,
+  violations: 3,
+  agents: 24,
+  chartRange: 6,
+  replayRunning: false,
+  selectedTrace: 0,
+};
+
+const TYPE_COLORS = {
+  AI_API_CALL:'#FF2E2E', AI_AGENT_DETECTED:'#cc2020', THREAT:'#ef4444',
+  INTERVENTION:'#f97316', DLP_MATCH:'#fb923c', SLA_BREACH:'#f59e0b',
+  ANOMALY:'#facc15', LOOP_DETECTED:'#84cc16', COST_ALERT:'#a855f7',
+  AI_LIB_DETECTED:'#d946ef', LOCAL_LLM_DETECTED:'#ec4899',
+  POLICY_MATCH:'#3b82f6', APPROVAL_REQUESTED:'#06b6d4',
+  APPROVAL_RESOLVED:'#22c55e', INTERACTION:'#818cf8', ACTION_TAKEN:'#6b7280',
+};
+const tc = t => TYPE_COLORS[t] || '#6b7280';
+
+// FAKE EVENTS
+const FAKE_POOL = [
+  {type:'AI_API_CALL',       process:'cursor.app',       detail:'claude-3-5-sonnet · 2847 tok · 142ms', conf:0.98},
+  {type:'INTERACTION',       process:'vscode',            detail:'gpt-4o · 1204 tok · openai', conf:0.97},
+  {type:'DLP_MATCH',         process:'network_probe',     detail:'SSN pattern detected in response', conf:0.96},
+  {type:'AI_AGENT_DETECTED', process:'python3',           detail:'ollama:11434 · llama3.2 local inference', conf:0.94},
+  {type:'POLICY_MATCH',      process:'langchain-agent',   detail:'data_exfiltration policy · high risk', conf:0.89},
+  {type:'ANOMALY',           process:'jupyter-kernel',    detail:'token rate 3.2x baseline', conf:0.82},
+  {type:'COST_ALERT',        process:'autogen-agent',     detail:'$0.84 budget threshold reached', conf:null},
+  {type:'LOCAL_LLM_DETECTED',process:'lm-studio',         detail:'mistral-7b-instruct · localhost:1234', conf:0.99},
+  {type:'THREAT',            process:'network_probe',     detail:'prompt injection attempt blocked', conf:0.87},
+  {type:'LOOP_DETECTED',     process:'crewai-orchestrator',detail:'7 iterations · circular tool call', conf:0.91},
+  {type:'AI_API_CALL',       process:'chrome',            detail:'gemini-1.5-pro · 891 tok · google', conf:0.98},
+  {type:'APPROVAL_REQUESTED',process:'orchestrator-7f2a', detail:'WriteFile /etc/crontab · risk 94%', conf:null},
+  {type:'INTERACTION',       process:'claude-desktop',    detail:'claude-3-haiku · 445 tok', conf:0.97},
+  {type:'DLP_MATCH',         process:'file_probe',        detail:'API key pattern · .env file scanned', conf:0.95},
+];
+
+let liveEvents = [];
+let poolIdx = 0;
+let eventId = 1000;
+
+function makeEvent() {
+  const t = new Date();
+  const src = FAKE_POOL[poolIdx % FAKE_POOL.length];
+  poolIdx++;
+  return {
+    id: eventId++,
+    type: src.type,
+    process: src.process,
+    detail: src.detail,
+    conf: src.conf,
+    timestamp: t.toTimeString().slice(0,8),
+    raw_ts: t,
+  };
+}
+
+function addLiveEvent() {
+  const ev = makeEvent();
+  liveEvents.unshift(ev);
+  if (liveEvents.length > 80) liveEvents.pop();
+  state.totalEvents++;
+  if (ev.type === 'DLP_MATCH') state.dlpCount++;
+  if (ev.type === 'POLICY_MATCH' || ev.type === 'THREAT') state.violations++;
+  updateSidebar();
+  if (state.currentView === 'dashboard') renderDashboard();
+  if (state.currentView === 'logs') renderLogs();
+}
+
+// CHART DATA
+const chartData = {
+  AI_API_CALL:240, INTERACTION:180, DLP_MATCH:90,
+  POLICY_MATCH:70, ANOMALY:55, THREAT:40,
+  LOCAL_LLM_DETECTED:38, COST_ALERT:22, LOOP_DETECTED:18,
+};
+
+function setChartRange(h) {
+  state.chartRange = h;
+  document.querySelectorAll('.chart-toggle').forEach(b => {
+    b.classList.toggle('active', parseInt(b.textContent) === h);
+  });
+  renderChart();
+}
+
+function renderChart() {
+  const container = document.getElementById('chart-bars');
+  if (!container) return;
+  const scale = state.chartRange / 6;
+  const types = Object.keys(chartData);
+  const vals  = types.map(t => Math.round(chartData[t] * scale));
+  const max   = Math.max(...vals, 1);
+  const BAR_AREA = 62;
+
+  container.innerHTML = types.map((t, i) => {
+    const v = vals[i];
+    const px = v > 0 ? Math.max(Math.round((v / max) * BAR_AREA), 3) : 0;
+    const color = tc(t);
+    return `<div class="chart-bar-col">
+      <div class="chart-bar-label">${v > 0 ? v : ''}</div>
+      <div class="chart-bar" style="height:${px}px;background:${color};"></div>
+      <div class="chart-bar-type">${t.replace(/_/g,' ')}</div>
+    </div>`;
+  }).join('');
+
+  const now  = new Date();
+  const from = new Date(now - state.chartRange * 3600000);
+  const fmt  = d => d.toUTCString().slice(17, 22) + ' UTC';
+  document.getElementById('chart-time-label').textContent = `${fmt(from)} → ${fmt(now)}`;
+}
+
+// VIEWS
+function showView(id) {
+  state.currentView = id;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.view === id);
+    if (n.dataset.view === id) n.querySelector('.ni-icon').style.color = 'var(--primary)';
+    else n.querySelector('.ni-icon').style.color = '';
+  });
+  document.getElementById(`view-${id}`)?.classList.add('active');
+  if (id === 'dashboard') renderDashboard();
+  if (id === 'logs')      renderLogs();
+  if (id === 'traces')    renderTraces();
+  if (id === 'compliance') renderCompliance();
+}
+
+function updateSidebar() {
+  document.getElementById('sb-agents').textContent = state.agents;
+  document.getElementById('sb-events').textContent = state.totalEvents;
+}
+
+function renderDashboard() {
+  document.getElementById('s-agents').textContent    = state.agents;
+  document.getElementById('s-events').textContent    = state.totalEvents;
+  document.getElementById('s-dlp').textContent       = state.dlpCount;
+  document.getElementById('s-violations').textContent = state.violations;
+  document.getElementById('dash-time').textContent   = new Date().toUTCString().slice(5,25) + ' UTC';
+  renderChart();
+  const el = document.getElementById('dash-events');
+  if (!el) return;
+  const html = liveEvents.slice(0, 20).map((ev, i) => eventRowHTML(ev, i === 0 && state.currentView === 'dashboard')).join('');
+  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:rgba(255,255,255,0.2);">Waiting for events…</div>';
+}
+
+function renderLogs() {
+  const el = document.getElementById('logs-events');
+  if (!el) return;
+  const html = liveEvents.map(ev => eventRowHTML(ev, false)).join('');
+  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:rgba(255,255,255,0.2);">No events yet…</div>';
+  document.getElementById('logs-sub').textContent = `${liveEvents.length} events · live`;
+}
+
+function eventRowHTML(ev, isNew) {
+  const color = tc(ev.type);
+  const conf  = ev.conf ? Math.round(ev.conf * 100) + '%' : '';
+  return `<div class="event-row${isNew ? ' new-flash' : ''}">
+    <span class="ev-type" style="color:${color}">${ev.type}</span>
+    <span class="ev-detail">${ev.process || ''} ${ev.detail ? '· ' + ev.detail : ''}</span>
+    <span class="ev-conf">${conf}</span>
+    <span class="ev-time">${ev.timestamp}</span>
+  </div>`;
+}
+
+// TRACES
+const TRACE_SESSIONS = [
+  {id:'a7f2-9c1d', agent:'orchestrator-agent', events:12, start:'18:40:22', status:'warn', label:'⚠ DLP hit'},
+  {id:'b31e-4af8', agent:'code-agent',         events:8,  start:'18:38:55', status:'ok',   label:'✓ Clean'},
+  {id:'c9d0-7b2a', agent:'search-agent',       events:5,  start:'18:35:10', status:'ok',   label:'✓ Clean'},
+  {id:'d44c-1e9f', agent:'memory-agent',       events:3,  start:'18:31:02', status:'ok',   label:'✓ Clean'},
+];
+
+function renderTraces() {
+  const list = document.getElementById('traces-list');
+  list.innerHTML = TRACE_SESSIONS.map((s, i) => `
+    <div class="trace-row${i === state.selectedTrace ? ' active' : ''}" onclick="selectTrace(${i})">
+      <div class="trace-id">${s.id}</div>
+      <div class="trace-meta">${s.agent} · ${s.events} spans</div>
+      <div class="trace-meta">${s.start}</div>
+      <span class="trace-status ${s.status}">${s.label}</span>
+    </div>`).join('');
+}
+
+function selectTrace(i) {
+  state.selectedTrace = i;
+  resetDag();
+  renderTraces();
+  document.getElementById('dag-status').textContent = `Session ${TRACE_SESSIONS[i].id} · ${TRACE_SESSIONS[i].events} spans · click Replay`;
+  document.getElementById('btn-replay').disabled = false;
+}
+
+function resetDag() {
+  ['n-u','n-o','n-ws','n-ce','n-m'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.className.baseVal = 'dag-node-bg'; }
+    const lbl = document.getElementById('nl-' + id.slice(2));
+    if (lbl) lbl.className.baseVal = 'dag-node-label';
+    const tim = document.getElementById('nt-' + id.slice(2));
+    if (tim) tim.textContent = '';
+  });
+  ['e-u-o','e-o-ws','e-o-ce','e-ws-m','e-ce-m'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.className.baseVal = 'dag-edge';
+  });
+  const dlpB = document.getElementById('dlp-badge');
+  const dlpT = document.getElementById('dlp-text');
+  if (dlpB) { dlpB.setAttribute('width','0'); dlpB.setAttribute('height','0'); }
+  if (dlpT) dlpT.textContent = '';
+}
+
+function setDagNode(nodeId, st, timing) {
+  const bg  = document.getElementById('n-' + nodeId);
+  const lbl = document.getElementById('nl-' + nodeId);
+  const tim = document.getElementById('nt-' + nodeId);
+  if (bg)  bg.className.baseVal  = 'dag-node-bg ' + st;
+  if (lbl) lbl.className.baseVal = 'dag-node-label ' + st;
+  if (tim && timing) { tim.textContent = timing; tim.className.baseVal = 'dag-timing ' + st; }
+}
+
+function setDagEdge(edgeId) {
+  const el = document.getElementById(edgeId);
+  if (el) el.className.baseVal = 'dag-edge active';
+}
+
+function startReplay() {
+  if (state.replayRunning) return;
+  state.replayRunning = true;
+  document.getElementById('btn-replay').disabled = true;
+  document.getElementById('dag-status').textContent = 'Replaying session…';
+  resetDag();
+  const isWarn = TRACE_SESSIONS[state.selectedTrace].status === 'warn';
+
+  setDagNode('u', 'running', '');
+  setTimeout(() => {
+    setDagNode('u', 'done', '8ms');
+    setDagEdge('e-u-o');
+    setDagNode('o', 'running', '');
+  }, 400);
+  setTimeout(() => {
+    setDagNode('o', 'done', '45ms');
+    setDagEdge('e-o-ws');
+    setDagEdge('e-o-ce');
+    setDagNode('ws', 'running', '');
+    setDagNode('ce', 'running', '');
+  }, 1000);
+  setTimeout(() => {
+    setDagNode('ws', 'done', '1240ms');
+    if (isWarn) {
+      const dlpB = document.getElementById('dlp-badge');
+      const dlpT = document.getElementById('dlp-text');
+      if (dlpB) { dlpB.setAttribute('x','120'); dlpB.setAttribute('y','253'); dlpB.setAttribute('width','100'); dlpB.setAttribute('height','18'); }
+      if (dlpT) { dlpT.setAttribute('x','170'); dlpT.setAttribute('y','266'); dlpT.textContent = '⚠ DLP: SSN found'; }
+    }
+  }, 2100);
+  setTimeout(() => setDagNode('ce', 'done', '892ms'), 2400);
+  setTimeout(() => {
+    setDagEdge('e-ws-m');
+    setDagEdge('e-ce-m');
+    setDagNode('m', 'running', '');
+  }, 2600);
+  setTimeout(() => {
+    setDagNode('m', 'done', '67ms');
+    document.getElementById('dag-status').textContent =
+      isWarn ? '⚠ Session complete · DLP match detected in web-search response' : '✓ Session complete · No violations';
+    document.getElementById('btn-replay').disabled = false;
+    state.replayRunning = false;
+  }, 3200);
+}
+
+// COMPLIANCE
+const FRAMEWORKS = [
+  {id:'eu_ai_act', name:'EU AI Act',   score:87, color:'#9B59FF', controls:[
+    {id:'AIA-4.1', name:'Risk categorisation system', st:'pass'},
+    {id:'AIA-4.2', name:'Technical documentation',    st:'pass'},
+    {id:'AIA-4.3', name:'Human oversight mechanisms', st:'pass'},
+    {id:'AIA-4.4', name:'Transparency obligations',   st:'fail'},
+    {id:'AIA-4.5', name:'Post-market monitoring',     st:'pass'},
+  ]},
+  {id:'gdpr', name:'GDPR',      score:94, color:'#3D8BFF', controls:[
+    {id:'GDPR-5',  name:'Data minimisation',           st:'pass'},
+    {id:'GDPR-25', name:'Data protection by design',   st:'pass'},
+    {id:'GDPR-32', name:'Security of processing',      st:'pass'},
+    {id:'GDPR-35', name:'Data protection impact assessment', st:'pass'},
+  ]},
+  {id:'soc2', name:'SOC 2',     score:91, color:'#FF2E2E', controls:[
+    {id:'CC6.1', name:'Logical access controls',       st:'pass'},
+    {id:'CC6.7', name:'Data transmission restrictions', st:'pass'},
+    {id:'CC7.2', name:'Anomaly and threat monitoring', st:'pass'},
+    {id:'CC9.1', name:'Risk mitigation activities',    st:'fail'},
+  ]},
+  {id:'dpdp', name:'DPDP',      score:78, color:'#F97316', controls:[
+    {id:'DPDP-4',  name:'Grounds for processing',      st:'pass'},
+    {id:'DPDP-8',  name:'Rights of data principals',   st:'fail'},
+    {id:'DPDP-9',  name:"Processing children's data",  st:'pass'},
+    {id:'DPDP-12', name:'Data fiduciary obligations',  st:'fail'},
+  ]},
+  {id:'hipaa', name:'HIPAA',    score:89, color:'#00C97A', controls:[
+    {id:'164.312a', name:'Access controls',             st:'pass'},
+    {id:'164.312b', name:'Audit controls',              st:'pass'},
+    {id:'164.312e', name:'Transmission security',       st:'fail'},
+  ]},
+  {id:'ccpa', name:'CCPA',      score:92, color:'#06b6d4', controls:[
+    {id:'CCPA-1798.100', name:'Right to know',          st:'pass'},
+    {id:'CCPA-1798.105', name:'Right to delete',        st:'pass'},
+    {id:'CCPA-1798.120', name:'Right to opt-out',       st:'pass'},
+  ]},
+];
+
+let selectedFw = 'eu_ai_act';
+
+function renderCompliance() {
+  const body = document.getElementById('compliance-body');
+  const groups = [
+    {label:'AI Regulation', ids:['eu_ai_act']},
+    {label:'Privacy',       ids:['gdpr','ccpa','dpdp']},
+    {label:'Security',      ids:['soc2','hipaa']},
+  ];
+
+  let html = groups.map(g => {
+    const cards = g.ids.map(id => {
+      const fw = FRAMEWORKS.find(f => f.id === id);
+      if (!fw) return '';
+      const scoreColor = fw.score >= 90 ? 'var(--green)' : fw.score >= 80 ? 'var(--yellow)' : 'var(--primary)';
+      const barW = fw.score;
+      return `<div class="fw-card${fw.id === selectedFw ? ' selected' : ''}" onclick="selectFw('${fw.id}')">
+        <div class="fw-name" style="color:${fw.color}">${fw.name}</div>
+        <div class="fw-score" style="color:${scoreColor}">${fw.score}%</div>
+        <div class="fw-bar-bg"><div class="fw-bar-fill" style="width:${barW}%;background:${scoreColor};"></div></div>
+      </div>`;
+    }).join('');
+    return `<div class="fw-group"><div class="fw-group-label">${g.label}</div><div class="fw-cards">${cards}</div></div>`;
+  }).join('');
+
+  const fw = FRAMEWORKS.find(f => f.id === selectedFw);
+  if (fw) {
+    html += `<div style="margin-top:4px;font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px;">${fw.name} — ${fw.controls.filter(c=>c.st==='pass').length}/${fw.controls.length} controls passing</div>`;
+    html += `<div class="fw-controls">${fw.controls.map(c => `
+      <div class="fw-ctrl-row">
+        <span class="fw-ctrl-id">${c.id}</span>
+        <span class="fw-ctrl-name">${c.name}</span>
+        <span class="fw-ctrl-badge ${c.st}">${c.st.toUpperCase()}</span>
+      </div>`).join('')}</div>`;
+  }
+
+  body.innerHTML = html;
+}
+
+function selectFw(id) {
+  selectedFw = id;
+  renderCompliance();
+}
+
+// APPROVAL
+function openApproval() {
+  document.getElementById('approval-modal').classList.add('open');
+}
+
+function resolveApproval(decision) {
+  document.getElementById('approval-modal').classList.remove('open');
+  const banner = document.getElementById('approval-banner');
+  if (decision === 'deny') {
+    banner.innerHTML = '<div class="ptb-text" style="color:var(--green)">✓&nbsp;<strong>ACTION DENIED</strong> — Agent blocked. Event logged to SIEM. Audit trail updated.</div>';
+    banner.style.background = 'rgba(0,201,122,0.08)';
+    banner.style.borderColor = 'rgba(0,201,122,0.3)';
+    liveEvents.unshift({id:eventId++, type:'APPROVAL_RESOLVED', process:'orchestrator-7f2a', detail:'DENIED by admin · WriteFile /etc/crontab', conf:null, timestamp:new Date().toTimeString().slice(0,8)});
+  } else {
+    banner.innerHTML = '<div class="ptb-text" style="color:rgba(255,255,255,0.4)">Action approved by admin. Agent resumed. Logged.</div>';
+    liveEvents.unshift({id:eventId++, type:'APPROVAL_RESOLVED', process:'orchestrator-7f2a', detail:'APPROVED by admin · WriteFile /etc/crontab', conf:null, timestamp:new Date().toTimeString().slice(0,8)});
+  }
+  if (state.currentView === 'logs') renderLogs();
+  if (state.tourStep === 4) showEndScreen();
+}
+
+// TOUR
+const TOUR_STEPS = [
+  {
+    view:'dashboard', target:'stat-cards',
+    title:'AI Agent Command Center',
+    body:'FORGE has discovered <strong style="color:#FF2E2E">24 active AI agents</strong> across your organization — including 3 running local LLMs that bypassed your proxy. Every interaction is captured in real time by 4 host-level probes. Watch the events climb.',
+    nextLabel:'See live events →',
+  },
+  {
+    view:'logs', target:'logs-events',
+    title:'Every Event. Sub-100ms.',
+    body:'FORGE streams every API call, DLP hit, policy violation, and anomaly here in under 100 milliseconds. Notice the <strong style="color:#fb923c">DLP_MATCH</strong> event — FORGE just intercepted an SSN in a Claude response and alerted before it was logged anywhere.',
+    nextLabel:'See trace DAG →',
+  },
+  {
+    view:'traces', target:'traces-dag',
+    title:'Full Trace DAG — Replay Any Session',
+    body:'FORGE reconstructs every agent session as a directed acyclic graph. Click <strong style="color:#FF2E2E">Replay Session</strong> now to watch the top session execute step by step, including where the DLP hit occurred. This is the only platform with agent-to-agent span visibility.',
+    nextLabel:'See compliance →',
+    action: () => { selectTrace(0); },
+  },
+  {
+    view:'compliance', target:'compliance-body',
+    title:'13 Frameworks. Zero Manual Work.',
+    body:'FORGE automatically evaluates your AI posture across <strong style="color:#9B59FF">EU AI Act</strong>, <strong style="color:#3D8BFF">GDPR</strong>, <strong style="color:#F97316">DPDP</strong>, SOC 2, HIPAA, and 9 more frameworks. No spreadsheets. No manual evidence collection. Each control maps directly to FORGE event data.',
+    nextLabel:'See policy control →',
+  },
+  {
+    view:'policies', target:'view-policies',
+    title:'Human-in-the-Loop. Agents Paused.',
+    body:'An agent tried to write to <code style="background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;">/etc/crontab</code>. FORGE intercepted it and <strong style="color:#F0A500">paused the agent</strong> pending your approval. Click <strong style="color:#F0A500">Review &amp; Decide</strong> to approve or deny — your decision is logged to the audit trail.',
+    nextLabel:'Approve or Deny →',
+  },
+];
+
+function startTour() {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('app').classList.add('visible');
+  seedInitialEvents();
+  startLiveData();
+  renderDashboard();
+  renderTraces();
+  renderCompliance();
+  state.tourStep = 0;
+  showTourStep(0);
+}
+
+function startFree() {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('app').classList.add('visible');
+  seedInitialEvents();
+  startLiveData();
+  renderDashboard();
+  renderTraces();
+  renderCompliance();
+  showView('dashboard');
+}
+
+function showTourStep(i) {
+  const step = TOUR_STEPS[i];
+  if (!step) return;
+
+  document.querySelectorAll('.tour-highlight').forEach(el => el.classList.remove('tour-highlight'));
+
+  showView(step.view);
+
+  setTimeout(() => {
+    if (step.action) step.action();
+
+    const target = document.getElementById(step.target);
+    if (target) target.classList.add('tour-highlight');
+
+    document.getElementById('tt-step-label').textContent = `STEP ${i + 1} OF ${TOUR_STEPS.length}`;
+    document.getElementById('tt-title').textContent = step.title;
+    document.getElementById('tt-body').innerHTML = step.body;
+    document.getElementById('tt-next').textContent = step.nextLabel || 'Next →';
+    document.getElementById('tt-back').style.visibility = i === 0 ? 'hidden' : 'visible';
+
+    const dots = document.getElementById('tt-dots');
+    dots.innerHTML = TOUR_STEPS.map((_, j) =>
+      `<div class="tt-dot${j === i ? ' active' : ''}" onclick="goTourStep(${j})"></div>`
+    ).join('');
+
+    document.getElementById('tour-overlay').classList.add('active');
+    document.getElementById('tour-tooltip').classList.add('active');
+  }, 80);
+}
+
+function tourNext() {
+  if (state.tourStep >= TOUR_STEPS.length - 1) {
+    document.getElementById('tour-overlay').classList.remove('active');
+    document.getElementById('tour-tooltip').classList.remove('active');
+    document.querySelectorAll('.tour-highlight').forEach(el => el.classList.remove('tour-highlight'));
+    openApproval();
+    return;
+  }
+  state.tourStep++;
+  showTourStep(state.tourStep);
+}
+
+function tourBack() {
+  if (state.tourStep > 0) {
+    state.tourStep--;
+    showTourStep(state.tourStep);
+  }
+}
+
+function goTourStep(i) { state.tourStep = i; showTourStep(i); }
+
+function skipTour() {
+  endTourUI();
+  showView(state.currentView);
+}
+
+function endTourUI() {
+  document.querySelectorAll('.tour-highlight').forEach(el => el.classList.remove('tour-highlight'));
+  document.getElementById('tour-overlay').classList.remove('active');
+  document.getElementById('tour-tooltip').classList.remove('active');
+  state.tourStep = -1;
+}
+
+function showEndScreen() {
+  endTourUI();
+  document.getElementById('approval-modal').classList.remove('open');
+  document.getElementById('end-screen').classList.add('open');
+}
+
+// LIVE DATA
+function seedInitialEvents() {
+  for (let i = 0; i < 20; i++) {
+    const ev = makeEvent();
+    const offset = (20 - i) * 12000;
+    const d = new Date(Date.now() - offset);
+    ev.timestamp = d.toTimeString().slice(0, 8);
+    liveEvents.push(ev);
+  }
+}
+
+function startLiveData() {
+  setInterval(addLiveEvent, 1800);
+  setInterval(() => {
+    if (Math.random() < 0.2) {
+      state.agents = 22 + Math.floor(Math.random() * 6);
+      updateSidebar();
+    }
+  }, 8000);
+}
+
+// NAV WIRING
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (state.tourStep >= 0) return;
+    showView(btn.dataset.view);
+  });
+});
+
+// WELCOME PARTICLES
+function initParticles() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  for (let i = 0; i < 35; i++) {
+    const dot = document.createElement('div');
+    const size = Math.random() * 3 + 1;
+    dot.style.cssText = `
+      position:absolute;
+      width:${size}px;height:${size}px;border-radius:50%;
+      background:#FF2E2E;opacity:${Math.random() * 0.25 + 0.05};
+      left:${Math.random() * 100}%;top:${Math.random() * 100}%;
+      animation:float-${i % 3} ${6 + Math.random() * 8}s ${Math.random() * 5}s infinite linear;
+    `;
+    container.appendChild(dot);
+  }
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes float-0{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-30px) translateX(15px);}100%{transform:translateY(0) translateX(0);}}
+    @keyframes float-1{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(20px) translateX(-20px);}100%{transform:translateY(0) translateX(0);}}
+    @keyframes float-2{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-15px) translateX(-10px);}100%{transform:translateY(0) translateX(0);}}
+  `;
+  document.head.appendChild(style);
+}
+
+// INIT
+initParticles();
+document.getElementById('dash-time').textContent = new Date().toUTCString().slice(5, 25) + ' UTC';
+</script>
+</body>
+</html>
