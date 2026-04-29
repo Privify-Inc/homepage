@@ -140,14 +140,19 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   #locked-modal-backdrop{left:170px;}
 }
 @media(max-width:768px){
-  #locked-modal-backdrop{left:0;}
+  #locked-modal-backdrop{left:0;top:48px;}
+  #locked-modal-backdrop.show{pointer-events:none;}
+  #locked-modal{pointer-events:all;}
 }
 #locked-modal-backdrop.show{
   opacity:1;pointer-events:all;
 }
 #locked-preview{
   position:absolute;inset:0;z-index:0;
-  overflow:hidden;pointer-events:none;
+  overflow:hidden;
+  clip-path:inset(0px);
+  transform:translateZ(0);
+  pointer-events:none;
   background:var(--bg);
 }
 #locked-preview-inner{
@@ -489,8 +494,13 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   #back-link{display:none;}
   #demo-badge{top:12px;right:10px;font-size:9px;padding:2px 7px;}
 
-  /* Topbar visible */
-  .mobile-topbar{display:flex;}
+  /* Topbar visible — fixed so it sits above any overlay */
+  .mobile-topbar{
+    display:flex;
+    position:fixed;top:0;left:0;right:0;height:48px;
+    z-index:9999;
+  }
+  .main{padding-top:48px;}
 
   /* Sidebar becomes a fixed drawer */
   .sidebar{
@@ -862,6 +872,9 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
             <!-- DLP badge (appears during replay) -->
             <rect id="dlp-badge" x="0" y="0" width="0" height="0" rx="3" fill="rgba(251,146,60,0.2)" stroke="#FB923C" stroke-width="1"/>
             <text id="dlp-text" x="0" y="0" fill="#FB923C" font-size="9" font-family="monospace"></text>
+            <!-- SLA badge (appears during slow-search replay) -->
+            <rect id="sla-badge" x="0" y="0" width="0" height="0" rx="3" fill="rgba(240,165,0,0.2)" stroke="#F0A500" stroke-width="1"/>
+            <text id="sla-text" x="0" y="0" fill="#F0A500" font-size="9" font-family="monospace"></text>
           </svg>
         </div>
       </div>
@@ -1203,9 +1216,9 @@ function eventRowHTML(ev, isNew) {
 // TRACES
 const TRACE_SESSIONS = [
   {id:'a7f2-9c1d', agent:'orchestrator-agent', events:12, start:'18:40:22', status:'warn', label:'⚠ DLP hit'},
-  {id:'b31e-4af8', agent:'code-agent',         events:8,  start:'18:38:55', status:'ok',   label:'✓ Clean'},
-  {id:'c9d0-7b2a', agent:'search-agent',       events:5,  start:'18:35:10', status:'ok',   label:'✓ Clean'},
-  {id:'d44c-1e9f', agent:'memory-agent',       events:3,  start:'18:31:02', status:'ok',   label:'✓ Clean'},
+  {id:'b31e-4af8', agent:'code-agent',         events:8,  start:'18:38:55', status:'ok',   label:'✓ 1.8s'},
+  {id:'c9d0-7b2a', agent:'search-agent',       events:5,  start:'18:35:10', status:'warn', label:'⚠ SLA breach'},
+  {id:'d44c-1e9f', agent:'memory-agent',       events:3,  start:'18:31:02', status:'ok',   label:'✓ 95ms'},
 ];
 
 function renderTraces() {
@@ -1244,6 +1257,10 @@ function resetDag() {
   const dlpT = document.getElementById('dlp-text');
   if (dlpB) { dlpB.setAttribute('width','0'); dlpB.setAttribute('height','0'); }
   if (dlpT) dlpT.textContent = '';
+  const slaB = document.getElementById('sla-badge');
+  const slaT = document.getElementById('sla-text');
+  if (slaB) { slaB.setAttribute('width','0'); slaB.setAttribute('height','0'); }
+  if (slaT) slaT.textContent = '';
 }
 
 function setDagNode(nodeId, st, timing) {
@@ -1260,49 +1277,67 @@ function setDagEdge(edgeId) {
   if (el) el.className.baseVal = 'dag-edge active';
 }
 
+function replayDone(msg) {
+  document.getElementById('dag-status').textContent = msg;
+  document.getElementById('btn-replay').disabled = false;
+  state.replayRunning = false;
+}
+
 function startReplay() {
   if (state.replayRunning) return;
   state.replayRunning = true;
   document.getElementById('btn-replay').disabled = true;
   document.getElementById('dag-status').textContent = 'Replaying session…';
   resetDag();
-  const isWarn = TRACE_SESSIONS[state.selectedTrace].status === 'warn';
+  [replay0, replay1, replay2, replay3][state.selectedTrace]();
+}
 
+// Trace 0: orchestrator — full parallel flow, DLP hit on web search
+function replay0() {
   setDagNode('u', 'running', '');
+  setTimeout(() => { setDagNode('u','done','8ms'); setDagEdge('e-u-o'); setDagNode('o','running',''); }, 400);
+  setTimeout(() => { setDagNode('o','done','45ms'); setDagEdge('e-o-ws'); setDagEdge('e-o-ce'); setDagNode('ws','running',''); setDagNode('ce','running',''); }, 1000);
   setTimeout(() => {
-    setDagNode('u', 'done', '8ms');
-    setDagEdge('e-u-o');
-    setDagNode('o', 'running', '');
-  }, 400);
-  setTimeout(() => {
-    setDagNode('o', 'done', '45ms');
-    setDagEdge('e-o-ws');
-    setDagEdge('e-o-ce');
-    setDagNode('ws', 'running', '');
-    setDagNode('ce', 'running', '');
-  }, 1000);
-  setTimeout(() => {
-    setDagNode('ws', 'done', '1240ms');
-    if (isWarn) {
-      const dlpB = document.getElementById('dlp-badge');
-      const dlpT = document.getElementById('dlp-text');
-      if (dlpB) { dlpB.setAttribute('x','120'); dlpB.setAttribute('y','253'); dlpB.setAttribute('width','100'); dlpB.setAttribute('height','18'); }
-      if (dlpT) { dlpT.setAttribute('x','170'); dlpT.setAttribute('y','266'); dlpT.textContent = '⚠ DLP: SSN found'; }
-    }
+    setDagNode('ws','done','1240ms');
+    const dlpB = document.getElementById('dlp-badge'), dlpT = document.getElementById('dlp-text');
+    if (dlpB) { dlpB.setAttribute('x','110'); dlpB.setAttribute('y','253'); dlpB.setAttribute('width','115'); dlpB.setAttribute('height','18'); }
+    if (dlpT) { dlpT.setAttribute('x','168'); dlpT.setAttribute('y','266'); dlpT.textContent = '⚠ DLP: SSN found'; }
   }, 2100);
-  setTimeout(() => setDagNode('ce', 'done', '892ms'), 2400);
+  setTimeout(() => setDagNode('ce','done','892ms'), 2400);
+  setTimeout(() => { setDagEdge('e-ws-m'); setDagEdge('e-ce-m'); setDagNode('m','running',''); }, 2600);
+  setTimeout(() => replayDone('⚠ Session complete · DLP match detected in web-search response'), 3200);
+}
+
+// Trace 1: code-agent — code executor only, web search not invoked
+function replay1() {
+  setDagNode('u', 'running', '');
+  setTimeout(() => { setDagNode('u','done','11ms'); setDagEdge('e-u-o'); setDagNode('o','running',''); }, 350);
+  setTimeout(() => { setDagNode('o','done','38ms'); setDagEdge('e-o-ce'); setDagNode('ce','running',''); }, 900);
+  setTimeout(() => { setDagNode('ce','done','1840ms'); setDagEdge('e-ce-m'); setDagNode('m','running',''); }, 2800);
+  setTimeout(() => replayDone('✓ Session complete · Code execution successful · No violations'), 3400);
+}
+
+// Trace 2: search-agent — web search only, exceeds 2000ms SLA
+function replay2() {
+  setDagNode('u', 'running', '');
+  setTimeout(() => { setDagNode('u','done','7ms'); setDagEdge('e-u-o'); setDagNode('o','running',''); }, 350);
+  setTimeout(() => { setDagNode('o','done','29ms'); setDagEdge('e-o-ws'); setDagNode('ws','running',''); }, 800);
   setTimeout(() => {
-    setDagEdge('e-ws-m');
-    setDagEdge('e-ce-m');
-    setDagNode('m', 'running', '');
-  }, 2600);
-  setTimeout(() => {
-    setDagNode('m', 'done', '67ms');
-    document.getElementById('dag-status').textContent =
-      isWarn ? '⚠ Session complete · DLP match detected in web-search response' : '✓ Session complete · No violations';
-    document.getElementById('btn-replay').disabled = false;
-    state.replayRunning = false;
-  }, 3200);
+    const slaB = document.getElementById('sla-badge'), slaT = document.getElementById('sla-text');
+    if (slaB) { slaB.setAttribute('x','110'); slaB.setAttribute('y','253'); slaB.setAttribute('width','125'); slaB.setAttribute('height','18'); }
+    if (slaT) { slaT.setAttribute('x','172'); slaT.setAttribute('y','266'); slaT.textContent = '⏱ SLA: >2000ms limit'; }
+  }, 2700);
+  setTimeout(() => { setDagNode('ws','done','3847ms'); setDagEdge('e-ws-m'); setDagNode('m','running',''); }, 4600);
+  setTimeout(() => replayDone('⚠ SLA breach · web-search latency 3847ms exceeded 2000ms threshold'), 5200);
+}
+
+// Trace 3: memory-agent — fast cache retrieval, no tool calls needed
+function replay3() {
+  setDagNode('u', 'running', '');
+  setTimeout(() => { setDagNode('u','done','3ms'); setDagEdge('e-u-o'); setDagNode('o','running',''); }, 300);
+  setTimeout(() => { setDagNode('o','done','18ms'); setDagEdge('e-o-ws'); setDagNode('ws','running',''); }, 650);
+  setTimeout(() => { setDagNode('ws','done','95ms'); setDagEdge('e-ws-m'); setDagNode('m','running',''); }, 950);
+  setTimeout(() => replayDone('✓ Session complete · Memory cache hit 95ms · No violations'), 1300);
 }
 
 // COMPLIANCE
@@ -1636,6 +1671,7 @@ function toggleSidebar() {
   const ov = document.getElementById('sidebar-overlay');
   const open = sb.classList.toggle('open');
   ov.classList.toggle('active', open);
+  if (open) hideLockedToast();
 }
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
