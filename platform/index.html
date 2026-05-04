@@ -570,6 +570,118 @@
         .edn-icon { color:var(--red); font-size:1rem; flex-shrink:0; margin-top:1px; }
         .edn-inner span:last-child { font-size:0.85rem; color:var(--gray-500); line-height:1.6; }
 
+        /* ── COMPARISON SECTION ── */
+        .cmp-section { background:var(--black); }
+        .cmp-wrap {
+            position:relative; border-radius:14px;
+            border:1px solid rgba(255,255,255,0.08); overflow:hidden;
+            box-shadow:0 0 0 1px rgba(232,93,84,0.08), 0 40px 100px rgba(0,0,0,0.55);
+            margin-bottom:1.75rem;
+        }
+        .cmp-glow {
+            position:absolute; width:600px; height:600px; border-radius:50%;
+            background:radial-gradient(ellipse, rgba(232,93,84,0.07) 0%, transparent 70%);
+            left:50%; top:50%; transform:translate(-50%,-50%);
+            pointer-events:none; z-index:0;
+        }
+        .cmp-table { width:100%; border-collapse:collapse; position:relative; z-index:1; }
+        .cmp-table thead tr { background:rgba(255,255,255,0.03); }
+        .cmp-table thead th {
+            padding:18px 24px; font-size:11px; font-weight:700;
+            letter-spacing:0.1em; text-transform:uppercase; text-align:left;
+            border-bottom:1px solid rgba(255,255,255,0.07);
+        }
+        .cmp-col-cap { width:28%; color:rgba(255,255,255,0.35); }
+        .cmp-col-others { color:rgba(255,255,255,0.25); width:36%; }
+        .cmp-col-forge {
+            color:var(--red); width:36%;
+            background:rgba(232,93,84,0.08);
+            border-left:1px solid rgba(232,93,84,0.2); position:relative;
+        }
+        .cmp-col-forge::after {
+            content:''; position:absolute; top:0; left:0; right:0; height:2px;
+            background:var(--red);
+        }
+        tr.cmp-group { background:rgba(255,255,255,0.02); border-top:1px solid rgba(232,93,84,0.1); }
+        tr.cmp-group td {
+            padding:9px 24px; font-size:8.5px; font-weight:800;
+            letter-spacing:0.22em; color:rgba(232,93,84,0.5); text-transform:uppercase;
+        }
+        tr.cmp-group td.cmp-forge-cell {
+            background:rgba(232,93,84,0.07); border-left:1px solid rgba(232,93,84,0.18);
+        }
+        .cmp-table tbody tr { border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.12s; }
+        .cmp-table tbody tr:last-child { border-bottom:none; }
+        .cmp-table tbody tr:not(.cmp-group):hover { background:rgba(255,255,255,0.025); }
+        .cmp-table td { padding:14px 24px; vertical-align:middle; font-size:13px; line-height:1.45; }
+        td.cmp-cap {
+            font-weight:600; color:rgba(255,255,255,0.65); font-size:12.5px;
+            border-right:1px solid rgba(255,255,255,0.04);
+        }
+        .cmp-unique {
+            display:inline-block; margin-left:7px; padding:1px 6px; border-radius:3px;
+            font-size:8px; font-weight:800; letter-spacing:0.07em;
+            background:rgba(232,93,84,0.15); color:#f87171;
+            border:1px solid rgba(232,93,84,0.28); vertical-align:middle; white-space:nowrap;
+        }
+        td.cmp-others { color:rgba(255,255,255,0.22); font-size:12.5px; }
+        .cmp-no { display:inline-flex; align-items:center; gap:7px; color:rgba(255,255,255,0.18); }
+        .cmp-no::before { content:'\2715'; font-size:12px; color:rgba(255,255,255,0.12); }
+        .cmp-partial { color:#F0A500; font-size:12px; }
+        td.cmp-forge-cell {
+            background:rgba(232,93,84,0.05); border-left:1px solid rgba(232,93,84,0.18);
+            font-weight:700; font-size:12.5px; color:#fff;
+        }
+        .cmp-yes { display:inline-flex; align-items:center; gap:8px; color:#fff; }
+        .cmp-yes::before { content:'\2713'; color:#22C55E; font-size:13px; font-weight:900; flex-shrink:0; }
+        .cmp-planned { color:#60A5FA; font-style:italic; font-weight:500; font-size:12px; }
+        .cmp-planned::before { content:'\25CB\00A0'; color:#60A5FA; font-style:normal; }
+        .cmp-observation {
+            background:rgba(232,93,84,0.06); border:1px solid rgba(232,93,84,0.18);
+            border-radius:10px; padding:22px 26px;
+            display:flex; gap:18px; align-items:flex-start; margin-bottom:1.25rem;
+        }
+        .cmp-obs-icon {
+            width:34px; height:34px; flex-shrink:0;
+            background:rgba(232,93,84,0.12); border:1px solid rgba(232,93,84,0.25);
+            border-radius:8px; display:flex; align-items:center; justify-content:center;
+            font-size:13px; color:var(--red); margin-top:2px;
+        }
+        .cmp-obs-eyebrow {
+            font-size:9px; font-weight:800; letter-spacing:0.2em;
+            color:var(--red); text-transform:uppercase; margin-bottom:6px;
+        }
+        .cmp-obs-text { font-size:13.5px; font-weight:500; color:rgba(255,255,255,0.6); line-height:1.7; }
+        .cmp-obs-text strong { color:#fff; font-weight:700; }
+        .cmp-stats {
+            display:grid; grid-template-columns:repeat(4,1fr);
+            gap:1px; background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.07); border-radius:12px;
+            overflow:hidden; margin-bottom:2rem;
+        }
+        .cmp-stat { background:var(--surface); padding:22px 20px; text-align:center; }
+        .cmp-stat-val { font-size:32px; font-weight:900; color:var(--red); letter-spacing:-0.04em; line-height:1; margin-bottom:6px; }
+        .cmp-stat-label { font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:0.07em; text-transform:uppercase; line-height:1.5; }
+        .cmp-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+        .cmp-btn-secondary {
+            display:inline-block; text-decoration:none; padding:0.75rem 1.5rem;
+            border:1px solid rgba(255,255,255,0.15); border-radius:6px;
+            color:rgba(255,255,255,0.6); font-weight:600; font-size:0.875rem;
+            transition:all 0.2s;
+        }
+        .cmp-btn-secondary:hover { border-color:rgba(255,255,255,0.35); color:#fff; }
+        @media(max-width:768px){
+            .cmp-wrap{ overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; }
+            .cmp-table{ min-width:460px; }
+            .cmp-table td, .cmp-table th{ padding:11px 14px; font-size:11.5px; }
+            .cmp-stats{ grid-template-columns:1fr 1fr; }
+            .cmp-observation{ flex-direction:column; gap:12px; }
+        }
+        @media(max-width:480px){
+            .cmp-table{ min-width:400px; }
+            .cmp-stat-val{ font-size:26px; }
+        }
+
     </style>
 </head>
 <body>
@@ -602,6 +714,7 @@
                     </div>
                 </div>
                 <a href="#deployment" class="nav-link">Deployment</a>
+                <a href="#comparison" class="nav-link">Compare</a>
                 <a href="#integrations" class="nav-link">Integrations</a>
                 <a href="#compliance" class="nav-link">Compliance</a>
                 <a href="../careers.html" class="nav-link">Careers</a>
@@ -1082,6 +1195,158 @@
     </div>
 </section>
 
+<!--  COMPARISON  -->
+<section class="cmp-section" id="comparison">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Capability Comparison</div>
+            <h2 class="section-title">Built for what others <span style="color:var(--red)">weren't</span></h2>
+            <p class="section-sub">Most AI tools were built for a single persona &mdash; the engineer, the security team, or the compliance officer. FORGE was designed from day one to serve all three, from a single deployment.</p>
+        </div>
+
+        <div class="cmp-wrap">
+            <div class="cmp-glow"></div>
+            <table class="cmp-table">
+                <thead>
+                    <tr>
+                        <th class="cmp-col-cap">Capability</th>
+                        <th class="cmp-col-others">Other platforms</th>
+                        <th class="cmp-col-forge">Privify FORGE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cmp-group">
+                        <td colspan="2">Detection &amp; Visibility</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Shadow AI detection</td>
+                        <td class="cmp-others"><span class="cmp-partial">Network layer only</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">OS + network + file system</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Local LLM detection <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Endpoint probe</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Agent-to-agent visibility <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Full interaction graph</span></td>
+                    </tr>
+
+                    <tr class="cmp-group">
+                        <td colspan="2">Observability &amp; Tracing</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Trace DAG with replay</td>
+                        <td class="cmp-others"><span class="cmp-partial">Basic or partial</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Full DAG &middot; 800ms replay</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">MCP server governance</td>
+                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Autodiscovery</span></td>
+                    </tr>
+
+                    <tr class="cmp-group">
+                        <td colspan="2">Security &amp; Data Protection</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">DLP scanning</td>
+                        <td class="cmp-others"><span class="cmp-partial">Limited or vendor-locked</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">12 patterns &middot; real-time</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">AI firewall &amp; intervention</td>
+                        <td class="cmp-others"><span class="cmp-partial">Guardrails only</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">10 signatures &middot; inline block</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Human-in-the-loop approvals <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Approval queue &middot; configurable</span></td>
+                    </tr>
+
+                    <tr class="cmp-group">
+                        <td colspan="2">Cost &amp; Quality Governance</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Cost governance</td>
+                        <td class="cmp-others"><span class="cmp-partial">Usage totals only</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Per-agent budget enforcement</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Quality SLAs</td>
+                        <td class="cmp-others"><span class="cmp-partial">Partial &mdash; single dimension</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">6 dimensions &middot; enforced</span></td>
+                    </tr>
+
+                    <tr class="cmp-group">
+                        <td colspan="2">Compliance &amp; Integration</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Compliance frameworks</td>
+                        <td class="cmp-others"><span class="cmp-partial">1&ndash;3 frameworks, basic</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">11 frameworks &middot; audit-ready</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">SIEM integration</td>
+                        <td class="cmp-others"><span class="cmp-partial">Basic or single platform</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">11 platforms &middot; real-time forward</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Deployment model</td>
+                        <td class="cmp-others"><span class="cmp-partial">SaaS only or cloud-locked</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Cloud &middot; on-prem &middot; airgap &middot; hybrid</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cmp-observation">
+            <div class="cmp-obs-icon">&#9654;</div>
+            <div>
+                <div class="cmp-obs-eyebrow">The FORGE difference</div>
+                <div class="cmp-obs-text">
+                    No other platform governs the <strong>full AI stack</strong> &mdash; detection, observability,
+                    security, cost, and compliance &mdash; from a single deployment.
+                    FORGE is purpose-built to serve the <strong>CISO, the AI engineer, and the compliance team</strong>
+                    without asking any of them to compromise.
+                </div>
+            </div>
+        </div>
+
+        <div class="cmp-stats">
+            <div class="cmp-stat">
+                <div class="cmp-stat-val">5</div>
+                <div class="cmp-stat-label">Capabilities no other<br>platform offers</div>
+            </div>
+            <div class="cmp-stat">
+                <div class="cmp-stat-val">11</div>
+                <div class="cmp-stat-label">Compliance<br>frameworks</div>
+            </div>
+            <div class="cmp-stat">
+                <div class="cmp-stat-val">11</div>
+                <div class="cmp-stat-label">SIEM platform<br>integrations</div>
+            </div>
+            <div class="cmp-stat">
+                <div class="cmp-stat-val">1</div>
+                <div class="cmp-stat-label">Deployment for<br>all three personas</div>
+            </div>
+        </div>
+
+        <div class="cmp-actions">
+            <a href="../forge/demo/index.html" class="nav-pill" style="text-decoration:none;padding:0.75rem 1.5rem;">&#9654; Try Interactive Demo</a>
+            <a href="#interest" class="cmp-btn-secondary">Request Access</a>
+        </div>
+    </div>
+</section>
+
 <!--  INTEGRATIONS  -->
 <section class="integrations-section" id="integrations">
     <div class="container">
@@ -1291,6 +1556,7 @@
     <div class="mobile-menu-inner container">
         <a href="#platform">Platform</a>
         <a href="#deployment">Deployment</a>
+        <a href="#comparison">Compare</a>
         <a href="#integrations">Integrations</a>
         <a href="#compliance">Compliance</a>
         <a href="../careers.html">Careers</a>
