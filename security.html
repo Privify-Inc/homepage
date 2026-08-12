@@ -132,6 +132,14 @@
             .footer-utility{flex-direction:column;align-items:flex-start;gap:1rem;}
             .fu-cap{white-space:normal;}
         }
+
+        /* Honour the OS-level reduced-motion preference across the whole page. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration:0.01ms !important; animation-iteration-count:1 !important;
+                transition-duration:0.01ms !important; scroll-behavior:auto !important;
+            }
+        }
 </style>
 </head>
 <body>
@@ -231,7 +239,10 @@
 
             <h3>Kernel components</h3>
             <p>
-                Inline enforcement on Windows uses a WFP callout driver operating in the network stack. Because
+                FORGE blocks inline on Windows, macOS and Linux. On Windows it can additionally enforce
+                through a WFP callout driver operating in the network stack, which evaluates policy at the
+                TCP connect boundary and therefore applies regardless of how an agent routes its traffic.
+                Because
                 this is a kernel-mode component, we treat it with corresponding care: it fails open into a
                 pass-through mode rather than risking system instability, and it is a documented part of any
                 deployment review. Deployment guidance and driver signing status are covered during technical

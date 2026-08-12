@@ -24,10 +24,12 @@ enforces policy in real time. Three stages:
 - **Observe** — every call becomes a node in an interaction graph (human to agent, agent to
   agent, agent to tool), with full trace replay, per-agent cost and token attribution, and
   export to 11 SIEM platforms in CEF, LEEF, STIX 2.1 and ECS.
-- **Govern** — 12 DLP patterns and 10 threat signatures scanned in real time, inline policy
-  enforcement on Windows, macOS and Linux, plus a human-in-the-loop approval queue for
-  high-risk actions. On Windows, enforcement can additionally run in the OS network stack via
-  a kernel driver at the TCP connect boundary.
+- **Govern** — 12 DLP patterns and 10 threat signatures scanned in real time, inline blocking
+  on Windows, macOS and Linux, plus a human-in-the-loop approval queue for high-risk actions.
+  On Windows, enforcement additionally runs in the OS network stack via a kernel driver,
+  evaluating policy at the TCP connect boundary, which applies regardless of how the agent
+  routes its traffic. Do not describe enforcement as Windows-only, and do not describe the
+  cross-platform path as kernel-level.
 
 Key differentiator: an MCP gateway can only govern traffic that routes through it. FORGE runs
 on the endpoint where the agent executes, so it also sees local models that never leave the

@@ -725,6 +725,14 @@
             .footer-utility{flex-direction:column;align-items:flex-start;gap:1rem;}
             .fu-cap{white-space:normal;}
         }
+
+        /* Honour the OS-level reduced-motion preference across the whole page. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration:0.01ms !important; animation-iteration-count:1 !important;
+                transition-duration:0.01ms !important; scroll-behavior:auto !important;
+            }
+        }
 </style>
 </head>
 <body>
@@ -1106,7 +1114,7 @@
             <div class="feature-card">
                 <div class="feature-icon"></div>
                 <h4>Compliance reporting</h4>
-                <p>11 frameworks: GDPR, HIPAA, SOC2, PCI-DSS, DPDP Act (India), EU AI Act, NIST AI RMF, ISO 42001, CCPA, DSA, California SB53. Tamper-evident SHA256 audit chain. CSV export.</p>
+                <p>13 frameworks: GDPR, HIPAA, SOC 2, PCI DSS, DPDP Act (India), PDPA (Singapore/Thailand), PIPEDA (Canada), EU AI Act, DSA, CA SB 53/AB 853, NIST AI RMF, ISO 42001, CCPA/CPRA. Tamper-evident SHA256 audit chain. CSV export.</p>
                 <span class="feature-tag">Compliance</span>
             </div>
         </div>
@@ -1335,7 +1343,7 @@
                     <tr>
                         <td class="cmp-cap">Compliance frameworks</td>
                         <td class="cmp-others"><span class="cmp-partial">1&ndash;3 frameworks, basic</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">11 frameworks &middot; audit-ready</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">13 frameworks &middot; audit-ready</span></td>
                     </tr>
                     <tr>
                         <td class="cmp-cap">SIEM integration</td>
@@ -1444,7 +1452,8 @@
     <div class="container">
         <div class="section-header">
             <div class="section-eyebrow">Compliance</div>
-            <h2 class="section-title">11 frameworks. Audit-ready out of the box.</h2>
+            <!-- Framework count and list: single source of truth is core_engine/compliance.py -> FRAMEWORKS (13). Update there first. -->
+            <h2 class="section-title">13 frameworks. Audit-ready out of the box.</h2>
             <p class="section-sub">Every AI agent interaction is mapped to regulatory controls. SHA256 hash chain on every event. CSV export for audit submission. No manual work for your GRC team.</p>
         </div>
         <div class="compliance-grid">
@@ -1714,12 +1723,16 @@ const observer = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.feature-card, .deploy-card, .advantage, .compliance-card, .int-category, .step-card, .pillar').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
+//  Skipped when the visitor asks for reduced motion — elements stay visible
+//  rather than being hidden by JS and revealed on scroll.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.feature-card, .deploy-card, .advantage, .compliance-card, .int-category, .step-card, .pillar').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
 
 //  FORGE early access form — sends to sales@privify.io + sales@privify.io
 //  Powered by Formspree (free, works on GitHub Pages, no backend needed)

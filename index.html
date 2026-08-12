@@ -343,6 +343,14 @@
             .footer-utility{flex-direction:column;align-items:flex-start;gap:1rem;}
             .fu-cap{white-space:normal;}
         }
+
+        /* Honour the OS-level reduced-motion preference across the whole page. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration:0.01ms !important; animation-iteration-count:1 !important;
+                transition-duration:0.01ms !important; scroll-behavior:auto !important;
+            }
+        }
 </style>
     <script type="application/ld+json">
 {
@@ -362,7 +370,7 @@
       "name": "Which platforms does FORGE support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Windows, macOS and Linux, with inline blocking on all three. Policy is evaluated at the moment an agent acts, and a blocked call is stopped before it reaches the provider rather than logged after the fact. On Windows, enforcement can additionally run in the OS network stack via a kernel driver, applying policy at the TCP connect boundary."
+        "text": "Inline blocking on Windows, macOS and Linux. Policy is evaluated at the moment an agent acts, and a blocked call is stopped before it reaches the provider rather than logged after the fact. On Windows, enforcement additionally runs in the OS network stack via a kernel driver, evaluating policy at the TCP connect boundary, which applies regardless of how the agent routes its traffic."
       }
     },
     {
@@ -795,13 +803,15 @@
                     <summary>Which platforms do you support?</summary>
                     <div class="faq-answer">
                         <p>
-                            <strong>Windows, macOS and Linux — with inline blocking on all three.</strong>
-                            Policy is evaluated at the moment an agent acts, and a blocked call is stopped
-                            before it reaches the provider rather than logged after the fact.
+                            <strong>Inline blocking on Windows, macOS and Linux.</strong> Policy is evaluated
+                            at the moment an agent acts, and a blocked call is stopped before it reaches the
+                            provider rather than logged after the fact.
                         </p>
                         <p>
-                            On Windows you can additionally run enforcement down in the OS network stack via a
-                            kernel driver, for teams that want policy applied at the TCP connect boundary.
+                            On Windows, enforcement additionally runs in the OS network stack via a kernel
+                            driver, evaluating policy at the TCP connect boundary — <strong>which applies
+                            regardless of how the agent routes its traffic.</strong> If unconditional
+                            enforcement is a control requirement for you, that's the deployment to ask about.
                         </p>
                     </div>
                 </details>
@@ -1105,8 +1115,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', () => document.querySelectorAll('.dropdown').forEach(dd => { dd.classList.remove('open'); const t=dd.querySelector('.dropdown-toggle');if(t)t.setAttribute('aria-expanded','false'); }));
 });
 
-const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);} }), {threshold:0.08});
-document.querySelectorAll('.rail-step, .gap-chip, .diff-card, .m-stat, .price-factor').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
+//  Scroll reveal. Skipped entirely when the visitor asks for reduced motion —
+//  the elements are then simply visible, never hidden by JS in the first place.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);} }), {threshold:0.08});
+    document.querySelectorAll('.rail-step, .gap-chip, .diff-card, .m-stat, .price-factor').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
+}
 
 document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
