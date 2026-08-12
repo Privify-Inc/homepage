@@ -783,7 +783,7 @@
 
             <div class="faq-list">
 
-                <details class="faq-item">
+                <details class="faq-item" name="faq">
                     <summary>Where does FORGE run, and does our data leave our network?</summary>
                     <div class="faq-answer">
                         <p>
@@ -799,7 +799,7 @@
                     </div>
                 </details>
 
-                <details class="faq-item">
+                <details class="faq-item" name="faq">
                     <summary>Which platforms do you support?</summary>
                     <div class="faq-answer">
                         <p>
@@ -816,7 +816,7 @@
                     </div>
                 </details>
 
-                <details class="faq-item">
+                <details class="faq-item" name="faq">
                     <summary>How is this different from the DLP or CASB we already own?</summary>
                     <div class="faq-answer">
                         <p>
@@ -833,7 +833,7 @@
                     </div>
                 </details>
 
-                <details class="faq-item">
+                <details class="faq-item" name="faq">
                     <summary>How does your system deploy?</summary>
                     <div class="faq-answer">
                         <p>
@@ -1092,6 +1092,20 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
     else run();
 })();
+
+
+//  FAQ accordion. Modern browsers group <details name="faq"> natively — opening
+//  one closes the rest. This only runs where that attribute is unsupported.
+if (!('name' in document.createElement('details'))) {
+    document.querySelectorAll('.faq-item').forEach(function (d) {
+        d.addEventListener('toggle', function () {
+            if (!d.open) return;
+            document.querySelectorAll('.faq-item[open]').forEach(function (other) {
+                if (other !== d) other.open = false;
+            });
+        });
+    });
+}
 
 function track(name){ if(window.plausible) plausible(name); }
 
