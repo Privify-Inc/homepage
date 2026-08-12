@@ -70,12 +70,18 @@
         .section-header.center .section-sub { margin-left:auto;margin-right:auto; }
 
         /* HERO — compressed so the product fork sits above the fold */
-        .hero { padding:9rem 2rem 3.5rem; }
+        .hero { padding:9rem 2rem 3.5rem;position:relative;overflow:hidden; }
+        /* Ambient discovery field. Most marks are barely visible — AI activity
+           nobody can see. A sweep on load brings them into view. Masked away
+           from the left so it never competes with the headline. */
+        .hero-field { position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;
+                      -webkit-mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,0.25) 34%,#000 72%);
+                      mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,0.25) 34%,#000 72%); }
         .hero-inner { max-width:760px;margin-bottom:3.25rem; }
         .eyebrow { display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem; }
         .eyebrow-dot { width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s infinite; }
         @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-        h1 { font-size:clamp(2.35rem,4.6vw,3.6rem);font-weight:800;line-height:1.06;letter-spacing:-0.03em;margin-bottom:1.35rem; }
+        h1 { font-size:clamp(2.6rem,6vw,5rem);font-weight:800;line-height:1.02;letter-spacing:-0.038em;margin-bottom:1.35rem;text-wrap:balance; }
         .red { color:var(--red); }
         .cyan { color:var(--cyan); }
         .hero-sub { font-size:1.1rem;color:var(--gray-400);line-height:1.65;max-width:600px; }
@@ -104,7 +110,7 @@
         .fork-card.forge .fork-points li::before { background:var(--red); }
         .fork-card.shield .fork-points li::before { background:var(--cyan); }
         .fork-actions { display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto; }
-        .btn { padding:0.7rem 1.4rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.875rem;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.45rem;border:1px solid transparent;cursor:pointer; }
+        .btn { padding:0.85rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.45rem;border:1px solid transparent;cursor:pointer; }
         .btn-forge { background:var(--red);color:var(--white); }
         .btn-forge:hover { background:#d44e46;transform:translateY(-2px);box-shadow:0 6px 24px var(--red-glow); }
         .btn-shield { background:var(--cyan);color:#04202a; }
@@ -277,6 +283,10 @@
             nav{width:100%;max-width:100%;}
             .container{padding:0 1.25rem;}
             .hero{padding:6.5rem 1.25rem 2.5rem;}
+            /* Text spans most of the width here, so the field has to recede */
+            .hero-field{opacity:0.42;
+                        -webkit-mask-image:linear-gradient(150deg,transparent 12%,rgba(0,0,0,0.3) 45%,#000 85%);
+                        mask-image:linear-gradient(150deg,transparent 12%,rgba(0,0,0,0.3) 45%,#000 85%);}
             .fork{grid-template-columns:1fr;}
             .diff-grid{grid-template-columns:1fr;}
             .fork-actions{flex-direction:column;align-items:stretch;}
@@ -369,6 +379,7 @@
 
 <!-- ══ HERO + PRODUCT FORK ══════════════════════════════════════════════ -->
 <section class="hero">
+    <canvas class="hero-field" id="heroField" aria-hidden="true"></canvas>
     <div class="container">
         <div class="hero-inner">
             <div class="eyebrow fade-in"><span class="eyebrow-dot"></span>AI control infrastructure</div>
@@ -377,8 +388,8 @@
                 <span class="red">control of AI</span>
             </h1>
             <p class="hero-sub fade-in delay-2">
-                Two products, built for two very different problems. Enterprises can't see what their AI agents
-                are doing. Individuals can't stop their data training models they never agreed to.
+                Enterprises can't see what their AI agents are doing. Individuals can't stop their data
+                training models they never agreed to.
             </p>
         </div>
 
@@ -817,6 +828,101 @@
 </footer>
 
 <script>
+/*  HERO DISCOVERY FIELD
+    A scatter of marks representing AI activity across an environment. Most sit
+    at near-zero opacity — running, unseen. On load a sweep crosses the field and
+    brings them into view, a few in the brand accent. That is the product thesis
+    rendered rather than decorated: discovery.
+
+    Draws once and stops. No perpetual animation — it should feel like a single
+    considered moment, not an ambient effect.                                   */
+(function heroField(){
+    const cv = document.getElementById('heroField');
+    if (!cv || !cv.getContext) return;
+    const ctx = cv.getContext('2d');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ACCENT = '232,93,84';
+    let marks = [], W = 0, H = 0, raf = null;
+
+    function build(){
+        const r = cv.getBoundingClientRect();
+        if (!r.width || !r.height) return false;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = r.width; H = r.height;
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        marks = [];
+        const step = W < 700 ? 28 : 22;
+        for (let gy = step * 0.5; gy < H; gy += step) {
+            for (let gx = step * 0.5; gx < W; gx += step) {
+                if (Math.random() < 0.26) continue;              // keep it sparse
+
+                // Left of the field is ungoverned: tall, jittered, irregular, dim.
+                // It resolves rightward into short, aligned, regular, brighter
+                // marks. Chaos becoming order — the product, as texture.
+                const t     = gx / W;
+                const order = Math.min(Math.max((t - 0.28) / 0.56, 0), 1);
+                const chaos = 1 - order;
+
+                // At order = 1 the jitter goes to zero and every tick is the same
+                // short length, so the rows visibly align. That alignment is what
+                // makes "order" legible at a glance rather than only when zoomed.
+                marks.push({
+                    x: gx + (Math.random() - 0.5) * step * chaos * 0.85,
+                    y: gy + (Math.random() - 0.5) * step * chaos * 1.7,
+                    h: 4 + chaos * chaos * 26 + Math.random() * chaos * 13,
+                    accent: Math.random() < (0.015 + order * 0.19),
+                    gain:   0.45 + order * 1.15,
+                    lit: 0
+                });
+            }
+        }
+        return true;
+    }
+
+    function paint(sweep){
+        ctx.clearRect(0, 0, W, H);
+        for (const m of marks) {
+            const target = sweep === null ? 1 : (m.x < sweep ? 1 : 0);
+            m.lit += (target - m.lit) * 0.14;
+            const a = (0.05 + m.lit * (m.accent ? 0.62 : 0.22)) * m.gain;
+            ctx.strokeStyle = m.accent ? 'rgba(' + ACCENT + ',' + a + ')'
+                                       : 'rgba(255,255,255,' + a + ')';
+            ctx.lineWidth = m.accent ? 1.6 : 1;
+            ctx.beginPath();
+            ctx.moveTo(m.x, m.y - m.h / 2);
+            ctx.lineTo(m.x, m.y + m.h / 2);
+            ctx.stroke();
+        }
+    }
+
+    function run(){
+        if (!build()) return;
+        if (reduce) { marks.forEach(m => m.lit = 1); paint(null); return; }
+        const t0 = performance.now(), DUR = 1900;
+        (function frame(now){
+            const t = Math.min((now - t0) / DUR, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            paint(eased * (W * 1.25));
+            if (t < 1) { raf = requestAnimationFrame(frame); }
+            else { paint(null); paint(null); }   // settle, then stop
+        })(t0);
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (raf) cancelAnimationFrame(raf);
+            if (build()) { marks.forEach(m => m.lit = 1); paint(null); }
+        }, 180);
+    });
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+    else run();
+})();
+
 function track(name){ if(window.plausible) plausible(name); }
 
 const hdr = document.getElementById('header');
