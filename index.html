@@ -128,18 +128,59 @@
         /* PRODUCT TRACK SECTIONS */
         .track { padding:5.5rem 0;position:relative; }
         .track-forge { border-top:1px solid var(--border); }
+        .track-gap { background:var(--surface);border-top:1px solid var(--border); }
         .track-shield { background:var(--surface);border-top:1px solid var(--border); }
+        .track-gap .track-tag { background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red); }
         .track-tag { display:inline-flex;align-items:center;gap:0.55rem;padding:0.4rem 0.9rem;border-radius:999px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.25rem; }
         .track-forge .track-tag { background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red); }
         .track-shield .track-tag { background:var(--cyan-dim);border:1px solid rgba(34,211,238,0.25);color:var(--cyan); }
 
-        /* HOW IT WORKS */
-        .steps { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem; }
-        .step { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.85rem 1.6rem;position:relative;transition:border-color 0.25s; }
-        .step:hover { border-color:var(--border-h); }
-        .step-num { font-family:var(--mono);font-size:0.7rem;font-weight:500;color:var(--red);letter-spacing:0.08em;margin-bottom:0.9rem; }
-        .step h3 { font-size:1.15rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.6rem; }
-        .step p { font-size:0.86rem;color:var(--gray-500);line-height:1.65;margin-bottom:1rem; }
+        /* COVERAGE MAP — the gateway blind-spot diagram.
+           Built from CSS boxes rather than SVG so the labels stay selectable
+           and the whole thing reflows to one column on narrow screens. */
+        .gap-map { position:relative;border:1px solid rgba(232,93,84,0.35);border-radius:18px;
+                   padding:2.75rem 1.75rem 1.75rem;margin-top:2.75rem;
+                   background:radial-gradient(ellipse 70% 90% at 80% 10%,rgba(232,93,84,0.05),transparent 70%); }
+        .gap-map-head { position:absolute;top:-0.62rem;left:1.5rem;background:var(--surface);
+                        padding:0 0.7rem;font-family:var(--mono);font-size:0.68rem;font-weight:500;
+                        letter-spacing:0.12em;text-transform:uppercase;color:var(--red); }
+        .gap-map-body { display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:1.75rem;align-items:center; }
+        /* Sized to its contents on purpose — the gateway's coverage should look
+           small next to the list of what falls outside it. */
+        .gap-inner { position:relative;border:1px dashed var(--gray-700);border-radius:13px;
+                     padding:2.25rem 1.35rem 1.5rem;background:rgba(255,255,255,0.015); }
+        .track-gap .section-header .section-eyebrow { display:flex;margin-top:0.9rem;margin-bottom:0.7rem; }
+        .gap-inner-head { position:absolute;top:-0.58rem;left:1.15rem;background:var(--surface);
+                          padding:0 0.6rem;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;
+                          text-transform:uppercase;color:var(--gray-600); }
+        .gap-node { border:1px solid var(--border-h);border-radius:8px;background:var(--surface-2);
+                    padding:0.8rem 1rem;font-size:0.85rem;font-weight:600;color:var(--gray-400);text-align:center; }
+        .gap-inner-note { font-size:0.72rem;color:var(--gray-700);text-align:center;margin-top:0.85rem;line-height:1.5; }
+        .gap-chips { display:flex;flex-direction:column;gap:0.85rem; }
+        .gap-chip { display:flex;gap:0.8rem;align-items:flex-start; }
+        .gap-chip-mark { flex-shrink:0;width:1.4rem;height:1.4rem;border-radius:50%;border:1px solid rgba(232,93,84,0.4);
+                         color:var(--red);font-size:0.7rem;display:flex;align-items:center;justify-content:center;margin-top:1px; }
+        .gap-chip-t { font-size:0.88rem;font-weight:650;color:var(--white);display:block;margin-bottom:1px; }
+        .gap-chip-s { font-size:0.79rem;color:var(--gray-600);line-height:1.5;display:block; }
+        .gap-map-foot { margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid rgba(232,93,84,0.18);
+                        font-size:0.79rem;color:var(--gray-500);display:flex;align-items:center;gap:0.6rem;line-height:1.5; }
+        .gap-map-foot i { color:var(--red);font-size:0.8rem;flex-shrink:0; }
+        .gap-caption { font-size:0.9rem;color:var(--gray-500);line-height:1.7;margin-top:1.5rem;max-width:720px; }
+
+        /* HOW IT WORKS — sequence rail.
+           Discover → Observe → Govern is a real sequence, so it reads as a
+           connected progression rather than three parallel cards. */
+        .rail { list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;position:relative; }
+        .rail::before { content:'';position:absolute;top:14px;left:calc(16.66% + 14px);right:calc(16.66% + 14px);
+                        height:1px;background:linear-gradient(90deg,var(--red),rgba(232,93,84,0.25)); }
+        .rail-step { position:relative;padding-right:1rem; }
+        .rail-node { width:29px;height:29px;border-radius:50%;border:1px solid rgba(232,93,84,0.45);
+                     background:var(--black);color:var(--red);font-family:var(--mono);font-size:0.68rem;font-weight:500;
+                     display:flex;align-items:center;justify-content:center;position:relative;z-index:2;margin-bottom:1.1rem; }
+        .rail-stage { font-family:var(--mono);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;
+                      color:var(--gray-700);margin-bottom:0.4rem; }
+        .rail-step h3 { font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.6rem; }
+        .rail-step > p { font-size:0.87rem;color:var(--gray-500);line-height:1.65;margin-bottom:1.1rem; }
         .step-detail { list-style:none;display:flex;flex-direction:column;gap:0.4rem;border-top:1px solid var(--border);padding-top:0.9rem; }
         .step-detail li { font-size:0.76rem;color:var(--gray-600);font-family:var(--mono);line-height:1.5;display:flex;gap:0.45rem; }
         .step-detail li::before { content:'›';color:var(--red);flex-shrink:0; }
@@ -209,7 +250,15 @@
         .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s}
 
         @media(max-width:900px) {
-            .steps{grid-template-columns:1fr;}
+            /* Rail turns vertical: the connecting line runs down the left gutter */
+            .rail{grid-template-columns:1fr;gap:2.25rem;padding-left:1.25rem;}
+            .rail::before{top:14px;bottom:14px;left:14px;right:auto;width:1px;height:auto;
+                          background:linear-gradient(180deg,var(--red),rgba(232,93,84,0.2));}
+            .rail-step{padding-right:0;padding-left:2.5rem;}
+            .rail-node{position:absolute;left:-1.25rem;top:0;margin-bottom:0;}
+            /* Coverage map stacks: gateway box first, blind spots beneath it */
+            .gap-map-body{grid-template-columns:1fr;gap:1.5rem;}
+            .gap-inner{min-height:0;}
             .diff-grid{grid-template-columns:1fr;}
             .price-factors{grid-template-columns:1fr;}
             .logo-row{grid-template-columns:repeat(3,1fr);}
@@ -415,73 +464,66 @@
 </section>
 
 <!-- ══ FORGE TRACK ══════════════════════════════════════════════════════ -->
-<section class="track track-forge" id="forge">
+<!-- ══ THE WEDGE — coverage gap, placed ahead of the mechanism ══════════ -->
+<section class="track track-gap" id="why">
     <div class="container">
 
         <div class="section-header">
             <div class="track-tag">FORGE · For enterprises</div>
-            <h2 class="section-title">How FORGE actually works</h2>
+            <div class="section-eyebrow">Why not just use a gateway?</div>
+            <h2 class="section-title">The agents your gateway will never see</h2>
             <p class="section-sub">
-                Three stages, running continuously on every endpoint in your environment. No agent registry to
-                maintain, no cooperation required from the tools you're trying to govern.
+                An MCP gateway governs what routes through it. That's real coverage — but an agent only
+                routes through it when it chooses to speak MCP. FORGE runs on the endpoint, where the
+                agent actually executes.
             </p>
         </div>
 
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">STAGE 01</div>
-                <h3>Discover</h3>
-                <p>
-                    Four probes run on each host and fingerprint AI activity from the inside — no
-                    self-reporting, no allowlist to keep current.
-                </p>
-                <ul class="step-detail">
-                    <li>Process probe: AI library signatures in running processes</li>
-                    <li>Network probe: outbound connections to AI API endpoints</li>
-                    <li>Endpoint probe: local model runtimes — Ollama, LM Studio, llama.cpp</li>
-                    <li>File probe: model weights and agent configs on disk</li>
-                </ul>
+        <div class="gap-map">
+            <div class="gap-map-head">Your environment — where FORGE runs</div>
+            <div class="gap-map-body">
+
+                <div class="gap-inner">
+                    <div class="gap-inner-head">What an MCP gateway sees</div>
+                    <div class="gap-node">MCP tool calls</div>
+                    <div class="gap-inner-note">Everything that chose to speak the protocol</div>
+                </div>
+
+                <div class="gap-chips">
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Local models</span>
+                            <span class="gap-chip-s">Ollama, LM Studio, llama.cpp — the traffic never leaves the machine, so it never reaches a gateway</span>
+                        </span>
+                    </div>
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Direct API calls</span>
+                            <span class="gap-chip-s">Code hitting a provider's REST endpoint isn't speaking MCP, so there's nothing at the protocol layer to inspect</span>
+                        </span>
+                    </div>
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Browser AI</span>
+                            <span class="gap-chip-s">An employee pasting into a chat window — the most common AI risk in an enterprise, and entirely outside the protocol</span>
+                        </span>
+                    </div>
+                </div>
+
             </div>
-            <div class="step">
-                <div class="step-num">STAGE 02</div>
-                <h3>Observe</h3>
-                <p>
-                    Every call becomes a node in a trace graph, so you can answer "what did this agent
-                    touch?" instead of guessing from logs.
-                </p>
-                <ul class="step-detail">
-                    <li>Interaction DAG: human → agent → agent → tool</li>
-                    <li>Full trace replay for incident review</li>
-                    <li>Per-agent cost and token attribution</li>
-                    <li>Export to 11 SIEM platforms — CEF, LEEF, STIX 2.1, ECS</li>
-                </ul>
-            </div>
-            <div class="step">
-                <div class="step-num">STAGE 03</div>
-                <h3>Govern</h3>
-                <p>
-                    Policies compile down to enforcement that runs inline, at the moment the agent acts —
-                    not in a report you read the next morning.
-                </p>
-                <ul class="step-detail">
-                    <li>12 DLP patterns scanned in real time — SSN, PHI, keys, secrets</li>
-                    <li>10 threat signatures — prompt injection, jailbreak, exfiltration</li>
-                    <li>Kernel-level blocking on Windows (WFP callout driver)</li>
-                    <li>Human-in-the-loop approval queue for high-risk actions</li>
-                </ul>
+            <div class="gap-map-foot">
+                <i class="fa-solid fa-shield-halved"></i>
+                FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
             </div>
         </div>
 
-        <!-- ── Competitive positioning (verified against source, see notes) ── -->
-        <div class="section-header" style="margin-top:5rem;margin-bottom:0">
-            <div class="section-eyebrow">How we're different</div>
-            <h2 class="section-title">A gateway only sees what routes through it</h2>
-            <p class="section-sub">
-                MCP gateways govern the MCP protocol boundary. That's real coverage — but an agent only passes
-                through it when it chooses to speak MCP. FORGE runs on the endpoint, where the agent actually
-                executes, so coverage doesn't depend on the protocol it picks.
-            </p>
-        </div>
+        <p class="gap-caption">
+            Three kinds of AI activity, none of which pass through a protocol gateway. FORGE catches all
+            three because it runs where the code runs, not where the traffic is supposed to go.
+        </p>
 
         <div class="diff-grid">
             <div class="diff-card">
@@ -521,6 +563,71 @@
             via the kernel driver. macOS and Linux endpoints are monitored and policy-evaluated, with enforcement
             parity on the roadmap. We'd rather you hear that from us than find it in a POC.
         </div>
+
+    </div>
+</section>
+
+<!-- ══ THE MECHANISM ═══════════════════════════════════════════════════ -->
+<section class="track track-forge" id="forge">
+    <div class="container">
+
+        <div class="section-header">
+            <div class="section-eyebrow">How it works</div>
+            <h2 class="section-title">How FORGE actually works</h2>
+            <p class="section-sub">
+                Three stages, running continuously on every endpoint in your environment. No agent registry to
+                maintain, no cooperation required from the tools you're trying to govern.
+            </p>
+        </div>
+
+        <ol class="rail">
+            <li class="rail-step">
+                <div class="rail-node">01</div>
+                <div class="rail-stage">Stage 01</div>
+                <h3>Discover</h3>
+                <p>
+                    Four probes run on each host and fingerprint AI activity from the inside — no
+                    self-reporting, no allowlist to keep current.
+                </p>
+                <ul class="step-detail">
+                    <li>Process probe: AI library signatures in running processes</li>
+                    <li>Network probe: outbound connections to AI API endpoints</li>
+                    <li>Endpoint probe: local model runtimes — Ollama, LM Studio, llama.cpp</li>
+                    <li>File probe: model weights and agent configs on disk</li>
+                </ul>
+            </li>
+            <li class="rail-step">
+                <div class="rail-node">02</div>
+                <div class="rail-stage">Stage 02</div>
+                <h3>Observe</h3>
+                <p>
+                    Every call becomes a node in a trace graph, so you can answer "what did this agent
+                    touch?" instead of guessing from logs.
+                </p>
+                <ul class="step-detail">
+                    <li>Interaction DAG: human → agent → agent → tool</li>
+                    <li>Full trace replay for incident review</li>
+                    <li>Per-agent cost and token attribution</li>
+                    <li>Export to 11 SIEM platforms — CEF, LEEF, STIX 2.1, ECS</li>
+                </ul>
+            </li>
+            <li class="rail-step">
+                <div class="rail-node">03</div>
+                <div class="rail-stage">Stage 03</div>
+                <h3>Govern</h3>
+                <p>
+                    Policies compile down to enforcement that runs inline, at the moment the agent acts —
+                    not in a report you read the next morning.
+                </p>
+                <ul class="step-detail">
+                    <li>12 DLP patterns scanned in real time — SSN, PHI, keys, secrets</li>
+                    <li>10 threat signatures — prompt injection, jailbreak, exfiltration</li>
+                    <li>Kernel-level blocking on Windows (WFP callout driver)</li>
+                    <li>Human-in-the-loop approval queue for high-risk actions</li>
+                </ul>
+            </li>
+        </ol>
+
 
         <!-- ── Social proof — placeholders, awaiting real customers ── -->
         <div class="proof">
@@ -743,7 +850,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);} }), {threshold:0.08});
-document.querySelectorAll('.step, .diff-card, .m-stat, .price-factor').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
+document.querySelectorAll('.rail-step, .gap-chip, .diff-card, .m-stat, .price-factor').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
 
 document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
