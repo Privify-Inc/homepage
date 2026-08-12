@@ -219,6 +219,31 @@
         .pi-chip { font-size:0.75rem;color:var(--gray-400);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:0.35rem 0.8rem;display:inline-flex;align-items:center;gap:0.4rem; }
         .pi-chip i { color:var(--red);font-size:0.7rem; }
 
+        /* FAQ — native <details> so it is keyboard-accessible and works
+           without JavaScript. No accordion library. */
+        .faq { padding:5.5rem 0;border-top:1px solid var(--border); }
+        .faq-grid { display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.6fr);gap:4rem;align-items:start; }
+        .faq-title { font-size:clamp(1.9rem,3.6vw,2.9rem);font-weight:800;letter-spacing:-0.035em;line-height:1.06;text-wrap:balance; }
+        .faq-aside { font-size:0.88rem;color:var(--text-3);line-height:1.7;margin-top:1.25rem; }
+        .faq-aside a { color:var(--red);text-decoration:none;border-bottom:1px solid rgba(232,93,84,0.35); }
+        .faq-aside a:hover { border-bottom-color:var(--red); }
+        .faq-list { border-top:1px solid var(--border); }
+        .faq-item { border-bottom:1px solid var(--border); }
+        .faq-item summary { list-style:none;cursor:pointer;padding:1.35rem 2.5rem 1.35rem 0;position:relative;
+                            font-size:1.02rem;font-weight:650;letter-spacing:-0.015em;line-height:1.4;
+                            color:var(--white);transition:color 0.2s; }
+        .faq-item summary::-webkit-details-marker { display:none; }
+        .faq-item summary:hover { color:var(--red); }
+        .faq-item summary:focus-visible { outline:2px solid var(--red);outline-offset:3px;border-radius:4px; }
+        .faq-item summary::after { content:'';position:absolute;right:0.35rem;top:1.72rem;width:9px;height:9px;
+                                   border-right:1.5px solid var(--gray-500);border-bottom:1.5px solid var(--gray-500);
+                                   transform:rotate(45deg);transition:transform 0.25s,border-color 0.2s; }
+        .faq-item[open] summary::after { transform:rotate(-135deg);border-color:var(--red); }
+        .faq-item[open] summary { color:var(--red); }
+        .faq-answer { padding:0 2.5rem 1.6rem 0;font-size:0.92rem;color:var(--gray-400);line-height:1.75;max-width:62ch; }
+        .faq-answer p + p { margin-top:0.85rem; }
+        .faq-answer strong { color:var(--white);font-weight:600; }
+
         /* MISSION */
         .mission { padding:5.5rem 0; }
         .mission-inner { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
@@ -262,6 +287,7 @@
             .gap-map-body{grid-template-columns:1fr;gap:1.5rem;}
             .gap-inner{min-height:0;}
             .diff-grid{grid-template-columns:repeat(2,1fr);}
+            .faq-grid{grid-template-columns:1fr;gap:2.25rem;}
             .price-factors{grid-template-columns:1fr;}
             .footer-cols{grid-template-columns:repeat(2,1fr);}
         }
@@ -296,6 +322,46 @@
             .soc2-badge{padding:0.75rem 1rem;}
         }
     </style>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where does FORGE run, and does our data leave our network?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FORGE is designed to run inside your own environment. The management plane, database and event store are yours, and the discovery probes execute on the endpoint and report to your management plane, not to Privify. In a self-hosted deployment your agent activity, traces and DLP findings never reach Privify."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which platforms does FORGE support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Windows, macOS and Linux, with inline blocking on all three. Policy is evaluated at the moment an agent acts, and a blocked call is stopped before it reaches the provider rather than logged after the fact. On Windows, enforcement can additionally run in the OS network stack via a kernel driver, applying policy at the TCP connect boundary."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is FORGE different from a DLP or CASB we already own?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Those tools were not built for AI. A CASB governs sanctioned SaaS and a DLP inspects data leaving a known channel. Neither was designed for one agent calling another, a tool invocation, or a model running locally on a developer's laptop. FORGE watches that layer and feeds what it finds back into your existing stack across 11 SIEM platforms, so existing controls see what they were blind to."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does FORGE deploy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Through several protection points chosen to fit where your agents run: an endpoint agent, a browser extension for AI used in the browser, a proxy for CLI-based AI tools, and host probes for discovery. Some teams start with discovery only and add enforcement later; others go straight to inline policy."
+      }
+    }
+  ]
+}
+    </script>
 </head>
 <body>
 
@@ -666,6 +732,93 @@
             <a href="contact.html?product=forge&amp;intent=pricing" class="btn btn-forge" onclick="track('CTA_ContactPricing')">
                 Contact us for pricing <i class="fa-solid fa-arrow-right fa-xs"></i>
             </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FAQ — objection handling, placed where objections actually surface:
+     immediately after pricing, while the enterprise track is still in view ══ -->
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="faq-grid">
+
+            <div>
+                <div class="section-eyebrow">FAQ</div>
+                <h2 class="faq-title">Questions we get from security teams</h2>
+                <p class="faq-aside">
+                    Something not covered here? <a href="contact.html?intent=other">Ask us directly</a> —
+                    it reaches the founding team, not a queue.
+                </p>
+            </div>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Where does FORGE run, and does our data leave our network?</summary>
+                    <div class="faq-answer">
+                        <p>
+                            FORGE is designed to run inside your own environment. The management plane, database
+                            and event store are yours, and the discovery probes execute on the endpoint and
+                            report to your management plane — not to us.
+                        </p>
+                        <p>
+                            In a self-hosted deployment, <strong>your agent activity, traces and DLP findings
+                            never reach Privify.</strong> That is the point of putting the control plane where
+                            your data already lives.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Which platforms do you support?</summary>
+                    <div class="faq-answer">
+                        <p>
+                            <strong>Windows, macOS and Linux — with inline blocking on all three.</strong>
+                            Policy is evaluated at the moment an agent acts, and a blocked call is stopped
+                            before it reaches the provider rather than logged after the fact.
+                        </p>
+                        <p>
+                            On Windows you can additionally run enforcement down in the OS network stack via a
+                            kernel driver, for teams that want policy applied at the TCP connect boundary.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How is this different from the DLP or CASB we already own?</summary>
+                    <div class="faq-answer">
+                        <p>
+                            <strong>Those tools were not built for AI.</strong> A CASB governs sanctioned SaaS.
+                            A DLP inspects data leaving a known channel. Neither was designed for one agent
+                            calling another, a tool invocation on your behalf, or a model running locally on a
+                            developer's laptop.
+                        </p>
+                        <p>
+                            FORGE watches the layer they were never pointed at — and then feeds what it finds
+                            back into the stack you already run, across 11 SIEM platforms. You don't replace
+                            your existing controls. You make them see what they were blind to.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How does your system deploy?</summary>
+                    <div class="faq-answer">
+                        <p>
+                            Through several protection points, and the right combination depends on where your
+                            agents actually run: an endpoint agent, a browser extension for AI used in the
+                            browser, a proxy for CLI-based AI tools, and host probes for discovery.
+                        </p>
+                        <p>
+                            Some teams start with discovery only and add enforcement once they've seen what
+                            turns up. Others go straight to inline policy. <strong>Worth a conversation rather
+                            than a checkbox</strong> — <a href="contact.html?intent=poc">tell us about your
+                            environment</a> and we'll map it out with you.
+                        </p>
+                    </div>
+                </details>
+
+            </div>
         </div>
     </div>
 </section>
