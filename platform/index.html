@@ -874,6 +874,13 @@
                                              justify-content:center; gap:0.3rem; }
         .deploy-spec-link i { font-size:0.6rem; transition:transform 0.2s; }
         .deploy-spec-link:hover i { transform:translateX(2px); }
+
+        /*  Names the product directly under the headline. Mono and muted so it
+            reads as a definition, not a second headline.  */
+        .hero-expand { font-family:var(--mono); font-size:0.74rem; letter-spacing:0.02em;
+                       color:var(--text-3); margin:-0.35rem 0 1.35rem; }
+        .hero-expand strong { color:var(--red); font-weight:600; letter-spacing:0.08em; }
+        @media(max-width:768px){ .hero-expand { font-size:0.68rem; } }
 </style>
 </head>
 <body>
@@ -944,6 +951,12 @@
                 <span class="highlight">AI agent</span><br>
                 across your enterprise
             </h1>
+            <!-- Product name expanded here: it appeared nowhere a reader would
+                 see it — only a hover-only nav dropdown and the brand section at
+                 the very foot of the page. -->
+            <div class="hero-expand fade-in delay-1">
+                <strong>FORGE</strong> &mdash; Federated Oversight &amp; Risk Governance Engine
+            </div>
             <p class="hero-subtitle fade-in delay-2">
                 Privify discovers every AI agent running in your environment — sanctioned or shadow — maps every interaction, and enforces policy in real time. Three pillars: Discovery, Observability, Governance.
             </p>
