@@ -204,15 +204,6 @@
         .diff-card h4 i { color:var(--red);font-size:0.85rem;margin-top:3px;flex-shrink:0; }
         .diff-card p { font-size:0.83rem;color:var(--text-3);line-height:1.6; }
 
-        /* PROOF / LOGOS PLACEHOLDER */
-        .proof { margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border); }
-        .proof-label { text-align:center;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gray-500);margin-bottom:1.75rem; }
-        .logo-row { display:grid;grid-template-columns:repeat(5,1fr);gap:1rem; }
-        .logo-slot { height:62px;border:1px dashed var(--gray-800);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:0.68rem;color:var(--gray-800);font-family:var(--mono);letter-spacing:0.04em; }
-        .quote-row { display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:1.25rem; }
-        .quote-slot { border:1px dashed var(--gray-800);border-radius:12px;padding:1.5rem;min-height:130px;display:flex;flex-direction:column;justify-content:center;gap:0.5rem; }
-        .quote-slot .qs-title { font-size:0.72rem;font-family:var(--mono);color:var(--gray-800);letter-spacing:0.04em; }
-        .quote-slot .qs-hint { font-size:0.78rem;color:var(--text-3);line-height:1.55; }
 
         /* PRICING */
         .pricing { padding:5.5rem 0;background:var(--surface-2);border-top:1px solid var(--border); }
@@ -272,8 +263,6 @@
             .gap-inner{min-height:0;}
             .diff-grid{grid-template-columns:repeat(2,1fr);}
             .price-factors{grid-template-columns:1fr;}
-            .logo-row{grid-template-columns:repeat(3,1fr);}
-            .quote-row{grid-template-columns:1fr;}
             .footer-cols{grid-template-columns:repeat(2,1fr);}
         }
         @media(max-width:768px) {
@@ -303,7 +292,6 @@
         @media(max-width:480px){
             .header .container{padding:0 0.875rem;}
             h1{font-size:2.1rem;}
-            .logo-row{grid-template-columns:repeat(2,1fr);}
             .footer-cols{grid-template-columns:1fr;}
             .soc2-badge{padding:0.75rem 1rem;}
         }
@@ -630,27 +618,6 @@
         </ol>
 
 
-        <!-- ── Social proof — placeholders, awaiting real customers ── -->
-        <div class="proof">
-            <div class="proof-label">Trusted by security and platform teams at</div>
-            <div class="logo-row">
-                <div class="logo-slot">LOGO SLOT 1</div>
-                <div class="logo-slot">LOGO SLOT 2</div>
-                <div class="logo-slot">LOGO SLOT 3</div>
-                <div class="logo-slot">LOGO SLOT 4</div>
-                <div class="logo-slot">LOGO SLOT 5</div>
-            </div>
-            <div class="quote-row">
-                <div class="quote-slot">
-                    <div class="qs-title">TESTIMONIAL SLOT — CISO / SECURITY</div>
-                    <div class="qs-hint">Pull quote about shadow AI discovery, plus name, title and company.</div>
-                </div>
-                <div class="quote-slot">
-                    <div class="qs-title">CASE STUDY SLOT — DEPLOYMENT</div>
-                    <div class="qs-hint">Environment size, time to deploy, agents discovered in week one, outcome.</div>
-                </div>
-            </div>
-        </div>
 
     </div>
 </section>
