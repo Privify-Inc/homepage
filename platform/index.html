@@ -863,6 +863,17 @@
             .brandbeat-copy { text-align:center; }
             .brandbeat-copy .section-sub { margin:0 auto; }
         }
+
+        /*  The pricing cell is a real link now — the only interactive cell in
+            the spec grid, so it has to read as one.  */
+        .deploy-spec-link { display:block; text-decoration:none; border:1px solid transparent;
+                            transition:border-color 0.2s, background 0.2s; }
+        .deploy-spec-link:hover { border-color:rgba(232,93,84,0.45); background:rgba(232,93,84,0.08); }
+        .deploy-spec-link:focus-visible { outline:2px solid var(--red); outline-offset:2px; }
+        .deploy-spec-link .deploy-spec-val { color:var(--red); display:flex; align-items:center;
+                                             justify-content:center; gap:0.3rem; }
+        .deploy-spec-link i { font-size:0.6rem; transition:transform 0.2s; }
+        .deploy-spec-link:hover i { transform:translateX(2px); }
 </style>
 </head>
 <body>
@@ -1334,7 +1345,7 @@
                 <div class="deploy-specs">
                     <div class="deploy-spec"><div class="deploy-spec-val">15 min</div><div class="deploy-spec-label">Time to deploy</div></div>
                     <div class="deploy-spec"><div class="deploy-spec-val">~2ms</div><div class="deploy-spec-label">Added latency</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">Contact us</div><div class="deploy-spec-label">Pricing</div></div>
+                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=smb" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'smb'}})" aria-label="Contact us about pricing for SMB, up to 50 agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
                 </div>
             </div>
             <div class="deploy-card">
@@ -1350,7 +1361,7 @@
                 <div class="deploy-specs">
                     <div class="deploy-spec"><div class="deploy-spec-val">1–2 days</div><div class="deploy-spec-label">Full deployment</div></div>
                     <div class="deploy-spec"><div class="deploy-spec-val">11 SIEMs</div><div class="deploy-spec-label">Supported</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">Contact us</div><div class="deploy-spec-label">Pricing</div></div>
+                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=mid-market" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'mid-market'}})" aria-label="Contact us about pricing for Mid-market, 50 to 500 agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
                 </div>
             </div>
             <div class="deploy-card">
@@ -1366,13 +1377,13 @@
                 <div class="deploy-specs">
                     <div class="deploy-spec"><div class="deploy-spec-val">Global</div><div class="deploy-spec-label">Deployment</div></div>
                     <div class="deploy-spec"><div class="deploy-spec-val">HA pairs</div><div class="deploy-spec-label">Availability</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">Contact us</div><div class="deploy-spec-label">Pricing</div></div>
+                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=enterprise" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'enterprise'}})" aria-label="Contact us about pricing for Enterprise, 1,000+ agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
                 </div>
             </div>
             <div class="deploy-card">
                 <div class="deploy-tier" style="color:var(--red)">Cloud-native — Kubernetes</div>
                 <h3>Admission webhook · zero config per pod</h3>
-                <div class="desc">One Helm install. Admission webhook auto-injects our sidecar into every AI pod at creation. No code changes. Integrates with Istio/Linkerd, exposes Prometheus metrics.</div>
+                <div class="desc">One Helm install. Admission webhook auto-injects our sidecar into every AI pod at creation. No code changes. Integrates with Istio/Linkerd, exposes Prometheus metrics. Runs on EKS, GKE and AKS.</div>
                 <div class="deploy-components">
                     <span class="deploy-chip">Helm chart</span>
                     <span class="deploy-chip">K8s sidecar</span>
@@ -1382,7 +1393,7 @@
                 <div class="deploy-specs">
                     <div class="deploy-spec"><div class="deploy-spec-val">1 cmd</div><div class="deploy-spec-label">Helm install</div></div>
                     <div class="deploy-spec"><div class="deploy-spec-val">~1ms</div><div class="deploy-spec-label">Sidecar latency</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">EKS/GKE/AKS</div><div class="deploy-spec-label">Supported</div></div>
+                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=cloud-native" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'cloud-native'}})" aria-label="Contact us about pricing for Cloud-native on Kubernetes"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
                 </div>
             </div>
         </div>
