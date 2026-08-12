@@ -818,6 +818,51 @@
             .forge-image-text{ text-align:center; }
             .forge-image-text .section-sub{ margin:0 auto; }
         }
+
+        /*  DISCOVERY GAP — the reason to act. Left panel is what an AI policy
+            names; right is what a first scan turns up. The density delta is
+            the argument; the numbers are the page's demo dataset.  */
+        .dgap { display:grid; grid-template-columns:1fr auto 1.55fr; gap:1.25rem; align-items:stretch; }
+        .dgap-panel { border:1px solid var(--border-hover); border-radius:14px; background:var(--surface-2);
+                      padding:1.4rem 1.25rem 1.2rem; display:flex; flex-direction:column; }
+        .dgap-found { border-color:rgba(232,93,84,0.45); background:rgba(232,93,84,0.05);
+                      box-shadow:0 0 44px rgba(232,93,84,0.10); }
+        .dgap-label { font-family:var(--mono); font-size:0.6rem; letter-spacing:0.11em; text-transform:uppercase;
+                      color:var(--text-3); margin-bottom:1rem; }
+        .dgap-grid { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:1.1rem; flex:1; align-content:flex-start; }
+        .dgap-grid i { width:9px; height:9px; border-radius:2px; background:var(--gray-700); display:block; }
+        .dgap-grid i.on  { background:rgba(232,93,84,0.55); }
+        .dgap-grid i.hot { background:var(--red); box-shadow:0 0 7px rgba(232,93,84,0.65); }
+        .dgap-fig { font-size:2.4rem; font-weight:800; letter-spacing:-0.03em; line-height:1; color:var(--gray-500);
+                    display:flex; align-items:baseline; gap:0.6rem; }
+        .dgap-found .dgap-fig { color:var(--white); font-size:3.1rem; }
+        .dgap-fig span { font-size:0.76rem; font-weight:500; letter-spacing:0; color:var(--text-3); }
+        .dgap-sub { font-size:0.75rem; color:var(--red); margin-top:0.5rem; font-weight:600; }
+        .dgap-vs { align-self:center; font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em;
+                   text-transform:uppercase; color:var(--gray-700); }
+        .dgap-note { font-size:0.7rem; color:var(--gray-700); margin-top:0.85rem; text-align:right; }
+        @media(max-width:1024px){
+            .dgap { grid-template-columns:1fr; gap:0.75rem; }
+            .dgap-vs { justify-self:center; padding:0.15rem 0; }
+            .dgap-note { text-align:left; }
+        }
+
+        /*  Topology now sits with deployment, where the architecture question
+            actually gets asked.  */
+        .topo-slot { max-width:880px; margin:0 auto 3.5rem; }
+
+        /*  BRAND BEAT — the forge metaphor. Decorative, so alt="" and
+            aria-hidden; the copy beside it carries the meaning.  */
+        .brandbeat { padding:5rem 0 1rem; background:var(--black); }
+        .brandbeat-inner { display:grid; grid-template-columns:1.35fr 1fr; gap:3.5rem; align-items:center; }
+        .brandbeat-img { width:100%; height:auto; display:block; border-radius:16px;
+                         box-shadow:0 40px 100px rgba(232,93,84,0.15), 0 0 0 1px rgba(232,93,84,0.15); }
+        .brandbeat-copy .section-title { margin-bottom:1rem; }
+        @media(max-width:900px){
+            .brandbeat-inner { grid-template-columns:1fr; gap:2rem; }
+            .brandbeat-copy { text-align:center; }
+            .brandbeat-copy .section-sub { margin:0 auto; }
+        }
 </style>
 </head>
 <body>
@@ -972,55 +1017,28 @@
     <div class="container">
         <div class="forge-image-inner">
             <div class="forge-image-text fade-in">
-                <div class="section-eyebrow">Powered by FORGE</div>
-                <h2 class="section-title">Where AI governance<br>is forged.</h2>
-                <p class="section-sub">Every AI agent in your enterprise shaped, governed, and held to policy — the moment it acts. FORGE is the control plane that makes it possible.</p>
+                <div class="section-eyebrow">The discovery gap</div>
+                <h2 class="section-title">You cannot govern<br>what you cannot see.</h2>
+                <p class="section-sub">Every AI policy names a handful of approved tools. The first FORGE scan usually finds an order of magnitude more already running — including agents nobody registered, and models that never leave the laptop.</p>
             </div>
             <div class="forge-image-wrap fade-in delay-2">
-                <div class="topo" role="img" aria-label="FORGE topology: Windows, macOS and Linux endpoints run probes that report to a FORGE control plane self-hosted inside your network, which exports to your SIEM. No agent data is sent to Privify.">
-                    <div class="topo-head">Your network</div>
-
-                    <div class="topo-body">
-                        <div class="topo-col">
-                            <div class="topo-col-label">Endpoints</div>
-                            <div class="topo-node">Windows</div>
-                            <div class="topo-node">macOS</div>
-                            <div class="topo-node">Linux</div>
-                            <div class="topo-note">4 probes &middot; inline blocking</div>
-                        </div>
-
-                        <div class="topo-link" aria-hidden="true">
-                            <span class="topo-link-label">probes</span>
-                            <span class="topo-arrow"></span>
-                        </div>
-
-                        <div class="topo-col">
-                            <div class="topo-col-label">FORGE control plane</div>
-                            <div class="topo-plane">
-                                <span>Policy engine</span>
-                                <span>Interaction graph</span>
-                                <span>Audit trail</span>
-                            </div>
-                            <div class="topo-note">self-hosted &middot; your infrastructure</div>
-                        </div>
-
-                        <div class="topo-link" aria-hidden="true">
-                            <span class="topo-link-label">export</span>
-                            <span class="topo-arrow"></span>
-                        </div>
-
-                        <div class="topo-col topo-col-end">
-                            <div class="topo-col-label">Your stack</div>
-                            <div class="topo-node">SIEM</div>
-                            <div class="topo-note">11 platforms</div>
-                        </div>
+                <div class="dgap">
+                    <div class="dgap-panel">
+                        <div class="dgap-label">What your policy names</div>
+                        <div class="dgap-grid"><i class=""></i><i class=""></i><i class=""></i></div>
+                        <div class="dgap-fig">3<span>approved tools</span></div>
                     </div>
 
-                    <div class="topo-foot">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-                        Nothing crosses this boundary. In a self-hosted deployment Privify never receives your agent activity, traces or DLP findings.
+                    <div class="dgap-vs" aria-hidden="true">vs</div>
+
+                    <div class="dgap-panel dgap-found">
+                        <div class="dgap-label">What FORGE finds</div>
+                        <div class="dgap-grid"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div>
+                        <div class="dgap-fig">47<span>agents running</span></div>
+                        <div class="dgap-sub">3 critical &middot; 12 policy violations</div>
                     </div>
                 </div>
+                <p class="dgap-note">Representative first-scan result, from the FORGE demo environment.</p>
             </div>
         </div>
     </div>
@@ -1252,9 +1270,57 @@
     <div class="container">
         <div class="section-header">
             <div class="section-eyebrow">Deployment</div>
+
             <h2 class="section-title">Meets you where your agents run</h2>
             <p class="section-sub">Six deployment components. Layer them for defence in depth. Start with one in five minutes. Scale to global enterprise without rearchitecting.</p>
         </div>
+        <div class="topo-slot">
+<div class="topo" role="img" aria-label="FORGE topology: Windows, macOS and Linux endpoints run probes that report to a FORGE control plane self-hosted inside your network, which exports to your SIEM. No agent data is sent to Privify.">
+                    <div class="topo-head">Your network</div>
+
+                    <div class="topo-body">
+                        <div class="topo-col">
+                            <div class="topo-col-label">Endpoints</div>
+                            <div class="topo-node">Windows</div>
+                            <div class="topo-node">macOS</div>
+                            <div class="topo-node">Linux</div>
+                            <div class="topo-note">4 probes &middot; inline blocking</div>
+                        </div>
+
+                        <div class="topo-link" aria-hidden="true">
+                            <span class="topo-link-label">probes</span>
+                            <span class="topo-arrow"></span>
+                        </div>
+
+                        <div class="topo-col">
+                            <div class="topo-col-label">FORGE control plane</div>
+                            <div class="topo-plane">
+                                <span>Policy engine</span>
+                                <span>Interaction graph</span>
+                                <span>Audit trail</span>
+                            </div>
+                            <div class="topo-note">self-hosted &middot; your infrastructure</div>
+                        </div>
+
+                        <div class="topo-link" aria-hidden="true">
+                            <span class="topo-link-label">export</span>
+                            <span class="topo-arrow"></span>
+                        </div>
+
+                        <div class="topo-col topo-col-end">
+                            <div class="topo-col-label">Your stack</div>
+                            <div class="topo-node">SIEM</div>
+                            <div class="topo-note">11 platforms</div>
+                        </div>
+                    </div>
+
+                    <div class="topo-foot">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                        Nothing crosses this boundary. In a self-hosted deployment Privify never receives your agent activity, traces or DLP findings.
+                    </div>
+                </div>
+        </div>
+
         <div class="deployment-grid">
             <div class="deploy-card">
                 <div class="deploy-tier" style="color:var(--red)">SMB — up to 50 agents</div>
@@ -1729,6 +1795,24 @@
 </section>
 
 <!--  INTEREST / SIGN UP  -->
+<!--  BRAND BEAT — the forge metaphor, placed after the rational case is
+      made and immediately before the ask. Decorative by intent.  -->
+<section class="brandbeat">
+    <div class="container">
+        <div class="brandbeat-inner">
+            <img src="forge_hero.png" alt="" aria-hidden="true" class="brandbeat-img" loading="lazy"/>
+            <div class="brandbeat-copy">
+                <div class="section-eyebrow">Powered by FORGE</div>
+                <h2 class="section-title">Where AI governance<br>is forged.</h2>
+                <p class="section-sub">
+                    Federated Oversight &amp; Risk Governance Engine. Every AI agent in your enterprise
+                    shaped, governed, and held to policy — the moment it acts.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="signup-section" id="interest">
     <div class="container">
         <div class="signup-inner">
