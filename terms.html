@@ -2,28 +2,220 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Privacy Policy - Privify</title>
-        <!-- Privacy-friendly analytics by Plausible -->
-        <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
-        <script>
-            window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-            plausible.init()
-        </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terms of use for the privify.io website and the free tools hosted on it.">
+    <title>Terms of Service — Privify</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+    <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            max-width: 800px; 
-            margin: 50px auto; 
-            padding: 20px;
-            background: #000;
-            color: #fff;
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --red:#E85D54; --red-dim:rgba(232,93,84,0.1);
+            --black:#000; --white:#fff;
+            --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-600:#4B5563;
+            --gray-700:#374151; --gray-800:#1F2937;
+            --surface:#0d0d0d; --surface-2:#111111; --surface-3:#161616;
+            --border:rgba(255,255,255,0.07); --border-h:rgba(255,255,255,0.14);
+            --mono:'JetBrains Mono',monospace;
         }
-        a { color: #E85D54; }
+        html { scroll-behavior:smooth; overflow-x:hidden; }
+        body { font-family:'Inter',-apple-system,sans-serif; background:var(--black); color:var(--white); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse 80% 60% at 70% -10%,rgba(232,93,84,0.06) 0%,transparent 60%); pointer-events:none; z-index:1; }
+        .container { max-width:1200px; margin:0 auto; padding:0 2rem; position:relative; z-index:2; }
+        .doc { max-width:760px; }
+
+        .header { position:fixed;top:0;left:0;right:0;padding:1.25rem 0;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid var(--border);transition:all 0.3s; }
+        .header.scrolled { padding:0.875rem 0;background:rgba(0,0,0,0.96); }
+        nav { display:flex;justify-content:space-between;align-items:center; }
+        .logo { display:flex;align-items:center;gap:0.625rem;text-decoration:none;color:var(--white);font-weight:700;font-size:1.375rem;letter-spacing:-0.02em; }
+        .nav-links { display:flex;align-items:center;gap:2.25rem; }
+        .nav-link { color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.875rem;transition:color 0.2s; }
+        .nav-link:hover { color:var(--white); }
+        .back-link { color:var(--gray-500);text-decoration:none;font-size:0.85rem;display:inline-flex;align-items:center;gap:0.45rem;transition:color 0.2s; }
+        .back-link:hover { color:var(--white); }
+
+        .wrap { padding:9rem 0 4rem; }
+        .eyebrow { display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem; }
+        h1 { font-size:clamp(2.1rem,3.8vw,3rem);font-weight:800;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.1rem; }
+        .lede { font-size:1.02rem;color:var(--gray-400);line-height:1.75;margin-bottom:1rem; }
+        .updated { font-size:0.76rem;color:var(--gray-700);font-family:var(--mono);margin-bottom:3rem; }
+
+        h2 { font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;margin:2.75rem 0 0.9rem;padding-top:1.85rem;border-top:1px solid var(--border); }
+        h2:first-of-type { border-top:none;padding-top:0;margin-top:0; }
+        h2 .num { font-family:var(--mono);font-size:0.8rem;color:var(--gray-700);margin-right:0.6rem;font-weight:500; }
+        p { font-size:0.93rem;color:var(--gray-400);line-height:1.8;margin-bottom:1rem; }
+        ul { margin:0 0 1.25rem 0;padding-left:0;list-style:none; }
+        li { font-size:0.9rem;color:var(--gray-400);line-height:1.75;margin-bottom:0.6rem;padding-left:1.4rem;position:relative; }
+        li::before { content:'—';position:absolute;left:0;color:var(--red);font-size:0.8rem; }
+        .doc a { color:var(--red);text-decoration:none;border-bottom:1px solid rgba(232,93,84,0.3);transition:border-color 0.2s; }
+        .doc a:hover { border-bottom-color:var(--red); }
+        strong { color:var(--white);font-weight:600; }
+
+        .callout { background:var(--surface);border:1px solid var(--border-h);border-left:2px solid var(--red);border-radius:10px;padding:1.4rem 1.5rem;margin:1.75rem 0; }
+        .callout .c-title { font-size:0.88rem;font-weight:700;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.55rem; }
+        .callout .c-title i { color:var(--red); }
+        .callout p { font-size:0.88rem;margin-bottom:0; }
+
+        .footer { padding:2.5rem 0 1.5rem;border-top:1px solid var(--border);margin-top:4rem; }
+        .footer-bottom { display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--gray-700);gap:1rem;flex-wrap:wrap; }
+        .footer-bottom a { color:var(--gray-600);text-decoration:none;margin-left:1.25rem;border-bottom:none; }
+        .footer-bottom a:hover { color:var(--white); }
+
+        @media(max-width:768px){
+            .nav-links{display:none;}
+            .container{padding:0 1.25rem;}
+            .wrap{padding:7rem 0 3rem;}
+            .footer-bottom{flex-direction:column;text-align:center;}
+            .footer-bottom a{margin:0 0.6rem;}
+        }
     </style>
 </head>
 <body>
-    <h1>Privacy Policy</h1>
-    <p>Coming soon...</p>
-    <p><a href="/">Back to Home</a></p>
+
+<header class="header" id="header">
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="32" width="32">
+                    <g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g>
+                </svg>
+                PRIVIFY
+            </a>
+            <div class="nav-links">
+                <a href="platform/index.html" class="nav-link">FORGE</a>
+                <a href="privacy/index.html" class="nav-link">SHIELD</a>
+                <a href="security.html" class="nav-link">Security</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left fa-xs"></i> Back to home</a>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+    <div class="container">
+        <div class="doc">
+            <div class="eyebrow">Legal</div>
+            <h1>Terms of Service</h1>
+            <p class="lede">
+                These terms govern your use of the privify.io website and the free tools we host on it.
+                By using the site, you agree to them.
+            </p>
+            <div class="updated">Last updated: 11 August 2026</div>
+
+            <div class="callout">
+                <div class="c-title"><i class="fa-solid fa-file-contract"></i> Using FORGE or SHIELD?</div>
+                <p>
+                    These website terms do <strong>not</strong> govern our products. FORGE deployments are
+                    governed by the licence and services agreement executed between Privify and the customer.
+                    SHIELD has not launched. For a copy of current product terms,
+                    <a href="contact.html">contact us</a>.
+                </p>
+            </div>
+
+            <h2><span class="num">01</span>Who we are</h2>
+            <p>
+                This website is operated by Privify, Inc. ("Privify", "we", "us"). Throughout these terms,
+                "the site" means privify.io and its subpages, including the free tools hosted there.
+            </p>
+
+            <h2><span class="num">02</span>Using the site</h2>
+            <p>You may read, share and link to anything published here. You agree not to:</p>
+            <ul>
+                <li>Use the site in any way that breaks applicable law.</li>
+                <li>Attempt to gain unauthorised access to our systems, or probe, scan or test their security without written permission — see our <a href="security.html">security page</a> for how to report issues responsibly.</li>
+                <li>Interfere with the site's operation or availability for others.</li>
+                <li>Scrape or reproduce our content at scale for a competing commercial product.</li>
+            </ul>
+
+            <h2><span class="num">03</span>Free tools</h2>
+            <p>
+                Tools such as Photo Scrubber are provided free and <strong>as-is</strong>, with no warranty of
+                any kind. They process files locally in your browser. While we've built them carefully, we
+                can't guarantee they will remove every trace of metadata from every file format, and you should
+                not rely on them as your sole safeguard where the stakes are high. Verify the output before
+                publishing anything sensitive.
+            </p>
+            <p>
+                How these tools handle your data is described in our
+                <a href="privacy.html">Privacy Policy</a>.
+            </p>
+
+            <h2><span class="num">04</span>Our content</h2>
+            <p>
+                The site's content, design, logos, product names (including FORGE and SHIELD) and software are
+                owned by Privify or our licensors and protected by intellectual property law. Nothing here
+                grants you a licence to our trademarks or software beyond ordinary use of the site.
+            </p>
+            <p>
+                Open-source components we distribute are covered by their own licences, which take precedence
+                over this section for those components.
+            </p>
+
+            <h2><span class="num">05</span>Forward-looking statements</h2>
+            <p>
+                The site describes products under active development. Roadmap items, capabilities described as
+                planned, and early-access features may change or may not ship. Nothing on this site is a
+                contractual commitment to deliver any particular feature, and you should not make purchasing
+                decisions on that basis. Where a capability is limited to particular platforms, we say so.
+            </p>
+
+            <h2><span class="num">06</span>Third-party links</h2>
+            <p>
+                We link to third-party sites and load some assets from third-party providers. We don't control
+                them and aren't responsible for their content or practices.
+            </p>
+
+            <h2><span class="num">07</span>Disclaimer and liability</h2>
+            <p>
+                The site and free tools are provided "as is" and "as available", without warranties of any
+                kind, whether express or implied, including fitness for a particular purpose and
+                non-infringement. We don't warrant that the site will be uninterrupted or error-free.
+            </p>
+            <p>
+                To the fullest extent permitted by law, Privify will not be liable for any indirect,
+                incidental, special, consequential or punitive damages, or any loss of data, profits or
+                goodwill, arising from your use of the site or free tools. Nothing in these terms limits
+                liability that cannot lawfully be limited.
+            </p>
+
+            <h2><span class="num">08</span>Changes</h2>
+            <p>
+                We may update these terms. The "last updated" date above will change when we do, and continued
+                use of the site after an update means you accept the revised terms.
+            </p>
+
+            <h2><span class="num">09</span>Contact</h2>
+            <p>
+                Questions about these terms: <a href="mailto:legal@privify.io">legal@privify.io</a>, or use
+                <a href="contact.html">our contact form</a>.
+            </p>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bottom">
+            <span>© 2026 Privify Inc. All rights reserved.</span>
+            <span>
+                <a href="security.html">Security</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="contact.html">Contact</a>
+            </span>
+        </div>
+    </div>
+</footer>
+
+<script>
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.pageYOffset > 50));
+</script>
 </body>
 </html>

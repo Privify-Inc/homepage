@@ -2,28 +2,367 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Privacy Policy - Privify</title>
-        <!-- Privacy-friendly analytics by Plausible -->
-        <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
-        <script>
-            window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-            plausible.init()
-        </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Talk to the Privify team about FORGE — AI agent governance for enterprises. Request a demo or pricing.">
+    <meta property="og:title" content="Contact Privify">
+    <meta property="og:description" content="Request a FORGE demo, ask about pricing, or get in touch with the Privify team.">
+    <title>Contact — Privify</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+    <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            max-width: 800px; 
-            margin: 50px auto; 
-            padding: 20px;
-            background: #000;
-            color: #fff;
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --red:#E85D54; --red-dim:rgba(232,93,84,0.1); --red-glow:rgba(232,93,84,0.22);
+            --cyan:#22D3EE; --cyan-dim:rgba(34,211,238,0.1);
+            --black:#000; --white:#fff;
+            --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-600:#4B5563;
+            --gray-700:#374151; --gray-800:#1F2937;
+            --surface:#0d0d0d; --surface-2:#111111; --surface-3:#161616;
+            --border:rgba(255,255,255,0.07); --border-h:rgba(255,255,255,0.14);
+            --mono:'JetBrains Mono',monospace;
         }
-        a { color: #E85D54; }
+        html { scroll-behavior:smooth; overflow-x:hidden; }
+        body { font-family:'Inter',-apple-system,sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+        body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse 80% 60% at 70% -10%,rgba(232,93,84,0.07) 0%,transparent 60%); pointer-events:none; z-index:1; }
+        .container { max-width:1200px; margin:0 auto; padding:0 2rem; position:relative; z-index:2; }
+
+        .header { position:fixed;top:0;left:0;right:0;padding:1.25rem 0;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid var(--border);transition:all 0.3s; }
+        .header.scrolled { padding:0.875rem 0;background:rgba(0,0,0,0.96); }
+        nav { display:flex;justify-content:space-between;align-items:center; }
+        .logo { display:flex;align-items:center;gap:0.625rem;text-decoration:none;color:var(--white);font-weight:700;font-size:1.375rem;letter-spacing:-0.02em; }
+        .nav-links { display:flex;align-items:center;gap:2.25rem; }
+        .nav-link { color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.875rem;transition:color 0.2s; }
+        .nav-link:hover { color:var(--white); }
+        .back-link { color:var(--gray-500);text-decoration:none;font-size:0.85rem;display:inline-flex;align-items:center;gap:0.45rem;transition:color 0.2s; }
+        .back-link:hover { color:var(--white); }
+
+        .wrap { padding:9rem 0 5rem; }
+        .contact-grid { display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;align-items:start; }
+        .eyebrow { display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem; }
+        h1 { font-size:clamp(2.1rem,3.8vw,3rem);font-weight:800;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.25rem; }
+        .lede { font-size:1.02rem;color:var(--gray-400);line-height:1.7;margin-bottom:2.5rem; }
+
+        .aside-block { border-top:1px solid var(--border);padding-top:1.5rem;margin-top:1.5rem; }
+        .aside-title { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray-600);margin-bottom:0.85rem; }
+        .aside-item { display:flex;gap:0.85rem;margin-bottom:1.1rem;align-items:flex-start; }
+        .aside-item i { color:var(--red);font-size:0.9rem;margin-top:3px;width:16px;flex-shrink:0; }
+        .aside-item .ai-t { font-size:0.86rem;font-weight:600;margin-bottom:2px; }
+        .aside-item .ai-s { font-size:0.8rem;color:var(--gray-600);line-height:1.55; }
+        .aside-item a { color:var(--gray-400);text-decoration:none;border-bottom:1px solid var(--gray-800); }
+        .aside-item a:hover { color:var(--white); }
+
+        .form-card { background:var(--surface);border:1px solid var(--border-h);border-radius:16px;padding:2.25rem;position:relative;overflow:hidden; }
+        .form-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),rgba(232,93,84,0)); }
+        .field { margin-bottom:1.1rem; }
+        .field label { display:block;font-size:0.78rem;font-weight:600;color:var(--gray-400);margin-bottom:0.45rem; }
+        .field label .req { color:var(--red); }
+        .input, .select, .textarea {
+            width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;
+            padding:0.7rem 0.9rem;color:var(--white);font-family:inherit;font-size:0.88rem;transition:border-color 0.2s,background 0.2s;
+        }
+        .input:focus, .select:focus, .textarea:focus { outline:none;border-color:rgba(232,93,84,0.5);background:var(--surface-3); }
+        .input::placeholder, .textarea::placeholder { color:var(--gray-700); }
+        .select { cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.85rem center; }
+        .select option { background:#161616;color:var(--white); }
+        .textarea { min-height:110px;resize:vertical;line-height:1.6; }
+        .field-row { display:grid;grid-template-columns:1fr 1fr;gap:1rem; }
+        .submit-btn { width:100%;background:var(--red);color:var(--white);border:none;border-radius:8px;padding:0.85rem 1.5rem;font-family:inherit;font-size:0.92rem;font-weight:600;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:0.5rem; }
+        .submit-btn:hover:not(:disabled) { background:#d44e46;transform:translateY(-2px);box-shadow:0 6px 24px var(--red-glow); }
+        .submit-btn:disabled { opacity:0.7;cursor:not-allowed;transform:none; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        .form-note { font-size:0.76rem;color:var(--gray-600);text-align:center;margin-top:1rem;line-height:1.6; }
+        .form-error { display:none;background:rgba(232,93,84,0.08);border:1px solid rgba(232,93,84,0.3);color:#f2a09a;border-radius:8px;padding:0.75rem 0.9rem;font-size:0.82rem;margin-bottom:1rem;line-height:1.55; }
+        .success { display:none;text-align:center;padding:2.5rem 1rem; }
+        .success i { font-size:2.25rem;color:var(--red);margin-bottom:1.25rem; }
+        .success h3 { font-size:1.35rem;font-weight:700;margin-bottom:0.75rem;letter-spacing:-0.02em; }
+        .success p { font-size:0.9rem;color:var(--gray-500);line-height:1.7;max-width:380px;margin:0 auto; }
+
+        .footer { padding:2.5rem 0 1.5rem;border-top:1px solid var(--border);margin-top:2rem; }
+        .footer-bottom { display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--gray-700);gap:1rem;flex-wrap:wrap; }
+        .footer-bottom a { color:var(--gray-600);text-decoration:none;margin-left:1.25rem; }
+        .footer-bottom a:hover { color:var(--white); }
+
+        @media(max-width:900px){
+            .contact-grid{grid-template-columns:1fr;gap:2.5rem;}
+            .nav-links{display:none;}
+        }
+        @media(max-width:600px){
+            .container{padding:0 1.25rem;}
+            .wrap{padding:7rem 0 3rem;}
+            .form-card{padding:1.65rem 1.35rem;}
+            .field-row{grid-template-columns:1fr;gap:0;}
+            .footer-bottom{flex-direction:column;text-align:center;}
+            .footer-bottom a{margin:0 0.6rem;}
+        }
     </style>
 </head>
 <body>
-    <h1>Privacy Policy</h1>
-    <p>Coming soon...</p>
-    <p><a href="/">Back to Home</a></p>
+
+<header class="header" id="header">
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="32" width="32">
+                    <g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g>
+                </svg>
+                PRIVIFY
+            </a>
+            <div class="nav-links">
+                <a href="platform/index.html" class="nav-link">FORGE</a>
+                <a href="privacy/index.html" class="nav-link">SHIELD</a>
+                <a href="index.html#pricing" class="nav-link">Pricing</a>
+                <a href="careers.html" class="nav-link">Careers</a>
+            </div>
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left fa-xs"></i> Back to home
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+    <div class="container">
+        <div class="contact-grid">
+
+            <div>
+                <div class="eyebrow">Contact</div>
+                <h1>Talk to our team</h1>
+                <p class="lede">
+                    Tell us about your environment and we'll come back with a deployment plan and a price —
+                    usually within two business days. No automated sales sequence, no cold calls.
+                </p>
+
+                <div class="aside-block">
+                    <div class="aside-title">What happens next</div>
+                    <div class="aside-item">
+                        <i class="fa-solid fa-1"></i>
+                        <div>
+                            <div class="ai-t">We read it — an actual person</div>
+                            <div class="ai-s">Your message goes straight to the founding team.</div>
+                        </div>
+                    </div>
+                    <div class="aside-item">
+                        <i class="fa-solid fa-2"></i>
+                        <div>
+                            <div class="ai-t">A scoping call, if it's a fit</div>
+                            <div class="ai-s">Thirty minutes on your environment, agent count and deployment constraints.</div>
+                        </div>
+                    </div>
+                    <div class="aside-item">
+                        <i class="fa-solid fa-3"></i>
+                        <div>
+                            <div class="ai-t">Live demo on your terms</div>
+                            <div class="ai-s">Walkthrough on our infrastructure, or a proof-of-concept in yours.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="aside-block">
+                    <div class="aside-title">Other ways to reach us</div>
+                    <div class="aside-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <div class="ai-t"><a href="mailto:sales@privify.io">sales@privify.io</a></div>
+                            <div class="ai-s">Direct email, if you'd rather skip the form.</div>
+                        </div>
+                    </div>
+                    <div class="aside-item">
+                        <i class="fa-solid fa-play"></i>
+                        <div>
+                            <div class="ai-t"><a href="forge/demo/index.html">Try the interactive demo</a></div>
+                            <div class="ai-s">Explore FORGE right now — no form, no signup.</div>
+                        </div>
+                    </div>
+                    <div class="aside-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <div class="ai-t"><a href="privacy/index.html#waitlist">Looking for SHIELD?</a></div>
+                            <div class="ai-s">Our consumer product is pre-launch — join the waitlist instead.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-card">
+                <div id="contactForm">
+                    <div class="form-error" id="formError"></div>
+
+                    <div class="field">
+                        <label for="cName">Name <span class="req">*</span></label>
+                        <input type="text" id="cName" class="input" placeholder="Jordan Ellis" autocomplete="name" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="cEmail">Work email <span class="req">*</span></label>
+                        <input type="email" id="cEmail" class="input" placeholder="jordan@company.com" autocomplete="email" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="cCompany">Company <span class="req">*</span></label>
+                        <input type="text" id="cCompany" class="input" placeholder="Company name" autocomplete="organization" required>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="cSize">Organisation size</label>
+                            <select id="cSize" class="select">
+                                <option value="" disabled selected>Select…</option>
+                                <option value="1-50">1–50 employees</option>
+                                <option value="51-200">51–200 employees</option>
+                                <option value="201-1000">201–1,000 employees</option>
+                                <option value="1001-5000">1,001–5,000 employees</option>
+                                <option value="5000+">5,000+ employees</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="cRole">Your role</label>
+                            <select id="cRole" class="select">
+                                <option value="" disabled selected>Select…</option>
+                                <option value="ciso">CISO / Security</option>
+                                <option value="ai-eng">AI / Platform Engineering</option>
+                                <option value="grc">GRC / Compliance</option>
+                                <option value="cto">CTO / CIO</option>
+                                <option value="procurement">Procurement</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="cIntent">What can we help with?</label>
+                        <select id="cIntent" class="select">
+                            <option value="demo">Request a demo</option>
+                            <option value="pricing">Pricing for my organisation</option>
+                            <option value="poc">Proof of concept in our environment</option>
+                            <option value="partner">Partnership / reseller enquiry</option>
+                            <option value="other">Something else</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="cMessage">Tell us about your AI deployment</label>
+                        <textarea id="cMessage" class="textarea" placeholder="How many agents are you running, on what platforms, and what's driving the timeline? (optional)"></textarea>
+                    </div>
+
+                    <button class="submit-btn" id="submitBtn" onclick="handleContact()">
+                        Contact sales <i class="fa-solid fa-arrow-right fa-xs"></i>
+                    </button>
+
+                    <p class="form-note">
+                        No spam. No sales calls without consent. We reply within 2 business days.
+                    </p>
+                </div>
+
+                <div class="success" id="contactSuccess">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3>Message received</h3>
+                    <p>
+                        Thanks — we'll review your details and be in touch within two business days with next
+                        steps and a deployment plan.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bottom">
+            <span>© 2026 Privify Inc. All rights reserved.</span>
+            <span>
+                <a href="security.html">Security</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </span>
+        </div>
+    </div>
+</footer>
+
+<script>
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.pageYOffset > 50));
+
+//  Shares the Formspree endpoint used by the FORGE early-access form on platform/index.html
+//  Delivers to sales@privify.io + sales@privify.io
+const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/maqalveb';
+
+//  Prefill intent from the CTA that sent the visitor here, e.g. contact.html?intent=pricing
+(function prefillFromQuery(){
+    const params = new URLSearchParams(window.location.search);
+    const intent = params.get('intent');
+    if (intent) {
+        const sel = document.getElementById('cIntent');
+        if ([...sel.options].some(o => o.value === intent)) sel.value = intent;
+    }
+})();
+
+function showError(msg){
+    const box = document.getElementById('formError');
+    box.textContent = msg;
+    box.style.display = 'block';
+    box.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+async function handleContact() {
+    const name    = document.getElementById('cName').value.trim();
+    const email   = document.getElementById('cEmail').value.trim();
+    const company = document.getElementById('cCompany').value.trim();
+    const size    = document.getElementById('cSize').value;
+    const role    = document.getElementById('cRole').value;
+    const intent  = document.getElementById('cIntent').value;
+    const message = document.getElementById('cMessage').value.trim();
+
+    document.getElementById('formError').style.display = 'none';
+
+    if (!name || !email || !company) {
+        showError('Please fill in your name, work email and company name.');
+        return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('That email address doesn’t look right — please check it.');
+        return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    const original = btn.innerHTML;
+    btn.innerHTML = '<span style="display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite"></span> Sending…';
+    btn.disabled = true;
+
+    const intentLabel = document.getElementById('cIntent').selectedOptions[0].textContent;
+
+    try {
+        const res = await fetch(CONTACT_FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+            body: JSON.stringify({
+                _subject: 'Privify contact — ' + intentLabel + ' — ' + company,
+                name, email, company,
+                organisation_size: size,
+                role, enquiry_type: intent, message,
+                _replyto: email,
+                source: 'contact.html'
+            })
+        });
+
+        if (!res.ok) throw new Error('Submission failed');
+
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('contactSuccess').style.display = 'block';
+        if (window.plausible) plausible('ContactFormSubmit', { props: { intent: intent } });
+
+    } catch (err) {
+        btn.innerHTML = original;
+        btn.disabled = false;
+        showError('Something went wrong sending your message. Please email us directly at sales@privify.io and we’ll pick it up from there.');
+    }
+}
+</script>
 </body>
 </html>

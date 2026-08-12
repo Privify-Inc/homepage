@@ -2,28 +2,252 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Privacy Policy - Privify</title>
-        <!-- Privacy-friendly analytics by Plausible -->
-        <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
-        <script>
-            window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-            plausible.init()
-        </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How privify.io handles data: analytics, forms, third-party resources and your rights.">
+    <title>Privacy Policy — Privify</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+    <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            max-width: 800px; 
-            margin: 50px auto; 
-            padding: 20px;
-            background: #000;
-            color: #fff;
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --red:#E85D54; --red-dim:rgba(232,93,84,0.1);
+            --black:#000; --white:#fff;
+            --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-600:#4B5563;
+            --gray-700:#374151; --gray-800:#1F2937;
+            --surface:#0d0d0d; --surface-2:#111111; --surface-3:#161616;
+            --border:rgba(255,255,255,0.07); --border-h:rgba(255,255,255,0.14);
+            --mono:'JetBrains Mono',monospace;
         }
-        a { color: #E85D54; }
+        html { scroll-behavior:smooth; overflow-x:hidden; }
+        body { font-family:'Inter',-apple-system,sans-serif; background:var(--black); color:var(--white); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse 80% 60% at 70% -10%,rgba(232,93,84,0.06) 0%,transparent 60%); pointer-events:none; z-index:1; }
+        .container { max-width:1200px; margin:0 auto; padding:0 2rem; position:relative; z-index:2; }
+        .doc { max-width:760px; }
+
+        .header { position:fixed;top:0;left:0;right:0;padding:1.25rem 0;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid var(--border);transition:all 0.3s; }
+        .header.scrolled { padding:0.875rem 0;background:rgba(0,0,0,0.96); }
+        nav { display:flex;justify-content:space-between;align-items:center; }
+        .logo { display:flex;align-items:center;gap:0.625rem;text-decoration:none;color:var(--white);font-weight:700;font-size:1.375rem;letter-spacing:-0.02em; }
+        .nav-links { display:flex;align-items:center;gap:2.25rem; }
+        .nav-link { color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.875rem;transition:color 0.2s; }
+        .nav-link:hover { color:var(--white); }
+        .back-link { color:var(--gray-500);text-decoration:none;font-size:0.85rem;display:inline-flex;align-items:center;gap:0.45rem;transition:color 0.2s; }
+        .back-link:hover { color:var(--white); }
+
+        .wrap { padding:9rem 0 4rem; }
+        .eyebrow { display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem; }
+        h1 { font-size:clamp(2.1rem,3.8vw,3rem);font-weight:800;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.1rem; }
+        .lede { font-size:1.02rem;color:var(--gray-400);line-height:1.75;margin-bottom:1rem; }
+        .updated { font-size:0.76rem;color:var(--gray-700);font-family:var(--mono);margin-bottom:3rem; }
+
+        h2 { font-size:1.35rem;font-weight:700;letter-spacing:-0.025em;margin:3rem 0 1rem;padding-top:2rem;border-top:1px solid var(--border); }
+        h2:first-of-type { border-top:none;padding-top:0;margin-top:0; }
+        h3 { font-size:1rem;font-weight:700;margin:1.75rem 0 0.6rem;letter-spacing:-0.015em; }
+        p { font-size:0.93rem;color:var(--gray-400);line-height:1.8;margin-bottom:1rem; }
+        ul { margin:0 0 1.25rem 0;padding-left:0;list-style:none; }
+        li { font-size:0.9rem;color:var(--gray-400);line-height:1.75;margin-bottom:0.6rem;padding-left:1.4rem;position:relative; }
+        li::before { content:'—';position:absolute;left:0;color:var(--red);font-size:0.8rem; }
+        .doc a { color:var(--red);text-decoration:none;border-bottom:1px solid rgba(232,93,84,0.3);transition:border-color 0.2s; }
+        .doc a:hover { border-bottom-color:var(--red); }
+        strong { color:var(--white);font-weight:600; }
+        code { font-family:var(--mono);font-size:0.85em;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:0.1rem 0.35rem;color:var(--gray-400); }
+
+        .callout { background:var(--surface);border:1px solid var(--border-h);border-left:2px solid var(--red);border-radius:10px;padding:1.4rem 1.5rem;margin:1.75rem 0; }
+        .callout .c-title { font-size:0.88rem;font-weight:700;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.55rem; }
+        .callout .c-title i { color:var(--red); }
+        .callout p { font-size:0.88rem;margin-bottom:0; }
+        .callout p + p { margin-top:0.75rem; }
+
+        .data-table { width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.86rem; }
+        .data-table th { text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-600);font-weight:700;padding:0.7rem 0.9rem;border-bottom:1px solid var(--border-h); }
+        .data-table td { padding:0.8rem 0.9rem;border-bottom:1px solid var(--border);color:var(--gray-400);vertical-align:top;line-height:1.6; }
+        .data-table td:first-child { color:var(--white);font-weight:500;white-space:nowrap; }
+
+        .footer { padding:2.5rem 0 1.5rem;border-top:1px solid var(--border);margin-top:4rem; }
+        .footer-bottom { display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--gray-700);gap:1rem;flex-wrap:wrap; }
+        .footer-bottom a { color:var(--gray-600);text-decoration:none;margin-left:1.25rem;border-bottom:none; }
+        .footer-bottom a:hover { color:var(--white); }
+
+        @media(max-width:768px){
+            .nav-links{display:none;}
+            .container{padding:0 1.25rem;}
+            .wrap{padding:7rem 0 3rem;}
+            .data-table, .data-table tbody, .data-table tr, .data-table td { display:block;width:100%; }
+            .data-table thead { display:none; }
+            .data-table tr { border-bottom:1px solid var(--border);padding:0.75rem 0; }
+            .data-table td { border-bottom:none;padding:0.2rem 0;white-space:normal; }
+            .data-table td:first-child { font-weight:700;white-space:normal; }
+            .footer-bottom{flex-direction:column;text-align:center;}
+            .footer-bottom a{margin:0 0.6rem;}
+        }
     </style>
 </head>
 <body>
-    <h1>Privacy Policy</h1>
-    <p>Coming soon...</p>
-    <p><a href="/">Back to Home</a></p>
+
+<header class="header" id="header">
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="32" width="32">
+                    <g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g>
+                </svg>
+                PRIVIFY
+            </a>
+            <div class="nav-links">
+                <a href="platform/index.html" class="nav-link">FORGE</a>
+                <a href="privacy/index.html" class="nav-link">SHIELD</a>
+                <a href="security.html" class="nav-link">Security</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left fa-xs"></i> Back to home</a>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+    <div class="container">
+        <div class="doc">
+            <div class="eyebrow">Legal</div>
+            <h1>Privacy Policy</h1>
+            <p class="lede">
+                We build privacy tools, so it would be absurd to run a vague privacy policy. This page
+                describes exactly what this website does with data — no more, no less.
+            </p>
+            <div class="updated">Last updated: 11 August 2026</div>
+
+            <div class="callout">
+                <div class="c-title"><i class="fa-solid fa-circle-info"></i> What this page covers</div>
+                <p>
+                    This notice covers <strong>the privify.io website</strong> and the free tools hosted on it.
+                    Data handled by FORGE inside a customer's own environment is governed by that customer's
+                    agreement with us, not by this page — in a self-hosted FORGE deployment, we never receive
+                    your data at all.
+                </p>
+            </div>
+
+            <h2>The short version</h2>
+            <ul>
+                <li>We set <strong>no cookies</strong> on this website.</li>
+                <li>We use privacy-friendly, cookieless analytics that don't identify you.</li>
+                <li>We don't run advertising, retargeting or cross-site tracking.</li>
+                <li>We only get your personal details if you type them into a form.</li>
+                <li>We don't sell or rent anything you give us.</li>
+            </ul>
+
+            <h2>What we collect</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr><th>Source</th><th>What is collected, and why</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Analytics</td>
+                        <td>
+                            We use <a href="https://plausible.io/privacy-focused-web-analytics" rel="noopener noreferrer" target="_blank">Plausible Analytics</a>,
+                            which is cookieless and does not collect personal data. It records aggregate page
+                            views, referrer and rough country — no cross-site profile, no device fingerprint,
+                            nothing that identifies you individually.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Contact &amp; interest forms</td>
+                        <td>
+                            When you submit a form we collect the fields you fill in: name, work email, company,
+                            organisation size, role, enquiry type and your message. These are processed by
+                            <a href="https://formspree.io/legal/privacy-policy/" rel="noopener noreferrer" target="_blank">Formspree</a>
+                            and delivered to our team by email. We use them to reply to you and, if relevant, to
+                            scope a deployment.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Server logs</td>
+                        <td>
+                            This site is served as static files by our hosting provider, which keeps standard
+                            request logs (including IP address) for operational and security purposes. We do not
+                            build profiles from them.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Third-party resources</h2>
+            <p>
+                Some assets on this site load from third-party networks. Because your browser requests them
+                directly, those providers necessarily see your IP address and user agent. We don't send them
+                anything else about you.
+            </p>
+            <ul>
+                <li><code>fonts.googleapis.com</code> and <code>fonts.gstatic.com</code> — web fonts</li>
+                <li><code>cdnjs.cloudflare.com</code>, <code>cdn.jsdelivr.net</code>, <code>unpkg.com</code> — icon and library assets</li>
+                <li><code>plausible.io</code> — analytics</li>
+                <li><code>formspree.io</code> — form delivery, only when you submit a form</li>
+            </ul>
+
+            <h2>Photo Scrubber</h2>
+            <p>
+                Photo Scrubber removes metadata from images. It's worth being precise about how it handles
+                your files:
+            </p>
+            <ul>
+                <li><strong>Your images never leave your browser.</strong> Files are read locally and processed on a canvas element. We do not upload or store your photos, and we never see them.</li>
+                <li><strong>GPS coordinates are the exception.</strong> If a photo contains GPS location data in its EXIF metadata, the tool sends those coordinates — latitude and longitude only, never the image — to a third-party geocoding service (<a href="https://nominatim.openstreetmap.org/" rel="noopener noreferrer" target="_blank">OpenStreetMap Nominatim</a>, with <a href="https://photon.komoot.io/" rel="noopener noreferrer" target="_blank">Photon</a> as a fallback) so it can show you the place name. This is how the tool tells you what your photo was revealing.</li>
+                <li>If you'd rather no coordinates leave your device at all, work offline or strip location data before uploading the file to the tool.</li>
+            </ul>
+
+            <h2>How long we keep things</h2>
+            <p>
+                Form submissions arrive as email and are retained in our inbox and CRM for as long as needed to
+                handle your enquiry and any resulting relationship. Analytics data is aggregate and holds no
+                personal identifiers. If you'd like your enquiry deleted, ask and we'll do it.
+            </p>
+
+            <h2>Your rights</h2>
+            <p>
+                Depending on where you live, you may have rights to access, correct, delete or restrict use of
+                your personal data, and to object to processing. To exercise any of them, email
+                <a href="mailto:privacy@privify.io">privacy@privify.io</a>. We'll respond within the timeframe
+                required by applicable law, and we won't make you jump through hoops.
+            </p>
+
+            <h2>Changes</h2>
+            <p>
+                If we change how this site handles data, we'll update this page and its "last updated" date.
+                Material changes will be called out clearly rather than buried.
+            </p>
+
+            <h2>Contact</h2>
+            <p>
+                Questions about this policy: <a href="mailto:privacy@privify.io">privacy@privify.io</a><br>
+                Security issues: <a href="mailto:security@privify.io">security@privify.io</a><br>
+                Everything else: <a href="contact.html">our contact form</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bottom">
+            <span>© 2026 Privify Inc. All rights reserved.</span>
+            <span>
+                <a href="security.html">Security</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="contact.html">Contact</a>
+            </span>
+        </div>
+    </div>
+</footer>
+
+<script>
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.pageYOffset > 50));
+</script>
 </body>
 </html>
