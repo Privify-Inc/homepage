@@ -17,7 +17,7 @@
         :root {
             --red:#E85D54; --red-dim:rgba(232,93,84,0.1); --red-glow:rgba(232,93,84,0.22);
             --black:#000; --white:#fff;
-            --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-600:#4B5563;
+            --gray-400:#9CA3AF; --text-3:#858C97; --gray-500:#6B7280; --gray-600:#4B5563;
             --gray-700:#374151; --gray-800:#1F2937;
             --surface:#0d0d0d; --surface-2:#111111; --surface-3:#161616;
             --border:rgba(255,255,255,0.07); --border-h:rgba(255,255,255,0.14);
@@ -36,14 +36,14 @@
         .nav-links { display:flex;align-items:center;gap:2.25rem; }
         .nav-link { color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.875rem;transition:color 0.2s; }
         .nav-link:hover { color:var(--white); }
-        .back-link { color:var(--gray-500);text-decoration:none;font-size:0.85rem;display:inline-flex;align-items:center;gap:0.45rem;transition:color 0.2s; }
+        .back-link { color:var(--gray-400);text-decoration:none;font-size:0.85rem;display:inline-flex;align-items:center;gap:0.45rem;transition:color 0.2s; }
         .back-link:hover { color:var(--white); }
 
         .wrap { padding:9rem 0 4rem; }
         .eyebrow { display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem; }
         h1 { font-size:clamp(2.1rem,3.8vw,3rem);font-weight:800;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.1rem; }
         .lede { font-size:1.02rem;color:var(--gray-400);line-height:1.75;margin-bottom:1rem; }
-        .updated { font-size:0.76rem;color:var(--gray-700);font-family:var(--mono);margin-bottom:3rem; }
+        .updated { font-size:0.76rem;color:var(--gray-500);font-family:var(--mono);margin-bottom:3rem; }
 
         h2 { font-size:1.35rem;font-weight:700;letter-spacing:-0.025em;margin:3rem 0 1rem;padding-top:2rem;border-top:1px solid var(--border); }
         h2:first-of-type { border-top:none;padding-top:0;margin-top:0; }
@@ -64,17 +64,17 @@
         .callout p + p { margin-top:0.75rem; }
 
         .status-table { width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.87rem; }
-        .status-table th { text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-600);font-weight:700;padding:0.7rem 0.9rem;border-bottom:1px solid var(--border-h); }
+        .status-table th { text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;padding:0.7rem 0.9rem;border-bottom:1px solid var(--border-h); }
         .status-table td { padding:0.8rem 0.9rem;border-bottom:1px solid var(--border);color:var(--gray-400);vertical-align:top; }
         .status-table td:first-child { color:var(--white);font-weight:500;width:42%; }
         .pill { display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.04em;padding:0.2rem 0.6rem;border-radius:999px;text-transform:uppercase;white-space:nowrap; }
         .pill-yes { background:rgba(34,211,238,0.1);color:#22D3EE;border:1px solid rgba(34,211,238,0.28); }
         .pill-progress { background:var(--red-dim);color:var(--red);border:1px solid rgba(232,93,84,0.28); }
-        .pill-no { background:rgba(255,255,255,0.04);color:var(--gray-600);border:1px solid var(--border-h); }
+        .pill-no { background:rgba(255,255,255,0.04);color:var(--text-3);border:1px solid var(--border-h); }
 
         .footer { padding:2.5rem 0 1.5rem;border-top:1px solid var(--border);margin-top:4rem; }
-        .footer-bottom { display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--gray-700);gap:1rem;flex-wrap:wrap; }
-        .footer-bottom a { color:var(--gray-600);text-decoration:none;margin-left:1.25rem;border-bottom:none; }
+        .footer-bottom { display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--gray-500);gap:1rem;flex-wrap:wrap; }
+        .footer-bottom a { color:var(--text-3);text-decoration:none;margin-left:1.25rem;border-bottom:none; }
         .footer-bottom a:hover { color:var(--white); }
 
         @media(max-width:768px){
