@@ -186,12 +186,17 @@
         .step-detail li::before { content:'›';color:var(--red);flex-shrink:0; }
 
         /* DIFFERENTIATOR */
-        .diff-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2.5rem; }
-        .diff-card { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem 1.6rem; }
-        .diff-card h4 { font-size:1rem;font-weight:700;margin-bottom:0.55rem;display:flex;align-items:center;gap:0.6rem;letter-spacing:-0.015em; }
-        .diff-card h4 i { color:var(--red);font-size:0.9rem; }
-        .diff-card p { font-size:0.86rem;color:var(--gray-400);line-height:1.65; }
-        .diff-note { margin-top:2rem;padding:1.1rem 1.3rem;background:var(--surface-2);border:1px solid var(--border);border-left:2px solid var(--gray-700);border-radius:8px;font-size:0.8rem;color:var(--text-3);line-height:1.65; }
+        .diff-label { font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+                      color:var(--gray-500);margin-top:3rem;margin-bottom:1.1rem; }
+        .diff-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:1rem; }
+        /* surface-2 so the cards read against the section's --surface ground */
+        .diff-card { background:var(--surface-2);border:1px solid var(--border);border-radius:14px;
+                     padding:1.5rem 1.35rem;transition:border-color 0.25s; }
+        .diff-card:hover { border-color:var(--border-h); }
+        .diff-card h4 { font-size:0.93rem;font-weight:700;margin-bottom:0.6rem;display:flex;align-items:flex-start;
+                        gap:0.55rem;letter-spacing:-0.015em;line-height:1.35;text-wrap:balance; }
+        .diff-card h4 i { color:var(--red);font-size:0.85rem;margin-top:3px;flex-shrink:0; }
+        .diff-card p { font-size:0.83rem;color:var(--text-3);line-height:1.6; }
 
         /* PROOF / LOGOS PLACEHOLDER */
         .proof { margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border); }
@@ -259,7 +264,7 @@
             /* Coverage map stacks: gateway box first, blind spots beneath it */
             .gap-map-body{grid-template-columns:1fr;gap:1.5rem;}
             .gap-inner{min-height:0;}
-            .diff-grid{grid-template-columns:1fr;}
+            .diff-grid{grid-template-columns:repeat(2,1fr);}
             .price-factors{grid-template-columns:1fr;}
             .logo-row{grid-template-columns:repeat(3,1fr);}
             .quote-row{grid-template-columns:1fr;}
@@ -273,6 +278,7 @@
             .container{padding:0 1.25rem;}
             .hero{padding:6.5rem 1.25rem 2.5rem;}
             .fork{grid-template-columns:1fr;}
+            .diff-grid{grid-template-columns:1fr;}
             .fork-actions{flex-direction:column;align-items:stretch;}
             .fork-actions .btn{justify-content:center;}
             .trust-inner{flex-direction:column;align-items:flex-start;gap:1.5rem;}
@@ -525,43 +531,27 @@
             three because it runs where the code runs, not where the traffic is supposed to go.
         </p>
 
+        <!-- Consequence, not mechanism — written for the CISO / risk / compliance
+             reader. The diagram's chips state the technical gap; these state what
+             it costs. Implementation detail lives on platform/index.html. -->
+        <div class="diff-label">What that gap costs you</div>
         <div class="diff-grid">
             <div class="diff-card">
-                <h4><i class="fa-solid fa-microchip"></i> Local models are invisible to gateways</h4>
-                <p>
-                    A developer running Ollama on their laptop never touches your gateway — the traffic never
-                    leaves the machine. FORGE's endpoint probe detects local model runtimes by process
-                    signature and listening port.
-                </p>
+                <h4><i class="fa-solid fa-file-shield"></i> Shadow AI you can't attest to</h4>
+                <p>A control you cannot evidence will not survive an audit — and no one can evidence a model they never knew was running.</p>
             </div>
             <div class="diff-card">
-                <h4><i class="fa-solid fa-right-left"></i> Direct API calls bypass the protocol layer</h4>
-                <p>
-                    Code that calls an AI provider's REST API directly isn't speaking MCP, so a protocol-layer
-                    control has nothing to inspect. FORGE watches outbound AI API connections regardless of how
-                    the call is framed.
-                </p>
+                <h4><i class="fa-solid fa-chart-pie"></i> Coverage numbers that flatter you</h4>
+                <p>A gateway can only report the traffic that reached it, so the gap never appears in the percentage you take to the board.</p>
             </div>
             <div class="diff-card">
-                <h4><i class="fa-solid fa-shield-halved"></i> Enforcement in the OS network stack</h4>
-                <p>
-                    On Windows, a WFP callout driver evaluates policy at TCP connect — inline, before the
-                    connection is established. Observation-only telemetry can log a violation; it can't stop one.
-                </p>
+                <h4><i class="fa-solid fa-hand"></i> Detection is not prevention</h4>
+                <p>Auditors separate a control that stops an action from a log that records one — only one of them satisfies a preventive requirement.</p>
             </div>
             <div class="diff-card">
-                <h4><i class="fa-solid fa-window-restore"></i> Browser AI counts too</h4>
-                <p>
-                    Most AI risk in an enterprise is an employee pasting into a chat window. A browser extension
-                    inspects content before the request leaves, applying the same DLP rules as everything else.
-                </p>
+                <h4><i class="fa-solid fa-user-shield"></i> Your largest exposure is human</h4>
+                <p>Most AI incidents begin with an employee and a chat window, not an autonomous agent — the same policy has to reach both.</p>
             </div>
-        </div>
-
-        <div class="diff-note">
-            <strong style="color:var(--gray-400)">On scope:</strong> Inline blocking is available on Windows today
-            via the kernel driver. macOS and Linux endpoints are monitored and policy-evaluated, with enforcement
-            parity on the roadmap. We'd rather you hear that from us than find it in a POC.
         </div>
 
     </div>
