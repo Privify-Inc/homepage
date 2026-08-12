@@ -75,6 +75,28 @@
             .footer-bottom{flex-direction:column;gap:0.75rem;text-align:center;}
         }
         @media(max-width:480px){ .footer-cols{grid-template-columns:1fr;} }
+
+        /* ── FOOTER UTILITY ROW ──────────────────────────────────────────── */
+        .footer-utility { display:flex;justify-content:space-between;align-items:center;gap:1.5rem 2rem;
+                          flex-wrap:wrap;padding:1.35rem 0;border-top:1px solid var(--border); }
+        .fu-left, .fu-right { display:flex;align-items:center;gap:0.55rem;flex-wrap:wrap; }
+        .fu-label { font-size:0.76rem;color:var(--pf-text);margin-left:0.4rem; }
+        .fu-ai { display:inline-flex;gap:0.4rem;flex-wrap:wrap; }
+        .fu-chip { display:inline-flex;align-items:center;gap:0.35rem;font-size:0.74rem;font-weight:500;
+                   color:var(--pf-text);text-decoration:none;border:1px solid var(--border);
+                   background:rgba(255,255,255,0.02);border-radius:6px;padding:0.3rem 0.6rem;
+                   transition:color 0.2s,border-color 0.2s,background 0.2s; }
+        .fu-chip:hover { color:var(--white);border-color:var(--border-h);background:rgba(255,255,255,0.05); }
+        .fu-chip svg { opacity:0.75;flex-shrink:0; }
+        .fu-mono { font-family:var(--mono,ui-monospace,monospace);letter-spacing:0.06em;font-size:0.68rem; }
+        .fu-trust { display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;color:var(--pf-text);
+                    border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.65rem;white-space:nowrap; }
+        .fu-trust svg { color:var(--red);opacity:0.9;flex-shrink:0; }
+        .fu-cap { color:var(--gray-500); }
+        @media(max-width:900px){
+            .footer-utility{flex-direction:column;align-items:flex-start;gap:1rem;}
+            .fu-cap{white-space:normal;}
+        }
 </style>
 </head>
 <body>
@@ -358,12 +380,40 @@
                 </div>
             </div>
         </div>
+        <div class="footer-utility">
+            <div class="fu-left">
+                <a href="../../llms.txt" class="fu-chip fu-mono">LLMS.TXT</a>
+                <span class="fu-label">Get an AI summary of this page</span>
+                <span class="fu-ai" id="fuAI">
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://claude.ai/new?q=Summarise%20https%3A%2F%2Fprivify.io"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg> Claude</a>
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://chatgpt.com/?q=Summarise%20https%3A%2F%2Fprivify.io"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg> ChatGPT</a>
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://www.perplexity.ai/search?q=Summarise%20https%3A%2F%2Fprivify.io"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg> Perplexity</a>
+                </span>
+            </div>
+            <div class="fu-right">
+                <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
+                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+            </div>
+        </div>
         <div class="footer-bottom">
             <span>© 2026 Privify Inc. All rights reserved.</span>
             <span style="font-size:0.75rem;color:var(--gray-800)">Privify is not SOC 2 certified. Security practices are aligned with the Trust Services Criteria.</span>
         </div>
     </div>
 </footer>
+<script>
+(function(){
+    var row = document.getElementById('fuAI');
+    if (!row) return;
+    var here = location.origin + location.pathname;
+    row.querySelectorAll('a[href]').forEach(function(a){
+        a.href = a.href.replace(/https%3A%2F%2Fprivify\.io/, encodeURIComponent(here));
+    });
+})();
+</script>
 </body>
 </html>
 
