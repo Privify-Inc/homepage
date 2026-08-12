@@ -34,6 +34,9 @@
             --gray-50: #F9FAFB;
             --gray-100: #F5F5F5;
             --gray-400: #9CA3AF;
+            --text-3: #858C97;      /* small detail text, 5.73:1 on --surface */
+            --ok: var(--ok);          /* semantic: healthy / supported */
+            --warn: var(--warn);        /* semantic: partial / attention */
             --gray-500: #6B7280;
             --gray-600: #4B5563;
             --gray-700: #374151;
@@ -117,7 +120,7 @@
         }
         
         .di-title { font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px; }
-        .di-sub { font-size:0.75rem;color:var(--gray-600); }
+        .di-sub { font-size:0.75rem;color:var(--text-3); }
         .dropdown-item:hover { background:rgba(255,255,255,0.05); color:var(--white); }
         .mobile-menu-btn { display:none; background:none; border:none; color:var(--white); cursor:pointer; padding:0.5rem; }
         .mobile-menu {
@@ -209,8 +212,8 @@
         .db-stat-label { font-size:0.6rem; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:3px; }
         .db-stat-val { font-size:1rem; font-weight:700; color:var(--white); }
         .db-stat-val.red { color:var(--red); }
-        .db-stat-val.green { color:#34d399; }
-        .db-stat-val.amber { color:#fbbf24; }
+        .db-stat-val.green { color:var(--ok); }
+        .db-stat-val.amber { color:var(--warn); }
         .db-chart { background:var(--surface-3); border:1px solid var(--border); border-radius:8px; padding:0.75rem; margin-bottom:0.75rem; }
         .db-chart-label { font-size:0.6rem; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; }
         .db-bars { display:flex; align-items:flex-end; gap:3px; height:48px; }
@@ -231,8 +234,8 @@
             border-radius:3px; white-space:nowrap;
         }
         .risk-high { background:rgba(232,93,84,0.2); color:var(--red); }
-        .risk-ok { background:rgba(52,211,153,0.15); color:#34d399; }
-        .risk-med { background:rgba(251,191,36,0.15); color:#fbbf24; }
+        .risk-ok { background:rgba(52,211,153,0.15); color:var(--ok); }
+        .risk-med { background:rgba(251,191,36,0.15); color:var(--warn); }
 
         /*  SECTION COMMON  */
         section { padding:6rem 0; }
@@ -254,16 +257,16 @@
 
         /*  LOGOS BAR  */
         .logos-bar { padding:3rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-        .logos-bar-label { text-align:center; font-size:0.8rem; color:var(--gray-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2rem; }
+        .logos-bar-label { text-align:center; font-size:0.8rem; color:var(--text-3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2rem; }
         .logos-scroll { display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; }
-        .logo-item { font-size:0.875rem; font-weight:600; color:var(--gray-700); letter-spacing:0.02em; white-space:nowrap; }
+        .logo-item { font-size:0.875rem; font-weight:600; color:var(--gray-500); letter-spacing:0.02em; white-space:nowrap; }
 
         /*  THREE PILLARS  */
         .pillars { background:var(--surface); }
         .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
         .pillar { background:var(--black); padding:2.5rem 2rem; position:relative; overflow:hidden; transition:background 0.3s; }
         .pillar:hover { background:var(--surface-2); }
-        .pillar-num { font-family:var(--mono); font-size:0.7rem; color:var(--gray-700); margin-bottom:1.25rem; }
+        .pillar-num { font-family:var(--mono); font-size:0.7rem; color:var(--gray-500); margin-bottom:1.25rem; }
         .pillar-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; font-size:1.25rem; }
         .pillar-icon.blue { background:rgba(59,130,246,0.12); }
         .pillar-icon.teal { background:rgba(20,184,166,0.12); }
@@ -274,9 +277,9 @@
         .pillar-features li { font-size:0.825rem; color:var(--gray-500); display:flex; align-items:flex-start; gap:0.5rem; }
         .pillar-features li::before { content:'→'; color:var(--red); font-size:0.75rem; margin-top:1px; flex-shrink:0; }
         .pillar-glow { position:absolute; bottom:-40px; right:-40px; width:120px; height:120px; border-radius:50%; opacity:0.04; }
-        .pillar:nth-child(1) .pillar-glow { background:#3b82f6; }
-        .pillar:nth-child(2) .pillar-glow { background:#14b8a6; }
-        .pillar:nth-child(3) .pillar-glow { background:#8b5cf6; }
+        .pillar:nth-child(1) .pillar-glow { background:var(--red); }
+        .pillar:nth-child(2) .pillar-glow { background:var(--red); }
+        .pillar:nth-child(3) .pillar-glow { background:var(--red); }
 
         /*  FEATURES GRID  */
         .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
@@ -315,7 +318,7 @@
         }
         .dash-nav-item {
             display:flex; align-items:center; gap:0.625rem;
-            padding:0.5rem 1.25rem; font-size:0.8rem; color:var(--gray-600);
+            padding:0.5rem 1.25rem; font-size:0.8rem; color:var(--text-3);
             cursor:default;
         }
         .dash-nav-item.active { color:var(--white); background:rgba(255,255,255,0.05); border-left:2px solid var(--red); }
@@ -327,11 +330,11 @@
             background:var(--surface-3); border:1px solid var(--border);
             border-radius:8px; padding:0.875rem 1rem;
         }
-        .dsc-label { font-size:0.65rem; color:var(--gray-600); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+        .dsc-label { font-size:0.65rem; color:var(--text-3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
         .dsc-val { font-size:1.375rem; font-weight:700; color:var(--white); }
-        .dsc-val.red{color:var(--red);} .dsc-val.green{color:#34d399;} .dsc-val.amber{color:#fbbf24;}
+        .dsc-val.red{color:var(--red);} .dsc-val.green{color:var(--ok);} .dsc-val.amber{color:var(--warn);}
         .dsc-change { font-size:0.65rem; margin-top:2px; }
-        .dsc-change.up{color:#34d399;} .dsc-change.down{color:var(--red);}
+        .dsc-change.up{color:var(--ok);} .dsc-change.down{color:var(--red);}
         .dash-row { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem; }
         .dash-panel { background:var(--surface-3); border:1px solid var(--border); border-radius:8px; padding:0.875rem 1rem; }
         .dash-panel-title { font-size:0.7rem; color:var(--gray-600); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem; }
@@ -342,8 +345,8 @@
         .agent-conf { font-size:0.65rem; color:var(--gray-600); }
         .risk-badge { font-size:0.58rem; font-weight:600; padding:2px 6px; border-radius:3px; }
         .rb-critical{background:rgba(232,93,84,0.2);color:var(--red);}
-        .rb-medium{background:rgba(251,191,36,0.15);color:#fbbf24;}
-        .rb-low{background:rgba(52,211,153,0.12);color:#34d399;}
+        .rb-medium{background:rgba(251,191,36,0.15);color:var(--warn);}
+        .rb-low{background:rgba(52,211,153,0.12);color:var(--ok);}
         .event-row { display:flex; align-items:flex-start; gap:0.5rem; padding:0.3rem 0; border-bottom:1px solid var(--border); }
         .event-row:last-child{border-bottom:none;}
         .event-type { font-size:0.58rem; font-family:var(--mono); background:var(--surface); color:var(--red); padding:1px 5px; border-radius:3px; white-space:nowrap; }
@@ -371,7 +374,7 @@
         .deploy-specs { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; }
         .deploy-spec { background:var(--surface-3); border-radius:6px; padding:0.5rem; text-align:center; }
         .deploy-spec-val { font-size:0.875rem; font-weight:700; color:var(--white); }
-        .deploy-spec-label { font-size:0.6rem; color:var(--gray-600); margin-top:2px; }
+        .deploy-spec-label { font-size:0.6rem; color:var(--text-3); margin-top:2px; }
 
         /*  INTEGRATIONS  */
         .integrations-section { background:var(--surface); }
@@ -393,7 +396,7 @@
         .compliance-controls { font-size:0.75rem; color:var(--gray-500); margin-bottom:0.875rem; }
         .compliance-bar { background:var(--surface-3); height:4px; border-radius:2px; overflow:hidden; }
         .compliance-fill { height:100%; background:var(--red); border-radius:2px; }
-        .compliance-status { font-size:0.7rem; font-weight:600; margin-top:0.5rem; color:#34d399; }
+        .compliance-status { font-size:0.7rem; font-weight:600; margin-top:0.5rem; color:var(--ok); }
         .compliance-badges { display:flex; justify-content:center; flex-wrap:wrap; gap:0.5rem; }
         .compliance-badge { font-size:0.75rem; font-weight:600; padding:0.375rem 0.875rem; border-radius:6px; }
 
@@ -406,7 +409,7 @@
         .advantage p { font-size:0.85rem; color:var(--gray-500); line-height:1.65; }
         .adv-tag { display:inline-block; margin-top:0.75rem; font-size:0.68rem; font-weight:700; padding:2px 7px; border-radius:4px; }
         .adv-unique { background:rgba(232,93,84,0.12); color:var(--red); }
-        .adv-parity { background:rgba(52,211,153,0.1); color:#34d399; }
+        .adv-parity { background:rgba(52,211,153,0.1); color:var(--ok); }
 
         /*  EASY INTEGRATION  */
         .integration-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
@@ -443,7 +446,7 @@
             border-radius:8px; padding:0.75rem 1rem; color:var(--white);
             font-size:0.9rem; font-family:inherit; outline:none; transition:border-color 0.2s;
         }
-        .signup-input::placeholder { color:var(--gray-600); }
+        .signup-input::placeholder { color:var(--text-3); }
         .signup-input:focus { border-color:rgba(232,93,84,0.5); }
         .signup-select {
             flex:1; min-width:180px; background:var(--surface-2); border:1px solid var(--border);
@@ -459,7 +462,7 @@
             font-size:0.875rem; font-family:inherit; outline:none; resize:vertical;
             transition:border-color 0.2s; min-height:80px; display:block; margin:0 auto 1rem;
         }
-        .signup-textarea::placeholder { color:var(--gray-600); }
+        .signup-textarea::placeholder { color:var(--text-3); }
         .signup-textarea:focus { border-color:rgba(232,93,84,0.5); }
         .signup-submit {
             background:var(--red); color:var(--white);
@@ -468,21 +471,21 @@
             transition:all 0.2s; font-family:inherit;
         }
         .signup-submit:hover { background:#d44e46; transform:translateY(-2px); box-shadow:0 6px 24px var(--red-glow); }
-        .signup-privacy { font-size:0.75rem; color:var(--gray-700); margin-top:0.875rem; }
+        .signup-privacy { font-size:0.75rem; color:var(--gray-500); margin-top:0.875rem; }
         .signup-success { display:none; padding:1.5rem; }
-        .signup-success h3 { font-size:1.25rem; font-weight:700; margin-bottom:0.5rem; color:#34d399; }
+        .signup-success h3 { font-size:1.25rem; font-weight:700; margin-bottom:0.5rem; color:var(--ok); }
         .signup-success p { font-size:0.9rem; color:var(--gray-400); }
         .trust-row { display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:1.5rem; }
-        .trust-item { display:flex; align-items:center; gap:0.375rem; font-size:0.8rem; color:var(--gray-600); }
+        .trust-item { display:flex; align-items:center; gap:0.375rem; font-size:0.8rem; color:var(--text-3); }
         .trust-item i { color:var(--red); font-size:0.7rem; }
 
         /*  FOOTER  */
         .footer { padding:3rem 0 2rem; border-top:1px solid var(--border); margin-top:0; }
         .footer-content { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
-        .footer-left { display:flex; align-items:center; gap:0.75rem; color:var(--gray-600); font-size:0.85rem; }
+        .footer-left { display:flex; align-items:center; gap:0.75rem; color:var(--text-3); font-size:0.85rem; }
         .footer-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; color:var(--gray-500); }
         .footer-links { display:flex; gap:2rem; list-style:none; }
-        .footer-link { color:var(--gray-600); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
+        .footer-link { color:var(--text-3); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
         .footer-link:hover { color:var(--white); }
 
         /*  ANIMATIONS  */
@@ -621,21 +624,21 @@
         .cmp-unique {
             display:inline-block; margin-left:7px; padding:1px 6px; border-radius:3px;
             font-size:8px; font-weight:800; letter-spacing:0.07em;
-            background:rgba(232,93,84,0.15); color:#f87171;
+            background:rgba(232,93,84,0.15); color:#EE8A83;
             border:1px solid rgba(232,93,84,0.28); vertical-align:middle; white-space:nowrap;
         }
         td.cmp-others { color:rgba(255,255,255,0.22); font-size:12.5px; }
         .cmp-no { display:inline-flex; align-items:center; gap:7px; color:rgba(255,255,255,0.18); }
         .cmp-no::before { content:'\2715'; font-size:12px; color:rgba(255,255,255,0.12); }
-        .cmp-partial { color:#F0A500; font-size:12px; }
+        .cmp-partial { color:var(--warn); font-size:12px; }
         td.cmp-forge-cell {
             background:rgba(232,93,84,0.05); border-left:1px solid rgba(232,93,84,0.18);
             font-weight:700; font-size:12.5px; color:#fff;
         }
         .cmp-yes { display:inline-flex; align-items:center; gap:8px; color:#fff; }
-        .cmp-yes::before { content:'\2713'; color:#22C55E; font-size:13px; font-weight:900; flex-shrink:0; }
-        .cmp-planned { color:#60A5FA; font-style:italic; font-weight:500; font-size:12px; }
-        .cmp-planned::before { content:'\25CB\00A0'; color:#60A5FA; font-style:normal; }
+        .cmp-yes::before { content:'\2713'; color:var(--ok); font-size:13px; font-weight:900; flex-shrink:0; }
+        .cmp-planned { color:var(--text-3); font-style:italic; font-weight:500; font-size:12px; }
+        .cmp-planned::before { content:'\25CB\00A0'; color:var(--text-3); font-style:normal; }
         .cmp-observation {
             background:rgba(232,93,84,0.06); border:1px solid rgba(232,93,84,0.18);
             border-radius:10px; padding:22px 26px;
@@ -854,7 +857,7 @@
                     </div>
                     <div class="db-agents">
                         <div class="db-agent">
-                            <div class="db-agent-dot" style="background:#34d399"></div>
+                            <div class="db-agent-dot" style="background:var(--ok)"></div>
                             <div class="db-agent-info"><div class="db-agent-name">research-agent-v2</div><div class="db-agent-sub">autonomous · 94% conf</div></div>
                             <div class="db-agent-risk risk-ok">Active</div>
                         </div>
@@ -864,12 +867,12 @@
                             <div class="db-agent-risk risk-high">Critical</div>
                         </div>
                         <div class="db-agent">
-                            <div class="db-agent-dot" style="background:#fbbf24"></div>
+                            <div class="db-agent-dot" style="background:var(--warn)"></div>
                             <div class="db-agent-info"><div class="db-agent-name">sales-copilot-prod</div><div class="db-agent-sub">api_consumer · 78%</div></div>
                             <div class="db-agent-risk risk-med">Review</div>
                         </div>
                         <div class="db-agent">
-                            <div class="db-agent-dot" style="background:#34d399"></div>
+                            <div class="db-agent-dot" style="background:var(--ok)"></div>
                             <div class="db-agent-info"><div class="db-agent-name">ollama-local-3</div><div class="db-agent-sub">local_llm · endpoint</div></div>
                             <div class="db-agent-risk risk-ok">Governed</div>
                         </div>
@@ -931,7 +934,7 @@
         <div class="pillars-grid">
             <div class="pillar">
                 <div class="pillar-num">01 /</div>
-                <div class="pillar-icon blue"><i class="fa-solid fa-radar" style="color:#3b82f6"></i></div>
+                <div class="pillar-icon blue"><i class="fa-solid fa-radar" style="color:var(--red)"></i></div>
                 <h3>Discovery</h3>
                 <p>Find every agent — sanctioned or shadow, cloud or local. Four parallel probes across endpoints, network traffic, filesystem, and behaviour patterns.</p>
                 <ul class="pillar-features">
@@ -1033,9 +1036,9 @@
                         <div class="dash-panel">
                             <div class="dash-panel-title">Detected agents — risk level</div>
                             <div class="agent-row"><div class="agent-dot" style="background:#E85D54"></div><div class="agent-name">unknown-agent-7f2a</div><div class="agent-conf">shadow · unregistered</div><div class="risk-badge rb-critical">Critical</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:#34d399"></div><div class="agent-name">research-agent-v2</div><div class="agent-conf">autonomous · 94%</div><div class="risk-badge rb-low">Compliant</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:#fbbf24"></div><div class="agent-name">sales-copilot-prod</div><div class="agent-conf">api_consumer · 78%</div><div class="risk-badge rb-medium">Review</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:#34d399"></div><div class="agent-name">ollama-local-3</div><div class="agent-conf">local_llm · endpoint probe</div><div class="risk-badge rb-low">Governed</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--ok)"></div><div class="agent-name">research-agent-v2</div><div class="agent-conf">autonomous · 94%</div><div class="risk-badge rb-low">Compliant</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--warn)"></div><div class="agent-name">sales-copilot-prod</div><div class="agent-conf">api_consumer · 78%</div><div class="risk-badge rb-medium">Review</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--ok)"></div><div class="agent-name">ollama-local-3</div><div class="agent-conf">local_llm · endpoint probe</div><div class="risk-badge rb-low">Governed</div></div>
                         </div>
                         <div class="dash-panel">
                             <div class="dash-panel-title">Live event feed</div>
@@ -1146,7 +1149,7 @@
                 </div>
             </div>
             <div class="deploy-card">
-                <div class="deploy-tier" style="color:#3b82f6">Mid-market — 50–500 agents</div>
+                <div class="deploy-tier" style="color:var(--red)">Mid-market — 50–500 agents</div>
                 <h3>Network probe + HA appliance pair</h3>
                 <div class="desc">DNS sinkhole discovers shadow AI across every device. Network probe at egress inspects payloads. Endpoint agents catch local LLMs. HA pair for production uptime.</div>
                 <div class="deploy-components">
@@ -1162,7 +1165,7 @@
                 </div>
             </div>
             <div class="deploy-card">
-                <div class="deploy-tier" style="color:#8b5cf6">Enterprise — 1,000+ agents</div>
+                <div class="deploy-tier" style="color:var(--red)">Enterprise — 1,000+ agents</div>
                 <h3>All layers · global · per-region compliance</h3>
                 <div class="desc">All six deployment components. Regional Privify hubs feed a central governance cluster. Per-region compliance — GDPR in EU, DPDP Act in India, CCPA/NIST in US. Data residency enforced.</div>
                 <div class="deploy-components">
@@ -1178,7 +1181,7 @@
                 </div>
             </div>
             <div class="deploy-card">
-                <div class="deploy-tier" style="color:#14b8a6">Cloud-native — Kubernetes</div>
+                <div class="deploy-tier" style="color:var(--red)">Cloud-native — Kubernetes</div>
                 <h3>Admission webhook · zero config per pod</h3>
                 <div class="desc">One Helm install. Admission webhook auto-injects our sidecar into every AI pod at creation. No code changes. Integrates with Istio/Linkerd, exposes Prometheus metrics.</div>
                 <div class="deploy-components">
