@@ -1,0 +1,92 @@
+# Privify
+
+> Privify builds AI control infrastructure. Two products: FORGE governs AI agents inside
+> enterprises, and SHIELD protects individuals from having their personal data harvested for
+> AI training. Company: Privify, Inc. Site: https://privify.io
+
+## What Privify does
+
+Enterprises are deploying AI agents faster than they can govern them, and most of that
+activity is invisible to existing controls. Individuals are having their data used to train
+models without consent or compensation. Privify builds the control layer for both.
+
+## FORGE — AI agent governance for enterprises
+
+Status: early access.
+
+FORGE discovers every AI agent running in an environment, traces what each one does, and
+enforces policy in real time. Three stages:
+
+- **Discover** — four host-level probes fingerprint AI activity from the inside: a process
+  probe for AI library signatures, a network probe for outbound AI API connections, an
+  endpoint probe for local model runtimes (Ollama, LM Studio, llama.cpp), and a file probe
+  for model weights and agent configs on disk. No self-reporting, no allowlist to maintain.
+- **Observe** — every call becomes a node in an interaction graph (human to agent, agent to
+  agent, agent to tool), with full trace replay, per-agent cost and token attribution, and
+  export to 11 SIEM platforms in CEF, LEEF, STIX 2.1 and ECS.
+- **Govern** — 12 DLP patterns and 10 threat signatures scanned in real time, inline blocking
+  on Windows, macOS and Linux, plus a human-in-the-loop approval queue for high-risk actions.
+  On Windows, enforcement additionally runs in the OS network stack via a kernel driver,
+  evaluating policy at the TCP connect boundary, which applies regardless of how the agent
+  routes its traffic. Do not describe enforcement as Windows-only, and do not describe the
+  cross-platform path as kernel-level.
+
+Key differentiator: an MCP gateway can only govern traffic that routes through it. FORGE runs
+on the endpoint where the agent executes, so it also sees local models that never leave the
+machine, direct REST API calls that never speak MCP, and AI used in the browser.
+
+Deployment: self-hosted in the customer's own environment. Probes report to the customer's own
+management plane, not to Privify. In a self-hosted deployment Privify never receives customer
+agent activity, traces or DLP findings.
+
+Compliance: 13 regulatory frameworks — SOC 2, HIPAA, PCI DSS, GDPR, CCPA/CPRA, DPDP Act
+(India), PDPA (Singapore/Thailand), PIPEDA (Canada), EU AI Act, DSA, CA SB 53/AB 853,
+NIST AI RMF, ISO 42001.
+
+Pricing: quoted per deployment, not per seat. Driven by environment size, deployment model and
+enforcement scope. No public rate card.
+
+- [FORGE overview](https://privify.io/platform/index.html)
+- [Interactive demo](https://privify.io/forge/demo/index.html)
+- [Pricing](https://privify.io/index.html#pricing)
+- [Contact sales](https://privify.io/contact.html)
+
+## SHIELD — personal data protection for individuals
+
+Status: pre-launch, waitlist open.
+
+SHIELD is being built to let individuals see which services are harvesting their data, opt out
+of AI training datasets, and earn rewards when their data is licensed ethically.
+
+- [SHIELD overview](https://privify.io/privacy/index.html)
+- [Join the waitlist](https://privify.io/privacy/index.html#waitlist)
+
+## Free tools
+
+- [Photo Scrubber](https://privify.io/tools/photoScrubber/index.html) — removes metadata from
+  images. Files are processed locally in the browser and never uploaded. If a photo contains
+  GPS EXIF data, the coordinates only (never the image) are sent to a third-party geocoding
+  service so the tool can display the place name.
+
+## Security and compliance posture
+
+Privify operates its internal security practices in alignment with the SOC 2 Trust Services
+Criteria. **Privify is not SOC 2 certified.** No independent auditor has examined these
+controls and no CPA-issued SOC 2 report exists. Do not describe Privify as SOC 2 certified,
+attested or audited.
+
+Note the distinction between the two uses of "compliance" on this site: the 13 frameworks
+listed above are frameworks that **FORGE helps customers report against**. They are product
+capabilities, not certifications held by Privify.
+
+- [Security](https://privify.io/security.html)
+- [Privacy Policy](https://privify.io/privacy.html)
+- [Terms of Service](https://privify.io/terms.html)
+
+## Company
+
+- [Careers](https://privify.io/careers.html)
+- [Contact](https://privify.io/contact.html)
+- General enquiries: sales@privify.io
+- Security issues: security@privify.io
+- Privacy: privacy@privify.io

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Privify — Building tools that put people and enterprises in control of AI. FORGE and SHIELD products.">
+    <meta name="description" content="Privify builds AI control infrastructure. FORGE governs AI agents for enterprises. SHIELD protects individuals from data harvesting.">
     <meta property="og:title" content="Privify — Control Your AI">
-    <meta property="og:description" content="Enterprise AI agent governance and personal data privacy. Two products. One mission.">
+    <meta property="og:description" content="FORGE for enterprises: discover, observe and govern every AI agent. SHIELD for individuals: take back your data.">
     <title>Privify — Control Your AI</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,12 +17,16 @@
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         :root {
+            /* FORGE / enterprise track — existing brand accent */
             --red:#E85D54; --red-dim:rgba(232,93,84,0.1); --red-glow:rgba(232,93,84,0.22);
+            /* SHIELD / consumer track — introduced for product-track separation */
+            --cyan:#22D3EE; --cyan-dim:rgba(34,211,238,0.1); --cyan-glow:rgba(34,211,238,0.22);
             --black:#000; --white:#fff;
-            --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-600:#4B5563;
+            --gray-400:#9CA3AF; --text-3:#858C97; --gray-500:#6B7280; --gray-600:#4B5563;
             --gray-700:#374151; --gray-800:#1F2937;
             --surface:#0d0d0d; --surface-2:#111111; --surface-3:#161616;
             --border:rgba(255,255,255,0.07); --border-h:rgba(255,255,255,0.14);
+            --mono:'JetBrains Mono',monospace;
         }
         html { scroll-behavior:smooth; overflow-x:hidden; }
         body { font-family:'Inter',-apple-system,sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; -webkit-font-smoothing:antialiased; max-width:100%; }
@@ -47,100 +51,347 @@
         .dropdown-item { display:block;padding:0.625rem 0.875rem;border-radius:6px;color:var(--gray-400);text-decoration:none; }
         .dropdown-item:hover { background:rgba(255,255,255,0.05);color:var(--white); }
         .di-title { font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px; }
-        .di-sub { font-size:0.75rem;color:var(--gray-600); }
+        .di-sub { font-size:0.75rem;color:var(--text-3); }
         .mobile-menu-btn { display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:0.5rem; }
-        .mobile-menu { display:none;position:fixed;top:68px;left:0;right:0;background:#0d0d0d;border-top:1px solid var(--border);z-index:999; }
+        .mobile-menu { display:none;position:fixed;top:68px;left:0;right:0;background:#0d0d0d;border-top:1px solid var(--border);z-index:999;max-height:calc(100vh - 68px);overflow-y:auto; }
         .mobile-menu.open { display:block; }
         .mobile-menu-inner { padding:1rem 2rem 1.5rem; }
         .mobile-menu a { display:block;padding:0.7rem 0;color:var(--gray-400);text-decoration:none;font-weight:500;font-size:0.9rem;border-bottom:1px solid var(--border); }
         .mobile-menu a:hover { color:var(--white); }
-        .mob-section { font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray-700);padding:1rem 0 0.25rem; }
-        .mob-cta { background:var(--red);color:var(--white) !important;border-radius:6px;padding:0.7rem 1rem;text-align:center;margin-top:0.75rem;font-weight:600; }
+        .mob-section { font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray-500);padding:1rem 0 0.25rem; }
+        .mob-cta { background:var(--red);color:var(--white) !important;border-radius:6px;padding:0.7rem 1rem;text-align:center;margin-top:0.75rem;font-weight:600;border-bottom:none !important; }
 
-        /* HERO */
-        .hero { min-height:100vh;display:flex;align-items:center;padding:7rem 2rem 5rem; }
-        .hero-inner { max-width:720px; }
+        /* SHARED SECTION FURNITURE */
+        .section-eyebrow { display:inline-flex;align-items:center;gap:0.5rem;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);margin-bottom:0.875rem; }
+        .section-title { font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:800;letter-spacing:-0.03em;line-height:1.12;margin-bottom:1rem; }
+        .section-sub { font-size:1rem;color:var(--gray-400);line-height:1.7;max-width:620px; }
+        .section-header { margin-bottom:3rem; }
+        .section-header.center { text-align:center; }
+        .section-header.center .section-sub { margin-left:auto;margin-right:auto; }
+
+        /* HERO — compressed so the product fork sits above the fold */
+        .hero { padding:9rem 2rem 3.5rem;position:relative;overflow:hidden; }
+        /* Ambient discovery field. Most marks are barely visible — AI activity
+           nobody can see. A sweep on load brings them into view. Masked away
+           from the left so it never competes with the headline. */
+        .hero-field { position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.72;
+                      -webkit-mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,0.25) 34%,#000 72%);
+                      mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,0.25) 34%,#000 72%); }
+        .hero-inner { max-width:760px;margin-bottom:3.25rem; }
         .eyebrow { display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem; }
         .eyebrow-dot { width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s infinite; }
         @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-        h1 { font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-0.03em;margin-bottom:1.5rem; }
+        h1 { font-size:clamp(2.6rem,6vw,5rem);font-weight:800;line-height:1.02;letter-spacing:-0.038em;margin-bottom:1.35rem;text-wrap:balance; }
         .red { color:var(--red); }
-        .hero-sub { font-size:1.125rem;color:var(--gray-400);line-height:1.7;margin-bottom:2.5rem;max-width:560px; }
-        .hero-actions { display:flex;gap:1rem;flex-wrap:wrap; }
-        .btn-primary { background:var(--red);color:var(--white);padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s; }
-        .btn-primary:hover { background:#d44e46;transform:translateY(-2px);box-shadow:0 6px 24px var(--red-glow); }
-        .btn-secondary { background:transparent;color:var(--white);padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;border:1px solid var(--border-h);transition:all 0.2s; }
-        .btn-secondary:hover { background:rgba(255,255,255,0.05); }
+        .cyan { color:var(--cyan); }
+        .hero-sub { font-size:1.1rem;color:var(--gray-400);line-height:1.65;max-width:600px; }
 
-        /* PRODUCTS */
-        .products { padding:5rem 0;background:var(--surface); }
-        .products-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem; }
-        .product-card { background:var(--black);border:1px solid var(--border);border-radius:16px;padding:2.5rem;text-decoration:none;color:inherit;display:block;transition:all 0.25s;position:relative;overflow:hidden; }
-        .product-card:hover { border-color:var(--border-h);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,0.4); }
-        .product-card.featured { border-color:rgba(232,93,84,0.3); }
-        .product-card.featured:hover { border-color:rgba(232,93,84,0.6); }
-        .product-label { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.25rem; }
-        .product-label.enterprise { color:var(--red); }
-        .product-label.consumer { color:var(--gray-500); }
-        .product-card h3 { font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem; }
-        .product-card p { font-size:0.9rem;color:var(--gray-500);line-height:1.65;margin-bottom:1.75rem; }
-        .product-features { list-style:none;display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.75rem; }
-        .product-features li { font-size:0.82rem;color:var(--gray-500);display:flex;align-items:flex-start;gap:0.5rem; }
-        .product-features li::before { content:'—';color:var(--red);font-size:0.75rem;margin-top:1px;flex-shrink:0; }
-        .product-cta { display:inline-flex;align-items:center;gap:0.4rem;font-size:0.875rem;font-weight:600;color:var(--white);transition:gap 0.2s; }
-        .product-card:hover .product-cta { gap:0.6rem; }
-        .product-card.featured .product-cta { color:var(--red); }
-        .pc-glow { position:absolute;bottom:-60px;right:-60px;width:160px;height:160px;border-radius:50%;opacity:0.04;background:var(--red); }
+        /* THE FORK — the first decision a visitor makes */
+        .fork-label { font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gray-500);margin-bottom:1.1rem;display:block; }
+        .fork { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem; }
+        .fork-card { position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2.25rem 2rem;overflow:hidden;transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;display:flex;flex-direction:column; }
+        .fork-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px; }
+        .fork-card.forge::before { background:linear-gradient(90deg,var(--red),rgba(232,93,84,0)); }
+        .fork-card.shield::before { background:linear-gradient(90deg,var(--cyan),rgba(34,211,238,0)); }
+        .fork-card.forge:hover { border-color:rgba(232,93,84,0.45);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,0.5),0 0 40px var(--red-glow); }
+        .fork-card.shield:hover { border-color:rgba(34,211,238,0.45);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,0.5),0 0 40px var(--cyan-glow); }
+        .fork-audience { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.11em;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem; }
+        .fork-card.forge .fork-audience { color:var(--red); }
+        .fork-card.shield .fork-audience { color:var(--cyan); }
+        .fork-status { font-size:0.62rem;font-weight:600;letter-spacing:0.06em;padding:0.15rem 0.5rem;border-radius:999px;text-transform:uppercase; }
+        .fork-card.forge .fork-status { background:var(--red-dim);color:var(--red);border:1px solid rgba(232,93,84,0.25); }
+        .fork-card.shield .fork-status { background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(34,211,238,0.25); }
+        .fork-name { font-size:1.85rem;font-weight:800;letter-spacing:-0.025em;margin-bottom:0.15rem; }
+        .fork-expand { font-size:0.72rem;color:var(--gray-500);font-family:var(--mono);margin-bottom:1rem; }
+        .fork-value { font-size:0.95rem;color:var(--gray-400);line-height:1.65;margin-bottom:1.5rem; }
+        .fork-points { list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.85rem; }
+        .fork-points li { font-size:0.84rem;color:var(--gray-400);display:flex;align-items:flex-start;gap:0.55rem;line-height:1.5; }
+        .fork-points li::before { content:'';width:5px;height:5px;border-radius:50%;margin-top:0.52rem;flex-shrink:0; }
+        .fork-card.forge .fork-points li::before { background:var(--red); }
+        .fork-card.shield .fork-points li::before { background:var(--cyan); }
+        .fork-actions { display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto; }
+        .btn { padding:0.85rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.45rem;border:1px solid transparent;cursor:pointer; }
+        .btn-forge { background:var(--red);color:var(--white); }
+        .btn-forge:hover { background:#d44e46;transform:translateY(-2px);box-shadow:0 6px 24px var(--red-glow); }
+        .btn-shield { background:var(--cyan);color:#04202a; }
+        .btn-shield:hover { background:#4dddf0;transform:translateY(-2px);box-shadow:0 6px 24px var(--cyan-glow); }
+        .btn-ghost { background:transparent;color:var(--white);border-color:var(--border-h); }
+        .btn-ghost:hover { background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.24); }
+        .fork-glow { position:absolute;bottom:-70px;right:-70px;width:200px;height:200px;border-radius:50%;opacity:0.05;pointer-events:none; }
+        .fork-card.forge .fork-glow { background:var(--red); }
+        .fork-card.shield .fork-glow { background:var(--cyan); }
+
+        /* TRUST STRIP + SOC 2 BADGE */
+        .trust-strip { border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface-2);padding:1.75rem 0; }
+        .trust-inner { display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap; }
+        .soc2-badge { display:inline-flex;align-items:center;gap:0.9rem;background:var(--surface);border:1px solid var(--border-h);border-radius:12px;padding:0.85rem 1.25rem;flex-shrink:0; }
+        .soc2-title { font-size:0.86rem;font-weight:700;color:var(--white);letter-spacing:-0.01em;line-height:1.3; }
+        .soc2-sub { font-size:0.68rem;color:var(--text-3);margin-top:3px;font-family:var(--mono);letter-spacing:-0.01em; }
+        .trust-items { display:flex;gap:2rem;flex-wrap:wrap; }
+        .trust-item { display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--gray-400); }
+        .trust-item i { color:var(--text-3);font-size:0.8rem; }
+
+        /* PRODUCT TRACK SECTIONS */
+        .track { padding:5.5rem 0;position:relative; }
+        .track-forge { border-top:1px solid var(--border); }
+        .track-gap { background:var(--surface);border-top:1px solid var(--border); }
+        .track-shield { background:var(--surface);border-top:1px solid var(--border); }
+        .track-gap .track-tag { background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red); }
+        .track-tag { display:inline-flex;align-items:center;gap:0.55rem;padding:0.4rem 0.9rem;border-radius:999px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.25rem; }
+        .track-forge .track-tag { background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red); }
+        .track-shield .track-tag { background:var(--cyan-dim);border:1px solid rgba(34,211,238,0.25);color:var(--cyan); }
+
+        /* COVERAGE MAP — the gateway blind-spot diagram.
+           Built from CSS boxes rather than SVG so the labels stay selectable
+           and the whole thing reflows to one column on narrow screens. */
+        .gap-map { position:relative;border:1px solid rgba(232,93,84,0.35);border-radius:18px;
+                   padding:2.75rem 1.75rem 1.75rem;margin-top:2.75rem;
+                   background:radial-gradient(ellipse 70% 90% at 80% 10%,rgba(232,93,84,0.05),transparent 70%); }
+        .gap-map-head { position:absolute;top:-0.62rem;left:1.5rem;background:var(--surface);
+                        padding:0 0.7rem;font-family:var(--mono);font-size:0.68rem;font-weight:500;
+                        letter-spacing:0.12em;text-transform:uppercase;color:var(--red); }
+        .gap-map-body { display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:1.75rem;align-items:center; }
+        /* Sized to its contents on purpose — the gateway's coverage should look
+           small next to the list of what falls outside it. */
+        .gap-inner { position:relative;border:1px dashed var(--gray-700);border-radius:13px;
+                     padding:2.25rem 1.35rem 1.5rem;background:rgba(255,255,255,0.015); }
+        .track-gap .section-header .section-eyebrow { display:flex;margin-top:0.9rem;margin-bottom:0.7rem; }
+        .gap-inner-head { position:absolute;top:-0.58rem;left:1.15rem;background:var(--surface);
+                          padding:0 0.6rem;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;
+                          text-transform:uppercase;color:var(--text-3); }
+        .gap-node { border:1px solid var(--border-h);border-radius:8px;background:var(--surface-2);
+                    padding:0.8rem 1rem;font-size:0.85rem;font-weight:600;color:var(--gray-400);text-align:center; }
+        .gap-inner-note { font-size:0.72rem;color:var(--gray-500);text-align:center;margin-top:0.85rem;line-height:1.5; }
+        .gap-chips { display:flex;flex-direction:column;gap:0.85rem; }
+        .gap-chip { display:flex;gap:0.8rem;align-items:flex-start; }
+        .gap-chip-mark { flex-shrink:0;width:1.4rem;height:1.4rem;border-radius:50%;border:1px solid rgba(232,93,84,0.4);
+                         color:var(--red);font-size:0.7rem;display:flex;align-items:center;justify-content:center;margin-top:1px; }
+        .gap-chip-t { font-size:0.88rem;font-weight:650;color:var(--white);display:block;margin-bottom:1px; }
+        .gap-chip-s { font-size:0.79rem;color:var(--text-3);line-height:1.5;display:block; }
+        .gap-map-foot { margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid rgba(232,93,84,0.18);
+                        font-size:0.79rem;color:var(--gray-400);display:flex;align-items:center;gap:0.6rem;line-height:1.5; }
+        .gap-map-foot i { color:var(--red);font-size:0.8rem;flex-shrink:0; }
+        .gap-caption { font-size:0.9rem;color:var(--gray-400);line-height:1.7;margin-top:1.5rem;max-width:720px; }
+
+        /* HOW IT WORKS — sequence rail.
+           Discover → Observe → Govern is a real sequence, so it reads as a
+           connected progression rather than three parallel cards. */
+        .rail { list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;position:relative; }
+        .rail::before { content:'';position:absolute;top:14px;left:calc(16.66% + 14px);right:calc(16.66% + 14px);
+                        height:1px;background:linear-gradient(90deg,var(--red),rgba(232,93,84,0.25)); }
+        .rail-step { position:relative;padding-right:1rem; }
+        .rail-node { width:29px;height:29px;border-radius:50%;border:1px solid rgba(232,93,84,0.45);
+                     background:var(--black);color:var(--red);font-family:var(--mono);font-size:0.68rem;font-weight:500;
+                     display:flex;align-items:center;justify-content:center;position:relative;z-index:2;margin-bottom:1.1rem; }
+        .rail-stage { font-family:var(--mono);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;
+                      color:var(--gray-500);margin-bottom:0.4rem; }
+        .rail-step h3 { font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.6rem; }
+        .rail-step > p { font-size:0.87rem;color:var(--gray-400);line-height:1.65;margin-bottom:1.1rem; }
+        .step-detail { list-style:none;display:flex;flex-direction:column;gap:0.4rem;border-top:1px solid var(--border);padding-top:0.9rem; }
+        .step-detail li { font-size:0.76rem;color:var(--text-3);font-family:var(--mono);line-height:1.5;display:flex;gap:0.45rem; }
+        .step-detail li::before { content:'›';color:var(--red);flex-shrink:0; }
+
+        /* DIFFERENTIATOR */
+        .diff-label { font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+                      color:var(--gray-500);margin-top:3rem;margin-bottom:1.1rem; }
+        .diff-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:1rem; }
+        /* surface-2 so the cards read against the section's --surface ground */
+        .diff-card { background:var(--surface-2);border:1px solid var(--border);border-radius:14px;
+                     padding:1.5rem 1.35rem;transition:border-color 0.25s; }
+        .diff-card:hover { border-color:var(--border-h); }
+        .diff-card h4 { font-size:0.93rem;font-weight:700;margin-bottom:0.6rem;display:flex;align-items:flex-start;
+                        gap:0.55rem;letter-spacing:-0.015em;line-height:1.35;text-wrap:balance; }
+        .diff-card h4 i { color:var(--red);font-size:0.85rem;margin-top:3px;flex-shrink:0; }
+        .diff-card p { font-size:0.83rem;color:var(--text-3);line-height:1.6; }
+
+
+        /* PRICING */
+        .pricing { padding:5.5rem 0;background:var(--surface-2);border-top:1px solid var(--border); }
+        .price-card { max-width:760px;margin:2.5rem auto 0;background:var(--surface);border:1px solid var(--border-h);border-radius:16px;padding:2.75rem 2.5rem;text-align:center;position:relative;overflow:hidden; }
+        .price-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(232,93,84,0),var(--red),rgba(232,93,84,0)); }
+        .price-card h3 { font-size:1.5rem;font-weight:800;letter-spacing:-0.025em;margin-bottom:0.75rem; }
+        .price-card > p { font-size:0.94rem;color:var(--gray-400);line-height:1.7;max-width:520px;margin:0 auto 2rem; }
+        .price-factors { display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.25rem;text-align:left; }
+        .price-factor { background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.2rem; }
+        .price-factor .pf-title { font-size:0.82rem;font-weight:700;margin-bottom:0.3rem; }
+        .price-factor .pf-sub { font-size:0.76rem;color:var(--text-3);line-height:1.55; }
+        .price-included { display:flex;flex-wrap:wrap;gap:0.55rem;justify-content:center;margin-bottom:2.25rem; }
+        .pi-chip { font-size:0.75rem;color:var(--gray-400);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:0.35rem 0.8rem;display:inline-flex;align-items:center;gap:0.4rem; }
+        .pi-chip i { color:var(--red);font-size:0.7rem; }
+
+        /* FAQ — native <details> so it is keyboard-accessible and works
+           without JavaScript. No accordion library. */
+        .faq { padding:5.5rem 0;border-top:1px solid var(--border); }
+        .faq-grid { display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.6fr);gap:4rem;align-items:start; }
+        .faq-title { font-size:clamp(1.9rem,3.6vw,2.9rem);font-weight:800;letter-spacing:-0.035em;line-height:1.06;text-wrap:balance; }
+        .faq-aside { font-size:0.88rem;color:var(--text-3);line-height:1.7;margin-top:1.25rem; }
+        .faq-aside a { color:var(--red);text-decoration:none;border-bottom:1px solid rgba(232,93,84,0.35); }
+        .faq-aside a:hover { border-bottom-color:var(--red); }
+        .faq-list { border-top:1px solid var(--border); }
+        .faq-item { border-bottom:1px solid var(--border); }
+        .faq-item summary { list-style:none;cursor:pointer;padding:1.35rem 2.5rem 1.35rem 0;position:relative;
+                            font-size:1.02rem;font-weight:650;letter-spacing:-0.015em;line-height:1.4;
+                            color:var(--white);transition:color 0.2s; }
+        .faq-item summary::-webkit-details-marker { display:none; }
+        .faq-item summary:hover { color:var(--red); }
+        .faq-item summary:focus-visible { outline:2px solid var(--red);outline-offset:3px;border-radius:4px; }
+        .faq-item summary::after { content:'';position:absolute;right:0.35rem;top:1.72rem;width:9px;height:9px;
+                                   border-right:1.5px solid var(--gray-500);border-bottom:1.5px solid var(--gray-500);
+                                   transform:rotate(45deg);transition:transform 0.25s,border-color 0.2s; }
+        .faq-item[open] summary::after { transform:rotate(-135deg);border-color:var(--red); }
+        .faq-item[open] summary { color:var(--red); }
+        .faq-answer { padding:0 2.5rem 1.6rem 0;font-size:0.92rem;color:var(--gray-400);line-height:1.75;max-width:62ch; }
+        .faq-answer p + p { margin-top:0.85rem; }
+        .faq-answer strong { color:var(--white);font-weight:600; }
 
         /* MISSION */
-        .mission { padding:5rem 0; }
+        .mission { padding:5.5rem 0; }
         .mission-inner { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
         .mission h2 { font-size:clamp(1.75rem,3vw,2.25rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:1rem; }
         .mission p { font-size:0.95rem;color:var(--gray-400);line-height:1.75; }
         .mission-stats { display:grid;grid-template-columns:repeat(2,1fr);gap:1rem; }
         .m-stat { background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:1.25rem; }
         .m-stat-num { font-size:2rem;font-weight:700;color:var(--white);letter-spacing:-0.02em; }
-        .m-stat-label { font-size:0.8rem;color:var(--gray-600);margin-top:3px; }
+        .m-stat-label { font-size:0.8rem;color:var(--text-3);margin-top:3px;line-height:1.45; }
+
+        /* FINAL CTA */
+        .final-cta { padding:5rem 0;border-top:1px solid var(--border);text-align:center; }
+        .final-cta h2 { font-size:clamp(1.6rem,2.8vw,2.1rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:0.9rem; }
+        .final-cta p { font-size:0.95rem;color:var(--gray-400);max-width:520px;margin:0 auto 2rem;line-height:1.7; }
+        .final-actions { display:flex;gap:0.9rem;justify-content:center;flex-wrap:wrap; }
 
         /* FOOTER */
         .footer { padding:3rem 0 1.5rem;border-top:1px solid var(--border); }
         .footer-top { display:grid;grid-template-columns:280px 1fr;gap:4rem;margin-bottom:2.5rem; }
-        .footer-logo { display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--gray-500);font-weight:700;font-size:1rem;margin-bottom:0.875rem; }
-        .footer-tagline { font-size:0.8rem;color:var(--gray-700);line-height:1.6; }
-        .footer-cols { display:grid;grid-template-columns:repeat(3,1fr);gap:2rem; }
-        .footer-col-title { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-600);margin-bottom:0.875rem; }
+        .footer-logo { display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--gray-400);font-weight:700;font-size:1rem;margin-bottom:0.875rem; }
+        .footer-tagline { font-size:0.8rem;color:var(--text-3);line-height:1.6; }
+        .footer-cols { display:grid;grid-template-columns:repeat(4,1fr);gap:2rem; }
+        .footer-col-title { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:0.875rem; }
         .footer-col { display:flex;flex-direction:column;gap:0.5rem; }
-        .footer-link { color:var(--gray-600);text-decoration:none;font-size:0.825rem;transition:color 0.2s; }
+        .footer-link { color:var(--text-3);text-decoration:none;font-size:0.825rem;transition:color 0.2s; }
         .footer-link:hover { color:var(--white); }
-        .footer-bottom { display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.8rem;color:var(--gray-700); }
+        .footer-bottom { display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.8rem;color:var(--gray-500);gap:1rem;flex-wrap:wrap; }
 
         @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         .fade-in { animation:fadeUp 0.7s ease-out both; }
         .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s}
 
+        @media(max-width:900px) {
+            /* Rail turns vertical: the connecting line runs down the left gutter */
+            .rail{grid-template-columns:1fr;gap:2.25rem;padding-left:1.25rem;}
+            .rail::before{top:14px;bottom:14px;left:14px;right:auto;width:1px;height:auto;
+                          background:linear-gradient(180deg,var(--red),rgba(232,93,84,0.2));}
+            .rail-step{padding-right:0;padding-left:2.5rem;}
+            .rail-node{position:absolute;left:-1.25rem;top:0;margin-bottom:0;}
+            /* Coverage map stacks: gateway box first, blind spots beneath it */
+            .gap-map-body{grid-template-columns:1fr;gap:1.5rem;}
+            .gap-inner{min-height:0;}
+            .diff-grid{grid-template-columns:repeat(2,1fr);}
+            .faq-grid{grid-template-columns:1fr;gap:2.25rem;}
+            .price-factors{grid-template-columns:1fr;}
+            .footer-cols{grid-template-columns:repeat(2,1fr);}
+        }
         @media(max-width:768px) {
             .nav-links{display:none;}
             .mobile-menu-btn{display:block;}
-            /* Prevent any overflow from the nav */
             .header .container{padding:0 1rem;}
             nav{width:100%;max-width:100%;}
-            /* Page layout */
             .container{padding:0 1.25rem;}
-            .hero{padding:5.5rem 1.25rem 3rem;}
-            .products-grid{grid-template-columns:1fr;}
-            .hero-actions{flex-direction:column;align-items:stretch;}
-            .btn-primary,.btn-secondary{text-align:center;}
+            .hero{padding:6.5rem 1.25rem 2.5rem;}
+            /* Text spans most of the width here, so the field has to recede */
+            .hero-field{opacity:0.30;
+                        -webkit-mask-image:linear-gradient(150deg,transparent 12%,rgba(0,0,0,0.3) 45%,#000 85%);
+                        mask-image:linear-gradient(150deg,transparent 12%,rgba(0,0,0,0.3) 45%,#000 85%);}
+            .fork{grid-template-columns:1fr;}
+            .diff-grid{grid-template-columns:1fr;}
+            .fork-actions{flex-direction:column;align-items:stretch;}
+            .fork-actions .btn{justify-content:center;}
+            .trust-inner{flex-direction:column;align-items:flex-start;gap:1.5rem;}
+            .trust-items{gap:1rem 1.5rem;}
             .mission-inner{grid-template-columns:1fr;gap:3rem;}
+            .price-card{padding:2rem 1.5rem;}
+            .final-actions{flex-direction:column;align-items:stretch;}
+            .final-actions .btn{justify-content:center;}
             .footer-top{grid-template-columns:1fr;gap:2rem;}
-            .footer-cols{grid-template-columns:repeat(2,1fr);}
             .footer-bottom{flex-direction:column;gap:0.75rem;text-align:center;}
         }
         @media(max-width:480px){
             .header .container{padding:0 0.875rem;}
-            h1{font-size:2.25rem;}
+            h1{font-size:2.1rem;}
             .footer-cols{grid-template-columns:1fr;}
+            .soc2-badge{padding:0.75rem 1rem;}
         }
-    </style>
+    
+        /* ── FOOTER UTILITY ROW ──────────────────────────────────────────── */
+        .footer-utility { display:flex;justify-content:space-between;align-items:center;gap:1.5rem 2rem;
+                          flex-wrap:wrap;padding:1.35rem 0;border-top:1px solid var(--border); }
+        .fu-left, .fu-right { display:flex;align-items:center;gap:0.55rem;flex-wrap:wrap; }
+        .fu-label { font-size:0.76rem;color:var(--pf-text);margin-left:0.4rem; }
+        .fu-ai { display:inline-flex;gap:0.4rem;flex-wrap:wrap; }
+        .fu-chip { display:inline-flex;align-items:center;gap:0.35rem;font-size:0.74rem;font-weight:500;
+                   color:var(--pf-text);text-decoration:none;border:1px solid var(--border);
+                   background:rgba(255,255,255,0.02);border-radius:6px;padding:0.3rem 0.6rem;
+                   transition:color 0.2s,border-color 0.2s,background 0.2s; }
+        .fu-chip:hover { color:var(--white);border-color:var(--border-h);background:rgba(255,255,255,0.05); }
+        .fu-chip svg { opacity:0.75;flex-shrink:0; }
+        .fu-mono { font-family:var(--mono,ui-monospace,monospace);letter-spacing:0.06em;font-size:0.68rem; }
+        .fu-trust { display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;color:var(--pf-text);
+                    border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.65rem;white-space:nowrap; }
+        .fu-trust svg { color:var(--red);opacity:0.9;flex-shrink:0; }
+        .fu-cap { color:var(--gray-500); }
+        @media(max-width:900px){
+            .footer-utility{flex-direction:column;align-items:flex-start;gap:1rem;}
+            .fu-cap{white-space:normal;}
+        }
+
+        /* Honour the OS-level reduced-motion preference across the whole page. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration:0.01ms !important; animation-iteration-count:1 !important;
+                transition-duration:0.01ms !important; scroll-behavior:auto !important;
+            }
+        }
+</style>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where does FORGE run, and does our data leave our network?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FORGE is designed to run inside your own environment. The management plane, database and event store are yours, and the discovery probes execute on the endpoint and report to your management plane, not to Privify. In a self-hosted deployment your agent activity, traces and DLP findings never reach Privify."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which platforms does FORGE support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Inline blocking on Windows, macOS and Linux. Policy is evaluated at the moment an agent acts, and a blocked call is stopped before it reaches the provider rather than logged after the fact. On Windows, enforcement additionally runs in the OS network stack via a kernel driver, evaluating policy at the TCP connect boundary, which applies regardless of how the agent routes its traffic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is FORGE different from a DLP or CASB we already own?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Those tools were not built for AI. A CASB governs sanctioned SaaS and a DLP inspects data leaving a known channel. Neither was designed for one agent calling another, a tool invocation, or a model running locally on a developer's laptop. FORGE watches that layer and feeds what it finds back into your existing stack across 11 SIEM platforms, so existing controls see what they were blind to."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does FORGE deploy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Through several protection points chosen to fit where your agents run: an endpoint agent, a browser extension for AI used in the browser, a proxy for CLI-based AI tools, and host probes for discovery. Some teams start with discovery only and add enforcement later; others go straight to inline policy."
+      }
+    }
+  ]
+}
+    </script>
 </head>
 <body>
 
@@ -162,14 +413,15 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="platform/index.html">
                             <div class="di-title">FORGE</div>
-                            <div class="di-sub">Federated Oversight &amp; Risk Governance Engine</div>
+                            <div class="di-sub">AI agent governance for enterprises</div>
                         </a>
                         <a class="dropdown-item" href="privacy/index.html" style="border-top:1px solid var(--border);">
                             <div class="di-title">SHIELD</div>
-                            <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
+                            <div class="di-sub">Personal data protection</div>
                         </a>
                     </div>
                 </div>
+                <a href="#pricing" class="nav-link">Pricing</a>
                 <a href="careers.html" class="nav-link">Careers</a>
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
@@ -183,7 +435,7 @@
                         </a>
                     </div>
                 </div>
-                <a href="platform/index.html#interest" class="nav-pill">Request Access</a>
+                <a href="contact.html" class="nav-pill">Contact Sales</a>
             </div>
             <button class="mobile-menu-btn" aria-label="Open menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -195,76 +447,443 @@
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner container">
         <div class="mob-section">Products</div>
-        <a href="platform/index.html">FORGE</a>
-        <a href="privacy/index.html">SHIELD</a>
+        <a href="platform/index.html">FORGE — for enterprises</a>
+        <a href="privacy/index.html">SHIELD — for individuals</a>
         <div class="mob-section">Company</div>
+        <a href="#pricing">Pricing</a>
         <a href="careers.html">Careers</a>
+        <a href="security.html">Security</a>
         <div class="mob-section">Tools</div>
         <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
-        <a href="platform/index.html#interest" class="mob-cta">Request Access</a>
+        <a href="contact.html" class="mob-cta">Contact Sales</a>
     </div>
 </div>
 
 <main>
+
+<!-- ══ HERO + PRODUCT FORK ══════════════════════════════════════════════ -->
 <section class="hero">
+    <canvas class="hero-field" id="heroField" aria-hidden="true"></canvas>
     <div class="container">
         <div class="hero-inner">
-            <div class="eyebrow fade-in"><span class="eyebrow-dot"></span>Two products. One mission.</div>
+            <div class="eyebrow fade-in"><span class="eyebrow-dot"></span>AI control infrastructure</div>
             <h1 class="fade-in delay-1">
-                Put people and<br>enterprises in<br>
+                Put enterprises and people in
                 <span class="red">control of AI</span>
             </h1>
             <p class="hero-sub fade-in delay-2">
-                Privify builds tools for a world where AI is everywhere. For enterprises running hundreds of agents. For individuals whose data trains models without consent.
+                Enterprises can't see what their AI agents are doing. Individuals can't stop their data
+                training models they never agreed to.
             </p>
-            <div class="hero-actions fade-in delay-3">
-                <a href="#products" class="btn-primary">Our products</a>
+        </div>
+
+        <span class="fork-label fade-in delay-2">Choose your path</span>
+        <div class="fork fade-in delay-3">
+
+            <div class="fork-card forge">
+                <div class="fork-audience">
+                    For enterprises
+                    <span class="fork-status">Early access</span>
+                </div>
+                <div class="fork-name">FORGE</div>
+                <div class="fork-expand">Federated Oversight &amp; Risk Governance Engine</div>
+                <p class="fork-value">
+                    Discover every AI agent running in your environment, trace what it does, and stop it in
+                    real time when it crosses a line.
+                </p>
+                <ul class="fork-points">
+                    <li>Find shadow AI your perimeter never sees — including local models on developer machines</li>
+                    <li>Full interaction graph: human to agent, agent to agent, agent to tool</li>
+                    <li>Inline enforcement, DLP and human-in-the-loop approvals</li>
+                    <li>13 regulatory frameworks, audit evidence out of the box</li>
+                </ul>
+                <div class="fork-actions">
+                    <a href="contact.html?product=forge" class="btn btn-forge" onclick="track('CTA_ForgeDemo')">
+                        Request a demo <i class="fa-solid fa-arrow-right fa-xs"></i>
+                    </a>
+                    <a href="platform/index.html" class="btn btn-ghost">Explore FORGE</a>
+                </div>
+                <div class="fork-glow"></div>
+            </div>
+
+            <div class="fork-card shield">
+                <div class="fork-audience">
+                    For individuals
+                    <span class="fork-status">Coming soon</span>
+                </div>
+                <div class="fork-name">SHIELD</div>
+                <div class="fork-expand">Sovereignty Hub for Individual Liberty and Data</div>
+                <p class="fork-value">
+                    Your data is training AI models right now, without your consent and without paying you.
+                    SHIELD gives you the switch.
+                </p>
+                <ul class="fork-points">
+                    <li>Opt out of AI training datasets</li>
+                    <li>See which services are harvesting your data</li>
+                    <li>Earn rewards when your data is licensed ethically</li>
+                    <li>Works with Google, LinkedIn, Amazon and more</li>
+                </ul>
+                <div class="fork-actions">
+                    <a href="privacy/index.html#waitlist" class="btn btn-shield" onclick="track('CTA_ShieldWaitlist')">
+                        Join the waitlist <i class="fa-solid fa-arrow-right fa-xs"></i>
+                    </a>
+                    <a href="privacy/index.html" class="btn btn-ghost">Explore SHIELD</a>
+                </div>
+                <div class="fork-glow"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══ TRUST STRIP + SOC 2 READINESS BADGE ══════════════════════════════ -->
+<section class="trust-strip">
+    <div class="container">
+        <div class="trust-inner">
+
+            <div class="soc2-badge">
+                <svg viewBox="0 0 40 46" width="32" height="37" aria-hidden="true" focusable="false">
+                    <path d="M20 2.5 L36 8.5 V22 C36 32 28.5 40.5 20 43.5 C11.5 40.5 4 32 4 22 V8.5 Z"
+                          fill="none" stroke="#E85D54" stroke-width="2.4" stroke-linejoin="round"/>
+                    <path d="M13 22.5 l5 5 l10.5 -11.5" fill="none" stroke="#FFFFFF" stroke-width="2.6"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div>
+                    <div class="soc2-title">Security Practices Aligned with SOC 2</div>
+                    <div class="soc2-sub">Controls mapped to Trust Services Criteria · Independent audit not yet completed</div>
+                </div>
+            </div>
+
+            <div class="trust-items">
+                <div class="trust-item"><i class="fa-solid fa-server"></i> Self-hosted deployment available</div>
+                <div class="trust-item"><i class="fa-solid fa-lock"></i> Your data never leaves your network</div>
+                <div class="trust-item"><i class="fa-solid fa-code"></i> API-first</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══ FORGE TRACK ══════════════════════════════════════════════════════ -->
+<!-- ══ THE WEDGE — coverage gap, placed ahead of the mechanism ══════════ -->
+<section class="track track-gap" id="why">
+    <div class="container">
+
+        <div class="section-header">
+            <div class="track-tag">FORGE · For enterprises</div>
+            <div class="section-eyebrow">Why not just use a gateway?</div>
+            <h2 class="section-title">The agents your gateway will never see</h2>
+            <p class="section-sub">
+                An MCP gateway governs what routes through it. That's real coverage — but an agent only
+                routes through it when it chooses to speak MCP. FORGE runs on the endpoint, where the
+                agent actually executes.
+            </p>
+        </div>
+
+        <div class="gap-map">
+            <div class="gap-map-head">Your environment — where FORGE runs</div>
+            <div class="gap-map-body">
+
+                <div class="gap-inner">
+                    <div class="gap-inner-head">What an MCP gateway sees</div>
+                    <div class="gap-node">MCP tool calls</div>
+                    <div class="gap-inner-note">Everything that chose to speak the protocol</div>
+                </div>
+
+                <div class="gap-chips">
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Local models</span>
+                            <span class="gap-chip-s">Ollama, LM Studio, llama.cpp — the traffic never leaves the machine, so it never reaches a gateway</span>
+                        </span>
+                    </div>
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Direct API calls</span>
+                            <span class="gap-chip-s">Code hitting a provider's REST endpoint isn't speaking MCP, so there's nothing at the protocol layer to inspect</span>
+                        </span>
+                    </div>
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Browser AI</span>
+                            <span class="gap-chip-s">An employee pasting into a chat window — the most common AI risk in an enterprise, and entirely outside the protocol</span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="gap-map-foot">
+                <i class="fa-solid fa-shield-halved"></i>
+                FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
+            </div>
+        </div>
+
+        <p class="gap-caption">
+            Three kinds of AI activity, none of which pass through a protocol gateway. FORGE catches all
+            three because it runs where the code runs, not where the traffic is supposed to go.
+        </p>
+
+        <!-- Consequence, not mechanism — written for the CISO / risk / compliance
+             reader. The diagram's chips state the technical gap; these state what
+             it costs. Implementation detail lives on platform/index.html. -->
+        <div class="diff-label">What that gap costs you</div>
+        <div class="diff-grid">
+            <div class="diff-card">
+                <h4><i class="fa-solid fa-file-shield"></i> Shadow AI you can't attest to</h4>
+                <p>A control you cannot evidence will not survive an audit — and no one can evidence a model they never knew was running.</p>
+            </div>
+            <div class="diff-card">
+                <h4><i class="fa-solid fa-chart-pie"></i> Coverage numbers that flatter you</h4>
+                <p>A gateway can only report the traffic that reached it, so the gap never appears in the percentage you take to the board.</p>
+            </div>
+            <div class="diff-card">
+                <h4><i class="fa-solid fa-hand"></i> Detection is not prevention</h4>
+                <p>Auditors separate a control that stops an action from a log that records one — only one of them satisfies a preventive requirement.</p>
+            </div>
+            <div class="diff-card">
+                <h4><i class="fa-solid fa-user-shield"></i> Your largest exposure is human</h4>
+                <p>Most AI incidents begin with an employee and a chat window, not an autonomous agent — the same policy has to reach both.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══ THE MECHANISM ═══════════════════════════════════════════════════ -->
+<section class="track track-forge" id="forge">
+    <div class="container">
+
+        <div class="section-header">
+            <div class="section-eyebrow">How it works</div>
+            <h2 class="section-title">How FORGE actually works</h2>
+            <p class="section-sub">
+                Three stages, running continuously on every endpoint in your environment. No agent registry to
+                maintain, no cooperation required from the tools you're trying to govern.
+            </p>
+        </div>
+
+        <ol class="rail">
+            <li class="rail-step">
+                <div class="rail-node">01</div>
+                <div class="rail-stage">Stage 01</div>
+                <h3>Discover</h3>
+                <p>
+                    Four probes run on each host and fingerprint AI activity from the inside — no
+                    self-reporting, no allowlist to keep current.
+                </p>
+                <ul class="step-detail">
+                    <li>Process probe: AI library signatures in running processes</li>
+                    <li>Network probe: outbound connections to AI API endpoints</li>
+                    <li>Endpoint probe: local model runtimes — Ollama, LM Studio, llama.cpp</li>
+                    <li>File probe: model weights and agent configs on disk</li>
+                </ul>
+            </li>
+            <li class="rail-step">
+                <div class="rail-node">02</div>
+                <div class="rail-stage">Stage 02</div>
+                <h3>Observe</h3>
+                <p>
+                    Every call becomes a node in a trace graph, so you can answer "what did this agent
+                    touch?" instead of guessing from logs.
+                </p>
+                <ul class="step-detail">
+                    <li>Interaction DAG: human → agent → agent → tool</li>
+                    <li>Full trace replay for incident review</li>
+                    <li>Per-agent cost and token attribution</li>
+                    <li>Export to 11 SIEM platforms — CEF, LEEF, STIX 2.1, ECS</li>
+                </ul>
+            </li>
+            <li class="rail-step">
+                <div class="rail-node">03</div>
+                <div class="rail-stage">Stage 03</div>
+                <h3>Govern</h3>
+                <p>
+                    Policies compile down to enforcement that runs inline, at the moment the agent acts —
+                    not in a report you read the next morning.
+                </p>
+                <ul class="step-detail">
+                    <li>12 DLP patterns scanned in real time — SSN, PHI, keys, secrets</li>
+                    <li>10 threat signatures — prompt injection, jailbreak, exfiltration</li>
+                    <li>Kernel-level blocking on Windows (WFP callout driver)</li>
+                    <li>Human-in-the-loop approval queue for high-risk actions</li>
+                </ul>
+            </li>
+        </ol>
+
+
+
+    </div>
+</section>
+
+<!-- ══ PRICING ══════════════════════════════════════════════════════════ -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <div class="section-header center" style="margin-bottom:0">
+            <div class="section-eyebrow" style="justify-content:center">Pricing</div>
+            <h2 class="section-title">Pricing tailored to your organization</h2>
+            <p class="section-sub">
+                FORGE is priced per deployment, not per seat off a rate card. Environment size, deployment model
+                and enforcement scope all move the number — so we quote it properly instead of guessing publicly.
+            </p>
+        </div>
+
+        <div class="price-card">
+            <h3>Let's scope it together</h3>
+            <p>
+                Tell us how many endpoints you're covering and where your agents run. We'll come back with a
+                deployment plan and a price, typically within two business days.
+            </p>
+
+            <div class="price-factors">
+                <div class="price-factor">
+                    <div class="pf-title">Environment size</div>
+                    <div class="pf-sub">Endpoints under management and number of agents discovered.</div>
+                </div>
+                <div class="price-factor">
+                    <div class="pf-title">Deployment model</div>
+                    <div class="pf-sub">Self-hosted in your network, or managed by Privify.</div>
+                </div>
+                <div class="price-factor">
+                    <div class="pf-title">Enforcement scope</div>
+                    <div class="pf-sub">Monitoring only, or inline blocking with kernel-level enforcement.</div>
+                </div>
+            </div>
+
+            <div class="price-included">
+                <span class="pi-chip"><i class="fa-solid fa-check"></i> All three pillars included</span>
+                <span class="pi-chip"><i class="fa-solid fa-check"></i> 13 compliance frameworks</span>
+                <span class="pi-chip"><i class="fa-solid fa-check"></i> 11 SIEM integrations</span>
+                <span class="pi-chip"><i class="fa-solid fa-check"></i> No per-seat licensing</span>
+            </div>
+
+            <a href="contact.html?product=forge&amp;intent=pricing" class="btn btn-forge" onclick="track('CTA_ContactPricing')">
+                Contact us for pricing <i class="fa-solid fa-arrow-right fa-xs"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FAQ — objection handling, placed where objections actually surface:
+     immediately after pricing, while the enterprise track is still in view ══ -->
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="faq-grid">
+
+            <div>
+                <div class="section-eyebrow">FAQ</div>
+                <h2 class="faq-title">Questions we get from security teams</h2>
+                <p class="faq-aside">
+                    Something not covered here? <a href="contact.html?intent=other">Ask us directly</a> —
+                    it reaches the founding team, not a queue.
+                </p>
+            </div>
+
+            <div class="faq-list">
+
+                <details class="faq-item" name="faq">
+                    <summary>Where does FORGE run, and does our data leave our network?</summary>
+                    <div class="faq-answer">
+                        <p>
+                            FORGE is designed to run inside your own environment. The management plane, database
+                            and event store are yours, and the discovery probes execute on the endpoint and
+                            report to your management plane — not to us.
+                        </p>
+                        <p>
+                            In a self-hosted deployment, <strong>your agent activity, traces and DLP findings
+                            never reach Privify.</strong> That is the point of putting the control plane where
+                            your data already lives.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="faq-item" name="faq">
+                    <summary>Which platforms do you support?</summary>
+                    <div class="faq-answer">
+                        <p>
+                            <strong>Inline blocking on Windows, macOS and Linux.</strong> Policy is evaluated
+                            at the moment an agent acts, and a blocked call is stopped before it reaches the
+                            provider rather than logged after the fact.
+                        </p>
+                        <p>
+                            On Windows, enforcement additionally runs in the OS network stack via a kernel
+                            driver, evaluating policy at the TCP connect boundary — <strong>which applies
+                            regardless of how the agent routes its traffic.</strong> If unconditional
+                            enforcement is a control requirement for you, that's the deployment to ask about.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="faq-item" name="faq">
+                    <summary>How is this different from the DLP or CASB we already own?</summary>
+                    <div class="faq-answer">
+                        <p>
+                            <strong>Those tools were not built for AI.</strong> A CASB governs sanctioned SaaS.
+                            A DLP inspects data leaving a known channel. Neither was designed for one agent
+                            calling another, a tool invocation on your behalf, or a model running locally on a
+                            developer's laptop.
+                        </p>
+                        <p>
+                            FORGE watches the layer they were never pointed at — and then feeds what it finds
+                            back into the stack you already run, across 11 SIEM platforms. You don't replace
+                            your existing controls. You make them see what they were blind to.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="faq-item" name="faq">
+                    <summary>How does your system deploy?</summary>
+                    <div class="faq-answer">
+                        <p>
+                            Through several protection points, and the right combination depends on where your
+                            agents actually run: an endpoint agent, a browser extension for AI used in the
+                            browser, a proxy for CLI-based AI tools, and host probes for discovery.
+                        </p>
+                        <p>
+                            Some teams start with discovery only and add enforcement once they've seen what
+                            turns up. Others go straight to inline policy. <strong>Worth a conversation rather
+                            than a checkbox</strong> — <a href="contact.html?intent=poc">tell us about your
+                            environment</a> and we'll map it out with you.
+                        </p>
+                    </div>
+                </details>
+
             </div>
         </div>
     </div>
 </section>
 
-<section class="products" id="products">
+<!-- ══ SHIELD TRACK ═════════════════════════════════════════════════════ -->
+<section class="track track-shield" id="shield">
     <div class="container">
-        <div style="text-align:center;margin-bottom:0.5rem">
-            <div class="section-eyebrow" style="display:inline-flex">What we build</div>
-        </div>
-        <h2 class="section-title" style="text-align:center;font-size:clamp(1.5rem,2.5vw,2rem)">Two products. Both in early access.</h2>
-        <div class="products-grid">
-
-            <a href="platform/index.html" class="product-card featured">
-                <div class="product-label enterprise">Enterprise — Early access</div>
-                <h3>FORGE</h3>
-                <p>Discover every AI agent in your enterprise, map every interaction, and enforce policy in real time. Three pillars: Discovery, Observability, Governance.</p>
-                <ul class="product-features">
-                    <li>Automatic shadow AI detection — endpoint, network and file probes</li>
-                    <li>Full interaction graph: human to agent, agent to agent, agent to tool</li>
-                    <li>Real-time DLP, AI firewall, and human-in-the-loop approvals</li>
-                    <li>11 compliance frameworks including GDPR, HIPAA, DPDP Act (India)</li>
-                    <li>11 SIEM integrations — CEF, LEEF, STIX 2.1, ECS</li>
-                </ul>
-                <span class="product-cta">Explore FORGE <i class="fa-solid fa-arrow-right fa-xs"></i></span>
-                <div class="pc-glow"></div>
-            </a>
-
-            <a href="privacy/index.html" class="product-card">
-                <div class="product-label consumer">Consumer — Coming soon</div>
-                <h3>SHIELD</h3>
-                <p>Your data trains AI models every day without your consent. Privify's data protection tools let you opt out, stay in control, and earn rewards from ethical data usage.</p>
-                <ul class="product-features">
-                    <li>Opt out of AI training datasets</li>
-                    <li>See which services are using your data</li>
-                    <li>Earn rewards from ethical data licensing</li>
-                    <li>Works with Google, LinkedIn, Amazon and more</li>
-                </ul>
-                <span class="product-cta">Join the SHIELD waitlist <i class="fa-solid fa-arrow-right fa-xs"></i></span>
-                <div class="pc-glow"></div>
-            </a>
-
+        <div class="section-header" style="max-width:720px">
+            <div class="track-tag">SHIELD · For individuals</div>
+            <h2 class="section-title">You never agreed to be training data</h2>
+            <p class="section-sub">
+                Every photo you post, every review you write, every message you send is feeding a model
+                somewhere. You weren't asked. You weren't paid. And there's no obvious way to say no.
+            </p>
+            <p class="section-sub" style="margin-top:1rem">
+                SHIELD is being built to change that — a single place to see who's taking your data, opt out
+                where you can, and get paid when you choose to share it.
+            </p>
+            <div class="fork-actions" style="margin-top:2rem">
+                <a href="privacy/index.html#waitlist" class="btn btn-shield" onclick="track('CTA_ShieldWaitlist_Track')">
+                    Join the waitlist <i class="fa-solid fa-arrow-right fa-xs"></i>
+                </a>
+                <a href="tools/photoScrubber/index.html" class="btn btn-ghost">Try Photo Scrubber — free</a>
+            </div>
+            <p style="font-size:0.78rem;color:var(--gray-500);margin-top:1.25rem;line-height:1.6">
+                SHIELD hasn't launched yet. Photo Scrubber is live today and free — it strips metadata from your
+                images in your browser, and your photos are never uploaded to us.
+            </p>
         </div>
     </div>
 </section>
 
+<!-- ══ MISSION — moved below the fork, per redesign ═════════════════════ -->
 <section class="mission">
     <div class="container">
         <div class="mission-inner">
@@ -283,7 +902,7 @@
                     <div class="m-stat-label">AI providers in our risk registry</div>
                 </div>
                 <div class="m-stat">
-                    <div class="m-stat-num">11</div>
+                    <div class="m-stat-num">13</div>
                     <div class="m-stat-label">Compliance frameworks supported</div>
                 </div>
                 <div class="m-stat">
@@ -294,6 +913,24 @@
         </div>
     </div>
 </section>
+
+<!-- ══ FINAL CTA ════════════════════════════════════════════════════════ -->
+<section class="final-cta">
+    <div class="container">
+        <h2>See what's already running in your environment</h2>
+        <p>
+            Most teams are surprised by what turns up in the first scan. We'll walk you through a live
+            deployment on your infrastructure.
+        </p>
+        <div class="final-actions">
+            <a href="contact.html?product=forge&amp;intent=demo" class="btn btn-forge" onclick="track('CTA_FinalDemo')">
+                Request a demo <i class="fa-solid fa-arrow-right fa-xs"></i>
+            </a>
+            <a href="forge/demo/index.html" class="btn btn-ghost">&#9654; Try the interactive demo</a>
+        </div>
+    </div>
+</section>
+
 </main>
 
 <footer class="footer">
@@ -304,38 +941,177 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="22" width="22" style="opacity:0.4"><g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g></svg>
                     PRIVIFY
                 </a>
-                <p class="footer-tagline">Building tools that put people and enterprises in control of AI.</p>
+                <p class="footer-tagline">Building tools that put enterprises and people in control of AI.</p>
             </div>
             <div class="footer-cols">
                 <div class="footer-col">
-                    <div class="footer-col-title">Products</div>
-                    <a href="platform/index.html" class="footer-link">FORGE</a>
-                    <a href="privacy/index.html" class="footer-link">SHIELD</a>
-                    <a href="tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
-                </div>
-                <div class="footer-col">
-                    <div class="footer-col-title">Platform</div>
+                    <div class="footer-col-title">FORGE</div>
+                    <a href="platform/index.html" class="footer-link">Overview</a>
                     <a href="forge/demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
                     <a href="platform/index.html#deployment" class="footer-link">Deployment</a>
                     <a href="platform/index.html#compliance" class="footer-link">Compliance</a>
                     <a href="platform/index.html#integrations" class="footer-link">Integrations</a>
-                    <a href="platform/index.html#interest" class="footer-link">Request Access</a>
+                    <a href="#pricing" class="footer-link">Pricing</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">SHIELD</div>
+                    <a href="privacy/index.html" class="footer-link">Overview</a>
+                    <a href="privacy/index.html#waitlist" class="footer-link">Join waitlist</a>
+                    <a href="tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
                 </div>
                 <div class="footer-col">
                     <div class="footer-col-title">Company</div>
                     <a href="careers.html" class="footer-link">Careers</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
                 </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Legal &amp; Trust</div>
+                    <a href="security.html" class="footer-link">Security</a>
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="terms.html" class="footer-link">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-utility">
+            <div class="fu-left">
+                <a href="llms.txt" class="fu-chip fu-mono">LLMS.TXT</a>
+                <span class="fu-label">Get an AI summary of this page</span>
+                <span class="fu-ai" id="fuAI">
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://claude.ai/new?q=Summarise%20https%3A%2F%2Fprivify.io"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg> Claude</a>
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://chatgpt.com/?q=Summarise%20https%3A%2F%2Fprivify.io">ChatGPT</a>
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://www.perplexity.ai/search?q=Summarise%20https%3A%2F%2Fprivify.io"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M22.3977 7.0896h-2.3106V.0676l-7.5094 6.3542V.1577h-1.1554v6.1966L4.4904 0v7.0896H1.6023v10.3976h2.8882V24l6.932-6.3591v6.2005h1.1554v-6.0469l6.9318 6.1807v-6.4879h2.8882V7.0896zm-3.4657-4.531v4.531h-5.355l5.355-4.531zm-13.2862.0676 4.8691 4.4634H5.6458V2.6262zM2.7576 16.332V8.245h7.8476l-6.1149 6.1147v1.9723H2.7576zm2.8882 5.0404v-3.8852h.0001v-2.6488l5.7763-5.7764v7.0111l-5.7764 5.2993zm12.7086.0248-5.7766-5.1509V9.0618l5.7766 5.7766v6.5588zm2.8882-5.0652h-1.733v-1.9723L13.3948 8.245h7.8478v8.087z"/></svg> Perplexity</a>
+                </span>
+            </div>
+            <div class="fu-right">
+                <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
+                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
             </div>
         </div>
         <div class="footer-bottom">
             <span>© 2026 Privify Inc. All rights reserved.</span>
+            <span style="font-size:0.75rem;color:var(--gray-800)">Privify is not SOC 2 certified. Security practices are aligned with the Trust Services Criteria.</span>
         </div>
     </div>
 </footer>
 
 <script>
+/*  HERO DISCOVERY FIELD
+    A scatter of marks representing AI activity across an environment. Most sit
+    at near-zero opacity — running, unseen. On load a sweep crosses the field and
+    brings them into view, a few in the brand accent. That is the product thesis
+    rendered rather than decorated: discovery.
+
+    Draws once and stops. No perpetual animation — it should feel like a single
+    considered moment, not an ambient effect.                                   */
+(function heroField(){
+    const cv = document.getElementById('heroField');
+    if (!cv || !cv.getContext) return;
+    const ctx = cv.getContext('2d');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ACCENT = '232,93,84';
+    let marks = [], W = 0, H = 0, raf = null;
+
+    function build(){
+        const r = cv.getBoundingClientRect();
+        if (!r.width || !r.height) return false;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = r.width; H = r.height;
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        marks = [];
+        const step = W < 700 ? 28 : 22;
+        for (let gy = step * 0.5; gy < H; gy += step) {
+            for (let gx = step * 0.5; gx < W; gx += step) {
+                if (Math.random() < 0.26) continue;              // keep it sparse
+
+                // Left of the field is ungoverned: tall, jittered, irregular, dim.
+                // It resolves rightward into short, aligned, regular, brighter
+                // marks. Chaos becoming order — the product, as texture.
+                const t     = gx / W;
+                const order = Math.min(Math.max((t - 0.28) / 0.56, 0), 1);
+                const chaos = 1 - order;
+
+                // At order = 1 the jitter goes to zero and every tick is the same
+                // short length, so the rows visibly align. That alignment is what
+                // makes "order" legible at a glance rather than only when zoomed.
+                marks.push({
+                    x: gx + (Math.random() - 0.5) * step * chaos * 0.85,
+                    y: gy + (Math.random() - 0.5) * step * chaos * 1.7,
+                    h: 4 + chaos * chaos * 26 + Math.random() * chaos * 13,
+                    accent: Math.random() < (0.015 + order * 0.19),
+                    gain:   0.45 + order * 1.15,
+                    lit: 0
+                });
+            }
+        }
+        return true;
+    }
+
+    function paint(sweep){
+        ctx.clearRect(0, 0, W, H);
+        for (const m of marks) {
+            const target = sweep === null ? 1 : (m.x < sweep ? 1 : 0);
+            m.lit += (target - m.lit) * 0.14;
+            const a = (0.05 + m.lit * (m.accent ? 0.62 : 0.22)) * m.gain;
+            ctx.strokeStyle = m.accent ? 'rgba(' + ACCENT + ',' + a + ')'
+                                       : 'rgba(255,255,255,' + a + ')';
+            ctx.lineWidth = m.accent ? 1.6 : 1;
+            ctx.beginPath();
+            ctx.moveTo(m.x, m.y - m.h / 2);
+            ctx.lineTo(m.x, m.y + m.h / 2);
+            ctx.stroke();
+        }
+    }
+
+    function run(){
+        if (!build()) return;
+        if (reduce) { marks.forEach(m => m.lit = 1); paint(null); return; }
+        const t0 = performance.now(), DUR = 1900;
+        (function frame(now){
+            const t = Math.min((now - t0) / DUR, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            paint(eased * (W * 1.25));
+            if (t < 1) { raf = requestAnimationFrame(frame); }
+            else { paint(null); paint(null); }   // settle, then stop
+        })(t0);
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (raf) cancelAnimationFrame(raf);
+            if (build()) { marks.forEach(m => m.lit = 1); paint(null); }
+        }, 180);
+    });
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+    else run();
+})();
+
+
+//  FAQ accordion. Modern browsers group <details name="faq"> natively — opening
+//  one closes the rest. This only runs where that attribute is unsupported.
+if (!('name' in document.createElement('details'))) {
+    document.querySelectorAll('.faq-item').forEach(function (d) {
+        d.addEventListener('toggle', function () {
+            if (!d.open) return;
+            document.querySelectorAll('.faq-item[open]').forEach(function (other) {
+                if (other !== d) other.open = false;
+            });
+        });
+    });
+}
+
+function track(name){ if(window.plausible) plausible(name); }
+
 const hdr = document.getElementById('header');
 window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.pageYOffset > 50));
+
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('.mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
@@ -343,6 +1119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', e => { e.preventDefault(); const open = menu.classList.toggle('open'); menu.setAttribute('aria-hidden', String(!open)); });
     document.addEventListener('click', e => { if (!menu.classList.contains('open')) return; if (!hdr.contains(e.target)&&!menu.contains(e.target)) { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } });
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.dropdown').forEach(dd => {
         const toggle = dd.querySelector('.dropdown-toggle');
@@ -351,8 +1128,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.addEventListener('click', () => document.querySelectorAll('.dropdown').forEach(dd => { dd.classList.remove('open'); const t=dd.querySelector('.dropdown-toggle');if(t)t.setAttribute('aria-expanded','false'); }));
 });
-const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);} }), {threshold:0.08});
-document.querySelectorAll('.product-card, .m-stat').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
+
+//  Scroll reveal. Skipped entirely when the visitor asks for reduced motion —
+//  the elements are then simply visible, never hidden by JS in the first place.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);} }), {threshold:0.08});
+    document.querySelectorAll('.rail-step, .gap-chip, .diff-card, .m-stat, .price-factor').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior:'smooth', block:'start' });
+        const m = document.getElementById('mobile-menu');
+        if (m) { m.classList.remove('open'); m.setAttribute('aria-hidden','true'); }
+    });
+});
+</script>
+<script>
+(function(){
+    var row = document.getElementById('fuAI');
+    if (!row) return;
+    var here = 'https://privify.io' + location.pathname;   // never leak preview/localhost hosts
+    row.querySelectorAll('a[href]').forEach(function(a){
+        a.href = a.href.replace(/https%3A%2F%2Fprivify\.io/, encodeURIComponent(here));
+    });
+})();
 </script>
 </body>
 </html>
