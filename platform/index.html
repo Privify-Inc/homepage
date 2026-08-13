@@ -34,6 +34,9 @@
             --gray-50: #F9FAFB;
             --gray-100: #F5F5F5;
             --gray-400: #9CA3AF;
+            --text-3: #858C97;      /* small detail text, 5.73:1 on --surface */
+            --ok: var(--ok);          /* semantic: healthy / supported */
+            --warn: var(--warn);        /* semantic: partial / attention */
             --gray-500: #6B7280;
             --gray-600: #4B5563;
             --gray-700: #374151;
@@ -117,7 +120,7 @@
         }
         
         .di-title { font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px; }
-        .di-sub { font-size:0.75rem;color:var(--gray-600); }
+        .di-sub { font-size:0.75rem;color:var(--text-3); }
         .dropdown-item:hover { background:rgba(255,255,255,0.05); color:var(--white); }
         .mobile-menu-btn { display:none; background:none; border:none; color:var(--white); cursor:pointer; padding:0.5rem; }
         .mobile-menu {
@@ -209,8 +212,8 @@
         .db-stat-label { font-size:0.6rem; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:3px; }
         .db-stat-val { font-size:1rem; font-weight:700; color:var(--white); }
         .db-stat-val.red { color:var(--red); }
-        .db-stat-val.green { color:#34d399; }
-        .db-stat-val.amber { color:#fbbf24; }
+        .db-stat-val.green { color:var(--ok); }
+        .db-stat-val.amber { color:var(--warn); }
         .db-chart { background:var(--surface-3); border:1px solid var(--border); border-radius:8px; padding:0.75rem; margin-bottom:0.75rem; }
         .db-chart-label { font-size:0.6rem; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; }
         .db-bars { display:flex; align-items:flex-end; gap:3px; height:48px; }
@@ -231,8 +234,8 @@
             border-radius:3px; white-space:nowrap;
         }
         .risk-high { background:rgba(232,93,84,0.2); color:var(--red); }
-        .risk-ok { background:rgba(52,211,153,0.15); color:#34d399; }
-        .risk-med { background:rgba(251,191,36,0.15); color:#fbbf24; }
+        .risk-ok { background:rgba(52,211,153,0.15); color:var(--ok); }
+        .risk-med { background:rgba(251,191,36,0.15); color:var(--warn); }
 
         /*  SECTION COMMON  */
         section { padding:6rem 0; }
@@ -254,16 +257,19 @@
 
         /*  LOGOS BAR  */
         .logos-bar { padding:3rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-        .logos-bar-label { text-align:center; font-size:0.8rem; color:var(--gray-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2rem; }
-        .logos-scroll { display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; }
-        .logo-item { font-size:0.875rem; font-weight:600; color:var(--gray-700); letter-spacing:0.02em; white-space:nowrap; }
+        .logos-bar-label { text-align:center; font-size:0.8rem; color:var(--text-3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2rem; }
+        .logos-scroll { display:flex; align-items:center; justify-content:center; gap:1.15rem 2rem; flex-wrap:wrap; }
+        .logo-item { font-size:0.875rem; font-weight:600; color:var(--text-3); letter-spacing:0.02em; white-space:nowrap;
+                     display:inline-flex; align-items:center; gap:0.45rem; transition:color 0.2s; }
+        .logo-item:hover { color:var(--white); }
+        .logo-item svg { width:15px; height:15px; fill:currentColor; opacity:0.8; flex-shrink:0; }
 
         /*  THREE PILLARS  */
         .pillars { background:var(--surface); }
         .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
         .pillar { background:var(--black); padding:2.5rem 2rem; position:relative; overflow:hidden; transition:background 0.3s; }
         .pillar:hover { background:var(--surface-2); }
-        .pillar-num { font-family:var(--mono); font-size:0.7rem; color:var(--gray-700); margin-bottom:1.25rem; }
+        .pillar-num { font-family:var(--mono); font-size:0.7rem; color:var(--gray-500); margin-bottom:1.25rem; }
         .pillar-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; font-size:1.25rem; }
         .pillar-icon.blue { background:rgba(59,130,246,0.12); }
         .pillar-icon.teal { background:rgba(20,184,166,0.12); }
@@ -274,9 +280,9 @@
         .pillar-features li { font-size:0.825rem; color:var(--gray-500); display:flex; align-items:flex-start; gap:0.5rem; }
         .pillar-features li::before { content:'→'; color:var(--red); font-size:0.75rem; margin-top:1px; flex-shrink:0; }
         .pillar-glow { position:absolute; bottom:-40px; right:-40px; width:120px; height:120px; border-radius:50%; opacity:0.04; }
-        .pillar:nth-child(1) .pillar-glow { background:#3b82f6; }
-        .pillar:nth-child(2) .pillar-glow { background:#14b8a6; }
-        .pillar:nth-child(3) .pillar-glow { background:#8b5cf6; }
+        .pillar:nth-child(1) .pillar-glow { background:var(--red); }
+        .pillar:nth-child(2) .pillar-glow { background:var(--red); }
+        .pillar:nth-child(3) .pillar-glow { background:var(--red); }
 
         /*  FEATURES GRID  */
         .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
@@ -315,7 +321,7 @@
         }
         .dash-nav-item {
             display:flex; align-items:center; gap:0.625rem;
-            padding:0.5rem 1.25rem; font-size:0.8rem; color:var(--gray-600);
+            padding:0.5rem 1.25rem; font-size:0.8rem; color:var(--text-3);
             cursor:default;
         }
         .dash-nav-item.active { color:var(--white); background:rgba(255,255,255,0.05); border-left:2px solid var(--red); }
@@ -327,11 +333,11 @@
             background:var(--surface-3); border:1px solid var(--border);
             border-radius:8px; padding:0.875rem 1rem;
         }
-        .dsc-label { font-size:0.65rem; color:var(--gray-600); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+        .dsc-label { font-size:0.65rem; color:var(--text-3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
         .dsc-val { font-size:1.375rem; font-weight:700; color:var(--white); }
-        .dsc-val.red{color:var(--red);} .dsc-val.green{color:#34d399;} .dsc-val.amber{color:#fbbf24;}
+        .dsc-val.red{color:var(--red);} .dsc-val.green{color:var(--ok);} .dsc-val.amber{color:var(--warn);}
         .dsc-change { font-size:0.65rem; margin-top:2px; }
-        .dsc-change.up{color:#34d399;} .dsc-change.down{color:var(--red);}
+        .dsc-change.up{color:var(--ok);} .dsc-change.down{color:var(--red);}
         .dash-row { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem; }
         .dash-panel { background:var(--surface-3); border:1px solid var(--border); border-radius:8px; padding:0.875rem 1rem; }
         .dash-panel-title { font-size:0.7rem; color:var(--gray-600); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem; }
@@ -342,8 +348,8 @@
         .agent-conf { font-size:0.65rem; color:var(--gray-600); }
         .risk-badge { font-size:0.58rem; font-weight:600; padding:2px 6px; border-radius:3px; }
         .rb-critical{background:rgba(232,93,84,0.2);color:var(--red);}
-        .rb-medium{background:rgba(251,191,36,0.15);color:#fbbf24;}
-        .rb-low{background:rgba(52,211,153,0.12);color:#34d399;}
+        .rb-medium{background:rgba(251,191,36,0.15);color:var(--warn);}
+        .rb-low{background:rgba(52,211,153,0.12);color:var(--ok);}
         .event-row { display:flex; align-items:flex-start; gap:0.5rem; padding:0.3rem 0; border-bottom:1px solid var(--border); }
         .event-row:last-child{border-bottom:none;}
         .event-type { font-size:0.58rem; font-family:var(--mono); background:var(--surface); color:var(--red); padding:1px 5px; border-radius:3px; white-space:nowrap; }
@@ -371,7 +377,7 @@
         .deploy-specs { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; }
         .deploy-spec { background:var(--surface-3); border-radius:6px; padding:0.5rem; text-align:center; }
         .deploy-spec-val { font-size:0.875rem; font-weight:700; color:var(--white); }
-        .deploy-spec-label { font-size:0.6rem; color:var(--gray-600); margin-top:2px; }
+        .deploy-spec-label { font-size:0.6rem; color:var(--text-3); margin-top:2px; }
 
         /*  INTEGRATIONS  */
         .integrations-section { background:var(--surface); }
@@ -393,7 +399,7 @@
         .compliance-controls { font-size:0.75rem; color:var(--gray-500); margin-bottom:0.875rem; }
         .compliance-bar { background:var(--surface-3); height:4px; border-radius:2px; overflow:hidden; }
         .compliance-fill { height:100%; background:var(--red); border-radius:2px; }
-        .compliance-status { font-size:0.7rem; font-weight:600; margin-top:0.5rem; color:#34d399; }
+        .compliance-status { font-size:0.7rem; font-weight:600; margin-top:0.5rem; color:var(--ok); }
         .compliance-badges { display:flex; justify-content:center; flex-wrap:wrap; gap:0.5rem; }
         .compliance-badge { font-size:0.75rem; font-weight:600; padding:0.375rem 0.875rem; border-radius:6px; }
 
@@ -406,7 +412,7 @@
         .advantage p { font-size:0.85rem; color:var(--gray-500); line-height:1.65; }
         .adv-tag { display:inline-block; margin-top:0.75rem; font-size:0.68rem; font-weight:700; padding:2px 7px; border-radius:4px; }
         .adv-unique { background:rgba(232,93,84,0.12); color:var(--red); }
-        .adv-parity { background:rgba(52,211,153,0.1); color:#34d399; }
+        .adv-parity { background:rgba(52,211,153,0.1); color:var(--ok); }
 
         /*  EASY INTEGRATION  */
         .integration-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
@@ -443,7 +449,7 @@
             border-radius:8px; padding:0.75rem 1rem; color:var(--white);
             font-size:0.9rem; font-family:inherit; outline:none; transition:border-color 0.2s;
         }
-        .signup-input::placeholder { color:var(--gray-600); }
+        .signup-input::placeholder { color:var(--text-3); }
         .signup-input:focus { border-color:rgba(232,93,84,0.5); }
         .signup-select {
             flex:1; min-width:180px; background:var(--surface-2); border:1px solid var(--border);
@@ -459,7 +465,7 @@
             font-size:0.875rem; font-family:inherit; outline:none; resize:vertical;
             transition:border-color 0.2s; min-height:80px; display:block; margin:0 auto 1rem;
         }
-        .signup-textarea::placeholder { color:var(--gray-600); }
+        .signup-textarea::placeholder { color:var(--text-3); }
         .signup-textarea:focus { border-color:rgba(232,93,84,0.5); }
         .signup-submit {
             background:var(--red); color:var(--white);
@@ -468,21 +474,21 @@
             transition:all 0.2s; font-family:inherit;
         }
         .signup-submit:hover { background:#d44e46; transform:translateY(-2px); box-shadow:0 6px 24px var(--red-glow); }
-        .signup-privacy { font-size:0.75rem; color:var(--gray-700); margin-top:0.875rem; }
+        .signup-privacy { font-size:0.75rem; color:var(--gray-500); margin-top:0.875rem; }
         .signup-success { display:none; padding:1.5rem; }
-        .signup-success h3 { font-size:1.25rem; font-weight:700; margin-bottom:0.5rem; color:#34d399; }
+        .signup-success h3 { font-size:1.25rem; font-weight:700; margin-bottom:0.5rem; color:var(--ok); }
         .signup-success p { font-size:0.9rem; color:var(--gray-400); }
         .trust-row { display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:1.5rem; }
-        .trust-item { display:flex; align-items:center; gap:0.375rem; font-size:0.8rem; color:var(--gray-600); }
+        .trust-item { display:flex; align-items:center; gap:0.375rem; font-size:0.8rem; color:var(--text-3); }
         .trust-item i { color:var(--red); font-size:0.7rem; }
 
         /*  FOOTER  */
         .footer { padding:3rem 0 2rem; border-top:1px solid var(--border); margin-top:0; }
         .footer-content { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
-        .footer-left { display:flex; align-items:center; gap:0.75rem; color:var(--gray-600); font-size:0.85rem; }
+        .footer-left { display:flex; align-items:center; gap:0.75rem; color:var(--text-3); font-size:0.85rem; }
         .footer-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; color:var(--gray-500); }
         .footer-links { display:flex; gap:2rem; list-style:none; }
-        .footer-link { color:var(--gray-600); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
+        .footer-link { color:var(--text-3); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
         .footer-link:hover { color:var(--white); }
 
         /*  ANIMATIONS  */
@@ -621,21 +627,21 @@
         .cmp-unique {
             display:inline-block; margin-left:7px; padding:1px 6px; border-radius:3px;
             font-size:8px; font-weight:800; letter-spacing:0.07em;
-            background:rgba(232,93,84,0.15); color:#f87171;
+            background:rgba(232,93,84,0.15); color:#EE8A83;
             border:1px solid rgba(232,93,84,0.28); vertical-align:middle; white-space:nowrap;
         }
         td.cmp-others { color:rgba(255,255,255,0.22); font-size:12.5px; }
         .cmp-no { display:inline-flex; align-items:center; gap:7px; color:rgba(255,255,255,0.18); }
         .cmp-no::before { content:'\2715'; font-size:12px; color:rgba(255,255,255,0.12); }
-        .cmp-partial { color:#F0A500; font-size:12px; }
+        .cmp-partial { color:var(--warn); font-size:12px; }
         td.cmp-forge-cell {
             background:rgba(232,93,84,0.05); border-left:1px solid rgba(232,93,84,0.18);
             font-weight:700; font-size:12.5px; color:#fff;
         }
         .cmp-yes { display:inline-flex; align-items:center; gap:8px; color:#fff; }
-        .cmp-yes::before { content:'\2713'; color:#22C55E; font-size:13px; font-weight:900; flex-shrink:0; }
-        .cmp-planned { color:#60A5FA; font-style:italic; font-weight:500; font-size:12px; }
-        .cmp-planned::before { content:'\25CB\00A0'; color:#60A5FA; font-style:normal; }
+        .cmp-yes::before { content:'\2713'; color:var(--ok); font-size:13px; font-weight:900; flex-shrink:0; }
+        .cmp-planned { color:var(--text-3); font-style:italic; font-weight:500; font-size:12px; }
+        .cmp-planned::before { content:'\25CB\00A0'; color:var(--text-3); font-style:normal; }
         .cmp-observation {
             background:rgba(232,93,84,0.06); border:1px solid rgba(232,93,84,0.18);
             border-radius:10px; padding:22px 26px;
@@ -732,6 +738,42 @@
                 animation-duration:0.01ms !important; animation-iteration-count:1 !important;
                 transition-duration:0.01ms !important; scroll-behavior:auto !important;
             }
+        }
+
+        /* COVERAGE MAP — the gateway blind-spot diagram.
+           Built from CSS boxes rather than SVG so the labels stay selectable
+           and the whole thing reflows to one column on narrow screens. */
+        .gap-map { position:relative;border:1px solid rgba(232,93,84,0.35);border-radius:18px;
+                   padding:2.75rem 1.75rem 1.75rem;margin-top:2.75rem;
+                   background:radial-gradient(ellipse 70% 90% at 80% 10%,rgba(232,93,84,0.05),transparent 70%); }
+        .gap-map-head { position:absolute;top:-0.62rem;left:1.5rem;background:var(--surface);
+                        padding:0 0.7rem;font-family:var(--mono);font-size:0.68rem;font-weight:500;
+                        letter-spacing:0.12em;text-transform:uppercase;color:var(--red); }
+        .gap-map-body { display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:1.75rem;align-items:center; }
+        /* Sized to its contents on purpose — the gateway's coverage should look
+           small next to the list of what falls outside it. */
+        .gap-inner { position:relative;border:1px dashed var(--gray-700);border-radius:13px;
+                     padding:2.25rem 1.35rem 1.5rem;background:rgba(255,255,255,0.015); }
+        .track-gap .section-header .section-eyebrow { display:flex;margin-top:0.9rem;margin-bottom:0.7rem; }
+        .gap-inner-head { position:absolute;top:-0.58rem;left:1.15rem;background:var(--surface);
+                          padding:0 0.6rem;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;
+                          text-transform:uppercase;color:var(--text-3); }
+        .gap-node { border:1px solid var(--border-h);border-radius:8px;background:var(--surface-2);
+                    padding:0.8rem 1rem;font-size:0.85rem;font-weight:600;color:var(--gray-400);text-align:center; }
+        .gap-inner-note { font-size:0.72rem;color:var(--gray-500);text-align:center;margin-top:0.85rem;line-height:1.5; }
+        .gap-chips { display:flex;flex-direction:column;gap:0.85rem; }
+        .gap-chip { display:flex;gap:0.8rem;align-items:flex-start; }
+        .gap-chip-mark { flex-shrink:0;width:1.4rem;height:1.4rem;border-radius:50%;border:1px solid rgba(232,93,84,0.4);
+                         color:var(--red);font-size:0.7rem;display:flex;align-items:center;justify-content:center;margin-top:1px; }
+        .gap-chip-t { font-size:0.88rem;font-weight:650;color:var(--white);display:block;margin-bottom:1px; }
+        .gap-chip-s { font-size:0.79rem;color:var(--text-3);line-height:1.5;display:block; }
+        .gap-map-foot { margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid rgba(232,93,84,0.18);
+                        font-size:0.79rem;color:var(--gray-400);display:flex;align-items:center;gap:0.6rem;line-height:1.5; }
+        .gap-map-foot i { color:var(--red);font-size:0.8rem;flex-shrink:0; }
+        .gap-caption { font-size:0.9rem;color:var(--gray-400);line-height:1.7;margin-top:1.5rem;max-width:720px; }
+        @media(max-width:900px){
+            .gap-map-body{grid-template-columns:1fr;gap:1.5rem;}
+            .gap-inner{min-height:0;}
         }
 </style>
 </head>
@@ -854,7 +896,7 @@
                     </div>
                     <div class="db-agents">
                         <div class="db-agent">
-                            <div class="db-agent-dot" style="background:#34d399"></div>
+                            <div class="db-agent-dot" style="background:var(--ok)"></div>
                             <div class="db-agent-info"><div class="db-agent-name">research-agent-v2</div><div class="db-agent-sub">autonomous · 94% conf</div></div>
                             <div class="db-agent-risk risk-ok">Active</div>
                         </div>
@@ -864,12 +906,12 @@
                             <div class="db-agent-risk risk-high">Critical</div>
                         </div>
                         <div class="db-agent">
-                            <div class="db-agent-dot" style="background:#fbbf24"></div>
+                            <div class="db-agent-dot" style="background:var(--warn)"></div>
                             <div class="db-agent-info"><div class="db-agent-name">sales-copilot-prod</div><div class="db-agent-sub">api_consumer · 78%</div></div>
                             <div class="db-agent-risk risk-med">Review</div>
                         </div>
                         <div class="db-agent">
-                            <div class="db-agent-dot" style="background:#34d399"></div>
+                            <div class="db-agent-dot" style="background:var(--ok)"></div>
                             <div class="db-agent-info"><div class="db-agent-name">ollama-local-3</div><div class="db-agent-sub">local_llm · endpoint</div></div>
                             <div class="db-agent-risk risk-ok">Governed</div>
                         </div>
@@ -907,13 +949,13 @@
         <div class="logos-bar-label">Designed for teams running agents on</div>
         <div class="logos-scroll">
             <span class="logo-item">OpenAI</span>
-            <span class="logo-item">Anthropic</span>
-            <span class="logo-item">Google Gemini</span>
-            <span class="logo-item">LangChain</span>
-            <span class="logo-item">CrewAI</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>Anthropic</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>Google Gemini</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.796 0a6.93 6.93 0 0 0-4.91 2.019L5.451 5.455l3.273 3.27 3.432-3.432a2.284 2.284 0 0 1 3.277 0 2.28 2.28 0 0 1 0 3.275L12 12.001l3.273 3.273 3.433-3.435c2.692-2.692 2.692-7.127 0-9.82A6.92 6.92 0 0 0 13.796 0m-5.07 8.728-3.433 3.434c-2.692 2.693-2.692 7.126 0 9.819A6.92 6.92 0 0 0 10.203 24a6.93 6.93 0 0 0 4.911-2.02l3.432-3.432-3.271-3.272-3.433 3.433a2.284 2.284 0 0 1-3.277 0 2.28 2.28 0 0 1 0-3.276L12 12z"/></svg>LangChain</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.482.18C7.161 1.319 1.478 9.069 1.426 15.372c-.051 5.527 3.1 8.68 8.68 8.627 6.716-.05 14.259-6.87 12.09-10.9-.672-1.292-1.396-1.344-2.687-.207-1.602 1.395-1.654.31-.207-2.893 1.757-3.98 1.705-5.322-.31-7.544C17.03.388 14.962-.388 12.482.181Zm5.322 2.068c2.273 2.015 2.376 4.236.465 8.42-1.395 3.1-2.17 3.515-3.824 1.86-1.24-1.24-1.343-3.46-.258-6.044 1.137-2.635.982-3.1-.568-1.653-3.72 3.358-6.458 9.765-5.424 12.503.464 1.189.825 1.395 2.737 1.395 2.79 0 6.303-1.705 7.957-3.926 1.756-2.274 2.79-2.274 2.79-.052 0 3.875-6.459 8.627-11.625 8.627-6.251 0-9.351-4.752-7.491-11.47.878-2.995 4.443-7.904 7.077-9.66 3.255-2.17 5.684-2.17 8.164 0z"/></svg>CrewAI</span>
             <span class="logo-item">AutoGen</span>
-            <span class="logo-item">vLLM</span>
-            <span class="logo-item">Ollama</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m23.6 0-8.721 4.59L9.829 24h7.41zM9.83 24V5.142H.4Z"/></svg>vLLM</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.361 10.26a.894.894 0 0 0-.558.47l-.072.148.001.207c0 .193.004.217.059.353.076.193.152.312.291.448.24.238.51.3.872.205a.86.86 0 0 0 .517-.436.752.752 0 0 0 .08-.498c-.064-.453-.33-.782-.724-.897a1.06 1.06 0 0 0-.466 0zm-9.203.005c-.305.096-.533.32-.65.639a1.187 1.187 0 0 0-.06.52c.057.309.31.59.598.667.362.095.632.033.872-.205.14-.136.215-.255.291-.448.055-.136.059-.16.059-.353l.001-.207-.072-.148a.894.894 0 0 0-.565-.472 1.02 1.02 0 0 0-.474.007Zm4.184 2c-.131.071-.223.25-.195.383.031.143.157.288.353.407.105.063.112.072.117.136.004.038-.01.146-.029.243-.02.094-.036.194-.036.222.002.074.07.195.143.253.064.052.076.054.255.059.164.005.198.001.264-.03.169-.082.212-.234.15-.525-.052-.243-.042-.28.087-.355.137-.08.281-.219.324-.314a.365.365 0 0 0-.175-.48.394.394 0 0 0-.181-.033c-.126 0-.207.03-.355.124l-.085.053-.053-.032c-.219-.13-.259-.145-.391-.143a.396.396 0 0 0-.193.032zm.39-2.195c-.373.036-.475.05-.654.086-.291.06-.68.195-.951.328-.94.46-1.589 1.226-1.787 2.114-.04.176-.045.234-.045.53 0 .294.005.357.043.524.264 1.16 1.332 2.017 2.714 2.173.3.033 1.596.033 1.896 0 1.11-.125 2.064-.727 2.493-1.571.114-.226.169-.372.22-.602.039-.167.044-.23.044-.523 0-.297-.005-.355-.045-.531-.288-1.29-1.539-2.304-3.072-2.497a6.873 6.873 0 0 0-.855-.031zm.645.937a3.283 3.283 0 0 1 1.44.514c.223.148.537.458.671.662.166.251.26.508.303.82.02.143.01.251-.043.482-.08.345-.332.705-.672.957a3.115 3.115 0 0 1-.689.348c-.382.122-.632.144-1.525.138-.582-.006-.686-.01-.853-.042-.57-.107-1.022-.334-1.35-.68-.264-.28-.385-.535-.45-.946-.03-.192.025-.509.137-.776.136-.326.488-.73.836-.963.403-.269.934-.46 1.422-.512.187-.02.586-.02.773-.002zm-5.503-11a1.653 1.653 0 0 0-.683.298C5.617.74 5.173 1.666 4.985 2.819c-.07.436-.119 1.04-.119 1.503 0 .544.064 1.24.155 1.721.02.107.031.202.023.208a8.12 8.12 0 0 1-.187.152 5.324 5.324 0 0 0-.949 1.02 5.49 5.49 0 0 0-.94 2.339 6.625 6.625 0 0 0-.023 1.357c.091.78.325 1.438.727 2.04l.13.195-.037.064c-.269.452-.498 1.105-.605 1.732-.084.496-.095.629-.095 1.294 0 .67.009.803.088 1.266.095.555.288 1.143.503 1.534.071.128.243.393.264.407.007.003-.014.067-.046.141a7.405 7.405 0 0 0-.548 1.873c-.062.417-.071.552-.071.991 0 .56.031.832.148 1.279L3.42 24h1.478l-.05-.091c-.297-.552-.325-1.575-.068-2.597.117-.472.25-.819.498-1.296l.148-.29v-.177c0-.165-.003-.184-.057-.293a.915.915 0 0 0-.194-.25 1.74 1.74 0 0 1-.385-.543c-.424-.92-.506-2.286-.208-3.451.124-.486.329-.918.544-1.154a.787.787 0 0 0 .223-.531c0-.195-.07-.355-.224-.522a3.136 3.136 0 0 1-.817-1.729c-.14-.96.114-2.005.69-2.834.563-.814 1.353-1.336 2.237-1.475.199-.033.57-.028.776.01.226.04.367.028.512-.041.179-.085.268-.19.374-.431.093-.215.165-.333.36-.576.234-.29.46-.489.822-.729.413-.27.884-.467 1.352-.561.17-.035.25-.04.569-.04.319 0 .398.005.569.04a4.07 4.07 0 0 1 1.914.997c.117.109.398.457.488.602.034.057.095.177.132.267.105.241.195.346.374.43.14.068.286.082.503.045.343-.058.607-.053.943.016 1.144.23 2.14 1.173 2.581 2.437.385 1.108.276 2.267-.296 3.153-.097.15-.193.27-.333.419-.301.322-.301.722-.001 1.053.493.539.801 1.866.708 3.036-.062.772-.26 1.463-.533 1.854a2.096 2.096 0 0 1-.224.258.916.916 0 0 0-.194.25c-.054.109-.057.128-.057.293v.178l.148.29c.248.476.38.823.498 1.295.253 1.008.231 2.01-.059 2.581a.845.845 0 0 0-.044.098c0 .006.329.009.732.009h.73l.02-.074.036-.134c.019-.076.057-.3.088-.516.029-.217.029-1.016 0-1.258-.11-.875-.295-1.57-.597-2.226-.032-.074-.053-.138-.046-.141.008-.005.057-.074.108-.152.376-.569.607-1.284.724-2.228.031-.26.031-1.378 0-1.628-.083-.645-.182-1.082-.348-1.525a6.083 6.083 0 0 0-.329-.7l-.038-.064.131-.194c.402-.604.636-1.262.727-2.04a6.625 6.625 0 0 0-.024-1.358 5.512 5.512 0 0 0-.939-2.339 5.325 5.325 0 0 0-.95-1.02 8.097 8.097 0 0 1-.186-.152.692.692 0 0 1 .023-.208c.208-1.087.201-2.443-.017-3.503-.19-.924-.535-1.658-.98-2.082-.354-.338-.716-.482-1.15-.455-.996.059-1.8 1.205-2.116 3.01a6.805 6.805 0 0 0-.097.726c0 .036-.007.066-.015.066a.96.96 0 0 1-.149-.078A4.857 4.857 0 0 0 12 3.03c-.832 0-1.687.243-2.456.698a.958.958 0 0 1-.148.078c-.008 0-.015-.03-.015-.066a6.71 6.71 0 0 0-.097-.725C8.997 1.392 8.337.319 7.46.048a2.096 2.096 0 0 0-.585-.041Zm.293 1.402c.248.197.523.759.682 1.388.03.113.06.244.069.292.007.047.026.152.041.233.067.365.098.76.102 1.24l.002.475-.12.175-.118.178h-.278c-.324 0-.646.041-.954.124l-.238.06c-.033.007-.038-.003-.057-.144a8.438 8.438 0 0 1 .016-2.323c.124-.788.413-1.501.696-1.711.067-.05.079-.049.157.013zm9.825-.012c.17.126.358.46.498.888.28.854.36 2.028.212 3.145-.019.14-.024.151-.057.144l-.238-.06a3.693 3.693 0 0 0-.954-.124h-.278l-.119-.178-.119-.175.002-.474c.004-.669.066-1.19.214-1.772.157-.623.434-1.185.68-1.382.078-.062.09-.063.159-.012z"/></svg>Ollama</span>
             <span class="logo-item">AWS Bedrock</span>
             <span class="logo-item">Azure OpenAI</span>
         </div>
@@ -931,7 +973,7 @@
         <div class="pillars-grid">
             <div class="pillar">
                 <div class="pillar-num">01 /</div>
-                <div class="pillar-icon blue"><i class="fa-solid fa-radar" style="color:#3b82f6"></i></div>
+                <div class="pillar-icon blue"><i class="fa-solid fa-radar" style="color:var(--red)"></i></div>
                 <h3>Discovery</h3>
                 <p>Find every agent — sanctioned or shadow, cloud or local. Four parallel probes across endpoints, network traffic, filesystem, and behaviour patterns.</p>
                 <ul class="pillar-features">
@@ -1033,9 +1075,9 @@
                         <div class="dash-panel">
                             <div class="dash-panel-title">Detected agents — risk level</div>
                             <div class="agent-row"><div class="agent-dot" style="background:#E85D54"></div><div class="agent-name">unknown-agent-7f2a</div><div class="agent-conf">shadow · unregistered</div><div class="risk-badge rb-critical">Critical</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:#34d399"></div><div class="agent-name">research-agent-v2</div><div class="agent-conf">autonomous · 94%</div><div class="risk-badge rb-low">Compliant</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:#fbbf24"></div><div class="agent-name">sales-copilot-prod</div><div class="agent-conf">api_consumer · 78%</div><div class="risk-badge rb-medium">Review</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:#34d399"></div><div class="agent-name">ollama-local-3</div><div class="agent-conf">local_llm · endpoint probe</div><div class="risk-badge rb-low">Governed</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--ok)"></div><div class="agent-name">research-agent-v2</div><div class="agent-conf">autonomous · 94%</div><div class="risk-badge rb-low">Compliant</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--warn)"></div><div class="agent-name">sales-copilot-prod</div><div class="agent-conf">api_consumer · 78%</div><div class="risk-badge rb-medium">Review</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--ok)"></div><div class="agent-name">ollama-local-3</div><div class="agent-conf">local_llm · endpoint probe</div><div class="risk-badge rb-low">Governed</div></div>
                         </div>
                         <div class="dash-panel">
                             <div class="dash-panel-title">Live event feed</div>
@@ -1146,7 +1188,7 @@
                 </div>
             </div>
             <div class="deploy-card">
-                <div class="deploy-tier" style="color:#3b82f6">Mid-market — 50–500 agents</div>
+                <div class="deploy-tier" style="color:var(--red)">Mid-market — 50–500 agents</div>
                 <h3>Network probe + HA appliance pair</h3>
                 <div class="desc">DNS sinkhole discovers shadow AI across every device. Network probe at egress inspects payloads. Endpoint agents catch local LLMs. HA pair for production uptime.</div>
                 <div class="deploy-components">
@@ -1162,7 +1204,7 @@
                 </div>
             </div>
             <div class="deploy-card">
-                <div class="deploy-tier" style="color:#8b5cf6">Enterprise — 1,000+ agents</div>
+                <div class="deploy-tier" style="color:var(--red)">Enterprise — 1,000+ agents</div>
                 <h3>All layers · global · per-region compliance</h3>
                 <div class="desc">All six deployment components. Regional Privify hubs feed a central governance cluster. Per-region compliance — GDPR in EU, DPDP Act in India, CCPA/NIST in US. Data residency enforced.</div>
                 <div class="deploy-components">
@@ -1178,7 +1220,7 @@
                 </div>
             </div>
             <div class="deploy-card">
-                <div class="deploy-tier" style="color:#14b8a6">Cloud-native — Kubernetes</div>
+                <div class="deploy-tier" style="color:var(--red)">Cloud-native — Kubernetes</div>
                 <h3>Admission webhook · zero config per pod</h3>
                 <div class="desc">One Helm install. Admission webhook auto-injects our sidecar into every AI pod at creation. No code changes. Integrates with Istio/Linkerd, exposes Prometheus metrics.</div>
                 <div class="deploy-components">
@@ -1247,6 +1289,66 @@
 </section>
 
 <!--  COMPARISON  -->
+<!-- ══ COVERAGE MAP — ported from the homepage. Leads into the capability
+     comparison: the gap first, the feature-by-feature detail after. ══ -->
+<section class="cmp-section" id="coverage">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Why not just use a gateway?</div>
+            <h2 class="section-title">The agents your gateway will never see</h2>
+            <p class="section-sub">
+                An MCP gateway governs what routes through it. That's real coverage — but an agent only
+                routes through it when it chooses to speak MCP. FORGE runs on the endpoint, where the
+                agent actually executes.
+            </p>
+        </div>
+        <div class="gap-map">
+            <div class="gap-map-head">Your environment — where FORGE runs</div>
+            <div class="gap-map-body">
+
+                <div class="gap-inner">
+                    <div class="gap-inner-head">What an MCP gateway sees</div>
+                    <div class="gap-node">MCP tool calls</div>
+                    <div class="gap-inner-note">Everything that chose to speak the protocol</div>
+                </div>
+
+                <div class="gap-chips">
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Local models</span>
+                            <span class="gap-chip-s">Ollama, LM Studio, llama.cpp — the traffic never leaves the machine, so it never reaches a gateway</span>
+                        </span>
+                    </div>
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Direct API calls</span>
+                            <span class="gap-chip-s">Code hitting a provider's REST endpoint isn't speaking MCP, so there's nothing at the protocol layer to inspect</span>
+                        </span>
+                    </div>
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Browser AI</span>
+                            <span class="gap-chip-s">An employee pasting into a chat window — the most common AI risk in an enterprise, and entirely outside the protocol</span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="gap-map-foot">
+                <i class="fa-solid fa-shield-halved"></i>
+                FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
+            </div>
+        </div>
+        <p class="gap-caption">
+            Three kinds of AI activity, none of which pass through a protocol gateway. FORGE catches all
+            three because it runs where the code runs, not where the traffic is supposed to go.
+        </p>
+    </div>
+</section>
+
 <section class="cmp-section" id="comparison">
     <div class="container">
         <div class="section-header">
