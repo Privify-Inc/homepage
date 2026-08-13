@@ -76,6 +76,7 @@
         .submit-btn:disabled { opacity:0.7;cursor:not-allowed;transform:none; }
         @keyframes spin { to { transform:rotate(360deg); } }
         .form-note { font-size:0.76rem;color:var(--text-3);text-align:center;margin-top:1rem;line-height:1.6; }
+        .tier-note { display:none;background:var(--red-dim);border:1px solid rgba(232,93,84,0.3);color:var(--red);border-radius:8px;padding:0.6rem 0.9rem;font-size:0.8rem;margin-bottom:1rem;font-weight:600; }
         .form-error { display:none;background:rgba(232,93,84,0.08);border:1px solid rgba(232,93,84,0.3);color:#f2a09a;border-radius:8px;padding:0.75rem 0.9rem;font-size:0.82rem;margin-bottom:1rem;line-height:1.55; }
         .success { display:none;text-align:center;padding:2.5rem 1rem; }
         .success i { font-size:2.25rem;color:var(--red);margin-bottom:1.25rem; }
@@ -242,6 +243,7 @@
             <div class="form-card">
                 <div id="contactForm">
                     <div class="form-error" id="formError"></div>
+                    <div class="tier-note" id="tierNote"></div>
 
                     <div class="field">
                         <label for="cName">Name <span class="req">*</span></label>
@@ -334,12 +336,26 @@ window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.
 const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/maqalveb';
 
 //  Prefill intent from the CTA that sent the visitor here, e.g. contact.html?intent=pricing
+const TIER_NAMES = { 'smb':'SMB — up to 50 agents', 'mid-market':'Mid-market — 50–500 agents',
+                     'enterprise':'Enterprise — 1,000+ agents', 'cloud-native':'Cloud-native — Kubernetes' };
+let enquiryTier = '';
+
 (function prefillFromQuery(){
     const params = new URLSearchParams(window.location.search);
     const intent = params.get('intent');
     if (intent) {
         const sel = document.getElementById('cIntent');
         if ([...sel.options].some(o => o.value === intent)) sel.value = intent;
+    }
+    // Deployment tier, when the visitor arrived from a tier card on the FORGE page.
+    const tier = params.get('tier');
+    if (tier && TIER_NAMES[tier]) {
+        enquiryTier = TIER_NAMES[tier];
+        const note = document.getElementById('tierNote');
+        if (note) {
+            note.textContent = 'Enquiring about: ' + enquiryTier;
+            note.style.display = 'block';
+        }
     }
 })();
 
@@ -382,10 +398,10 @@ async function handleContact() {
             method: 'POST',
             headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
             body: JSON.stringify({
-                _subject: 'Privify contact — ' + intentLabel + ' — ' + company,
+                _subject: 'Privify contact — ' + intentLabel + (enquiryTier ? ' (' + enquiryTier + ')' : '') + ' — ' + company,
                 name, email, company,
                 organisation_size: size,
-                role, enquiry_type: intent, message,
+                role, enquiry_type: intent, deployment_tier: enquiryTier || '(not specified)', message,
                 _replyto: email,
                 source: 'contact.html'
             })
