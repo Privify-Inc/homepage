@@ -115,6 +115,89 @@
 [data-theme="light"] input::placeholder,
 [data-theme="light"] select::placeholder { color: #9CA3AF; }
 
+/* ── Global text legibility in light mode ── */
+/* Headings — catch hardcoded #fff / rgba(255,255,255,X) */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 { color: #0A0A0A; }
+
+/* Body copy, lists, labels */
+[data-theme="light"] p  { color: #374151; }
+[data-theme="light"] li { color: #374151; }
+[data-theme="light"] label { color: #374151; }
+[data-theme="light"] td,
+[data-theme="light"] th { color: #374151; }
+
+/* Sub / desc / note / label text — these often use rgba(255,255,255,0.65) */
+[data-theme="light"] [class*="-sub"],
+[data-theme="light"] [class*="-desc"],
+[data-theme="light"] [class*="-note"],
+[data-theme="light"] [class*="-label"],
+[data-theme="light"] [class*="-caption"] { color: #4B5563; }
+
+/* Card interiors — all text inherits dark body color */
+[data-theme="light"] .pillar *,
+[data-theme="light"] .advantage *,
+[data-theme="light"] .feature-card *,
+[data-theme="light"] .integration-card *,
+[data-theme="light"] .product-card *,
+[data-theme="light"] .stat-card *,
+[data-theme="light"] .fork-card *,
+[data-theme="light"] .step-card *,
+[data-theme="light"] .job-card *,
+[data-theme="light"] .value-card *,
+[data-theme="light"] .deploy-card *,
+[data-theme="light"] .compliance-card *,
+[data-theme="light"] .shield-card *,
+[data-theme="light"] .metric-card *,
+[data-theme="light"] .security-card *,
+[data-theme="light"] .careers-card *,
+[data-theme="light"] .trust-card * { color: inherit; }
+
+/* Ensure card containers themselves are dark */
+[data-theme="light"] .pillar,
+[data-theme="light"] .advantage,
+[data-theme="light"] .feature-card,
+[data-theme="light"] .integration-card,
+[data-theme="light"] .product-card,
+[data-theme="light"] .stat-card,
+[data-theme="light"] .fork-card,
+[data-theme="light"] .step-card,
+[data-theme="light"] .job-card,
+[data-theme="light"] .value-card,
+[data-theme="light"] .deploy-card,
+[data-theme="light"] .compliance-card,
+[data-theme="light"] .shield-card,
+[data-theme="light"] .metric-card,
+[data-theme="light"] .security-card,
+[data-theme="light"] .careers-card,
+[data-theme="light"] .trust-card { color: #0A0A0A; }
+
+/* Section text blocks */
+[data-theme="light"] .section-title,
+[data-theme="light"] .section-sub,
+[data-theme="light"] .hero-title,
+[data-theme="light"] .hero-sub,
+[data-theme="light"] .hero-eyebrow { color: #0A0A0A; }
+[data-theme="light"] .section-sub,
+[data-theme="light"] .hero-sub { color: #4B5563; }
+
+/* Comparison table text */
+[data-theme="light"] .cmp-obs-text       { color: #374151; }
+[data-theme="light"] .cmp-obs-text strong{ color: #0A0A0A; }
+[data-theme="light"] .cmp-stat-label     { color: #6B7280; }
+
+/* Preserve intentional color accents — don't override red, cyan, green values */
+[data-theme="light"] [style*="color:var(--red)"],
+[data-theme="light"] [style*="color: var(--red)"],
+[data-theme="light"] [style*="color:var(--cyan)"],
+[data-theme="light"] [style*="color: var(--cyan)"],
+[data-theme="light"] [style*="color:var(--green)"],
+[data-theme="light"] [style*="color: var(--green)"] { color: unset; }
+
 /* ── Theme toggle button (shared styles) ── */
 .theme-toggle {
   background: none;
