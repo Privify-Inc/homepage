@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Request early access to FORGE — Privify's AI governance platform for enterprises.">
+<meta name="robots" content="noindex">
+<title>Request Access — Privify FORGE</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/theme.css">
+<script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --red: #E85D54;
+  --red-dim: rgba(232,93,84,0.12);
+  --red-glow: rgba(232,93,84,0.25);
+  --black: #000;
+  --white: #fff;
+  --surface: #0d0d0d;
+  --surface-2: #111111;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.14);
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --text-3: #858C97;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(232,93,84,0.12) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+
+/* NAV */
+.header {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 1.1rem 2rem;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  display: flex; align-items: center; gap: 0.6rem;
+  text-decoration: none; color: var(--white);
+  font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em;
+}
+.logo svg { height: 28px; width: auto; }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.back-link {
+  color: var(--gray-400); text-decoration: none;
+  font-size: 0.85rem; font-weight: 500;
+  display: flex; align-items: center; gap: 0.4rem;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--white); }
+.theme-toggle {
+  background: none; border: 1px solid var(--border);
+  color: var(--gray-400); cursor: pointer;
+  width: 32px; height: 32px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; padding: 0; flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--border-hover); color: var(--white); }
+.theme-toggle .icon-sun  { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+/* PAGE */
+.page {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 7rem 1.5rem 4rem;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 3rem 3rem 2.5rem;
+  width: 100%; max-width: 560px;
+  position: relative;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+}
+.card::before {
+  content: '';
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 2px;
+  background: var(--red);
+  border-radius: 1px;
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--red-dim); border: 1px solid rgba(232,93,84,0.25);
+  color: var(--red); padding: 0.3rem 0.8rem; border-radius: 999px;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; margin-bottom: 1.25rem;
+}
+.dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+h1 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+.sub {
+  font-size: 0.95rem; color: var(--gray-400); line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+/* FORM */
+.form-row { display: flex; gap: 0.65rem; margin-bottom: 0.65rem; flex-wrap: wrap; }
+.form-input, .form-select, .form-textarea {
+  flex: 1; min-width: 180px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: inherit; font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-input::placeholder, .form-select::placeholder { color: var(--text-3); }
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(232,93,84,0.5);
+}
+.form-select { cursor: pointer; }
+.form-select option { background: #1a1a1a; color: var(--white); }
+.form-textarea {
+  width: 100%; min-height: 90px; resize: vertical;
+  margin-bottom: 0.65rem;
+}
+.form-submit {
+  width: 100%;
+  background: var(--red); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 0.9rem 1.5rem;
+  font-family: inherit; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(232,93,84,0.3);
+  margin-bottom: 0.875rem;
+}
+.form-submit:hover { background: #d44e46; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(232,93,84,0.4); }
+.form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.form-note {
+  font-size: 0.78rem; color: var(--text-3);
+  text-align: center; line-height: 1.5;
+}
+
+/* SUCCESS */
+.success { display: none; text-align: center; padding: 1rem 0; }
+.success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.success h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem; }
+.success p { color: var(--gray-400); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+.success-back {
+  display: inline-block; text-decoration: none;
+  color: var(--red); font-size: 0.9rem; font-weight: 600;
+}
+
+/* TRUST STRIP */
+.trust { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.trust-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--text-3); }
+.trust-item i { color: var(--gray-500); font-size: 0.8rem; }
+
+/* LIGHT MODE */
+[data-theme="light"] .header { background: rgba(242,242,246,0.9) !important; }
+[data-theme="light"] .logo { color: #0A0A0A; }
+[data-theme="light"] .back-link { color: #6B7280; }
+[data-theme="light"] .back-link:hover { color: #0A0A0A; }
+[data-theme="light"] .card { background: #FFFFFF; border-color: rgba(0,0,0,0.08); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+[data-theme="light"] h1 { color: #0A0A0A; }
+[data-theme="light"] .sub { color: #4B5563; }
+[data-theme="light"] .form-input, [data-theme="light"] .form-select, [data-theme="light"] .form-textarea { background: #F4F4F6; border-color: rgba(0,0,0,0.1); color: #0A0A0A; }
+[data-theme="light"] .form-input::placeholder { color: #9CA3AF; }
+[data-theme="light"] .form-select option { background: #fff; color: #0A0A0A; }
+[data-theme="light"] .form-note { color: #9CA3AF; }
+[data-theme="light"] .trust { border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .trust-item { color: #9CA3AF; }
+[data-theme="light"] body { background: #F2F2F6; }
+[data-theme="light"] body::before { opacity: 0.3; }
+
+/* RESPONSIVE */
+@media(max-width: 560px) {
+  .card { padding: 2rem 1.5rem 1.75rem; }
+  .form-input, .form-select { min-width: 100%; }
+  h1 { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a href="../index.html" class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="28" width="28">
+      <g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g>
+    </svg>
+    PRIVIFY
+  </a>
+  <div class="nav-right">
+    <a href="../forge/index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to FORGE
+    </a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="card">
+
+    <div id="requestForm">
+      <div class="eyebrow"><span class="dot"></span>Early access &mdash; limited seats</div>
+      <h1>Request access to FORGE</h1>
+      <p class="sub">We onboard enterprises in cohorts. Tell us about your environment and we&rsquo;ll be in touch within 2 business days with a personalised demo and deployment plan.</p>
+
+      <div class="form-row">
+        <input type="text"  class="form-input" id="rName"    placeholder="Your name"    required>
+        <input type="email" class="form-input" id="rEmail"   placeholder="Work email"   required>
+      </div>
+      <div class="form-row">
+        <input type="text"  class="form-input" id="rCompany" placeholder="Company name" required>
+        <select class="form-select" id="rSize">
+          <option value="" disabled selected>Organisation size</option>
+          <option value="1-50">1&ndash;50 employees</option>
+          <option value="51-200">51&ndash;200 employees</option>
+          <option value="201-1000">201&ndash;1,000 employees</option>
+          <option value="1001-5000">1,001&ndash;5,000 employees</option>
+          <option value="5000+">5,000+ employees</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <select class="form-select" id="rRole" style="min-width:100%;">
+          <option value="" disabled selected>Your role</option>
+          <option value="ciso">CISO / Security</option>
+          <option value="ai-eng">AI / Platform Engineering</option>
+          <option value="grc">GRC / Compliance</option>
+          <option value="cto">CTO / CIO</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <textarea class="form-textarea" id="rMessage" placeholder="Tell us about your AI deployment &mdash; how many agents, what platforms (optional)"></textarea>
+      <button class="form-submit" id="rSubmit" onclick="submitRequest()">Request access &rarr;</button>
+      <p class="form-note">No spam. No sales calls without consent.</p>
+    </div>
+
+    <div class="success" id="requestSuccess">
+      <div class="success-icon">&#10003;</div>
+      <h2>Request received</h2>
+      <p>Thanks &mdash; we&rsquo;ll review your details and be in touch within 2 business days with a personalised demo and deployment plan.</p>
+      <a href="../forge/index.html" class="success-back">&#8592; Back to FORGE</a>
+    </div>
+
+    <div class="trust">
+      <div class="trust-item"><i class="fa-solid fa-lock"></i> Self-hosted available</div>
+      <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Data stays in your network</div>
+      <div class="trust-item"><i class="fa-solid fa-clock"></i> Deploy in under 15 min</div>
+      <div class="trust-item"><i class="fa-solid fa-code"></i> API-first, 66 endpoints</div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+const ENDPOINT = 'https://formspree.io/f/maqalveb';
+
+async function submitRequest() {
+  const name    = document.getElementById('rName').value.trim();
+  const email   = document.getElementById('rEmail').value.trim();
+  const company = document.getElementById('rCompany').value.trim();
+  const size    = document.getElementById('rSize').value;
+  const role    = document.getElementById('rRole').value;
+  const message = document.getElementById('rMessage').value.trim();
+
+  if (!name || !email || !company) {
+    alert('Please fill in your name, email, and company name.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Please enter a valid work email address.');
+    return;
+  }
+
+  const btn = document.getElementById('rSubmit');
+  btn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px"></span>Submitting...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'FORGE Early Access Request — ' + company,
+        name, email, company,
+        organisation_size: size,
+        role, message,
+        _replyto: email,
+        product: 'FORGE — AI Governance Platform'
+      })
+    });
+
+    if (res.ok) {
+      document.getElementById('requestForm').style.display = 'none';
+      document.getElementById('requestSuccess').style.display = 'block';
+      if (window.plausible) plausible('EarlyAccessSignup');
+    } else {
+      throw new Error();
+    }
+  } catch {
+    btn.innerHTML = 'Request access &rarr;';
+    btn.disabled = false;
+    alert('Something went wrong. Please email us at sales@privify.io');
+  }
+}
+</script>
+<script src="/theme.js"></script>
+</body>
+</html>

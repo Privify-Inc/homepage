@@ -8,6 +8,7 @@
 <meta property="og:description" content="Experience the platform that discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance.">
 <title>FORGE — Interactive Product Demo | Privify</title>
 <link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="/theme.css">
 <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
 <style>
@@ -628,9 +629,28 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 @media(max-width:900px){
   #mobile-warning{display:flex;}
 }
+
+/* Light mode — FORGE demo dashboard */
+[data-theme="light"] { --bg:#F0F0F4; --panel:#FFFFFF; --panel2:#F5F5FA; --border:rgba(0,0,0,0.08); --text:#0A0A0A; --text-muted:#6B7280; --text-dim:#9CA3AF; }
+[data-theme="light"] html, [data-theme="light"] body { background: #F0F0F4; color: #0A0A0A; }
+[data-theme="light"] .sidebar { background: #FFFFFF; border-right-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .main-header { background: #FFFFFF; border-bottom-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .panel { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .nav-item { color: #4B5563; }
+[data-theme="light"] .nav-item:hover { background: rgba(0,0,0,0.04); color: #0A0A0A; }
+[data-theme="light"] .nav-item.active { background: rgba(232,93,84,0.08); color: #E85D54; }
+[data-theme="light"] #locked-modal { background: #FFFFFF; }
+[data-theme="light"] #locked-modal-backdrop { background: rgba(0,0,0,0.5); }
+[data-theme="light"] #theme-toggle { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.4); }
+[data-theme="light"] .icon-sun { display: block; }
+[data-theme="light"] .icon-moon { display: none; }
 </style>
 </head>
 <body>
+<button id="theme-toggle" aria-label="Toggle light/dark mode" style="position:fixed;top:10px;right:54px;z-index:9000;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);cursor:pointer;width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;padding:0;transition:all 0.2s;">
+    <svg class="icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+    <svg class="icon-sun"  width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
 
 <!-- MOBILE WARNING -->
 <div id="mobile-warning">
@@ -1041,7 +1061,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
     <div class="lt-label">Full Platform Feature</div>
     <div class="lt-panel-name" id="lt-panel-name"></div>
     <div class="lt-body" id="lt-body">See this in action in a live demo.</div>
-    <a class="lt-link" href="https://privify.io/platform/index.html#interest" target="_blank">Book a Live Demo &#8594;</a>
+    <a class="lt-link" href="https://privify.io/forge/index.html#interest" target="_blank">Book a Live Demo &#8594;</a>
   </div>
 </div>
 
@@ -1729,5 +1749,6 @@ function hideLockedToast() {
 initParticles();
 document.getElementById('dash-time').textContent = new Date().toUTCString().slice(5, 25) + ' UTC';
 </script>
+<script src="/theme.js"></script>
 </body>
 </html>

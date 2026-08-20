@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/theme.css">
     <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
     <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
     <style>
@@ -351,6 +352,21 @@
                 transition-duration:0.01ms !important; scroll-behavior:auto !important;
             }
         }
+
+        /* Light mode — homepage specifics */
+        [data-theme="light"] .hero { background: transparent; }
+        [data-theme="light"] .fork-card { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .fork-card:hover { border-color: rgba(0,0,0,0.16); }
+        [data-theme="light"] .product-section { background: #EBEBF0; }
+        [data-theme="light"] .track-forge { border-color: rgba(232,93,84,0.2); }
+        [data-theme="light"] .track-shield { border-color: rgba(34,211,238,0.2); }
+        [data-theme="light"] .eyebrow { background: rgba(232,93,84,0.08); }
+        [data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3 { color: #0A0A0A; }
+        [data-theme="light"] .hero-sub, [data-theme="light"] .section-sub { color: #4B5563; }
+        [data-theme="light"] .btn-ghost { border-color: rgba(0,0,0,0.15); color: #4B5563; }
+        [data-theme="light"] .btn-ghost:hover { background: rgba(0,0,0,0.04); color: #0A0A0A; }
+        [data-theme="light"] .logo-strip { border-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .logo-item { filter: invert(1) opacity(0.3); }
 </style>
     <script type="application/ld+json">
 {
@@ -411,11 +427,11 @@
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="platform/index.html">
+                        <a class="dropdown-item" href="forge/index.html">
                             <div class="di-title">FORGE</div>
                             <div class="di-sub">AI agent governance for enterprises</div>
                         </a>
-                        <a class="dropdown-item" href="privacy/index.html" style="border-top:1px solid var(--border);">
+                        <a class="dropdown-item" href="shield/index.html" style="border-top:1px solid var(--border);">
                             <div class="di-title">SHIELD</div>
                             <div class="di-sub">Personal data protection</div>
                         </a>
@@ -436,6 +452,10 @@
                     </div>
                 </div>
                 <a href="contact.html" class="nav-pill">Contact Sales</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+    <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+    <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
             </div>
             <button class="mobile-menu-btn" aria-label="Open menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -447,8 +467,8 @@
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner container">
         <div class="mob-section">Products</div>
-        <a href="platform/index.html">FORGE — for enterprises</a>
-        <a href="privacy/index.html">SHIELD — for individuals</a>
+        <a href="forge/index.html">FORGE — for enterprises</a>
+        <a href="shield/index.html">SHIELD — for individuals</a>
         <div class="mob-section">Company</div>
         <a href="#pricing">Pricing</a>
         <a href="careers.html">Careers</a>
@@ -501,7 +521,7 @@
                     <a href="contact.html?product=forge" class="btn btn-forge" onclick="track('CTA_ForgeDemo')">
                         Request a demo <i class="fa-solid fa-arrow-right fa-xs"></i>
                     </a>
-                    <a href="platform/index.html" class="btn btn-ghost">Explore FORGE</a>
+                    <a href="forge/index.html" class="btn btn-ghost">Explore FORGE</a>
                 </div>
                 <div class="fork-glow"></div>
             </div>
@@ -524,10 +544,10 @@
                     <li>Works with Google, LinkedIn, Amazon and more</li>
                 </ul>
                 <div class="fork-actions">
-                    <a href="privacy/index.html#waitlist" class="btn btn-shield" onclick="track('CTA_ShieldWaitlist')">
+                    <a href="shield/index.html#waitlist" class="btn btn-shield" onclick="track('CTA_ShieldWaitlist')">
                         Join the waitlist <i class="fa-solid fa-arrow-right fa-xs"></i>
                     </a>
-                    <a href="privacy/index.html" class="btn btn-ghost">Explore SHIELD</a>
+                    <a href="shield/index.html" class="btn btn-ghost">Explore SHIELD</a>
                 </div>
                 <div class="fork-glow"></div>
             </div>
@@ -870,7 +890,7 @@
                 where you can, and get paid when you choose to share it.
             </p>
             <div class="fork-actions" style="margin-top:2rem">
-                <a href="privacy/index.html#waitlist" class="btn btn-shield" onclick="track('CTA_ShieldWaitlist_Track')">
+                <a href="shield/index.html#waitlist" class="btn btn-shield" onclick="track('CTA_ShieldWaitlist_Track')">
                     Join the waitlist <i class="fa-solid fa-arrow-right fa-xs"></i>
                 </a>
                 <a href="tools/photoScrubber/index.html" class="btn btn-ghost">Try Photo Scrubber — free</a>
@@ -946,17 +966,17 @@
             <div class="footer-cols">
                 <div class="footer-col">
                     <div class="footer-col-title">FORGE</div>
-                    <a href="platform/index.html" class="footer-link">Overview</a>
+                    <a href="forge/index.html" class="footer-link">Overview</a>
                     <a href="forge/demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
-                    <a href="platform/index.html#deployment" class="footer-link">Deployment</a>
-                    <a href="platform/index.html#compliance" class="footer-link">Compliance</a>
-                    <a href="platform/index.html#integrations" class="footer-link">Integrations</a>
+                    <a href="forge/index.html#deployment" class="footer-link">Deployment</a>
+                    <a href="forge/index.html#compliance" class="footer-link">Compliance</a>
+                    <a href="forge/index.html#integrations" class="footer-link">Integrations</a>
                     <a href="#pricing" class="footer-link">Pricing</a>
                 </div>
                 <div class="footer-col">
                     <div class="footer-col-title">SHIELD</div>
-                    <a href="privacy/index.html" class="footer-link">Overview</a>
-                    <a href="privacy/index.html#waitlist" class="footer-link">Join waitlist</a>
+                    <a href="shield/index.html" class="footer-link">Overview</a>
+                    <a href="shield/index.html#waitlist" class="footer-link">Join waitlist</a>
                     <a href="tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
                 </div>
                 <div class="footer-col">
@@ -1157,5 +1177,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
 })();
 </script>
+<script src="/theme.js"></script>
 </body>
 </html>

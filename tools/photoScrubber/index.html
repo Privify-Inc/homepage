@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="/theme.css">
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
   <script>
@@ -105,6 +106,14 @@
                 transition-duration:0.01ms !important; scroll-behavior:auto !important;
             }
         }
+
+/* Light mode — Photo Scrubber */
+[data-theme="light"] body { background: #F2F2F6; color: #0A0A0A; }
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3 { color: #0A0A0A; }
+[data-theme="light"] .tool-card, [data-theme="light"] .upload-zone { background: #FFFFFF; border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] .upload-zone:hover { border-color: rgba(232,93,84,0.4); }
+[data-theme="light"] .result-panel { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] p, [data-theme="light"] .helper-text { color: #4B5563; }
 </style>
 </head>
 <body>
@@ -127,8 +136,8 @@
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="../../platform/index.html" style="display:block;padding:0.625rem 0.875rem;border-radius:6px;text-decoration:none;"><div style="font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:2px">FORGE</div><div style="font-size:0.75rem;color:#4B5563">Federated Oversight &amp; Risk Governance Engine</div></a>
-              <a class="dropdown-item" href="../../privacy/index.html" style="display:block;padding:0.625rem 0.875rem;border-radius:6px;text-decoration:none;"><div style="font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:2px">SHIELD</div><div style="font-size:0.75rem;color:#4B5563">Sovereignty Hub for Individual Liberty and Data</div></a>
+              <a class="dropdown-item" href="../../forge/index.html" style="display:block;padding:0.625rem 0.875rem;border-radius:6px;text-decoration:none;"><div style="font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:2px">FORGE</div><div style="font-size:0.75rem;color:#4B5563">Federated Oversight &amp; Risk Governance Engine</div></a>
+              <a class="dropdown-item" href="../../shield/index.html" style="display:block;padding:0.625rem 0.875rem;border-radius:6px;text-decoration:none;"><div style="font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:2px">SHIELD</div><div style="font-size:0.75rem;color:#4B5563">Sovereignty Hub for Individual Liberty and Data</div></a>
             </div>
           </div>
           <a class="nav-link" href="../../careers.html">Careers</a>
@@ -141,7 +150,11 @@
               <a class="dropdown-item" href="./index.html" style="display:block;padding:0.625rem 0.875rem;border-radius:6px;text-decoration:none;"><div style="font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:2px">Photo Scrubber</div><div style="font-size:0.75rem;color:#4B5563">Remove metadata from images</div></a>
             </div>
           </div>
-          <a class="nav-cta" href="../../platform/index.html#interest">Request Access</a>
+          <a class="nav-cta" href="../../forge/index.html#interest">Request Access</a>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" style="background:none;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);cursor:pointer;width:32px;height:32px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:0;transition:all 0.2s;">
+    <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+    <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
         </div>
         <button class="mobile-menu-btn" aria-label="Open menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -155,8 +168,8 @@
   <!-- Mobile menu content -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner container">
-      <a href="../../platform/index.html">FORGE</a>
-      <a href="../../privacy/index.html">SHIELD</a>
+      <a href="../../forge/index.html">FORGE</a>
+      <a href="../../shield/index.html">SHIELD</a>
       <a href="../../careers.html">Careers</a>
       <div class="mobile-tools">
         <button class="mobile-submenu-toggle" aria-expanded="false" aria-controls="mobile-tools-menu">
@@ -167,7 +180,7 @@
           <a href="./index.html">Photo Scrubber</a>
         </div>
       </div>
-      <a href="../../platform/index.html#interest" style="background:#E85D54;color:#fff;border-radius:6px;padding:0.7rem 1rem;text-align:center;margin-top:0.75rem;font-weight:600;display:block;">Request Access</a>
+      <a href="../../forge/index.html#interest" style="background:#E85D54;color:#fff;border-radius:6px;padding:0.7rem 1rem;text-align:center;margin-top:0.75rem;font-weight:600;display:block;">Request Access</a>
     </div>
   </div>
 
@@ -362,17 +375,17 @@
             <div class="footer-cols">
                 <div class="footer-col">
                     <div class="footer-col-title">FORGE</div>
-                    <a href="../../platform/index.html" class="footer-link">Overview</a>
+                    <a href="../../forge/index.html" class="footer-link">Overview</a>
                     <a href="../../forge/demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
-                    <a href="../../platform/index.html#deployment" class="footer-link">Deployment</a>
-                    <a href="../../platform/index.html#compliance" class="footer-link">Compliance</a>
-                    <a href="../../platform/index.html#integrations" class="footer-link">Integrations</a>
+                    <a href="../../forge/index.html#deployment" class="footer-link">Deployment</a>
+                    <a href="../../forge/index.html#compliance" class="footer-link">Compliance</a>
+                    <a href="../../forge/index.html#integrations" class="footer-link">Integrations</a>
                     <a href="../../index.html#pricing" class="footer-link">Pricing</a>
                 </div>
                 <div class="footer-col">
                     <div class="footer-col-title">SHIELD</div>
-                    <a href="../../privacy/index.html" class="footer-link">Overview</a>
-                    <a href="../../privacy/index.html#waitlist" class="footer-link">Join waitlist</a>
+                    <a href="../../shield/index.html" class="footer-link">Overview</a>
+                    <a href="../../shield/index.html#waitlist" class="footer-link">Join waitlist</a>
                     <a href="../../tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
                 </div>
                 <div class="footer-col">
@@ -422,6 +435,7 @@
     });
 })();
 </script>
+<script src="/theme.js"></script>
 </body>
 </html>
 

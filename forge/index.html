@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privify — FORGE. Discover, observe, and govern every AI agent across your enterprise in real time.">
+    <meta name="keywords" content="AI governance, AI agent security, LLM observability, enterprise AI, shadow AI detection, AI compliance">
+    <meta property="og:title" content="Privify — FORGE">
+    <meta property="og:description" content="Discover every AI agent. Observe every interaction. Govern every decision. Real-time AI governance for the enterprise.">
+    <meta property="og:image" content="/images/og-image.png">
+    <meta property="og:url content="https://privify.io/forge/">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>FORGE — Privify</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/theme.css">
+    <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
+    <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        :root {
+            --red: #E85D54;
+            --red-dim: rgba(232,93,84,0.12);
+            --red-glow: rgba(232,93,84,0.25);
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F5F5F5;
+            --gray-400: #9CA3AF;
+            --text-3: #858C97;      /* small detail text, 5.73:1 on --surface */
+            --ok: var(--ok);          /* semantic: healthy / supported */
+            --warn: var(--warn);        /* semantic: partial / attention */
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --surface: #0d0d0d;
+            --surface-2: #111111;
+            --surface-3: #161616;
+            --border: rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed; top:0; left:0; right:0; bottom:0;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% -10%, rgba(232,93,84,0.09) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at -10% 80%, rgba(232,93,84,0.05) 0%, transparent 60%);
+            pointer-events: none; z-index:1;
+        }
+
+        .container { max-width:1200px; margin:0 auto; padding:0 2rem; position:relative; z-index:2; }
+
+        /*  NAV  */
+        .header {
+            position:fixed; top:0; left:0; right:0;
+            padding:1.25rem 0;
+            background:rgba(0,0,0,0.85);
+            backdrop-filter:blur(16px);
+            -webkit-backdrop-filter:blur(16px);
+            z-index:1000;
+            border-bottom:1px solid var(--border);
+            transition:all 0.3s ease;
+        }
+        .header.scrolled { padding:0.875rem 0; background:rgba(0,0,0,0.95); }
+        nav { display:flex; justify-content:space-between; align-items:center; }
+        .logo {
+            display:flex; align-items:center; gap:0.625rem;
+            text-decoration:none; color:var(--white);
+            font-weight:700; font-size:1.375rem; letter-spacing:-0.02em;
+        }
+        .logo svg { height:32px; width:auto; }
+        .nav-links { display:flex; align-items:center; gap:1.5rem; }
+        .nav-link { color:var(--gray-400); text-decoration:none; font-weight:500; font-size:0.9rem; transition:color 0.2s; }
+        .nav-link:hover { color:var(--white); }
+        .nav-pill {
+            background:var(--red); color:var(--white);
+            padding:0.5rem 1.25rem; border-radius:6px;
+            text-decoration:none; font-weight:600; font-size:0.875rem;
+            transition:all 0.2s;
+        }
+        .nav-pill:hover { background:#d44e46; transform:translateY(-1px); box-shadow:0 4px 16px var(--red-glow); }
+        .dropdown { position:relative; }
+        .dropdown-toggle {
+            color:var(--gray-400); font-weight:500; font-size:0.9rem;
+            display:inline-flex; align-items:center; gap:0.35rem;
+            background:transparent; border:none; cursor:pointer; font:inherit;
+        }
+        .dropdown-toggle:hover { color:var(--white); }
+        .dropdown-menu {
+            position:absolute; top:calc(100% + 10px); right:0; min-width:200px;
+            background:#1a1a1a; border:1px solid var(--border);
+            border-radius:10px; box-shadow:0 12px 40px rgba(0,0,0,0.5);
+            padding:0.5rem; display:none; z-index:1001;
+        }
+        .dropdown.open .dropdown-menu { display:block; }
+        .dropdown-item {
+            display:block; padding:0.6rem 0.8rem; border-radius:6px;
+            color:var(--gray-400); text-decoration:none; font-weight:500; font-size:0.875rem;
+        }
+        
+        .di-title { font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px; }
+        .di-sub { font-size:0.75rem;color:var(--text-3); }
+        .dropdown-item:hover { background:rgba(255,255,255,0.05); color:var(--white); }
+        .mobile-menu-btn { display:none; background:none; border:none; color:var(--white); cursor:pointer; padding:0.5rem; }
+        .mobile-menu {
+            display:none; position:fixed; top:68px; left:0; right:0;
+            background:#0d0d0d; border-top:1px solid var(--border);
+            box-shadow:0 10px 40px rgba(0,0,0,0.5); z-index:999;
+        }
+        .mobile-menu.open { display:block; }
+        .mobile-menu-inner { padding:1rem 2rem; }
+        .mobile-menu a { display:block; padding:0.75rem 0; color:var(--gray-400); text-decoration:none; font-weight:500; font-size:0.9rem; }
+        .mobile-menu a:hover { color:var(--white); }
+        .mobile-submenu-toggle { display:flex; align-items:center; justify-content:space-between; width:100%; padding:0.75rem 0; background:none; border:none; color:var(--gray-400); font-weight:500; cursor:pointer; font-size:0.9rem; }
+        .mobile-submenu { padding-left:.75rem; border-left:2px solid var(--border); }
+
+        /*  HERO  */
+        .hero {
+            min-height:100vh; display:flex; align-items:center;
+            padding:7rem 2rem 5rem; position:relative; overflow:hidden;
+        }
+        .hero-content {
+            max-width:1200px; margin:0 auto;
+            display:grid; grid-template-columns:1fr 1fr;
+            gap:5rem; align-items:center;
+        }
+        .hero-eyebrow {
+            display:inline-flex; align-items:center; gap:0.5rem;
+            background:var(--red-dim); border:1px solid rgba(232,93,84,0.3);
+            color:var(--red); padding:0.375rem 0.875rem; border-radius:999px;
+            font-size:0.8rem; font-weight:600; letter-spacing:0.04em;
+            text-transform:uppercase; margin-bottom:1.5rem;
+        }
+        .hero-eyebrow .dot { width:6px; height:6px; background:var(--red); border-radius:50%; animation:pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+        h1 {
+            font-size:clamp(2.25rem,4.5vw,3.75rem);
+            font-weight:800; line-height:1.08;
+            letter-spacing:-0.03em; margin-bottom:1.75rem;
+        }
+        .highlight { color:var(--red); }
+        .hero-subtitle {
+            font-size:1.125rem; color:var(--gray-400);
+            line-height:1.7; margin-bottom:2.5rem; font-weight:400;
+            max-width:520px;
+        }
+        .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:3rem; }
+        .btn-primary {
+            background:var(--red); color:var(--white);
+            padding:0.75rem 1.75rem; border-radius:8px;
+            text-decoration:none; font-weight:600; font-size:0.95rem;
+            transition:all 0.2s; border:none; cursor:pointer;
+        }
+        .btn-primary:hover { background:#d44e46; transform:translateY(-2px); box-shadow:0 6px 24px var(--red-glow); }
+        .btn-secondary {
+            background:transparent; color:var(--white);
+            padding:0.75rem 1.75rem; border-radius:8px;
+            text-decoration:none; font-weight:600; font-size:0.95rem;
+            border:1px solid var(--border-hover); transition:all 0.2s;
+        }
+        .btn-secondary:hover { background:rgba(255,255,255,0.05); border-color:rgba(255,255,255,0.25); }
+        .hero-stats { display:flex; gap:2.5rem; flex-wrap:wrap; }
+        .stat { }
+        .stat-num { font-size:1.75rem; font-weight:700; color:var(--white); letter-spacing:-0.02em; }
+        .stat-label { font-size:0.8rem; color:var(--gray-500); margin-top:2px; }
+
+        /* dashboard mockup */
+        .hero-visual { position:relative; }
+        .dashboard-frame {
+            background:var(--surface-2); border:1px solid var(--border);
+            border-radius:14px; overflow:hidden;
+            box-shadow:0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px var(--border);
+            animation:float 8s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .dashboard-bar {
+            background:var(--surface-3); padding:0.75rem 1rem;
+            display:flex; align-items:center; gap:0.5rem;
+            border-bottom:1px solid var(--border);
+        }
+        .db-dot { width:10px; height:10px; border-radius:50%; }
+        .db-dot.r { background:#ff5f57; } .db-dot.y { background:#febc2e; } .db-dot.g { background:#28c840; }
+        .db-title { font-size:0.75rem; color:var(--gray-500); margin-left:0.5rem; font-family:var(--mono); }
+        .dashboard-body { padding:1rem; }
+        .db-stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:0.5rem; margin-bottom:0.75rem; }
+        .db-stat {
+            background:var(--surface-3); border:1px solid var(--border);
+            border-radius:8px; padding:0.625rem 0.75rem;
+        }
+        .db-stat-label { font-size:0.6rem; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:3px; }
+        .db-stat-val { font-size:1rem; font-weight:700; color:var(--white); }
+        .db-stat-val.red { color:var(--red); }
+        .db-stat-val.green { color:var(--ok); }
+        .db-stat-val.amber { color:var(--warn); }
+        .db-chart { background:var(--surface-3); border:1px solid var(--border); border-radius:8px; padding:0.75rem; margin-bottom:0.75rem; }
+        .db-chart-label { font-size:0.6rem; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; }
+        .db-bars { display:flex; align-items:flex-end; gap:3px; height:48px; }
+        .db-bar { flex:1; background:rgba(232,93,84,0.3); border-radius:2px 2px 0 0; transition:all 0.3s; }
+        .db-bar:hover { background:var(--red); }
+        .db-agents { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; }
+        .db-agent {
+            background:var(--surface-3); border:1px solid var(--border);
+            border-radius:8px; padding:0.625rem 0.75rem;
+            display:flex; align-items:center; gap:0.5rem;
+        }
+        .db-agent-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+        .db-agent-info { flex:1; min-width:0; }
+        .db-agent-name { font-size:0.65rem; color:var(--white); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .db-agent-sub { font-size:0.58rem; color:var(--gray-500); margin-top:1px; }
+        .db-agent-risk {
+            font-size:0.58rem; font-weight:600; padding:1px 5px;
+            border-radius:3px; white-space:nowrap;
+        }
+        .risk-high { background:rgba(232,93,84,0.2); color:var(--red); }
+        .risk-ok { background:rgba(52,211,153,0.15); color:var(--ok); }
+        .risk-med { background:rgba(251,191,36,0.15); color:var(--warn); }
+
+        /*  SECTION COMMON  */
+        section { padding:6rem 0; }
+        .section-eyebrow {
+            display:inline-flex; align-items:center; gap:0.5rem;
+            color:var(--red); font-size:0.75rem; font-weight:600;
+            letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;
+        }
+        .section-title {
+            font-size:clamp(1.75rem,3vw,2.5rem); font-weight:800;
+            letter-spacing:-0.025em; line-height:1.15; margin-bottom:1rem;
+        }
+        .section-sub {
+            font-size:1.0625rem; color:var(--gray-400);
+            line-height:1.7; max-width:560px;
+        }
+        .section-header { text-align:center; margin-bottom:4rem; }
+        .section-header .section-sub { margin:0 auto; }
+
+        /*  LOGOS BAR  */
+        .logos-bar { padding:3rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+        .logos-bar-label { text-align:center; font-size:0.8rem; color:var(--text-3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2rem; }
+        .logos-scroll { display:flex; align-items:center; justify-content:center; gap:1.15rem 2rem; flex-wrap:wrap; }
+        .logo-item { font-size:0.875rem; font-weight:600; color:var(--text-3); letter-spacing:0.02em; white-space:nowrap;
+                     display:inline-flex; align-items:center; gap:0.45rem; transition:color 0.2s; }
+        .logo-item:hover { color:var(--white); }
+        .logo-item svg { width:15px; height:15px; fill:currentColor; opacity:0.8; flex-shrink:0; }
+
+        /*  THREE PILLARS  */
+        .pillars { background:var(--surface); }
+        .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+        .pillar { background:var(--black); padding:2.5rem 2rem; position:relative; overflow:hidden; transition:background 0.3s; }
+        .pillar:hover { background:var(--surface-2); }
+        .pillar-num { font-family:var(--mono); font-size:0.7rem; color:var(--gray-500); margin-bottom:1.25rem; }
+        .pillar-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; font-size:1.25rem; }
+        .pillar-icon.blue { background:rgba(59,130,246,0.12); }
+        .pillar-icon.teal { background:rgba(20,184,166,0.12); }
+        .pillar-icon.purple { background:rgba(139,92,246,0.12); }
+        .pillar h3 { font-size:1.25rem; font-weight:700; margin-bottom:0.75rem; }
+        .pillar p { font-size:0.9rem; color:var(--gray-500); line-height:1.65; }
+        .pillar-features { list-style:none; margin-top:1.5rem; display:flex; flex-direction:column; gap:0.5rem; }
+        .pillar-features li { font-size:0.825rem; color:var(--gray-500); display:flex; align-items:flex-start; gap:0.5rem; }
+        .pillar-features li::before { content:'→'; color:var(--red); font-size:0.75rem; margin-top:1px; flex-shrink:0; }
+        .pillar-glow { position:absolute; bottom:-40px; right:-40px; width:120px; height:120px; border-radius:50%; opacity:0.04; }
+        .pillar:nth-child(1) .pillar-glow { background:var(--red); }
+        .pillar:nth-child(2) .pillar-glow { background:var(--red); }
+        .pillar:nth-child(3) .pillar-glow { background:var(--red); }
+
+        /*  FEATURES GRID  */
+        .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+        .feature-card {
+            background:var(--surface-2); border:1px solid var(--border);
+            border-radius:12px; padding:1.75rem;
+            transition:all 0.25s;
+        }
+        .feature-card:hover { border-color:var(--border-hover); background:var(--surface-3); transform:translateY(-2px); }
+        .feature-icon { font-size:1.5rem; margin-bottom:1rem; }
+        .feature-card h4 { font-size:0.975rem; font-weight:700; margin-bottom:0.5rem; }
+        .feature-card p { font-size:0.85rem; color:var(--gray-500); line-height:1.6; }
+        .feature-tag { display:inline-block; margin-top:0.875rem; font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:4px; background:var(--red-dim); color:var(--red); }
+
+        /*  DASHBOARD SECTION  */
+        .dashboard-section { background:var(--surface); overflow:hidden; }
+        .dashboard-showcase {
+            background:var(--surface-2); border:1px solid var(--border);
+            border-radius:16px; overflow:hidden;
+            box-shadow:0 40px 100px rgba(0,0,0,0.6);
+            margin-top:3rem;
+        }
+        .dash-topbar {
+            background:var(--surface-3); padding:0.875rem 1.25rem;
+            display:flex; align-items:center; gap:0.5rem;
+            border-bottom:1px solid var(--border);
+        }
+        .dash-dots { display:flex; gap:6px; }
+        .dash-dot { width:12px; height:12px; border-radius:50%; }
+        .dash-dot.r{background:#ff5f57;} .dash-dot.y{background:#febc2e;} .dash-dot.g{background:#28c840;}
+        .dash-url { font-family:var(--mono); font-size:0.75rem; color:var(--gray-600); margin-left:0.75rem; }
+        .dash-body { display:grid; grid-template-columns:200px 1fr; min-height:480px; }
+        .dash-sidebar {
+            background:var(--surface-3); border-right:1px solid var(--border);
+            padding:1.25rem 0;
+        }
+        .dash-nav-item {
+            display:flex; align-items:center; gap:0.625rem;
+            padding:0.5rem 1.25rem; font-size:0.8rem; color:var(--text-3);
+            cursor:default;
+        }
+        .dash-nav-item.active { color:var(--white); background:rgba(255,255,255,0.05); border-left:2px solid var(--red); }
+        .dash-nav-item i { width:16px; text-align:center; font-size:0.75rem; }
+        .dash-nav-section { font-size:0.6rem; color:var(--gray-700); text-transform:uppercase; letter-spacing:0.1em; padding:1rem 1.25rem 0.375rem; }
+        .dash-main { padding:1.5rem; overflow:hidden; }
+        .dash-top-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0.75rem; margin-bottom:1.25rem; }
+        .dash-stat-card {
+            background:var(--surface-3); border:1px solid var(--border);
+            border-radius:8px; padding:0.875rem 1rem;
+        }
+        .dsc-label { font-size:0.65rem; color:var(--text-3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+        .dsc-val { font-size:1.375rem; font-weight:700; color:var(--white); }
+        .dsc-val.red{color:var(--red);} .dsc-val.green{color:var(--ok);} .dsc-val.amber{color:var(--warn);}
+        .dsc-change { font-size:0.65rem; margin-top:2px; }
+        .dsc-change.up{color:var(--ok);} .dsc-change.down{color:var(--red);}
+        .dash-row { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem; }
+        .dash-panel { background:var(--surface-3); border:1px solid var(--border); border-radius:8px; padding:0.875rem 1rem; }
+        .dash-panel-title { font-size:0.7rem; color:var(--gray-600); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem; }
+        .agent-row { display:flex; align-items:center; gap:0.5rem; padding:0.375rem 0; border-bottom:1px solid var(--border); }
+        .agent-row:last-child{border-bottom:none;}
+        .agent-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+        .agent-name { font-size:0.7rem; color:var(--white); font-weight:500; flex:1; }
+        .agent-conf { font-size:0.65rem; color:var(--gray-600); }
+        .risk-badge { font-size:0.58rem; font-weight:600; padding:2px 6px; border-radius:3px; }
+        .rb-critical{background:rgba(232,93,84,0.2);color:var(--red);}
+        .rb-medium{background:rgba(251,191,36,0.15);color:var(--warn);}
+        .rb-low{background:rgba(52,211,153,0.12);color:var(--ok);}
+        .event-row { display:flex; align-items:flex-start; gap:0.5rem; padding:0.3rem 0; border-bottom:1px solid var(--border); }
+        .event-row:last-child{border-bottom:none;}
+        .event-type { font-size:0.58rem; font-family:var(--mono); background:var(--surface); color:var(--red); padding:1px 5px; border-radius:3px; white-space:nowrap; }
+        .event-msg { font-size:0.65rem; color:var(--gray-500); flex:1; line-height:1.4; }
+        .event-time { font-size:0.58rem; color:var(--gray-700); white-space:nowrap; }
+        .mini-bars { display:flex; align-items:flex-end; gap:2px; height:40px; margin-top:0.5rem; }
+        .mini-bar { flex:1; border-radius:1px 1px 0 0; }
+
+        /*  DEPLOYMENT  */
+        .deployment-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+        .deploy-card {
+            background:var(--surface-2); border:1px solid var(--border);
+            border-radius:12px; padding:2rem;
+            transition:all 0.25s;
+        }
+        .deploy-card:hover { border-color:var(--border-hover); transform:translateY(-2px); }
+        .deploy-tier { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.75rem; }
+        .deploy-card h3 { font-size:1.1rem; font-weight:700; margin-bottom:0.5rem; }
+        .deploy-card .desc { font-size:0.875rem; color:var(--gray-500); line-height:1.6; margin-bottom:1.25rem; }
+        .deploy-components { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.25rem; }
+        .deploy-chip {
+            font-size:0.7rem; font-weight:500; padding:3px 9px; border-radius:4px;
+            background:rgba(255,255,255,0.05); border:1px solid var(--border); color:var(--gray-400);
+        }
+        .deploy-specs { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; }
+        .deploy-spec { background:var(--surface-3); border-radius:6px; padding:0.5rem; text-align:center; }
+        .deploy-spec-val { font-size:0.875rem; font-weight:700; color:var(--white); }
+        .deploy-spec-label { font-size:0.6rem; color:var(--text-3); margin-top:2px; }
+
+        /*  INTEGRATIONS  */
+        .integrations-section { background:var(--surface); }
+        .int-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+        .int-category { background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:1.5rem; }
+        .int-category h4 { font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:1rem; color:var(--gray-400); }
+        .int-item { display:flex; align-items:center; gap:0.5rem; padding:0.375rem 0; font-size:0.825rem; color:var(--gray-400); border-bottom:1px solid var(--border); }
+        .int-item:last-child{border-bottom:none;}
+        .int-dot { width:6px; height:6px; border-radius:50%; background:var(--red); flex-shrink:0; }
+
+        /*  COMPLIANCE  */
+        .compliance-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; margin-bottom:3rem; }
+        .compliance-card {
+            background:var(--surface-2); border:1px solid var(--border);
+            border-radius:12px; padding:1.5rem; text-align:center; transition:all 0.2s;
+        }
+        .compliance-card:hover { border-color:var(--border-hover); transform:translateY(-2px); }
+        .compliance-name { font-size:1.25rem; font-weight:800; margin-bottom:0.375rem; }
+        .compliance-controls { font-size:0.75rem; color:var(--gray-500); margin-bottom:0.875rem; }
+        .compliance-bar { background:var(--surface-3); height:4px; border-radius:2px; overflow:hidden; }
+        .compliance-fill { height:100%; background:var(--red); border-radius:2px; }
+        .compliance-status { font-size:0.7rem; font-weight:600; margin-top:0.5rem; color:var(--ok); }
+        .compliance-badges { display:flex; justify-content:center; flex-wrap:wrap; gap:0.5rem; }
+        .compliance-badge { font-size:0.75rem; font-weight:600; padding:0.375rem 0.875rem; border-radius:6px; }
+
+        /*  ADVANTAGES  */
+        .advantages-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+        .advantage { background:var(--black); padding:2rem 2.5rem; transition:background 0.2s; }
+        .advantage:hover { background:var(--surface-2); }
+        .adv-icon { font-size:1.5rem; margin-bottom:0.875rem; }
+        .advantage h4 { font-size:0.975rem; font-weight:700; margin-bottom:0.5rem; }
+        .advantage p { font-size:0.85rem; color:var(--gray-500); line-height:1.65; }
+        .adv-tag { display:inline-block; margin-top:0.75rem; font-size:0.68rem; font-weight:700; padding:2px 7px; border-radius:4px; }
+        .adv-unique { background:rgba(232,93,84,0.12); color:var(--red); }
+        .adv-parity { background:rgba(52,211,153,0.1); color:var(--ok); }
+
+        /*  EASY INTEGRATION  */
+        .integration-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+        .step-card { text-align:center; padding:1.5rem; }
+        .step-num {
+            width:40px; height:40px; border-radius:50%;
+            background:var(--red-dim); border:1px solid rgba(232,93,84,0.3);
+            color:var(--red); font-size:0.875rem; font-weight:700;
+            display:flex; align-items:center; justify-content:center;
+            margin:0 auto 1rem;
+        }
+        .step-card h4 { font-size:0.9rem; font-weight:700; margin-bottom:0.5rem; }
+        .step-card p { font-size:0.8rem; color:var(--gray-500); line-height:1.6; }
+
+
+        /*  PAGE-END CTA  */
+        .cta-section { background:var(--surface); }
+        .cta-inner {
+            background:var(--black); border:1px solid var(--border);
+            border-radius:20px; padding:4rem; text-align:center;
+            position:relative; overflow:hidden;
+        }
+        .cta-inner::before {
+            content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%);
+            width:400px; height:400px; border-radius:50%;
+            background:radial-gradient(circle,rgba(232,93,84,0.08) 0%,transparent 70%);
+            pointer-events:none;
+        }
+        .cta-inner h2 { font-size:clamp(1.6rem,3vw,2.5rem); font-weight:800; letter-spacing:-0.03em; line-height:1.1; margin-bottom:1rem; }
+        .cta-inner p { font-size:1rem; color:var(--gray-400); max-width:460px; margin:0 auto 2.5rem; line-height:1.65; }
+        .cta-btn {
+            display:inline-flex; align-items:center; gap:0.5rem;
+            background:var(--red); color:#fff; text-decoration:none;
+            padding:1rem 2.5rem; border-radius:8px;
+            font-weight:700; font-size:1rem;
+            transition:all 0.2s; box-shadow:0 4px 24px rgba(232,93,84,0.35);
+        }
+        .cta-btn:hover { background:#d44e46; transform:translateY(-2px); box-shadow:0 8px 32px rgba(232,93,84,0.45); }
+        .cta-note { font-size:0.78rem; color:var(--text-3); margin-top:1.25rem; }
+        .cta-trust { display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:2rem; padding-top:1.75rem; border-top:1px solid var(--border); }
+        .trust-item { display:flex; align-items:center; gap:0.375rem; font-size:0.8rem; color:var(--text-3); }
+        .trust-item i { color:var(--red); font-size:0.7rem; }
+        [data-theme="light"] .cta-inner { background:#FFFFFF; border-color:rgba(0,0,0,0.08); }
+        [data-theme="light"] .cta-section { background:#EBEBF0; }
+        [data-theme="light"] .cta-inner p { color:#4B5563; }
+        [data-theme="light"] .cta-note { color:#9CA3AF; }
+        [data-theme="light"] .cta-trust { border-top-color:rgba(0,0,0,0.08); }
+
+        /*  FOOTER  */
+        .footer { padding:3rem 0 2rem; border-top:1px solid var(--border); margin-top:0; }
+        .footer-content { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
+        .footer-left { display:flex; align-items:center; gap:0.75rem; color:var(--text-3); font-size:0.85rem; }
+        .footer-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; color:var(--gray-500); }
+        .footer-links { display:flex; gap:2rem; list-style:none; }
+        .footer-link { color:var(--text-3); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
+        .footer-link:hover { color:var(--white); }
+
+        /*  ANIMATIONS  */
+        @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in { animation:fadeUp 0.7s ease-out both; }
+        .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s} .delay-4{animation-delay:.4s}
+
+        /*  RESPONSIVE  */
+        
+        @media(max-width:1024px) { .forge-image-inner{grid-template-columns:1fr;} .forge-image-text{text-align:center;} .forge-image-text .section-sub{margin:0 auto;} }
+        @media(max-width:1024px) {
+            .hero-content{grid-template-columns:1fr;text-align:center;gap:3rem;}
+            .hero-visual{order:-1;}
+            .hero-actions{justify-content:center;}
+            .hero-stats{justify-content:center;}
+            .hero-subtitle{margin:0 auto 2.5rem;}
+            .pillars-grid{grid-template-columns:1fr;}
+            .features-grid{grid-template-columns:repeat(2,1fr);}
+            .compliance-grid{grid-template-columns:repeat(3,1fr);}
+            .advantages-grid{grid-template-columns:1fr;}
+            .integration-steps{grid-template-columns:repeat(2,1fr);}
+            .int-grid{grid-template-columns:repeat(2,1fr);}
+            .dash-body{grid-template-columns:1fr;}
+            .dash-sidebar{display:none;}
+        }
+        @media(max-width:768px) {
+            .nav-links{display:none;}
+            .mobile-menu-btn{display:block;}
+            /* Hero */
+            .hero{padding:5rem 1.25rem 3rem;min-height:auto;}
+            .hero-actions{flex-direction:column;align-items:stretch;}
+            .btn-primary,.btn-secondary{text-align:center;padding:0.8rem 1.25rem;}
+            .hero-stats{gap:1.5rem;}
+            /* Sections */
+            section{padding:3.5rem 0;}
+            .container{padding:0 1.25rem;}
+            /* Grids */
+            .deployment-grid{grid-template-columns:1fr;}
+            .features-grid{grid-template-columns:1fr;}
+            .compliance-grid{grid-template-columns:repeat(2,1fr);}
+            .integration-steps{grid-template-columns:1fr;}
+            .int-grid{grid-template-columns:1fr;}
+            /* Dashboard mockup */
+            .dash-top-stats{grid-template-columns:repeat(2,1fr);}
+            .dash-row{grid-template-columns:1fr;}
+            .dashboard-showcase{border-radius:10px;}
+            /* Logos */
+            .logos-scroll{gap:1.5rem;}
+            /* Pillars */
+            .pillar{padding:1.75rem 1.25rem;}
+            /* Sign up */
+            .signup-inner{padding:2rem 1.25rem;}
+            .signup-form,.signup-row2{flex-direction:column;}
+            .signup-input,.signup-select{min-width:unset;width:100%;}
+            /* Footer */
+            .footer-content{flex-direction:column;text-align:center;}
+            .footer-links{flex-wrap:wrap;justify-content:center;gap:0.75rem 1.5rem;}
+        }
+        @media(max-width:480px) {
+            h1{font-size:2rem;}
+            .hero{padding:4.5rem 1rem 2.5rem;}
+            .compliance-grid{grid-template-columns:1fr;}
+            .advantages-grid{grid-template-columns:1fr;}
+            .section-title{font-size:1.5rem;}
+            .deploy-specs{grid-template-columns:repeat(2,1fr);}
+            .hero-stats{grid-template-columns:repeat(2,1fr);display:grid;gap:1rem;}
+            .stat-num{font-size:1.375rem;}
+            .dashboard-frame{display:none;} /* hide hero mockup on very small screens */
+            .db-stats-row{grid-template-columns:repeat(2,1fr);}
+            .forge-badge-name{font-size:1.25rem;}
+        }
+
+        /* FORGE IMAGE SECTION */
+        .forge-image-section { padding:5rem 0; background:var(--black); overflow:hidden; }
+        .forge-image-inner { display:grid; grid-template-columns:1fr 1.6fr; gap:4rem; align-items:center; }
+        .forge-image-wrap { position:relative; }
+        .forge-hero-img { width:100%; height:auto; display:block; border-radius:16px; }
+        .forge-image-badge { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); padding:2rem 1.5rem 1.25rem; }
+        .forge-badge-name { display:block; font-size:1.75rem; font-weight:900; color:var(--red); letter-spacing:0.12em; line-height:1; }
+        .forge-badge-sub { display:block; font-size:0.7rem; color:rgba(255,255,255,0.5); letter-spacing:0.08em; margin-top:4px; text-transform:uppercase; }
+
+        /* EASY DEPLOY NOTE */
+        .easy-deploy-note { margin-top:2.5rem; }
+        .edn-inner { display:flex; align-items:flex-start; gap:0.75rem; background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:1rem 1.25rem; max-width:680px; margin:0 auto; }
+        .edn-icon { color:var(--red); font-size:1rem; flex-shrink:0; margin-top:1px; }
+        .edn-inner span:last-child { font-size:0.85rem; color:var(--gray-500); line-height:1.6; }
+
+        /* ── COMPARISON SECTION ── */
+        .cmp-section { background:var(--black); }
+        .cmp-wrap {
+            position:relative; border-radius:14px;
+            border:1px solid rgba(255,255,255,0.08); overflow:hidden;
+            box-shadow:0 0 0 1px rgba(232,93,84,0.08), 0 40px 100px rgba(0,0,0,0.55);
+            margin-bottom:1.75rem;
+        }
+        .cmp-glow {
+            position:absolute; width:600px; height:600px; border-radius:50%;
+            background:radial-gradient(ellipse, rgba(232,93,84,0.07) 0%, transparent 70%);
+            left:50%; top:50%; transform:translate(-50%,-50%);
+            pointer-events:none; z-index:0;
+        }
+        .cmp-table { width:100%; border-collapse:collapse; position:relative; z-index:1; }
+        .cmp-table thead tr { background:rgba(255,255,255,0.03); }
+        .cmp-table thead th {
+            padding:18px 24px; font-size:11px; font-weight:700;
+            letter-spacing:0.1em; text-transform:uppercase; text-align:left;
+            border-bottom:1px solid rgba(255,255,255,0.07);
+        }
+        .cmp-col-cap { width:28%; color:rgba(255,255,255,0.35); }
+        .cmp-col-others { color:rgba(255,255,255,0.25); width:36%; }
+        .cmp-col-forge {
+            color:var(--red); width:36%;
+            background:rgba(232,93,84,0.08);
+            border-left:1px solid rgba(232,93,84,0.2); position:relative;
+        }
+        .cmp-col-forge::after {
+            content:''; position:absolute; top:0; left:0; right:0; height:2px;
+            background:var(--red);
+        }
+        tr.cmp-group { background:rgba(255,255,255,0.02); border-top:1px solid rgba(232,93,84,0.1); }
+        tr.cmp-group td {
+            padding:9px 24px; font-size:8.5px; font-weight:800;
+            letter-spacing:0.22em; color:rgba(232,93,84,0.5); text-transform:uppercase;
+        }
+        tr.cmp-group td.cmp-forge-cell {
+            background:rgba(232,93,84,0.07); border-left:1px solid rgba(232,93,84,0.18);
+        }
+        .cmp-table tbody tr { border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.12s; }
+        .cmp-table tbody tr:last-child { border-bottom:none; }
+        .cmp-table tbody tr:not(.cmp-group):hover { background:rgba(255,255,255,0.025); }
+        .cmp-table td { padding:14px 24px; vertical-align:middle; font-size:13px; line-height:1.45; }
+        td.cmp-cap {
+            font-weight:600; color:rgba(255,255,255,0.65); font-size:12.5px;
+            border-right:1px solid rgba(255,255,255,0.04);
+        }
+        .cmp-unique {
+            display:inline-block; margin-left:7px; padding:1px 6px; border-radius:3px;
+            font-size:8px; font-weight:800; letter-spacing:0.07em;
+            background:rgba(232,93,84,0.15); color:#EE8A83;
+            border:1px solid rgba(232,93,84,0.28); vertical-align:middle; white-space:nowrap;
+        }
+        td.cmp-others { color:rgba(255,255,255,0.22); font-size:12.5px; }
+        .cmp-no { display:inline-flex; align-items:center; gap:7px; color:rgba(255,255,255,0.18); }
+        .cmp-no::before { content:'\2715'; font-size:12px; color:rgba(255,255,255,0.12); }
+        .cmp-partial { color:var(--warn); font-size:12px; }
+        td.cmp-forge-cell {
+            background:rgba(232,93,84,0.05); border-left:1px solid rgba(232,93,84,0.18);
+            font-weight:700; font-size:12.5px; color:#fff;
+        }
+        .cmp-yes { display:inline-flex; align-items:center; gap:8px; color:#fff; }
+        .cmp-yes::before { content:'\2713'; color:var(--ok); font-size:13px; font-weight:900; flex-shrink:0; }
+        .cmp-planned { color:var(--text-3); font-style:italic; font-weight:500; font-size:12px; }
+        .cmp-planned::before { content:'\25CB\00A0'; color:var(--text-3); font-style:normal; }
+        .cmp-observation {
+            background:rgba(232,93,84,0.06); border:1px solid rgba(232,93,84,0.18);
+            border-radius:10px; padding:22px 26px;
+            display:flex; gap:18px; align-items:flex-start; margin-bottom:1.25rem;
+        }
+        .cmp-obs-icon {
+            width:34px; height:34px; flex-shrink:0;
+            background:rgba(232,93,84,0.12); border:1px solid rgba(232,93,84,0.25);
+            border-radius:8px; display:flex; align-items:center; justify-content:center;
+            font-size:13px; color:var(--red); margin-top:2px;
+        }
+        .cmp-obs-eyebrow {
+            font-size:9px; font-weight:800; letter-spacing:0.2em;
+            color:var(--red); text-transform:uppercase; margin-bottom:6px;
+        }
+        .cmp-obs-text { font-size:13.5px; font-weight:500; color:rgba(255,255,255,0.6); line-height:1.7; }
+        .cmp-obs-text strong { color:#fff; font-weight:700; }
+        .cmp-stats {
+            display:grid; grid-template-columns:repeat(4,1fr);
+            gap:1px; background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.07); border-radius:12px;
+            overflow:hidden; margin-bottom:2rem;
+        }
+        .cmp-stat { background:var(--surface); padding:22px 20px; text-align:center; }
+        .cmp-stat-val { font-size:32px; font-weight:900; color:var(--red); letter-spacing:-0.04em; line-height:1; margin-bottom:6px; }
+        .cmp-stat-label { font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:0.07em; text-transform:uppercase; line-height:1.5; }
+        .cmp-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+        .cmp-btn-secondary {
+            display:inline-block; text-decoration:none; padding:0.75rem 1.5rem;
+            border:1px solid rgba(255,255,255,0.15); border-radius:6px;
+            color:rgba(255,255,255,0.6); font-weight:600; font-size:0.875rem;
+            transition:all 0.2s;
+        }
+        .cmp-btn-secondary:hover { border-color:rgba(255,255,255,0.35); color:#fff; }
+        @media(max-width:768px){
+            .cmp-wrap{ overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; }
+            .cmp-table{ min-width:460px; }
+            .cmp-table td, .cmp-table th{ padding:11px 14px; font-size:11.5px; }
+            .cmp-stats{ grid-template-columns:1fr 1fr; }
+            .cmp-observation{ flex-direction:column; gap:12px; }
+        }
+        @media(max-width:480px){
+            .cmp-table{ min-width:400px; }
+            .cmp-stat-val{ font-size:26px; }
+        }
+
+    
+        /* ── SITE FOOTER (canonical — synced across all pages) ───────────── */
+        :root { --pf-text:#858C97; }
+        .footer { padding:3rem 0 1.5rem;border-top:1px solid var(--border);margin-top:0; }
+        .footer .container { max-width:1200px;margin:0 auto;padding:0 2rem; }
+        .footer-top { display:grid;grid-template-columns:280px 1fr;gap:4rem;margin-bottom:2.5rem;text-align:left; }
+        .footer-logo { display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--gray-400);font-weight:700;font-size:1rem;margin-bottom:0.875rem;border-bottom:none; }
+        .footer-tagline { font-size:0.8rem;color:var(--pf-text);line-height:1.6;margin:0; }
+        .footer-cols { display:grid;grid-template-columns:repeat(4,1fr);gap:2rem; }
+        .footer-col-title { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--pf-text);margin-bottom:0.875rem; }
+        .footer-col { display:flex;flex-direction:column;gap:0.5rem;align-items:flex-start; }
+        .footer-link { color:var(--pf-text);text-decoration:none;font-size:0.825rem;transition:color 0.2s;border-bottom:none; }
+        .footer-link:hover { color:var(--white); }
+        .footer-bottom { display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.8rem;color:var(--gray-500);gap:1rem;flex-wrap:wrap;text-align:left; }
+        .footer-bottom a { border-bottom:none; }
+        @media(max-width:900px){ .footer-cols{grid-template-columns:repeat(2,1fr);} }
+        @media(max-width:768px){
+            .footer-top{grid-template-columns:1fr;gap:2rem;}
+            .footer-bottom{flex-direction:column;gap:0.75rem;text-align:center;}
+        }
+        @media(max-width:480px){ .footer-cols{grid-template-columns:1fr;} }
+
+        /* ── FOOTER UTILITY ROW ──────────────────────────────────────────── */
+        .footer-utility { display:flex;justify-content:space-between;align-items:center;gap:1.5rem 2rem;
+                          flex-wrap:wrap;padding:1.35rem 0;border-top:1px solid var(--border); }
+        .fu-left, .fu-right { display:flex;align-items:center;gap:0.55rem;flex-wrap:wrap; }
+        .fu-label { font-size:0.76rem;color:var(--pf-text);margin-left:0.4rem; }
+        .fu-ai { display:inline-flex;gap:0.4rem;flex-wrap:wrap; }
+        .fu-chip { display:inline-flex;align-items:center;gap:0.35rem;font-size:0.74rem;font-weight:500;
+                   color:var(--pf-text);text-decoration:none;border:1px solid var(--border);
+                   background:rgba(255,255,255,0.02);border-radius:6px;padding:0.3rem 0.6rem;
+                   transition:color 0.2s,border-color 0.2s,background 0.2s; }
+        .fu-chip:hover { color:var(--white);border-color:var(--border-h);background:rgba(255,255,255,0.05); }
+        .fu-chip svg { opacity:0.75;flex-shrink:0; }
+        .fu-mono { font-family:var(--mono,ui-monospace,monospace);letter-spacing:0.06em;font-size:0.68rem; }
+        .fu-trust { display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;color:var(--pf-text);
+                    border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.65rem;white-space:nowrap; }
+        .fu-trust svg { color:var(--red);opacity:0.9;flex-shrink:0; }
+        .fu-cap { color:var(--gray-500); }
+        @media(max-width:900px){
+            .footer-utility{flex-direction:column;align-items:flex-start;gap:1rem;}
+            .fu-cap{white-space:normal;}
+        }
+
+        /* Honour the OS-level reduced-motion preference across the whole page. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration:0.01ms !important; animation-iteration-count:1 !important;
+                transition-duration:0.01ms !important; scroll-behavior:auto !important;
+            }
+        }
+
+        /* COVERAGE MAP — the gateway blind-spot diagram.
+           Built from CSS boxes rather than SVG so the labels stay selectable
+           and the whole thing reflows to one column on narrow screens. */
+        .gap-map { position:relative;border:1px solid rgba(232,93,84,0.35);border-radius:18px;
+                   padding:2.75rem 1.75rem 1.75rem;margin-top:2.75rem;
+                   background:radial-gradient(ellipse 70% 90% at 80% 10%,rgba(232,93,84,0.05),transparent 70%); }
+        .gap-map-head { position:absolute;top:-0.62rem;left:1.5rem;background:var(--surface);
+                        padding:0 0.7rem;font-family:var(--mono);font-size:0.68rem;font-weight:500;
+                        letter-spacing:0.12em;text-transform:uppercase;color:var(--red); }
+        .gap-map-body { display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:1.75rem;align-items:center; }
+        /* Sized to its contents on purpose — the gateway's coverage should look
+           small next to the list of what falls outside it. */
+        .gap-inner { position:relative;border:1px dashed var(--gray-700);border-radius:13px;
+                     padding:2.25rem 1.35rem 1.5rem;background:rgba(255,255,255,0.015); }
+        .track-gap .section-header .section-eyebrow { display:flex;margin-top:0.9rem;margin-bottom:0.7rem; }
+        .gap-inner-head { position:absolute;top:-0.58rem;left:1.15rem;background:var(--surface);
+                          padding:0 0.6rem;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;
+                          text-transform:uppercase;color:var(--text-3); }
+        .gap-node { border:1px solid var(--border-h);border-radius:8px;background:var(--surface-2);
+                    padding:0.8rem 1rem;font-size:0.85rem;font-weight:600;color:var(--gray-400);text-align:center; }
+        .gap-inner-note { font-size:0.72rem;color:var(--gray-500);text-align:center;margin-top:0.85rem;line-height:1.5; }
+        .gap-chips { display:flex;flex-direction:column;gap:0.85rem; }
+        .gap-chip { display:flex;gap:0.8rem;align-items:flex-start; }
+        .gap-chip-mark { flex-shrink:0;width:1.4rem;height:1.4rem;border-radius:50%;border:1px solid rgba(232,93,84,0.4);
+                         color:var(--red);font-size:0.7rem;display:flex;align-items:center;justify-content:center;margin-top:1px; }
+        .gap-chip-t { font-size:0.88rem;font-weight:650;color:var(--white);display:block;margin-bottom:1px; }
+        .gap-chip-s { font-size:0.79rem;color:var(--text-3);line-height:1.5;display:block; }
+        .gap-map-foot { margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid rgba(232,93,84,0.18);
+                        font-size:0.79rem;color:var(--gray-400);display:flex;align-items:center;gap:0.6rem;line-height:1.5; }
+        .gap-map-foot i { color:var(--red);font-size:0.8rem;flex-shrink:0; }
+        .gap-caption { font-size:0.9rem;color:var(--gray-400);line-height:1.7;margin-top:1.5rem;max-width:720px; }
+        @media(max-width:900px){
+            .gap-map-body{grid-template-columns:1fr;gap:1.5rem;}
+            .gap-inner{min-height:0;}
+        }
+
+        /*  TOPOLOGY DIAGRAM — replaces the stock hero art. Carries the
+            data-residency argument: endpoints -> your control plane -> your
+            stack, with nothing crossing out to Privify. CSS boxes rather than
+            SVG so it reflows and the labels stay selectable.  */
+        .topo { border:1px solid rgba(232,93,84,0.35); border-radius:16px; padding:2.5rem 1.6rem 1.4rem;
+                position:relative; background:radial-gradient(ellipse 80% 70% at 70% 0%,rgba(232,93,84,0.05),transparent 70%); }
+        .topo-head { position:absolute; top:-0.62rem; left:1.4rem; background:var(--black); padding:0 0.7rem;
+                     font-family:var(--mono); font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--red); }
+        .topo-body { display:grid; grid-template-columns:1fr auto 1.15fr auto 0.8fr; gap:0.9rem; align-items:center; }
+        .topo-col { display:flex; flex-direction:column; gap:0.4rem; min-width:0; }
+        .topo-col-label { font-family:var(--mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase;
+                          color:var(--text-3); margin-bottom:0.2rem; }
+        .topo-node { border:1px solid var(--border-hover); border-radius:7px; background:var(--surface-2);
+                     padding:0.5rem 0.7rem; font-size:0.8rem; font-weight:600; color:var(--gray-400); text-align:center; }
+        .topo-plane { border:1px solid rgba(232,93,84,0.4); border-radius:9px; background:rgba(232,93,84,0.06);
+                      padding:0.7rem; display:flex; flex-direction:column; gap:0.35rem; }
+        .topo-plane span { font-size:0.78rem; font-weight:600; color:var(--white); text-align:center; }
+        .topo-note { font-size:0.66rem; color:var(--text-3); text-align:center; margin-top:0.15rem; line-height:1.4; }
+        .topo-link { display:flex; flex-direction:column; align-items:center; gap:0.3rem; }
+        .topo-link-label { font-family:var(--mono); font-size:0.55rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-3); }
+        .topo-arrow { width:34px; height:1px; background:linear-gradient(90deg,rgba(232,93,84,0.25),var(--red)); position:relative; }
+        .topo-arrow::after { content:''; position:absolute; right:-1px; top:-3px; border-left:6px solid var(--red);
+                             border-top:3.5px solid transparent; border-bottom:3.5px solid transparent; }
+        .topo-foot { display:flex; align-items:flex-start; gap:0.5rem; margin-top:1.5rem; padding-top:1rem;
+                     border-top:1px solid rgba(232,93,84,0.18); font-size:0.74rem; color:var(--text-3); line-height:1.5; }
+        .topo-foot svg { color:var(--red); flex-shrink:0; margin-top:2px; }
+        @media(max-width:1024px){
+            .topo-body { grid-template-columns:1fr; gap:0.5rem; }
+            .topo-link { flex-direction:row; gap:0.5rem; padding:0.15rem 0; }
+            .topo-arrow { width:1px; height:20px; background:linear-gradient(180deg,rgba(232,93,84,0.25),var(--red)); }
+            .topo-arrow::after { right:-3px; top:auto; bottom:-1px; border-left:3.5px solid transparent;
+                                 border-right:3.5px solid transparent; border-top:6px solid var(--red); border-bottom:none; }
+        }
+        /*  Re-declared after the base rules above. The original stacking rule
+            sits earlier in the sheet than `.forge-image-inner`, so at equal
+            specificity the two-column base rule won and the section never
+            collapsed on tablet or mobile.  */
+        @media(max-width:1024px){
+            .forge-image-inner{ grid-template-columns:1fr; }
+            .forge-image-text{ text-align:center; }
+            .forge-image-text .section-sub{ margin:0 auto; }
+        }
+
+        /*  DISCOVERY GAP — the reason to act. Left panel is what an AI policy
+            names; right is what a first scan turns up. The density delta is
+            the argument; the numbers are the page's demo dataset.  */
+        .dgap { display:grid; grid-template-columns:1fr auto 1.55fr; gap:1.25rem; align-items:stretch; }
+        .dgap-panel { border:1px solid var(--border-hover); border-radius:14px; background:var(--surface-2);
+                      padding:1.4rem 1.25rem 1.2rem; display:flex; flex-direction:column; }
+        .dgap-found { border-color:rgba(232,93,84,0.45); background:rgba(232,93,84,0.05);
+                      box-shadow:0 0 44px rgba(232,93,84,0.10); }
+        .dgap-label { font-family:var(--mono); font-size:0.6rem; letter-spacing:0.11em; text-transform:uppercase;
+                      color:var(--text-3); margin-bottom:1rem; }
+        .dgap-grid { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:1.1rem; flex:1; align-content:flex-start; }
+        .dgap-grid i { width:9px; height:9px; border-radius:2px; background:var(--gray-700); display:block; }
+        .dgap-grid i.on  { background:rgba(232,93,84,0.55); }
+        .dgap-grid i.hot { background:var(--red); box-shadow:0 0 7px rgba(232,93,84,0.65); }
+        .dgap-fig { font-size:2.4rem; font-weight:800; letter-spacing:-0.03em; line-height:1; color:var(--gray-500);
+                    display:flex; align-items:baseline; gap:0.6rem; }
+        .dgap-found .dgap-fig { color:var(--white); font-size:3.1rem; }
+        .dgap-fig span { font-size:0.76rem; font-weight:500; letter-spacing:0; color:var(--text-3); }
+        .dgap-sub { font-size:0.75rem; color:var(--red); margin-top:0.5rem; font-weight:600; }
+        .dgap-vs { align-self:center; font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em;
+                   text-transform:uppercase; color:var(--gray-700); }
+        .dgap-note { font-size:0.7rem; color:var(--gray-700); margin-top:0.85rem; text-align:right; }
+        @media(max-width:1024px){
+            .dgap { grid-template-columns:1fr; gap:0.75rem; }
+            .dgap-vs { justify-self:center; padding:0.15rem 0; }
+            .dgap-note { text-align:left; }
+        }
+
+        /*  Topology now sits with deployment, where the architecture question
+            actually gets asked.  */
+        .topo-slot { max-width:880px; margin:0 auto 3.5rem; }
+
+        /*  BRAND BEAT — the forge metaphor. Decorative, so alt="" and
+            aria-hidden; the copy beside it carries the meaning.  */
+        .brandbeat { padding:5rem 0 1rem; background:var(--black); }
+        .brandbeat-inner { display:grid; grid-template-columns:1.35fr 1fr; gap:3.5rem; align-items:center; }
+        .brandbeat-img { width:100%; height:auto; display:block; border-radius:16px;
+                         box-shadow:0 40px 100px rgba(232,93,84,0.15), 0 0 0 1px rgba(232,93,84,0.15); }
+        .brandbeat-copy .section-title { margin-bottom:1rem; }
+        @media(max-width:900px){
+            .brandbeat-inner { grid-template-columns:1fr; gap:2rem; }
+            .brandbeat-copy { text-align:center; }
+            .brandbeat-copy .section-sub { margin:0 auto; }
+        }
+
+        /*  The pricing cell is a real link now — the only interactive cell in
+            the spec grid, so it has to read as one.  */
+        .deploy-spec-link { display:block; text-decoration:none; border:1px solid transparent;
+                            transition:border-color 0.2s, background 0.2s; }
+        .deploy-spec-link:hover { border-color:rgba(232,93,84,0.45); background:rgba(232,93,84,0.08); }
+        .deploy-spec-link:focus-visible { outline:2px solid var(--red); outline-offset:2px; }
+        .deploy-spec-link .deploy-spec-val { color:var(--red); display:flex; align-items:center;
+                                             justify-content:center; gap:0.3rem; }
+        .deploy-spec-link i { font-size:0.6rem; transition:transform 0.2s; }
+        .deploy-spec-link:hover i { transform:translateX(2px); }
+
+        /*  Names the product directly under the headline. Mono and muted so it
+            reads as a definition, not a second headline.  */
+        .hero-expand { font-family:var(--mono); font-size:0.74rem; letter-spacing:0.02em;
+                       color:var(--text-3); margin:-0.35rem 0 1.35rem; }
+        .hero-expand strong { color:var(--red); font-weight:600; letter-spacing:0.08em; }
+        @media(max-width:768px){ .hero-expand { font-size:0.68rem; } }
+
+        /* ── LIGHT MODE THEME ── */
+        /* Dark is default; light overrides only color tokens */
+        [data-theme="light"] {
+            --black:        #FFFFFF;
+            --white:        #0A0A0A;
+            --surface:      #F4F4F6;
+            --surface-2:    #EAEAEE;
+            --surface-3:    #E0E0E6;
+            --border:       rgba(0,0,0,0.08);
+            --border-hover: rgba(0,0,0,0.16);
+            --gray-400:     #4B5563;
+            --gray-500:     #6B7280;
+            --gray-600:     #9CA3AF;
+            --gray-700:     #D1D5DB;
+            --gray-800:     #E5E7EB;
+            --text-3:       #6B7280;
+            --red-dim:      rgba(232,93,84,0.10);
+            --red-glow:     rgba(232,93,84,0.20);
+        }
+        [data-theme="light"] body {
+            background: #F4F4F6;
+            color: #0A0A0A;
+        }
+        [data-theme="light"] body::before {
+            background:
+                radial-gradient(ellipse 80% 60% at 70% -10%, rgba(232,93,84,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at -10% 80%, rgba(232,93,84,0.03) 0%, transparent 60%);
+        }
+        [data-theme="light"] .header {
+            background: rgba(244,244,246,0.88);
+        }
+        [data-theme="light"] .header.scrolled {
+            background: rgba(244,244,246,0.97);
+        }
+        [data-theme="light"] .dropdown-menu {
+            background: #FFFFFF;
+        }
+        [data-theme="light"] .mobile-menu {
+            background: #F4F4F6;
+        }
+        [data-theme="light"] .logo { color: #0A0A0A; }
+        [data-theme="light"] .footer { background: #E8E8EE; border-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .footer-logo { color: #0A0A0A; }
+        [data-theme="light"] .cmp-stat { background: #EAEAEE; }
+        [data-theme="light"] .cmp-wrap { border-color: rgba(0,0,0,0.1); }
+        [data-theme="light"] .cmp-forge-cell { background: rgba(232,93,84,0.07); }
+        [data-theme="light"] .cmp-col-forge { background: rgba(232,93,84,0.07); }
+        [data-theme="light"] .dashboard-panel,
+        [data-theme="light"] .dash-sidebar { background: #E8E8EE; }
+        [data-theme="light"] .pillar { background: #F4F4F6; }
+        [data-theme="light"] .pillars-grid { background: rgba(0,0,0,0.06); }
+
+        /* ── THEME TOGGLE BUTTON ── */
+        .theme-toggle {
+            background: none; border: 1px solid var(--border);
+            color: var(--gray-400); cursor: pointer;
+            width: 32px; height: 32px; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; transition: all 0.2s; flex-shrink: 0;
+        }
+        .theme-toggle:hover { border-color: var(--border-hover); color: var(--white); }
+        .theme-toggle .icon-sun  { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        [data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+</style>
+</head>
+<body>
+
+<!--  HEADER  -->
+<header class="header" id="header">
+    <div class="container">
+        <nav>
+            <a href="../index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="32" width="32">
+                    <g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g>
+                </svg>
+                PRIVIFY
+            </a>
+            <div class="nav-links">
+                <div class="dropdown">
+                    <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                        Products
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="index.html">
+                            <div class="di-title">FORGE</div>
+                            <div class="di-sub">Federated Oversight &amp; Risk Governance Engine</div>
+                        </a>
+                        <a class="dropdown-item" href="../shield/index.html">
+                            <div class="di-title">SHIELD</div>
+                            <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#deployment" class="nav-link">Deployment</a>
+                <a href="#comparison" class="nav-link">Compare</a>
+                <a href="#integrations" class="nav-link">Integrations</a>
+                <a href="#compliance" class="nav-link">Compliance</a>
+                <a href="../careers.html" class="nav-link">Careers</a>
+                <div class="dropdown">
+                    <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                        Tools
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="tools/photoScrubber/index.html">Photo Scrubber</a>
+                    </div>
+                </div>
+                <a href="../forge/demo/index.html" class="nav-link" style="color:var(--red);font-weight:600;">&#9654; Live Demo</a>
+                <a href="../request/index.html" class="nav-pill">Request Access</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+                    <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+                    <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                </button>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Open menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<!--  HERO  -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <div class="hero-eyebrow fade-in">
+                <span class="dot"></span>
+                Now in early access
+            </div>
+            <h1 class="fade-in delay-1">
+                Govern every<br>
+                <span class="highlight">AI agent</span><br>
+                across your enterprise
+            </h1>
+            <!-- Product name expanded here: it appeared nowhere a reader would
+                 see it — only a hover-only nav dropdown and the brand section at
+                 the very foot of the page. -->
+            <div class="hero-expand fade-in delay-1">
+                <strong>FORGE</strong> &mdash; Federated Oversight &amp; Risk Governance Engine
+            </div>
+            <p class="hero-subtitle fade-in delay-2">
+                Privify discovers every AI agent running in your environment — sanctioned or shadow — maps every interaction, and enforces policy in real time. Three pillars: Discovery, Observability, Governance.
+            </p>
+            <div class="hero-actions fade-in delay-3">
+                <a href="../request/index.html" class="btn-primary">Request early access</a>
+                <a href="../forge/demo/index.html" class="btn-secondary">&#9654; Try interactive demo</a>
+                <a href="#platform" class="btn-secondary" style="border-color:var(--border);">See how it works</a>
+                <a href="forge_brochure.pdf" download class="btn-secondary" style="border-color:var(--border);display:inline-flex;align-items:center;gap:0.4rem;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download brochure
+                </a>
+            </div>
+            <div class="hero-stats fade-in delay-4">
+                <!-- Counts verified against ../AgentDiscovery: PROVIDERS (116),
+                     FRAMEWORKS (13), DLP_PATTERNS (12), SIEM connectors (11). -->
+                <div class="stat">
+                    <div class="stat-num">116</div>
+                    <div class="stat-label">AI providers tracked</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">13</div>
+                    <div class="stat-label">Compliance frameworks</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">12</div>
+                    <div class="stat-label">DLP patterns, live</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">11</div>
+                    <div class="stat-label">SIEM platforms</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual fade-in delay-3">
+            <!-- Live dashboard mockup -->
+            <div class="dashboard-frame">
+                <div class="dashboard-bar">
+                    <div class="db-dot r"></div><div class="db-dot y"></div><div class="db-dot g"></div>
+                    <span class="db-title">privify — fleet dashboard</span>
+                </div>
+                <div class="dashboard-body">
+                    <div class="db-stats-row">
+                        <div class="db-stat"><div class="db-stat-label">Active agents</div><div class="db-stat-val">47</div></div>
+                        <div class="db-stat"><div class="db-stat-label">Critical risk</div><div class="db-stat-val red">3</div></div>
+                        <div class="db-stat"><div class="db-stat-label">Today cost</div><div class="db-stat-val amber">$84</div></div>
+                        <div class="db-stat"><div class="db-stat-label">Violations</div><div class="db-stat-val red">12</div></div>
+                    </div>
+                    <div class="db-chart">
+                        <div class="db-chart-label">API calls / hour</div>
+                        <div class="db-bars" id="heroBars"></div>
+                    </div>
+                    <div class="db-agents">
+                        <div class="db-agent">
+                            <div class="db-agent-dot" style="background:var(--ok)"></div>
+                            <div class="db-agent-info"><div class="db-agent-name">research-agent-v2</div><div class="db-agent-sub">autonomous · 94% conf</div></div>
+                            <div class="db-agent-risk risk-ok">Active</div>
+                        </div>
+                        <div class="db-agent">
+                            <div class="db-agent-dot" style="background:#E85D54"></div>
+                            <div class="db-agent-info"><div class="db-agent-name">unknown-agent-7f2</div><div class="db-agent-sub">shadow · unregistered</div></div>
+                            <div class="db-agent-risk risk-high">Critical</div>
+                        </div>
+                        <div class="db-agent">
+                            <div class="db-agent-dot" style="background:var(--warn)"></div>
+                            <div class="db-agent-info"><div class="db-agent-name">sales-copilot-prod</div><div class="db-agent-sub">api_consumer · 78%</div></div>
+                            <div class="db-agent-risk risk-med">Review</div>
+                        </div>
+                        <div class="db-agent">
+                            <div class="db-agent-dot" style="background:var(--ok)"></div>
+                            <div class="db-agent-info"><div class="db-agent-name">ollama-local-3</div><div class="db-agent-sub">local_llm · endpoint</div></div>
+                            <div class="db-agent-risk risk-ok">Governed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  FORGE HERO IMAGE  -->
+<section class="forge-image-section">
+    <div class="container">
+        <div class="forge-image-inner">
+            <div class="forge-image-text fade-in">
+                <div class="section-eyebrow">The discovery gap</div>
+                <h2 class="section-title">You cannot govern<br>what you cannot see.</h2>
+                <p class="section-sub">Every AI policy names a handful of approved tools. The first FORGE scan usually finds an order of magnitude more already running — including agents nobody registered, and models that never leave the laptop.</p>
+            </div>
+            <div class="forge-image-wrap fade-in delay-2">
+                <div class="dgap">
+                    <div class="dgap-panel">
+                        <div class="dgap-label">What your policy names</div>
+                        <div class="dgap-grid"><i class=""></i><i class=""></i><i class=""></i></div>
+                        <div class="dgap-fig">3<span>approved tools</span></div>
+                    </div>
+
+                    <div class="dgap-vs" aria-hidden="true">vs</div>
+
+                    <div class="dgap-panel dgap-found">
+                        <div class="dgap-label">What FORGE finds</div>
+                        <div class="dgap-grid"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div>
+                        <div class="dgap-fig">47<span>agents running</span></div>
+                        <div class="dgap-sub">3 critical &middot; 12 policy violations</div>
+                    </div>
+                </div>
+                <p class="dgap-note">Representative first-scan result, from the FORGE demo environment.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--  LOGOS  -->
+<div class="logos-bar">
+    <div class="container">
+        <div class="logos-bar-label">Designed for teams running agents on</div>
+        <div class="logos-scroll">
+            <span class="logo-item">OpenAI</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>Anthropic</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>Google Gemini</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.796 0a6.93 6.93 0 0 0-4.91 2.019L5.451 5.455l3.273 3.27 3.432-3.432a2.284 2.284 0 0 1 3.277 0 2.28 2.28 0 0 1 0 3.275L12 12.001l3.273 3.273 3.433-3.435c2.692-2.692 2.692-7.127 0-9.82A6.92 6.92 0 0 0 13.796 0m-5.07 8.728-3.433 3.434c-2.692 2.693-2.692 7.126 0 9.819A6.92 6.92 0 0 0 10.203 24a6.93 6.93 0 0 0 4.911-2.02l3.432-3.432-3.271-3.272-3.433 3.433a2.284 2.284 0 0 1-3.277 0 2.28 2.28 0 0 1 0-3.276L12 12z"/></svg>LangChain</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.482.18C7.161 1.319 1.478 9.069 1.426 15.372c-.051 5.527 3.1 8.68 8.68 8.627 6.716-.05 14.259-6.87 12.09-10.9-.672-1.292-1.396-1.344-2.687-.207-1.602 1.395-1.654.31-.207-2.893 1.757-3.98 1.705-5.322-.31-7.544C17.03.388 14.962-.388 12.482.181Zm5.322 2.068c2.273 2.015 2.376 4.236.465 8.42-1.395 3.1-2.17 3.515-3.824 1.86-1.24-1.24-1.343-3.46-.258-6.044 1.137-2.635.982-3.1-.568-1.653-3.72 3.358-6.458 9.765-5.424 12.503.464 1.189.825 1.395 2.737 1.395 2.79 0 6.303-1.705 7.957-3.926 1.756-2.274 2.79-2.274 2.79-.052 0 3.875-6.459 8.627-11.625 8.627-6.251 0-9.351-4.752-7.491-11.47.878-2.995 4.443-7.904 7.077-9.66 3.255-2.17 5.684-2.17 8.164 0z"/></svg>CrewAI</span>
+            <span class="logo-item">AutoGen</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m23.6 0-8.721 4.59L9.829 24h7.41zM9.83 24V5.142H.4Z"/></svg>vLLM</span>
+            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.361 10.26a.894.894 0 0 0-.558.47l-.072.148.001.207c0 .193.004.217.059.353.076.193.152.312.291.448.24.238.51.3.872.205a.86.86 0 0 0 .517-.436.752.752 0 0 0 .08-.498c-.064-.453-.33-.782-.724-.897a1.06 1.06 0 0 0-.466 0zm-9.203.005c-.305.096-.533.32-.65.639a1.187 1.187 0 0 0-.06.52c.057.309.31.59.598.667.362.095.632.033.872-.205.14-.136.215-.255.291-.448.055-.136.059-.16.059-.353l.001-.207-.072-.148a.894.894 0 0 0-.565-.472 1.02 1.02 0 0 0-.474.007Zm4.184 2c-.131.071-.223.25-.195.383.031.143.157.288.353.407.105.063.112.072.117.136.004.038-.01.146-.029.243-.02.094-.036.194-.036.222.002.074.07.195.143.253.064.052.076.054.255.059.164.005.198.001.264-.03.169-.082.212-.234.15-.525-.052-.243-.042-.28.087-.355.137-.08.281-.219.324-.314a.365.365 0 0 0-.175-.48.394.394 0 0 0-.181-.033c-.126 0-.207.03-.355.124l-.085.053-.053-.032c-.219-.13-.259-.145-.391-.143a.396.396 0 0 0-.193.032zm.39-2.195c-.373.036-.475.05-.654.086-.291.06-.68.195-.951.328-.94.46-1.589 1.226-1.787 2.114-.04.176-.045.234-.045.53 0 .294.005.357.043.524.264 1.16 1.332 2.017 2.714 2.173.3.033 1.596.033 1.896 0 1.11-.125 2.064-.727 2.493-1.571.114-.226.169-.372.22-.602.039-.167.044-.23.044-.523 0-.297-.005-.355-.045-.531-.288-1.29-1.539-2.304-3.072-2.497a6.873 6.873 0 0 0-.855-.031zm.645.937a3.283 3.283 0 0 1 1.44.514c.223.148.537.458.671.662.166.251.26.508.303.82.02.143.01.251-.043.482-.08.345-.332.705-.672.957a3.115 3.115 0 0 1-.689.348c-.382.122-.632.144-1.525.138-.582-.006-.686-.01-.853-.042-.57-.107-1.022-.334-1.35-.68-.264-.28-.385-.535-.45-.946-.03-.192.025-.509.137-.776.136-.326.488-.73.836-.963.403-.269.934-.46 1.422-.512.187-.02.586-.02.773-.002zm-5.503-11a1.653 1.653 0 0 0-.683.298C5.617.74 5.173 1.666 4.985 2.819c-.07.436-.119 1.04-.119 1.503 0 .544.064 1.24.155 1.721.02.107.031.202.023.208a8.12 8.12 0 0 1-.187.152 5.324 5.324 0 0 0-.949 1.02 5.49 5.49 0 0 0-.94 2.339 6.625 6.625 0 0 0-.023 1.357c.091.78.325 1.438.727 2.04l.13.195-.037.064c-.269.452-.498 1.105-.605 1.732-.084.496-.095.629-.095 1.294 0 .67.009.803.088 1.266.095.555.288 1.143.503 1.534.071.128.243.393.264.407.007.003-.014.067-.046.141a7.405 7.405 0 0 0-.548 1.873c-.062.417-.071.552-.071.991 0 .56.031.832.148 1.279L3.42 24h1.478l-.05-.091c-.297-.552-.325-1.575-.068-2.597.117-.472.25-.819.498-1.296l.148-.29v-.177c0-.165-.003-.184-.057-.293a.915.915 0 0 0-.194-.25 1.74 1.74 0 0 1-.385-.543c-.424-.92-.506-2.286-.208-3.451.124-.486.329-.918.544-1.154a.787.787 0 0 0 .223-.531c0-.195-.07-.355-.224-.522a3.136 3.136 0 0 1-.817-1.729c-.14-.96.114-2.005.69-2.834.563-.814 1.353-1.336 2.237-1.475.199-.033.57-.028.776.01.226.04.367.028.512-.041.179-.085.268-.19.374-.431.093-.215.165-.333.36-.576.234-.29.46-.489.822-.729.413-.27.884-.467 1.352-.561.17-.035.25-.04.569-.04.319 0 .398.005.569.04a4.07 4.07 0 0 1 1.914.997c.117.109.398.457.488.602.034.057.095.177.132.267.105.241.195.346.374.43.14.068.286.082.503.045.343-.058.607-.053.943.016 1.144.23 2.14 1.173 2.581 2.437.385 1.108.276 2.267-.296 3.153-.097.15-.193.27-.333.419-.301.322-.301.722-.001 1.053.493.539.801 1.866.708 3.036-.062.772-.26 1.463-.533 1.854a2.096 2.096 0 0 1-.224.258.916.916 0 0 0-.194.25c-.054.109-.057.128-.057.293v.178l.148.29c.248.476.38.823.498 1.295.253 1.008.231 2.01-.059 2.581a.845.845 0 0 0-.044.098c0 .006.329.009.732.009h.73l.02-.074.036-.134c.019-.076.057-.3.088-.516.029-.217.029-1.016 0-1.258-.11-.875-.295-1.57-.597-2.226-.032-.074-.053-.138-.046-.141.008-.005.057-.074.108-.152.376-.569.607-1.284.724-2.228.031-.26.031-1.378 0-1.628-.083-.645-.182-1.082-.348-1.525a6.083 6.083 0 0 0-.329-.7l-.038-.064.131-.194c.402-.604.636-1.262.727-2.04a6.625 6.625 0 0 0-.024-1.358 5.512 5.512 0 0 0-.939-2.339 5.325 5.325 0 0 0-.95-1.02 8.097 8.097 0 0 1-.186-.152.692.692 0 0 1 .023-.208c.208-1.087.201-2.443-.017-3.503-.19-.924-.535-1.658-.98-2.082-.354-.338-.716-.482-1.15-.455-.996.059-1.8 1.205-2.116 3.01a6.805 6.805 0 0 0-.097.726c0 .036-.007.066-.015.066a.96.96 0 0 1-.149-.078A4.857 4.857 0 0 0 12 3.03c-.832 0-1.687.243-2.456.698a.958.958 0 0 1-.148.078c-.008 0-.015-.03-.015-.066a6.71 6.71 0 0 0-.097-.725C8.997 1.392 8.337.319 7.46.048a2.096 2.096 0 0 0-.585-.041Zm.293 1.402c.248.197.523.759.682 1.388.03.113.06.244.069.292.007.047.026.152.041.233.067.365.098.76.102 1.24l.002.475-.12.175-.118.178h-.278c-.324 0-.646.041-.954.124l-.238.06c-.033.007-.038-.003-.057-.144a8.438 8.438 0 0 1 .016-2.323c.124-.788.413-1.501.696-1.711.067-.05.079-.049.157.013zm9.825-.012c.17.126.358.46.498.888.28.854.36 2.028.212 3.145-.019.14-.024.151-.057.144l-.238-.06a3.693 3.693 0 0 0-.954-.124h-.278l-.119-.178-.119-.175.002-.474c.004-.669.066-1.19.214-1.772.157-.623.434-1.185.68-1.382.078-.062.09-.063.159-.012z"/></svg>Ollama</span>
+            <span class="logo-item">AWS Bedrock</span>
+            <span class="logo-item">Azure OpenAI</span>
+        </div>
+    </div>
+</div>
+
+<!--  THREE PILLARS  -->
+<section class="pillars" id="platform">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Platform</div>
+            <h2 class="section-title">Three pillars. One control plane.</h2>
+            <p class="section-sub">Privify is not a single tool. It is an integrated governance layer operating at every point where AI agents exist in your enterprise.</p>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar">
+                <div class="pillar-num">01 /</div>
+                <div class="pillar-icon blue"><i class="fa-solid fa-radar" style="color:var(--red)"></i></div>
+                <h3>Discovery</h3>
+                <p>Find every agent — sanctioned or shadow, cloud or local. Four parallel probes across endpoints, network traffic, filesystem, and behaviour patterns.</p>
+                <ul class="pillar-features">
+                    <li>Endpoint probe: detects AI library imports & local LLMs (Ollama, LM Studio, vLLM)</li>
+                    <li>Network probe: maps outbound calls to 116 AI providers</li>
+                    <li>File probe: finds prompt artifacts, API keys, agent configs</li>
+                    <li>MCP server auto-discovery with security assessment</li>
+                    <li>Participant registry: humans, agents, tools, APIs</li>
+                </ul>
+                <div class="pillar-glow"></div>
+            </div>
+            <div class="pillar">
+                <div class="pillar-num">02 /</div>
+                <div class="pillar-icon teal"></div>
+                <h3>Observability</h3>
+                <p>See what agents do — not just that they ran. Full interaction graph across human↔agent, agent↔agent, and agent↔tool. The delegation chain made visible.</p>
+                <ul class="pillar-features">
+                    <li>Live interaction graph: every delegation, message, and tool call</li>
+                    <li>Trace DAG with 800ms animated replay</li>
+                    <li>Quality scoring: 6-dimension radar per agent</li>
+                    <li>Anomaly detection with baseline deviation alerts</li>
+                    <li>OpenTelemetry OTLP receiver — no rip-and-replace</li>
+                </ul>
+                <div class="pillar-glow"></div>
+            </div>
+            <div class="pillar">
+                <div class="pillar-num">03 /</div>
+                <div class="pillar-icon purple"></div>
+                <h3>Governance</h3>
+                <p>Stop bad things before they complete. Policy evaluation on every interaction, mid-flight intervention, human approval gates, cost budgets, and quality SLAs.</p>
+                <ul class="pillar-features">
+                    <li>Policy engine: condition DSL, simulation mode, versioned rules</li>
+                    <li>DLP scanning: 12 patterns including SSN, PHI, API keys</li>
+                    <li>AI firewall: 10 threat signatures including prompt injection & jailbreak</li>
+                    <li>Human-in-the-loop: pause any interaction for approval</li>
+                    <li>Cost governance: per-agent budgets with threshold alerts</li>
+                </ul>
+                <div class="pillar-glow"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  DASHBOARD SECTION  -->
+<section class="dashboard-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Live dashboard</div>
+            <h2 class="section-title">Your entire AI fleet. One screen.</h2>
+            <p class="section-sub">11 real-time panels powered by WebSocket and SSE streams. Every agent, every interaction, every policy match — visible the moment it happens.</p>
+        </div>
+        <div class="dashboard-showcase">
+            <div class="dash-topbar">
+                <div class="dash-dots"><div class="dash-dot r"></div><div class="dash-dot y"></div><div class="dash-dot g"></div></div>
+                <div class="dash-url">localhost:8000 — Privify Fleet Dashboard</div>
+            </div>
+            <div class="dash-body">
+                <div class="dash-sidebar">
+                    <div class="dash-nav-section">Overview</div>
+                    <div class="dash-nav-item active"><i class="fa-solid fa-chart-line"></i> Dashboard</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-network-wired"></i> Interactions</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-route"></i> Traces</div>
+                    <div class="dash-nav-section">Discovery</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-users"></i> Participants</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-server"></i> MCP Servers</div>
+                    <div class="dash-nav-section">Governance</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-shield"></i> Policies</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-check-circle"></i> Approvals</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-star"></i> Quality</div>
+                    <div class="dash-nav-section">Security</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-file-shield"></i> Compliance</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-file-export"></i> Reports & SIEM</div>
+                    <div class="dash-nav-item"><i class="fa-solid fa-list"></i> Event Logs</div>
+                </div>
+                <div class="dash-main">
+                    <div class="dash-top-stats">
+                        <div class="dash-stat-card">
+                            <div class="dsc-label">Active agents</div>
+                            <div class="dsc-val">47</div>
+                            <div class="dsc-change up">↑ 3 since yesterday</div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dsc-label">Policy violations</div>
+                            <div class="dsc-val red">12</div>
+                            <div class="dsc-change down">↑ 4 this hour</div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dsc-label">Today's AI cost</div>
+                            <div class="dsc-val amber">$84.20</div>
+                            <div class="dsc-change down">84% of $100 budget</div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dsc-label">Pending approvals</div>
+                            <div class="dsc-val">2</div>
+                            <div class="dsc-change">Awaiting review</div>
+                        </div>
+                    </div>
+                    <div class="dash-row">
+                        <div class="dash-panel">
+                            <div class="dash-panel-title">Detected agents — risk level</div>
+                            <div class="agent-row"><div class="agent-dot" style="background:#E85D54"></div><div class="agent-name">unknown-agent-7f2a</div><div class="agent-conf">shadow · unregistered</div><div class="risk-badge rb-critical">Critical</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--ok)"></div><div class="agent-name">research-agent-v2</div><div class="agent-conf">autonomous · 94%</div><div class="risk-badge rb-low">Compliant</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--warn)"></div><div class="agent-name">sales-copilot-prod</div><div class="agent-conf">api_consumer · 78%</div><div class="risk-badge rb-medium">Review</div></div>
+                            <div class="agent-row"><div class="agent-dot" style="background:var(--ok)"></div><div class="agent-name">ollama-local-3</div><div class="agent-conf">local_llm · endpoint probe</div><div class="risk-badge rb-low">Governed</div></div>
+                        </div>
+                        <div class="dash-panel">
+                            <div class="dash-panel-title">Live event feed</div>
+                            <div class="event-row"><span class="event-type">DLP_MATCH</span><div class="event-msg">SSN detected in outbound agent message</div><div class="event-time">2s ago</div></div>
+                            <div class="event-row"><span class="event-type">THREAT</span><div class="event-msg">Prompt injection in agent↔agent delegation</div><div class="event-time">14s ago</div></div>
+                            <div class="event-row"><span class="event-type">COST_ALERT</span><div class="event-msg">research-agent-v2 at 84% daily budget</div><div class="event-time">1m ago</div></div>
+                            <div class="event-row"><span class="event-type">APPROVAL</span><div class="event-msg">Interaction paused — awaiting human review</div><div class="event-time">3m ago</div></div>
+                        </div>
+                    </div>
+                    <div class="dash-panel" style="margin-bottom:0">
+                        <div class="dash-panel-title">AI API call volume — last 12 hours</div>
+                        <div class="mini-bars" id="showcaseBars"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  KEY FEATURES  -->
+<section id="features">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Capabilities</div>
+            <h2 class="section-title">Everything you need to govern AI at scale</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>Shadow AI detection</h4>
+                <p>Discovers agents nobody registered — including local LLMs running on Ollama or LM Studio that generate zero outbound traffic. Process-level scanning, not proxy-level.</p>
+                <span class="feature-tag">Discovery</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>Interaction graph</h4>
+                <p>Live SVG graph of every human→agent, agent→agent, and agent→tool interaction. Colour-coded by policy status. Click any edge for full context, token counts, and latency.</p>
+                <span class="feature-tag">Observability</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>Real-time intervention</h4>
+                <p>BLOCK, REDACT, FLAG, or PAUSE any interaction before the response reaches its destination. Policy evaluation runs on every message the moment it's captured.</p>
+                <span class="feature-tag">Governance</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>DLP scanning</h4>
+                <p>12 patterns scan all interaction content: SSN, credit cards, API keys (OpenAI sk-*, AWS AKIA*), PHI, connection strings. Catches data in agent↔agent messages too.</p>
+                <span class="feature-tag">Security</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>AI firewall</h4>
+                <p>10 threat signatures covering the OWASP LLM Top 10: prompt injection, jailbreak (DAN), system prompt extraction, data exfiltration, indirect injection via tools.</p>
+                <span class="feature-tag">Security</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>Cost governance</h4>
+                <p>Per-agent cost ledger with team attribution, daily/weekly/monthly budgets, threshold alerts, and monthly spend forecasting. Chargeback-ready reports.</p>
+                <span class="feature-tag">FinOps</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>Quality SLAs</h4>
+                <p>6-dimension quality scoring (relevance, accuracy, safety, compliance, helpfulness, hallucination risk) with per-agent thresholds and automatic ALERT or SUSPEND on breach.</p>
+                <span class="feature-tag">Governance</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>Human-in-the-loop</h4>
+                <p>Approval queue pauses policy-violating interactions. Reviewer sees full context — interaction graph, participants, risk score, matched policy — before approving or denying.</p>
+                <span class="feature-tag">Governance</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h4>Compliance reporting</h4>
+                <p>13 frameworks: GDPR, HIPAA, SOC 2, PCI DSS, DPDP Act (India), PDPA (Singapore/Thailand), PIPEDA (Canada), EU AI Act, DSA, CA SB 53/AB 853, NIST AI RMF, ISO 42001, CCPA/CPRA. Tamper-evident SHA256 audit chain. CSV export.</p>
+                <span class="feature-tag">Compliance</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  DEPLOYMENT SCENARIOS  -->
+<section id="deployment" style="background:var(--surface)">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Deployment</div>
+
+            <h2 class="section-title">Meets you where your agents run</h2>
+            <p class="section-sub">Six deployment components. Layer them for defence in depth. Start with one in five minutes. Scale to global enterprise without rearchitecting.</p>
+        </div>
+        <div class="topo-slot">
+<div class="topo" role="img" aria-label="FORGE topology: Windows, macOS and Linux endpoints run probes that report to a FORGE control plane self-hosted inside your network, which exports to your SIEM. No agent data is sent to Privify.">
+                    <div class="topo-head">Your network</div>
+
+                    <div class="topo-body">
+                        <div class="topo-col">
+                            <div class="topo-col-label">Endpoints</div>
+                            <div class="topo-node">Windows</div>
+                            <div class="topo-node">macOS</div>
+                            <div class="topo-node">Linux</div>
+                            <div class="topo-note">4 probes &middot; inline blocking</div>
+                        </div>
+
+                        <div class="topo-link" aria-hidden="true">
+                            <span class="topo-link-label">probes</span>
+                            <span class="topo-arrow"></span>
+                        </div>
+
+                        <div class="topo-col">
+                            <div class="topo-col-label">FORGE control plane</div>
+                            <div class="topo-plane">
+                                <span>Policy engine</span>
+                                <span>Interaction graph</span>
+                                <span>Audit trail</span>
+                            </div>
+                            <div class="topo-note">self-hosted &middot; your infrastructure</div>
+                        </div>
+
+                        <div class="topo-link" aria-hidden="true">
+                            <span class="topo-link-label">export</span>
+                            <span class="topo-arrow"></span>
+                        </div>
+
+                        <div class="topo-col topo-col-end">
+                            <div class="topo-col-label">Your stack</div>
+                            <div class="topo-node">SIEM</div>
+                            <div class="topo-note">11 platforms</div>
+                        </div>
+                    </div>
+
+                    <div class="topo-foot">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                        Nothing crosses this boundary. In a self-hosted deployment Privify never receives your agent activity, traces or DLP findings.
+                    </div>
+                </div>
+        </div>
+
+        <div class="deployment-grid">
+            <div class="deploy-card">
+                <div class="deploy-tier" style="color:var(--red)">SMB — up to 50 agents</div>
+                <h3>Single appliance or Docker</h3>
+                <div class="desc">One Docker container or a compact network appliance. Plug it in, run one command, govern your entire team's AI usage in under 15 minutes.</div>
+                <div class="deploy-components">
+                    <span class="deploy-chip">Docker container</span>
+                    <span class="deploy-chip">Endpoint agent</span>
+                    <span class="deploy-chip">DNS sinkhole</span>
+                </div>
+                <div class="deploy-specs">
+                    <div class="deploy-spec"><div class="deploy-spec-val">15 min</div><div class="deploy-spec-label">Time to deploy</div></div>
+                    <div class="deploy-spec"><div class="deploy-spec-val">~2ms</div><div class="deploy-spec-label">Added latency</div></div>
+                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=smb" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'smb'}})" aria-label="Contact us about pricing for SMB, up to 50 agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
+                </div>
+            </div>
+            <div class="deploy-card">
+                <div class="deploy-tier" style="color:var(--red)">Mid-market — 50–500 agents</div>
+                <h3>Network probe + HA appliance pair</h3>
+                <div class="desc">DNS sinkhole discovers shadow AI across every device. Network probe at egress inspects payloads. Endpoint agents catch local LLMs. HA pair for production uptime.</div>
+                <div class="deploy-components">
+                    <span class="deploy-chip">DNS sinkhole</span>
+                    <span class="deploy-chip">Network probe</span>
+                    <span class="deploy-chip">HA appliance pair</span>
+                    <span class="deploy-chip">PostgreSQL</span>
+                </div>
+                <div class="deploy-specs">
+                    <div class="deploy-spec"><div class="deploy-spec-val">1–2 days</div><div class="deploy-spec-label">Full deployment</div></div>
+                    <div class="deploy-spec"><div class="deploy-spec-val">11 SIEMs</div><div class="deploy-spec-label">Supported</div></div>
+                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=mid-market" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'mid-market'}})" aria-label="Contact us about pricing for Mid-market, 50 to 500 agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
+                </div>
+            </div>
+            <div class="deploy-card">
+                <div class="deploy-tier" style="color:var(--red)">Enterprise — 1,000+ agents</div>
+                <h3>All layers · global · per-region compliance</h3>
+                <div class="desc">All six deployment components. Regional Privify hubs feed a central governance cluster. Per-region compliance — GDPR in EU, DPDP Act in India, CCPA/NIST in US. Data residency enforced.</div>
+                <div class="deploy-components">
+                    <span class="deploy-chip">All 6 layers</span>
+                    <span class="deploy-chip">Regional hubs</span>
+                    <span class="deploy-chip">RBAC</span>
+                    <span class="deploy-chip">Multi-SIEM</span>
+                </div>
+                <div class="deploy-specs">
+                    <div class="deploy-spec"><div class="deploy-spec-val">Global</div><div class="deploy-spec-label">Deployment</div></div>
+                    <div class="deploy-spec"><div class="deploy-spec-val">HA pairs</div><div class="deploy-spec-label">Availability</div></div>
+                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=enterprise" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'enterprise'}})" aria-label="Contact us about pricing for Enterprise, 1,000+ agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
+                </div>
+            </div>
+            <div class="deploy-card">
+                <div class="deploy-tier" style="color:var(--red)">Cloud-native — Kubernetes</div>
+                <h3>Admission webhook · zero config per pod</h3>
+                <div class="desc">One Helm install. Admission webhook auto-injects our sidecar into every AI pod at creation. No code changes. Integrates with Istio/Linkerd, exposes Prometheus metrics. Runs on EKS, GKE and AKS.</div>
+                <div class="deploy-components">
+                    <span class="deploy-chip">Helm chart</span>
+                    <span class="deploy-chip">K8s sidecar</span>
+                    <span class="deploy-chip">Admission webhook</span>
+                    <span class="deploy-chip">Istio / Linkerd</span>
+                </div>
+                <div class="deploy-specs">
+                    <div class="deploy-spec"><div class="deploy-spec-val">1 cmd</div><div class="deploy-spec-label">Helm install</div></div>
+                    <div class="deploy-spec"><div class="deploy-spec-val">~1ms</div><div class="deploy-spec-label">Sidecar latency</div></div>
+                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=cloud-native" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'cloud-native'}})" aria-label="Contact us about pricing for Cloud-native on Kubernetes"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  ADVANTAGES  -->
+<section id="advantages">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Why Privify</div>
+            <h2 class="section-title">Built differently. Governed deeper.</h2>
+            <p class="section-sub">Most governance tools sit at the network boundary. Privify reaches further — into the endpoint, into the delegation chain, into the cost ledger.</p>
+        </div>
+        <div class="advantages-grid">
+            <div class="advantage">
+                <div class="adv-icon"></div>
+                <h4>OS-level endpoint detection</h4>
+                <p>Privify's endpoint probe scans running processes, detects AI library imports, and discovers local LLM servers (Ollama, LM Studio, vLLM) that generate zero outbound traffic. Network-only tools are completely blind to these. We aren't.</p>
+                <span class="adv-tag adv-unique">Unique capability</span>
+            </div>
+            <div class="advantage">
+                <div class="adv-icon"></div>
+                <h4>Full interaction graph including agent↔agent</h4>
+                <p>When Agent A delegates to Agent B who calls Tool C, we see and govern the entire chain. Most platforms only see the first hop — human sends prompt, AI responds. The real risk — data leakage, prompt injection, unauthorised delegation — lives in the delegation path.</p>
+                <span class="adv-tag adv-unique">Unique capability</span>
+            </div>
+            <div class="advantage">
+                <div class="adv-icon">⏸</div>
+                <h4>Mid-flight intervention — not post-hoc alerting</h4>
+                <p>Policy evaluation runs the moment an interaction is captured — before the response reaches its destination. BLOCK halts instantly. REDACT strips sensitive content and allows through. PAUSE suspends and opens a human approval queue. This is control, not just visibility.</p>
+                <span class="adv-tag adv-unique">Unique capability</span>
+            </div>
+            <div class="advantage">
+                <div class="adv-icon"></div>
+                <h4>Quality SLAs linked to governance</h4>
+                <p>Quality scoring (6 dimensions, every interaction) feeds directly into the governance engine. A quality SLA breach — hallucination rate exceeds threshold, task completion drops — triggers the same ALERT or SUSPEND workflow as a security policy violation. One control plane for both.</p>
+                <span class="adv-tag adv-unique">Unique capability</span>
+            </div>
+            <div class="advantage">
+                <div class="adv-icon"></div>
+                <h4>Per-agent cost governance</h4>
+                <p>Token costs tracked per agent, attributed to teams and cost centres, measured against daily/weekly/monthly budgets. Forecasting projects end-of-month spend from 14-day trend data. The only platform that can answer: which agent cost your team $4,200 last month?</p>
+                <span class="adv-tag adv-unique">Unique capability</span>
+            </div>
+            <div class="advantage">
+                <div class="adv-icon"></div>
+                <h4>SIEM-native, not SIEM-replacing</h4>
+                <p>11 SIEM platforms supported across 6 export formats — CEF for Splunk, LEEF for QRadar, ECS for Elastic, STIX 2.1 for threat intel platforms. Every event auto-forwards in real time. Your SOC team gets AI agent telemetry in the platform they already use.</p>
+                <span class="adv-tag adv-parity">Enterprise ready</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  COMPARISON  -->
+<!-- ══ COVERAGE MAP — ported from the homepage. Leads into the capability
+     comparison: the gap first, the feature-by-feature detail after. ══ -->
+<section class="cmp-section" id="coverage">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Why not just use a gateway?</div>
+            <h2 class="section-title">The agents your gateway will never see</h2>
+            <p class="section-sub">
+                An MCP gateway governs what routes through it. That's real coverage — but an agent only
+                routes through it when it chooses to speak MCP. FORGE runs on the endpoint, where the
+                agent actually executes.
+            </p>
+        </div>
+        <div class="gap-map">
+            <div class="gap-map-head">Your environment — where FORGE runs</div>
+            <div class="gap-map-body">
+
+                <div class="gap-inner">
+                    <div class="gap-inner-head">What an MCP gateway sees</div>
+                    <div class="gap-node">MCP tool calls</div>
+                    <div class="gap-inner-note">Everything that chose to speak the protocol</div>
+                </div>
+
+                <div class="gap-chips">
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Local models</span>
+                            <span class="gap-chip-s">Ollama, LM Studio, llama.cpp — the traffic never leaves the machine, so it never reaches a gateway</span>
+                        </span>
+                    </div>
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Direct API calls</span>
+                            <span class="gap-chip-s">Code hitting a provider's REST endpoint isn't speaking MCP, so there's nothing at the protocol layer to inspect</span>
+                        </span>
+                    </div>
+                    <div class="gap-chip">
+                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
+                        <span>
+                            <span class="gap-chip-t">Browser AI</span>
+                            <span class="gap-chip-s">An employee pasting into a chat window — the most common AI risk in an enterprise, and entirely outside the protocol</span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="gap-map-foot">
+                <i class="fa-solid fa-shield-halved"></i>
+                FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
+            </div>
+        </div>
+        <p class="gap-caption">
+            Three kinds of AI activity, none of which pass through a protocol gateway. FORGE catches all
+            three because it runs where the code runs, not where the traffic is supposed to go.
+        </p>
+    </div>
+</section>
+
+<section class="cmp-section" id="comparison">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Capability Comparison</div>
+            <h2 class="section-title">Built for what others <span style="color:var(--red)">weren't</span></h2>
+            <p class="section-sub">Most AI tools were built for a single persona &mdash; the engineer, the security team, or the compliance officer. FORGE was designed from day one to serve all three, from a single deployment.</p>
+        </div>
+
+        <div class="cmp-wrap">
+            <div class="cmp-glow"></div>
+            <table class="cmp-table">
+                <thead>
+                    <tr>
+                        <th class="cmp-col-cap">Capability</th>
+                        <th class="cmp-col-others">Other platforms</th>
+                        <th class="cmp-col-forge">Privify FORGE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cmp-group">
+                        <td colspan="2">Detection &amp; Visibility</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Shadow AI detection</td>
+                        <td class="cmp-others"><span class="cmp-partial">Network layer only</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">OS + network + file system</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Local LLM detection <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Endpoint probe</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Agent-to-agent visibility <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Full interaction graph</span></td>
+                    </tr>
+
+                    <tr class="cmp-group">
+                        <td colspan="2">Observability &amp; Tracing</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Trace DAG with replay</td>
+                        <td class="cmp-others"><span class="cmp-partial">Basic or partial</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Full DAG &middot; 800ms replay</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">MCP server governance</td>
+                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Autodiscovery</span></td>
+                    </tr>
+
+                    <tr class="cmp-group">
+                        <td colspan="2">Security &amp; Data Protection</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">DLP scanning</td>
+                        <td class="cmp-others"><span class="cmp-partial">Limited or vendor-locked</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">12 patterns &middot; real-time</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">AI firewall &amp; intervention</td>
+                        <td class="cmp-others"><span class="cmp-partial">Guardrails only</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">10 signatures &middot; inline block</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Human-in-the-loop approvals <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Approval queue &middot; configurable</span></td>
+                    </tr>
+
+                    <tr class="cmp-group">
+                        <td colspan="2">Cost &amp; Quality Governance</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Cost governance</td>
+                        <td class="cmp-others"><span class="cmp-partial">Usage totals only</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Per-agent budget enforcement</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Quality SLAs</td>
+                        <td class="cmp-others"><span class="cmp-partial">Partial &mdash; single dimension</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">6 dimensions &middot; enforced</span></td>
+                    </tr>
+
+                    <tr class="cmp-group">
+                        <td colspan="2">Compliance &amp; Integration</td>
+                        <td class="cmp-forge-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Compliance frameworks</td>
+                        <td class="cmp-others"><span class="cmp-partial">1&ndash;3 frameworks, basic</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">13 frameworks &middot; audit-ready</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">SIEM integration</td>
+                        <td class="cmp-others"><span class="cmp-partial">Basic or single platform</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">11 platforms &middot; real-time forward</span></td>
+                    </tr>
+                    <tr>
+                        <td class="cmp-cap">Deployment model</td>
+                        <td class="cmp-others"><span class="cmp-partial">SaaS only or cloud-locked</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Cloud &middot; on-prem &middot; airgap &middot; hybrid</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cmp-observation">
+            <div class="cmp-obs-icon">&#9654;</div>
+            <div>
+                <div class="cmp-obs-eyebrow">The FORGE difference</div>
+                <div class="cmp-obs-text">
+                    No other platform governs the <strong>full AI stack</strong> &mdash; detection, observability,
+                    security, cost, and compliance &mdash; from a single deployment.
+                    FORGE is purpose-built to serve the <strong>CISO, the AI engineer, and the compliance team</strong>
+                    without asking any of them to compromise.
+                </div>
+            </div>
+        </div>
+
+        <div class="cmp-stats">
+            <div class="cmp-stat">
+                <div class="cmp-stat-val">5</div>
+                <div class="cmp-stat-label">Capabilities no other<br>platform offers</div>
+            </div>
+            <div class="cmp-stat">
+                <div class="cmp-stat-val">11</div>
+                <div class="cmp-stat-label">Compliance<br>frameworks</div>
+            </div>
+            <div class="cmp-stat">
+                <div class="cmp-stat-val">11</div>
+                <div class="cmp-stat-label">SIEM platform<br>integrations</div>
+            </div>
+            <div class="cmp-stat">
+                <div class="cmp-stat-val">1</div>
+                <div class="cmp-stat-label">Deployment for<br>all three personas</div>
+            </div>
+        </div>
+
+        <div class="cmp-actions">
+            <a href="../forge/demo/index.html" class="nav-pill" style="text-decoration:none;padding:0.75rem 1.5rem;">&#9654; Try Interactive Demo</a>
+            <a href="../request/index.html" class="cmp-btn-secondary">Request Access</a>
+        </div>
+    </div>
+</section>
+
+<!--  INTEGRATIONS  -->
+<section class="integrations-section" id="integrations">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Integrations</div>
+            <h2 class="section-title">Fits into your existing stack</h2>
+            <p class="section-sub">116 AI providers seeded. 11 SIEM platforms. Cloud discovery for AWS, GCP, and Azure. You don't rebuild your infrastructure — Privify slots into it.</p>
+        </div>
+        <div class="int-grid">
+            <div class="int-category">
+                <h4>AI providers</h4>
+                <div class="int-item"><div class="int-dot"></div>OpenAI / Azure OpenAI</div>
+                <div class="int-item"><div class="int-dot"></div>Anthropic</div>
+                <div class="int-item"><div class="int-dot"></div>Google Gemini / Vertex</div>
+                <div class="int-item"><div class="int-dot"></div>AWS Bedrock</div>
+                <div class="int-item"><div class="int-dot"></div>Ollama / vLLM / LM Studio</div>
+                <div class="int-item"><div class="int-dot"></div>+111 more providers</div>
+            </div>
+            <div class="int-category">
+                <h4>SIEM & Security</h4>
+                <div class="int-item"><div class="int-dot"></div>Splunk (CEF / HEC)</div>
+                <div class="int-item"><div class="int-dot"></div>Microsoft Sentinel</div>
+                <div class="int-item"><div class="int-dot"></div>IBM QRadar (LEEF)</div>
+                <div class="int-item"><div class="int-dot"></div>Elastic SIEM (ECS)</div>
+                <div class="int-item"><div class="int-dot"></div>Datadog / CrowdStrike</div>
+                <div class="int-item"><div class="int-dot"></div>STIX 2.1 threat intel</div>
+            </div>
+            <div class="int-category">
+                <h4>Cloud platforms</h4>
+                <div class="int-item"><div class="int-dot"></div>AWS (ECS, Lambda, Bedrock)</div>
+                <div class="int-item"><div class="int-dot"></div>GCP (Vertex, Cloud Run)</div>
+                <div class="int-item"><div class="int-dot"></div>Azure (OpenAI, AKS, Functions)</div>
+                <div class="int-item"><div class="int-dot"></div>Kubernetes (EKS / GKE / AKS)</div>
+                <div class="int-item"><div class="int-dot"></div>Run:ai / NVIDIA workloads</div>
+                <div class="int-item"><div class="int-dot"></div>Serverless (Lambda, Cloud Run)</div>
+            </div>
+            <div class="int-category">
+                <h4>Observability & ITSM</h4>
+                <div class="int-item"><div class="int-dot"></div>OpenTelemetry (OTLP)</div>
+                <div class="int-item"><div class="int-dot"></div>Langfuse</div>
+                <div class="int-item"><div class="int-dot"></div>Datadog / New Relic</div>
+                <div class="int-item"><div class="int-dot"></div>ServiceNow</div>
+                <div class="int-item"><div class="int-dot"></div>Jira</div>
+                <div class="int-item"><div class="int-dot"></div>Slack / PagerDuty / Teams</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  COMPLIANCE  -->
+<section id="compliance">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Compliance</div>
+            <!-- Framework count and list: single source of truth is core_engine/compliance.py -> FRAMEWORKS (13). Update there first. -->
+            <h2 class="section-title">13 frameworks. Audit-ready out of the box.</h2>
+            <p class="section-sub">Every AI agent interaction is mapped to regulatory controls. SHA256 hash chain on every event. CSV export for audit submission. No manual work for your GRC team.</p>
+        </div>
+        <div class="compliance-grid">
+            <div class="compliance-card">
+                <div class="compliance-name">GDPR</div>
+                <div class="compliance-controls">7 controls mapped</div>
+                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
+                <div class="compliance-status"> Fully covered</div>
+            </div>
+            <div class="compliance-card">
+                <div class="compliance-name">HIPAA</div>
+                <div class="compliance-controls">6 controls mapped</div>
+                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
+                <div class="compliance-status"> Fully covered</div>
+            </div>
+            <div class="compliance-card">
+                <div class="compliance-name">SOC 2</div>
+                <div class="compliance-controls">7 controls mapped</div>
+                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
+                <div class="compliance-status"> Fully covered</div>
+            </div>
+            <div class="compliance-card">
+                <div class="compliance-name">PCI-DSS</div>
+                <div class="compliance-controls">5 controls mapped</div>
+                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
+                <div class="compliance-status"> Fully covered</div>
+            </div>
+            <div class="compliance-card" style="position:relative">
+                
+                <div class="compliance-name">DPDP</div>
+                <div class="compliance-controls">6 controls mapped</div>
+                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
+                <div class="compliance-status"> Fully covered</div>
+            </div>
+        </div>
+        <div style="text-align:center">
+            <div style="font-size:0.8rem;color:var(--gray-600);margin-bottom:1.25rem;">Also covers</div>
+            <div class="compliance-badges">
+                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127470;&#127475; DPDP Rules 2025</span><span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127466;&#127482; EU AI Act</span>
+                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; NIST AI RMF</span>
+                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127760; ISO 42001</span>
+                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; CCPA</span>
+                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127466;&#127482; DSA</span>
+                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; California SB53</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  EASY ADOPTION  -->
+<section style="background:var(--surface)" id="easy-deploy">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Easy adoption</div>
+            <h2 class="section-title">Running in minutes. Not months.</h2>
+            <p class="section-sub">Start with zero infrastructure changes. Add layers as your needs grow. Each step delivers immediate value — independently.</p>
+        </div>
+        <div class="integration-steps">
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <h4>Single container</h4>
+                <p>FORGE runs as a single Docker container. No database to configure, no agents to install, no proxy to route traffic through. Up and running in minutes.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <h4>DNS sinkhole</h4>
+                <p>One config change to your internal DNS resolver. Instantly see every AI domain lookup from every device on your network — no agent install needed on any machine.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <h4>Endpoint agents</h4>
+                <p>Deploy lightweight endpoint agents on developer machines and servers. Detects local LLMs, AI library imports, and filesystem artifacts — invisible to network-only tools.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">4</div>
+                <h4>SIEM integration</h4>
+                <p>Connect your existing Splunk, Sentinel, or QRadar. All events forward automatically in CEF, LEEF, ECS, or STIX 2.1 — your SOC team sees AI telemetry immediately.</p>
+            </div>
+        </div>
+        <div class="easy-deploy-note">
+            <div class="edn-inner">
+                <span class="edn-icon">&#9432;</span>
+                <span>Each deployment layer works independently. Start with Step 1 and add coverage when you need it — no rearchitecting required.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  INTEREST / SIGN UP  -->
+<!--  BRAND BEAT — the forge metaphor, placed after the rational case is
+      made and immediately before the ask. Decorative by intent.  -->
+<section class="brandbeat">
+    <div class="container">
+        <div class="brandbeat-inner">
+            <img src="forge_hero.png" alt="" aria-hidden="true" class="brandbeat-img" loading="lazy"/>
+            <div class="brandbeat-copy">
+                <div class="section-eyebrow">Powered by FORGE</div>
+                <h2 class="section-title">Where AI governance<br>is forged.</h2>
+                <p class="section-sub">
+                    Federated Oversight &amp; Risk Governance Engine. Every AI agent in your enterprise
+                    shaped, governed, and held to policy — the moment it acts.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section" id="interest">
+    <div class="container">
+        <div class="cta-inner">
+            <div class="hero-eyebrow" style="display:inline-flex;margin-bottom:1.5rem">
+                <span class="dot"></span>
+                Early access &mdash; limited seats
+            </div>
+            <h2>Ready to govern your AI fleet?</h2>
+            <p>We onboard enterprises in cohorts. Tell us about your environment and we&rsquo;ll be in touch within 2 business days with a personalised demo and deployment plan.</p>
+            <a href="../request/index.html" class="cta-btn">
+                Request access
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <p class="cta-note">No spam. No sales calls without consent.</p>
+            <div class="cta-trust">
+                <div class="trust-item"><i class="fa-solid fa-lock"></i> Self-hosted available</div>
+                <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Data never leaves your network</div>
+                <div class="trust-item"><i class="fa-solid fa-clock"></i> Deploy in under 15 minutes</div>
+                <div class="trust-item"><i class="fa-solid fa-code"></i> API-first, 66 endpoints</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!--  MOBILE MENU  -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner container">
+        <a href="#platform">Platform</a>
+        <a href="#deployment">Deployment</a>
+        <a href="#comparison">Compare</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#compliance">Compliance</a>
+        <a href="../careers.html">Careers</a>
+        <div>
+            <button class="mobile-submenu-toggle" aria-expanded="false" aria-controls="mobile-tools-menu">
+                <span>Tools</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div id="mobile-tools-menu" class="mobile-submenu" hidden>
+                <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
+            </div>
+        </div>
+        <a href="../forge/demo/index.html" style="color:var(--red);font-weight:600;">&#9654; Try Interactive Demo</a>
+        <a href="../request/index.html">Request Access</a>
+    </div>
+</div>
+
+<!--  FOOTER  -->
+
+
+<script>
+//  Header scroll
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.pageYOffset > 50);
+});
+
+//  Animated bars (hero)
+function makeBars(containerId, count, color) {
+    const c = document.getElementById(containerId);
+    if (!c) return;
+    const heights = Array.from({length:count}, () => 20 + Math.random() * 80);
+    heights.forEach(h => {
+        const b = document.createElement('div');
+        b.className = 'db-bar';
+        b.style.height = h + '%';
+        b.style.background = color || 'rgba(232,93,84,0.3)';
+        c.appendChild(b);
+    });
+}
+makeBars('heroBars', 24, 'rgba(232,93,84,0.35)');
+makeBars('showcaseBars', 24, 'rgba(232,93,84,0.3)');
+
+//  Mini bar animation
+function animateBars() {
+    document.querySelectorAll('.db-bar, .mini-bar').forEach(b => {
+        if (Math.random() > 0.7) {
+            const h = 10 + Math.random() * 90;
+            b.style.height = h + '%';
+            b.style.transition = 'height 1.5s ease';
+        }
+    });
+}
+setInterval(animateBars, 2000);
+
+//  Mobile menu
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', e => {
+        e.preventDefault();
+        const open = menu.classList.toggle('open');
+        menu.setAttribute('aria-hidden', String(!open));
+    });
+    document.addEventListener('click', e => {
+        if (!menu.classList.contains('open')) return;
+        if (!document.getElementById('header').contains(e.target) && !menu.contains(e.target)) {
+            menu.classList.remove('open');
+            menu.setAttribute('aria-hidden', 'true');
+        }
+    });
+});
+
+//  Mobile submenu
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            const id = btn.getAttribute('aria-controls');
+            const panel = document.getElementById(id);
+            if (!panel) return;
+            const exp = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!exp));
+            panel.hidden = exp;
+        });
+    });
+});
+
+//  Dropdown
+document.addEventListener('DOMContentLoaded', () => {
+    const dd = document.querySelector('.dropdown');
+    if (!dd) return;
+    const toggle = dd.querySelector('.dropdown-toggle');
+    toggle.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        dd.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', dd.classList.contains('open').toString());
+    });
+    document.addEventListener('click', e => { if (!dd.contains(e.target)) { dd.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); } });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { dd.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); } });
+});
+
+//  Fade-in on scroll
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+            observer.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+//  Skipped when the visitor asks for reduced motion — elements stay visible
+//  rather than being hidden by JS and revealed on scroll.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.feature-card, .deploy-card, .advantage, .compliance-card, .int-category, .step-card, .pillar').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
+
+//  Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // close mobile menu
+        const m = document.getElementById('mobile-menu');
+        if (m) { m.classList.remove('open'); m.setAttribute('aria-hidden','true'); }
+    });
+});
+</script>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="22" width="22" style="opacity:0.4"><g transform="scale(0.025)"><path d="M1265,165H830.7c-61.7,0-111.8,50.2-111.8,111.8l4,1196.4L180.3,930.5h430.2V818.7H180.3c-45.4,0-85.9,27.1-103.3,69c-17.4,41.9-7.9,89.8,24.2,121.8l542.7,542.7c21.4,21.4,49.9,32.8,79,32.8c14.4,0,29-2.8,42.9-8.6c41.9-17.4,69-57.9,69-103.5l-4-1196.2H1265c148.5,0,270,120.8,270.9,269.3c0.4,72.7-27.5,141.1-78.8,192.7c-51.2,51.6-119.5,80-192.2,80H944.4v111.8H1265c102.7,0,199.1-40.1,271.5-112.9c72.4-72.8,111.9-169.5,111.3-272.2C1646.4,335.7,1474.7,165,1265,165z" fill="#E85D54"/></g></svg>
+                    PRIVIFY
+                </a>
+                <p class="footer-tagline">Building tools that put enterprises and people in control of AI.</p>
+            </div>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <div class="footer-col-title">FORGE</div>
+                    <a href="index.html" class="footer-link">Overview</a>
+                    <a href="../forge/demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
+                    <a href="#deployment" class="footer-link">Deployment</a>
+                    <a href="#compliance" class="footer-link">Compliance</a>
+                    <a href="#integrations" class="footer-link">Integrations</a>
+                    <a href="../index.html#pricing" class="footer-link">Pricing</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">SHIELD</div>
+                    <a href="../shield/index.html" class="footer-link">Overview</a>
+                    <a href="../shield/index.html#waitlist" class="footer-link">Join waitlist</a>
+                    <a href="../tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Company</div>
+                    <a href="../careers.html" class="footer-link">Careers</a>
+                    <a href="../contact.html" class="footer-link">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Legal &amp; Trust</div>
+                    <a href="../security.html" class="footer-link">Security</a>
+                    <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="../terms.html" class="footer-link">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-utility">
+            <div class="fu-left">
+                <a href="../llms.txt" class="fu-chip fu-mono">LLMS.TXT</a>
+                <span class="fu-label">Get an AI summary of this page</span>
+                <span class="fu-ai" id="fuAI">
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://claude.ai/new?q=Summarise%20https%3A%2F%2Fprivify.io"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg> Claude</a>
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://chatgpt.com/?q=Summarise%20https%3A%2F%2Fprivify.io">ChatGPT</a>
+                    <a class="fu-chip" target="_blank" rel="noopener noreferrer"
+                       href="https://www.perplexity.ai/search?q=Summarise%20https%3A%2F%2Fprivify.io"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M22.3977 7.0896h-2.3106V.0676l-7.5094 6.3542V.1577h-1.1554v6.1966L4.4904 0v7.0896H1.6023v10.3976h2.8882V24l6.932-6.3591v6.2005h1.1554v-6.0469l6.9318 6.1807v-6.4879h2.8882V7.0896zm-3.4657-4.531v4.531h-5.355l5.355-4.531zm-13.2862.0676 4.8691 4.4634H5.6458V2.6262zM2.7576 16.332V8.245h7.8476l-6.1149 6.1147v1.9723H2.7576zm2.8882 5.0404v-3.8852h.0001v-2.6488l5.7763-5.7764v7.0111l-5.7764 5.2993zm12.7086.0248-5.7766-5.1509V9.0618l5.7766 5.7766v6.5588zm2.8882-5.0652h-1.733v-1.9723L13.3948 8.245h7.8478v8.087z"/></svg> Perplexity</a>
+                </span>
+            </div>
+            <div class="fu-right">
+                <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
+                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Privify Inc. All rights reserved.</span>
+            <span style="font-size:0.75rem;color:var(--gray-800)">Privify is not SOC 2 certified. Security practices are aligned with the Trust Services Criteria.</span>
+        </div>
+    </div>
+</footer>
+<script>
+(function(){
+    var row = document.getElementById('fuAI');
+    if (!row) return;
+    var here = 'https://privify.io' + location.pathname;   // never leak preview/localhost hosts
+    row.querySelectorAll('a[href]').forEach(function(a){
+        a.href = a.href.replace(/https%3A%2F%2Fprivify\.io/, encodeURIComponent(here));
+    });
+})();
+</script>
+
+<script src="/theme.js"></script>
+</body>
+</html>

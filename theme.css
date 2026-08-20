@@ -1,0 +1,138 @@
+/* ── Privify shared theme — light mode token overrides ── */
+
+/* All pages share these CSS variable names. Light mode flips them. */
+[data-theme="light"] {
+  --black:        #FFFFFF;
+  --white:        #0A0A0A;
+  --surface:      #F2F2F6;
+  --surface-2:    #E8E8EE;
+  --surface-3:    #DEDEE6;
+  --border:       rgba(0,0,0,0.08);
+  --border-hover: rgba(0,0,0,0.16);
+  --gray-50:      #1F2937;
+  --gray-100:     #374151;
+  --gray-400:     #4B5563;
+  --gray-500:     #6B7280;
+  --gray-600:     #9CA3AF;
+  --gray-700:     #D1D5DB;
+  --gray-800:     #E5E7EB;
+  --text-3:       #6B7280;
+  --red-dim:      rgba(232,93,84,0.10);
+  --red-glow:     rgba(232,93,84,0.18);
+  --cyan-dim:     rgba(34,211,238,0.08);
+  --cyan-glow:    rgba(34,211,238,0.15);
+}
+
+[data-theme="light"] body {
+  background: #F2F2F6;
+  color: #0A0A0A;
+}
+
+[data-theme="light"] body::before { opacity: 0.35; }
+
+/* Nav / header */
+[data-theme="light"] .header {
+  background: rgba(242,242,246,0.88) !important;
+  border-bottom-color: rgba(0,0,0,0.08);
+}
+[data-theme="light"] .header.scrolled {
+  background: rgba(242,242,246,0.97) !important;
+}
+[data-theme="light"] .logo,
+[data-theme="light"] .logo span { color: #0A0A0A; }
+[data-theme="light"] .nav-link,
+[data-theme="light"] .dropdown-toggle { color: #4B5563; }
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .dropdown-toggle:hover { color: #0A0A0A; }
+[data-theme="light"] .dropdown-menu {
+  background: #FFFFFF;
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+[data-theme="light"] .di-title { color: #0A0A0A; }
+[data-theme="light"] .di-sub   { color: #6B7280; }
+[data-theme="light"] .dropdown-item:hover { background: rgba(0,0,0,0.04); color: #0A0A0A; }
+[data-theme="light"] .mobile-menu { background: #F2F2F6; border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .mobile-menu a { color: #4B5563; border-bottom-color: rgba(0,0,0,0.06); }
+[data-theme="light"] .mobile-menu a:hover { color: #0A0A0A; }
+[data-theme="light"] .mobile-menu-btn { color: #0A0A0A; }
+[data-theme="light"] .mob-section { color: #6B7280; }
+
+/* Cards / surfaces */
+[data-theme="light"] .pillar          { background: #FFFFFF; }
+[data-theme="light"] .pillars-grid    { background: rgba(0,0,0,0.06); }
+[data-theme="light"] .advantage       { background: #FFFFFF; }
+[data-theme="light"] .advantages-grid { background: rgba(0,0,0,0.06); }
+[data-theme="light"] .feature-card    { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .integration-card{ background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .product-card    { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .stat-card       { background: #FFFFFF; }
+
+/* Dashboard panel */
+[data-theme="light"] .dashboard-section { background: #F2F2F6; }
+[data-theme="light"] .dash-panel        { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .dash-sidebar      { background: #EBEBF0; border-right-color: rgba(0,0,0,0.08); }
+
+/* Comparison table */
+[data-theme="light"] .cmp-section       { background: #FFFFFF; }
+[data-theme="light"] .cmp-wrap          { border-color: rgba(0,0,0,0.1); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+[data-theme="light"] .cmp-table thead tr{ background: #F2F2F6; }
+[data-theme="light"] .cmp-table td,
+[data-theme="light"] .cmp-table th     { border-color: rgba(0,0,0,0.06); }
+[data-theme="light"] .cmp-forge-cell   { background: rgba(232,93,84,0.06); }
+[data-theme="light"] .cmp-col-forge    { background: rgba(232,93,84,0.06); }
+[data-theme="light"] td.cmp-cap        { color: #374151; }
+[data-theme="light"] td.cmp-others     { color: #6B7280; }
+[data-theme="light"] .cmp-stat         { background: #F2F2F6; }
+[data-theme="light"] .cmp-observation  { background: rgba(232,93,84,0.05); }
+[data-theme="light"] tr.cmp-group      { background: #EBEBF0; }
+[data-theme="light"] tr.cmp-group td   { color: rgba(232,93,84,0.7); }
+
+/* Footer */
+[data-theme="light"] .footer       { background: #E2E2EA; border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .footer-logo  { color: #0A0A0A; }
+[data-theme="light"] .footer-link  { color: #6B7280; }
+[data-theme="light"] .footer-link:hover { color: #0A0A0A; }
+[data-theme="light"] .footer-col-title  { color: #374151; }
+[data-theme="light"] .footer-bottom     { border-top-color: rgba(0,0,0,0.08); color: #9CA3AF; }
+
+/* Sections that have explicit dark backgrounds */
+[data-theme="light"] .integrations-section,
+[data-theme="light"] .dashboard-section,
+[data-theme="light"] section[style*="background:var(--surface)"],
+[data-theme="light"] section[style*="background: var(--surface)"] {
+  background: #EBEBF0 !important;
+}
+
+/* Hero / waitlist / signup form inputs */
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  background: #FFFFFF;
+  border-color: rgba(0,0,0,0.14);
+  color: #0A0A0A;
+}
+[data-theme="light"] input::placeholder,
+[data-theme="light"] select::placeholder { color: #9CA3AF; }
+
+/* ── Theme toggle button (shared styles) ── */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--gray-400);
+  cursor: pointer;
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  padding: 0;
+}
+.theme-toggle:hover {
+  border-color: var(--border-hover);
+  color: var(--white);
+}
+.theme-toggle .icon-sun  { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
