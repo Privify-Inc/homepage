@@ -1,0 +1,433 @@
+/* Sentry widget — styles live inside the shadow root, so nothing here
+   leaks onto the host page and nothing on the host page leaks in except
+   the CSS custom properties we deliberately read (spec 4.4). */
+
+:host {
+  --sentry-bg: var(--surface, #0d0d0d);
+  --sentry-bg-2: var(--surface-2, #111111);
+  --sentry-text: var(--white, #fff);
+  --sentry-muted: var(--gray-400, #9CA3AF);
+  --sentry-muted-2: var(--text-3, #858C97);
+  --sentry-border: var(--border, rgba(255, 255, 255, 0.07));
+  --sentry-accent: var(--red, #e85d54);
+  --sentry-accent-dim: var(--red-dim, rgba(232, 93, 84, 0.1));
+  --sentry-focus: #60a5fa;
+  --sentry-radius: 16px;
+  --sentry-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  all: initial;
+  font-family: var(--sentry-font);
+  color-scheme: dark;
+}
+
+[data-theme='light'] :host {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── Launcher ───────────────────────────────────────────────────────── */
+
+.launcher {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 2147483000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--sentry-border);
+  background: var(--sentry-bg-2);
+  color: var(--sentry-text);
+  font-family: var(--sentry-font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.launcher.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.launcher:hover {
+  border-color: var(--sentry-accent);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+  transform: translateY(-2px);
+}
+
+.launcher:focus-visible {
+  outline: 2px solid var(--sentry-focus);
+  outline-offset: 2px;
+}
+
+.launcher .mark {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--sentry-accent);
+}
+
+@media (min-width: 641px) {
+  .launcher {
+    bottom: 24px;
+    right: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .launcher {
+    min-height: 44px;
+  }
+}
+
+/* ── Panel ──────────────────────────────────────────────────────────── */
+
+.panel {
+  position: fixed;
+  bottom: 88px;
+  right: 16px;
+  z-index: 2147483000;
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  height: 600px;
+  max-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  background: var(--sentry-bg);
+  border: 1px solid var(--sentry-border);
+  border-radius: var(--sentry-radius);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.panel.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+@media (min-width: 641px) {
+  .panel {
+    bottom: 96px;
+    right: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .panel {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+
+.header {
+  flex-shrink: 0;
+  padding: 0.9rem 1rem 0.8rem;
+  border-bottom: 1px solid var(--sentry-border);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--sentry-text);
+}
+
+.wordmark .mark {
+  width: 18px;
+  height: 18px;
+  color: var(--sentry-accent);
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.icon-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--sentry-muted);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  color: var(--sentry-text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.icon-btn:focus-visible {
+  outline: 2px solid var(--sentry-focus);
+  outline-offset: 1px;
+}
+
+.disclosure {
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--sentry-muted-2);
+  line-height: 1.4;
+}
+
+/* ── Thread ─────────────────────────────────────────────────────────── */
+
+.thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Flex children default to flex-shrink: 1, so once the thread overflows the
+   column squashes entries instead of scrolling — an availability card was
+   crushed to 2px and its slot buttons became invisible. Every entry keeps its
+   natural height and the thread scrolls, which is the intent. */
+.thread > * {
+  flex-shrink: 0;
+}
+
+.msg {
+  max-width: 88%;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.msg-sentry {
+  align-self: flex-start;
+  background: var(--sentry-bg-2);
+  border: 1px solid var(--sentry-border);
+  border-radius: 12px 12px 12px 4px;
+  padding: 0.65rem 0.85rem;
+  color: var(--sentry-text);
+}
+
+.msg-visitor {
+  align-self: flex-end;
+  border: 1px solid var(--sentry-accent-dim);
+  border-radius: 12px 12px 4px 12px;
+  padding: 0.65rem 0.85rem;
+  color: var(--sentry-text);
+}
+
+.msg-error {
+  align-self: flex-start;
+  color: var(--sentry-accent);
+  font-size: 0.85rem;
+}
+
+.pulse {
+  align-self: flex-start;
+  display: flex;
+  gap: 4px;
+  padding: 0.65rem 0.85rem;
+}
+
+.pulse span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sentry-muted);
+  animation: sentry-pulse 1.1s infinite ease-in-out;
+}
+
+.pulse span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.pulse span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes sentry-pulse {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+/* ── Rich cards ─────────────────────────────────────────────────────── */
+
+.card {
+  align-self: flex-start;
+  width: 100%;
+  border: 1px solid var(--sentry-border);
+  border-radius: 12px;
+  background: var(--sentry-bg-2);
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 0.75rem 0.85rem;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--sentry-text);
+  margin-bottom: 0.25rem;
+}
+
+.card-desc {
+  font-size: 0.82rem;
+  color: var(--sentry-muted);
+  margin-bottom: 0.6rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--sentry-font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 0.8rem;
+  border-radius: 7px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--sentry-accent);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--sentry-border);
+  color: var(--sentry-text);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--sentry-focus);
+  outline-offset: 2px;
+}
+
+/* ── Composer ───────────────────────────────────────────────────────── */
+
+.composer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid var(--sentry-border);
+}
+
+.composer textarea {
+  flex: 1;
+  resize: none;
+  min-height: 20px;
+  max-height: 96px;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid var(--sentry-border);
+  background: var(--sentry-bg-2);
+  color: var(--sentry-text);
+  font-family: var(--sentry-font);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.composer textarea:focus-visible {
+  outline: 2px solid var(--sentry-focus);
+  outline-offset: 1px;
+}
+
+.composer textarea::placeholder {
+  color: var(--sentry-muted);
+}
+
+.send-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: var(--sentry-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.send-btn:focus-visible {
+  outline: 2px solid var(--sentry-focus);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

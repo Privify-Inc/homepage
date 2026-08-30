@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 24" fill="none" role="img" aria-label="Sentry">
+  <title>Sentry</title>
+  <!--
+    Horizontal lockup: the mark at 24x24, then "Sentry" set in Inter — the
+    site's display face — at the same weight and tracking as the PRIVIFY
+    wordmark in the site header (700, -0.02em).
+
+    The text is live <text>, not outlines. Inter is already loaded on every
+    page this appears on, so it renders correctly in context and stays
+    editable; the fallback stack covers the case where this file is opened
+    standalone. If it ever needs to render somewhere Inter is not available
+    and pixel-exactness matters, convert the text to paths at that point.
+  -->
+  <!-- stroke-width is 3 in the mark's own 32-unit space; the 0.75 scale
+       renders it at 2.25, matching the mark used standalone at 24px. -->
+  <g stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" transform="scale(0.75)">
+    <path d="M23.5 9.2 A9.5 9.5 0 1 0 25.4 14.2"/>
+    <circle cx="16" cy="16" r="2.4" fill="currentColor" stroke="none"/>
+  </g>
+  <text x="30" y="17.4" fill="currentColor" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17" font-weight="700" letter-spacing="-0.34">Sentry</text>
+</svg>
