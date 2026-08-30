@@ -216,6 +216,48 @@
   line-height: 1.4;
 }
 
+.privacy-link {
+  color: var(--sentry-muted-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.privacy-link:hover,
+.privacy-link:focus-visible {
+  color: var(--sentry-text);
+}
+
+/* The two exits, always present in the header (addendum 7.2). Understated on
+   purpose: they must be findable without competing with the conversation. */
+.exits {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.exit-btn {
+  font-family: var(--sentry-font);
+  font-size: 0.72rem;
+  line-height: 1;
+  padding: 0.32rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--sentry-border);
+  background: transparent;
+  color: var(--sentry-muted);
+  cursor: pointer;
+  text-decoration: none;
+  /* Selectable, not an obfuscated mailto trick (addendum 7.2). */
+  user-select: text;
+}
+
+.exit-btn:hover,
+.exit-btn:focus-visible {
+  color: var(--sentry-text);
+  border-color: var(--sentry-accent);
+}
+
 /* ── Thread ─────────────────────────────────────────────────────────── */
 
 .thread {

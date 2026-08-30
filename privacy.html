@@ -199,8 +199,9 @@
                 <li>We set <strong>no cookies</strong> on this website.</li>
                 <li>We use privacy-friendly, cookieless analytics that don't identify you.</li>
                 <li>We don't run advertising, retargeting or cross-site tracking.</li>
-                <li>We only get your personal details if you type them into a form.</li>
+                <li>We only get your personal details if you type them into a form or tell them to Sentry, our AI assistant.</li>
                 <li>We don't sell or rent anything you give us.</li>
+                <li>We don't train AI models on your conversations.</li>
             </ul>
 
             <h2>What we collect</h2>
@@ -227,6 +228,24 @@
                             <a href="https://formspree.io/legal/privacy-policy/" rel="noopener noreferrer" target="_blank">Formspree</a>
                             and delivered to our team by email. We use them to reply to you and, if relevant, to
                             scope a deployment.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sentry (AI assistant)</td>
+                        <td>
+                            If you open Sentry and send a message, we collect what you type, plus the page you
+                            started on and your browser's time zone (so it can offer meeting times in your own
+                            clock). Anything you choose to tell it — name, work email, company, role, size, what
+                            you're trying to solve — is collected because you said it. See
+                            <a href="#sentry">Sentry</a> below for how it is handled.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Abuse prevention</td>
+                        <td>
+                            Sentry counts requests per IP address for an hour at a time, to stop the widget being
+                            used as a free AI endpoint. The counters hold an IP address and a number — no message
+                            content — and are deleted automatically once they expire.
                         </td>
                     </tr>
                     <tr>
@@ -264,11 +283,62 @@
                 <li>If you'd rather no coordinates leave your device at all, work offline or strip location data before uploading the file to the tool.</li>
             </ul>
 
+            <!-- The "30 days" below is the visitor-facing half of a promise the
+                 Function enforces via TRANSCRIPT_RETENTION_DAYS. If that setting
+                 changes, this paragraph, Sentry's own header line and its system
+                 prompt must change with it. See sentry-backend/src/lib/sessionStore.ts. -->
+            <h2 id="sentry">Sentry, our AI assistant</h2>
+            <p>
+                Sentry is the chat assistant in the corner of this site. It is an AI, it says so in its first
+                message and in its header, and it will confirm it plainly if you ask. It is there to answer
+                questions about our products and, if it's useful to you, to book you a call.
+            </p>
+            <ul>
+                <li>
+                    <strong>Your messages are sent to Anthropic</strong> to generate replies, using the Claude
+                    API. <strong>We do not train AI models on your conversations, and Anthropic does not train
+                    its models on API traffic.</strong>
+                </li>
+                <li>
+                    <strong>The conversation is stored for 30 days</strong> in our Azure storage, in the same
+                    region as the rest of our infrastructure, and is then deleted automatically by a scheduled
+                    job. That deletion is not a manual promise; it runs on a timer.
+                </li>
+                <li>
+                    <strong>If you give contact details, the conversation goes to our sales team</strong> — by
+                    email and Microsoft Teams, and into our CRM alongside your enquiry. Those copies are a
+                    record of a real sales conversation and are kept under normal business retention, which is
+                    longer than 30 days. In other words: the 30-day clock covers our working copy of the chat,
+                    not a lead record you created by asking us to get in touch.
+                </li>
+                <li>
+                    <strong>If you book a call</strong>, the appointment is created in Microsoft Bookings with
+                    the name and email you gave, and you get a calendar invitation.
+                </li>
+                <li>
+                    <strong>We don't log what you typed into our monitoring.</strong> Operational telemetry
+                    records timings, error codes and counts, not message content.
+                </li>
+                <li>
+                    Please don't paste credentials, API keys, live incident detail or customer data into it.
+                    Sentry will tell you the same thing if you start.
+                </li>
+            </ul>
+            <p>
+                You never have to use it. Every page carries our contact form, and
+                <a href="mailto:enterprise@privify.io">enterprise@privify.io</a> reaches a person directly —
+                the address is printed in Sentry's own header for exactly that reason. If you'd like a
+                conversation deleted before the 30 days are up, ask and we'll do it.
+            </p>
+
             <h2>How long we keep things</h2>
             <p>
                 Form submissions arrive as email and are retained in our inbox and CRM for as long as needed to
-                handle your enquiry and any resulting relationship. Analytics data is aggregate and holds no
-                personal identifiers. If you'd like your enquiry deleted, ask and we'll do it.
+                handle your enquiry and any resulting relationship. Sentry conversations are deleted from our
+                working store after 30 days; if you shared contact details, the copy sent to our sales team is
+                kept with your enquiry under the same CRM retention as a form submission. Analytics data is
+                aggregate and holds no personal identifiers. If you'd like your enquiry deleted, ask and we'll
+                do it.
             </p>
 
             <h2>Your rights</h2>
@@ -375,5 +445,6 @@ window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.
 })();
 </script>
 <script src="/theme.js"></script>
+<script src="/assets/sentry/sentry.js" defer data-sentry-page="privacy" data-sentry-api="https://privify-sentry.azurewebsites.net/api"></script>
 </body>
 </html>
