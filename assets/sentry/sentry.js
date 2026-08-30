@@ -297,12 +297,20 @@
         last.slots.push(slot);
       });
 
+      // When every slot is in the same zone — the normal case — name it once
+      // under the title instead of stamping "PDT" on all six buttons. A
+      // fortnight can straddle a DST change though, and then they genuinely
+      // differ, so fall back to labelling each button.
+      var zones = result.slots
+        .map(function (slot) { return slot.zone; })
+        .filter(function (zone, i, all) { return zone && all.indexOf(zone) === i; });
+      var sharedZone = zones.length === 1 ? zones[0] : null;
+
       var dayBlocks = groups.map(function (group) {
         var buttons = group.slots.map(function (slot) {
           var full = slot.label || formatSlot(slot.start);
-          var btn = el('button', { type: 'button', class: 'btn btn-secondary', 'aria-label': full }, [
-            slot.time || full,
-          ]);
+          var face = slot.time ? (sharedZone || !slot.zone ? slot.time : slot.time + ' ' + slot.zone) : full;
+          var btn = el('button', { type: 'button', class: 'btn btn-secondary', 'aria-label': full }, [face]);
           btn.addEventListener('click', function () {
             sendMessage(full + ' works for me.');
           });
@@ -314,9 +322,9 @@
         ]);
       });
 
-      appendCardNode(
-        el('div', { class: 'card-body' }, [el('div', { class: 'card-title' }, ['Pick a time'])].concat(dayBlocks))
-      );
+      var head = [el('div', { class: 'card-title' }, ['Pick a time'])];
+      if (sharedZone) head.push(el('div', { class: 'card-desc' }, ['All times ' + sharedZone]));
+      appendCardNode(el('div', { class: 'card-body' }, head.concat(dayBlocks)));
     } else if (tool === 'book_appointment') {
       if (result && result.ok) {
         appendCardNode(
