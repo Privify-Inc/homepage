@@ -1,0 +1,4 @@
+# Local-only Sentry harness for exercising the widget against localhost:7071.
+# This repo is published straight to GitHub Pages, so anything committed here
+# is public — keep dev scaffolding out of it.
+sentry-dev.html

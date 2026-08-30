@@ -335,6 +335,20 @@
   flex-wrap: wrap;
 }
 
+/* Availability is offered across several days, so each day gets a heading and
+   its own row of times. The heading carries the date the buttons omit. */
+.slot-day + .slot-day {
+  margin-top: 0.6rem;
+}
+
+.slot-day-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--sentry-muted);
+  margin-bottom: 0.35rem;
+}
+
 .btn {
   font-family: var(--sentry-font);
   font-size: 0.82rem;

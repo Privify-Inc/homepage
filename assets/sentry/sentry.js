@@ -271,23 +271,51 @@
 
   function renderToolResult(tool, result) {
     if (tool === 'check_availability') {
-      if (!result || !result.slots || result.slots.length === 0) {
+      if (!result) return;
+      // A lookup that failed and a calendar that is genuinely empty are
+      // different things. Only the first is "having trouble"; for the second
+      // Sentry's own message already explains it, and a card here would just
+      // contradict whatever it said.
+      if (result.error) {
         appendMessage('sentry', "I'm having trouble pulling up the calendar right now — let's try again in a moment.");
         return;
       }
-      var slotButtons = result.slots.map(function (slot) {
-        var label = slot.label || formatSlot(slot.start);
-        var btn = el('button', { type: 'button', class: 'btn btn-secondary' }, [label]);
-        btn.addEventListener('click', function () {
-          sendMessage(label + ' works for me.');
-        });
-        return btn;
+      if (!result.slots || result.slots.length === 0) return;
+
+      // Slots now span several days, so group them under a day heading and put
+      // only the time on each button — six full "Tuesday, September 2 at 2:00
+      // PM PDT" labels is a wall in a 400px panel. The full label still rides
+      // along for screen readers and for the message the click sends.
+      var groups = [];
+      result.slots.forEach(function (slot) {
+        var day = slot.day || formatSlot(slot.start);
+        var last = groups.length ? groups[groups.length - 1] : null;
+        if (!last || last.day !== day) {
+          last = { day: day, slots: [] };
+          groups.push(last);
+        }
+        last.slots.push(slot);
       });
+
+      var dayBlocks = groups.map(function (group) {
+        var buttons = group.slots.map(function (slot) {
+          var full = slot.label || formatSlot(slot.start);
+          var btn = el('button', { type: 'button', class: 'btn btn-secondary', 'aria-label': full }, [
+            slot.time || full,
+          ]);
+          btn.addEventListener('click', function () {
+            sendMessage(full + ' works for me.');
+          });
+          return btn;
+        });
+        return el('div', { class: 'slot-day' }, [
+          el('div', { class: 'slot-day-label' }, [group.day]),
+          el('div', { class: 'card-actions' }, buttons),
+        ]);
+      });
+
       appendCardNode(
-        el('div', { class: 'card-body' }, [
-          el('div', { class: 'card-title' }, ['Pick a time']),
-          el('div', { class: 'card-actions' }, slotButtons),
-        ])
+        el('div', { class: 'card-body' }, [el('div', { class: 'card-title' }, ['Pick a time'])].concat(dayBlocks))
       );
     } else if (tool === 'book_appointment') {
       if (result && result.ok) {
