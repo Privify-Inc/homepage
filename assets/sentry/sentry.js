@@ -564,7 +564,30 @@
 
   var SCRIPT = document.currentScript;
   var PAGE = (SCRIPT && SCRIPT.dataset.sentryPage) || 'unknown';
-  var API_BASE = (SCRIPT && SCRIPT.dataset.sentryApi) || 'https://api.privify.io/api';
+  /**
+   * Where the agent's API lives.
+   *
+   * Every page hardcodes the production endpoint in its script tag, which
+   * means serving this repo locally would still talk to the live backend —
+   * real Anthropic spend, real sessions, and real appointments on the real
+   * calendar, from what looks like a safe local page. So a page served from
+   * localhost points at a local Functions host instead, unless its tag names
+   * an endpoint explicitly via `data-sentry-api-local`.
+   *
+   * Gated on hostname, so it cannot affect privify.io no matter what: the
+   * override simply never applies anywhere else.
+   */
+  function resolveApiBase(script) {
+    var explicit = script && script.dataset.sentryApi;
+    var host = window.location.hostname;
+    var isLocal = host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+    if (isLocal) {
+      return (script && script.dataset.sentryApiLocal) || 'http://localhost:7071/api';
+    }
+    return explicit || 'https://api.privify.io/api';
+  }
+
+  var API_BASE = resolveApiBase(SCRIPT);
   var CSS_HREF = SCRIPT ? new URL('./sentry.css', SCRIPT.src).href : '/assets/sentry/sentry.css';
   var IS_SHIELD = PAGE.toLowerCase().indexOf('shield') !== -1;
 
