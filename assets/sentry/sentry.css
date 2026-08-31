@@ -209,15 +209,21 @@
   outline-offset: 1px;
 }
 
+/* --sentry-muted, not --sentry-muted-2. In light mode --text-3 resolves to
+   #6B7280, which lands at 4.33:1 on the header surface — under WCAG AA's 4.5
+   for text this size. That is measured, not guessed. This is the AI-disclosure
+   line and the route to the privacy policy, so it is the last text in the
+   widget that should be the hardest to read; --gray-400 clears AA in both
+   themes while staying visibly quieter than the title. */
 .disclosure {
   margin-top: 0.4rem;
   font-size: 0.72rem;
-  color: var(--sentry-muted-2);
+  color: var(--sentry-muted);
   line-height: 1.4;
 }
 
 .privacy-link {
-  color: var(--sentry-muted-2);
+  color: var(--sentry-muted);
   text-decoration: underline;
   text-underline-offset: 2px;
   white-space: nowrap;
@@ -486,4 +492,41 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ── Touch targets ──────────────────────────────────────────────────────
+   Two conditions, deliberately. The width case is the one spec 11 actually
+   asks about ("usable one-handed at 375px") and is the one that can be
+   verified by resizing; (pointer: coarse) then catches the tablet that is
+   still a finger at 900px. A narrow desktop window gets the larger targets
+   too, which costs nothing.
+
+   Measured at 375px, the close and send buttons came out 28x28 and 36x36.
+   Both clear WCAG 2.5.8 AA (24x24), so this is not a conformance fix — but
+   they are the two most-tapped controls in the widget, and 28px is a fiddly
+   thing to hit one-handed on a phone. The exits grow a little too; they were
+   exactly 24px tall, which is the floor rather than a comfortable size. */
+@media (max-width: 640px), (pointer: coarse) {
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .send-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .exit-btn {
+    padding: 0.5rem 0.7rem;
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Inline in a sentence, so WCAG's inline-link exception applies and it must
+     not become a block. Padding widens the hit area without breaking the line. */
+  .privacy-link {
+    padding: 0.25rem 0.15rem;
+  }
 }
