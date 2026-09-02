@@ -389,6 +389,23 @@
   margin-top: 0.6rem;
 }
 
+/* Four times per day, laid out as four columns rather than left to wrap.
+   Wrapping put three on one line and a lonely fourth on the next, which reads
+   as "three slots, and an afterthought" instead of one day's choices. Equal
+   columns also stop "9:30 AM" and "12:30 PM" from making a ragged edge. */
+.slot-day .card-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.3rem;
+}
+
+.slot-day .card-actions .btn {
+  padding: 0.4rem 0.2rem;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 0.76rem;
+}
+
 .slot-day-label {
   font-size: 0.75rem;
   font-weight: 600;
