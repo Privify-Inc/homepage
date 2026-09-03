@@ -134,6 +134,23 @@
 [data-theme="light"] .gap-caption      { color: #374151; }
 [data-theme="light"] .footer-bottom    { color: #6B7280; }
 
+/* ── FAQ section ──
+   summary elements often do not inherit color from body in some browsers;
+   adding explicit rules covers all states. */
+[data-theme="light"] .faq-item summary         { color: #0A0A0A; }
+[data-theme="light"] .faq-item summary:hover   { color: var(--red); }
+[data-theme="light"] .faq-item[open] summary   { color: var(--red); }
+[data-theme="light"] .faq-answer               { color: #374151; }
+[data-theme="light"] .faq-answer strong        { color: #0A0A0A; }
+[data-theme="light"] .faq-aside                { color: #4B5563; }
+[data-theme="light"] .faq-list                 { border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .faq-item                 { border-bottom-color: rgba(0,0,0,0.08); }
+
+/* ── Mission section, final CTA ── */
+[data-theme="light"] .mission p                { color: #374151; }
+[data-theme="light"] .final-cta p             { color: #374151; }
+[data-theme="light"] .final-cta               { background: #EAEAF0; }
+
 /* Dashboard panel */
 [data-theme="light"] .dashboard-section { background: #F2F2F6; }
 [data-theme="light"] .dash-panel        { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
