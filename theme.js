@@ -4,8 +4,8 @@
   var KEY   = 'privify-theme';
   var saved = localStorage.getItem(KEY);
 
-  /* Apply saved theme immediately (before DOM/CSS load) */
-  if (saved === 'light') root.setAttribute('data-theme', 'light');
+  /* Light is the default. Only go dark if the user explicitly chose it. */
+  if (saved !== 'dark') root.setAttribute('data-theme', 'light');
 
   /* Wire button after DOM is ready */
   function wire() {

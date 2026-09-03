@@ -1,7 +1,17 @@
 /* ── Privify shared theme — light mode token overrides ── */
 
+/* Semantic status colors — defined here so pages don't need to define them.
+   The forge page has invalid self-referential definitions (--ok:var(--ok))
+   which resolve to nothing; these provide the actual values. */
+:root {
+  --ok:   #34D399;
+  --warn: #FBBF24;
+}
+
 /* All pages share these CSS variable names. Light mode flips them. */
 [data-theme="light"] {
+  --ok:   #059669;
+  --warn: #B45309;
   --black:        #FFFFFF;
   --white:        #0A0A0A;
   --surface:      #F2F2F6;
@@ -197,6 +207,185 @@
 [data-theme="light"] [style*="color: var(--cyan)"],
 [data-theme="light"] [style*="color:var(--green)"],
 [data-theme="light"] [style*="color: var(--green)"] { color: unset; }
+
+/* ── Comparison table — hardcoded rgba(255,255,255,X) colors ── */
+/* The forge cells and header columns use literal white values that variable
+   flipping cannot reach. Override every hardcoded white in the table. */
+[data-theme="light"] td.cmp-forge-cell         { color: #0A0A0A; }
+[data-theme="light"] .cmp-yes                  { color: #0A0A0A; }
+[data-theme="light"] .cmp-no                   { color: #9CA3AF; }
+[data-theme="light"] .cmp-no::before           { color: #C0C0C8; }
+[data-theme="light"] .cmp-partial              { color: #B45309; }
+[data-theme="light"] .cmp-planned              { color: #6B7280; }
+[data-theme="light"] .cmp-col-cap              { color: #374151; }
+[data-theme="light"] .cmp-col-others           { color: #6B7280; }
+[data-theme="light"] .cmp-col-forge            { color: var(--red); }
+[data-theme="light"] .cmp-table thead th       { color: #374151; }
+[data-theme="light"] .cmp-table tbody tr:not(.cmp-group):hover { background: rgba(0,0,0,0.025); }
+[data-theme="light"] .cmp-stat-val             { color: var(--red); }
+[data-theme="light"] .cmp-unique               { background: rgba(232,93,84,0.10); color: var(--red); border-color: rgba(232,93,84,0.25); }
+
+/* ── Dashboard / fleet mockup ── */
+[data-theme="light"] .dashboard-frame,
+[data-theme="light"] .dashboard-showcase       { background: #FFFFFF; border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .dashboard-bar,
+[data-theme="light"] .dash-topbar              { background: #EAEAF0; border-bottom-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .db-dot.r,
+[data-theme="light"] .dash-dot.r              { background: #ff5f57; }
+[data-theme="light"] .db-title,
+[data-theme="light"] .dash-url                { color: #6B7280; }
+[data-theme="light"] .db-stat,
+[data-theme="light"] .dash-stat-card          { background: #EAEAF0; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .db-stat-label,
+[data-theme="light"] .dsc-label               { color: #6B7280; }
+[data-theme="light"] .db-stat-val,
+[data-theme="light"] .dsc-val                 { color: #0A0A0A; }
+[data-theme="light"] .db-chart                { background: #EAEAF0; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .db-chart-label          { color: #6B7280; }
+[data-theme="light"] .db-agent                { background: #EAEAF0; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .db-agent-name           { color: #0A0A0A; }
+[data-theme="light"] .db-agent-sub            { color: #6B7280; }
+[data-theme="light"] .dash-panel-title        { color: #6B7280; }
+[data-theme="light"] .agent-name              { color: #0A0A0A; }
+[data-theme="light"] .agent-conf              { color: #6B7280; }
+[data-theme="light"] .agent-row               { border-bottom-color: rgba(0,0,0,0.06); }
+[data-theme="light"] .event-type              { background: #F0F0F6; color: var(--red); }
+[data-theme="light"] .event-msg               { color: #374151; }
+[data-theme="light"] .event-time              { color: #9CA3AF; }
+[data-theme="light"] .event-row               { border-bottom-color: rgba(0,0,0,0.06); }
+[data-theme="light"] .dash-nav-item           { color: #6B7280; }
+[data-theme="light"] .dash-nav-item.active    { color: #0A0A0A; background: rgba(0,0,0,0.05); border-left-color: var(--red); }
+[data-theme="light"] .dash-nav-section        { color: #9CA3AF; }
+[data-theme="light"] .risk-badge.rb-critical  { background: rgba(232,93,84,0.12); color: var(--red); }
+[data-theme="light"] .risk-badge.rb-medium    { background: rgba(180,83,9,0.12); color: #B45309; }
+[data-theme="light"] .risk-badge.rb-low       { background: rgba(5,150,105,0.12); color: #059669; }
+
+/* ── Topology / architecture diagram ── */
+[data-theme="light"] .topo                    { border-color: rgba(232,93,84,0.25); background: rgba(232,93,84,0.03); }
+[data-theme="light"] .topo-head               { background: #F2F2F6; }
+[data-theme="light"] .topo-node               { background: #FFFFFF; border-color: rgba(0,0,0,0.12); color: #374151; }
+[data-theme="light"] .topo-col-label          { color: #6B7280; }
+[data-theme="light"] .topo-plane              { background: rgba(232,93,84,0.08); border-color: rgba(232,93,84,0.3); }
+[data-theme="light"] .topo-plane span         { color: #0A0A0A; }
+[data-theme="light"] .topo-note               { color: #6B7280; }
+[data-theme="light"] .topo-link-label         { color: #6B7280; }
+[data-theme="light"] .topo-foot               { color: #4B5563; border-top-color: rgba(232,93,84,0.15); }
+
+/* ── Gap map / coverage diagram ── */
+[data-theme="light"] .gap-map                 { background: rgba(232,93,84,0.03); border-color: rgba(232,93,84,0.25); }
+[data-theme="light"] .gap-map-head            { background: #F2F2F6; }
+[data-theme="light"] .gap-inner               { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.14); }
+[data-theme="light"] .gap-inner-head          { background: #F2F2F6; color: #6B7280; }
+[data-theme="light"] .gap-node                { background: #FFFFFF; border-color: rgba(0,0,0,0.12); color: #374151; }
+[data-theme="light"] .gap-chip-t              { color: #0A0A0A; }
+[data-theme="light"] .gap-chip-s              { color: #6B7280; }
+[data-theme="light"] .gap-chip-mark           { border-color: rgba(232,93,84,0.4); }
+[data-theme="light"] .gap-map-foot            { color: #4B5563; border-top-color: rgba(232,93,84,0.15); }
+[data-theme="light"] .gap-caption             { color: #4B5563; }
+[data-theme="light"] .gap-inner-note          { color: #6B7280; }
+
+/* ── Discovery gap (dgap) ── */
+[data-theme="light"] .dgap-panel              { background: #FFFFFF; border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .dgap-found              { background: rgba(232,93,84,0.05); border-color: rgba(232,93,84,0.4); }
+[data-theme="light"] .dgap-label              { color: #6B7280; }
+[data-theme="light"] .dgap-fig                { color: #374151; }
+[data-theme="light"] .dgap-found .dgap-fig    { color: #0A0A0A; }
+[data-theme="light"] .dgap-fig span           { color: #6B7280; }
+[data-theme="light"] .dgap-note               { color: #9CA3AF; }
+[data-theme="light"] .dgap-vs                 { color: #9CA3AF; }
+[data-theme="light"] .dgap-grid i             { background: #D1D5DB; }
+[data-theme="light"] .dgap-grid i.on          { background: rgba(232,93,84,0.45); }
+[data-theme="light"] .dgap-grid i.hot         { background: var(--red); }
+
+/* ── Logos bar ── */
+[data-theme="light"] .logos-bar               { background: #F5F5F8; border-color: rgba(0,0,0,0.07); }
+[data-theme="light"] .logos-bar-label         { color: #9CA3AF; }
+[data-theme="light"] .logo-item               { color: #6B7280; }
+[data-theme="light"] .logo-item:hover         { color: #0A0A0A; }
+[data-theme="light"] .logo-item svg           { fill: currentColor; }
+
+/* ── Trust strip ── */
+[data-theme="light"] .trust-strip             { background: #E8E8EE; }
+[data-theme="light"] .trust-item              { color: #4B5563; }
+[data-theme="light"] .soc2-badge              { background: #F5F5F8; border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .soc2-title              { color: #0A0A0A; }
+[data-theme="light"] .soc2-sub                { color: #6B7280; }
+
+/* ── Fork cards (homepage) ── */
+[data-theme="light"] .fork-card               { background: #FFFFFF; }
+[data-theme="light"] .fork-name               { color: #0A0A0A; }
+[data-theme="light"] .fork-expand             { color: #6B7280; }
+[data-theme="light"] .fork-value              { color: #4B5563; }
+[data-theme="light"] .fork-points li          { color: #4B5563; }
+[data-theme="light"] .fork-label              { color: #9CA3AF; }
+
+/* ── Deploy chips & specs ── */
+[data-theme="light"] .deploy-chip             { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); color: #374151; }
+[data-theme="light"] .deploy-spec             { background: #F2F2F6; }
+[data-theme="light"] .deploy-spec-val         { color: #0A0A0A; }
+[data-theme="light"] .deploy-spec-label       { color: #6B7280; }
+[data-theme="light"] .deploy-tier             { color: var(--red); }
+[data-theme="light"] .edn-inner               { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+
+/* ── Integration grid ── */
+[data-theme="light"] .int-category            { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .int-category h4         { color: #4B5563; }
+[data-theme="light"] .int-item                { color: #374151; border-bottom-color: rgba(0,0,0,0.06); }
+
+/* ── Compliance cards ── */
+[data-theme="light"] .compliance-bar          { background: #DCDCE4; }
+[data-theme="light"] .compliance-status       { color: #059669; }
+[data-theme="light"] .compliance-controls     { color: #6B7280; }
+
+/* ── Advantages ── */
+[data-theme="light"] .adv-unique              { background: rgba(232,93,84,0.10); color: var(--red); }
+[data-theme="light"] .adv-parity              { background: rgba(5,150,105,0.10); color: #059669; }
+[data-theme="light"] .adv-icon                { color: #0A0A0A; }
+
+/* ── Feature tags ── */
+[data-theme="light"] .feature-tag             { background: rgba(232,93,84,0.08); color: var(--red); }
+
+/* ── Rail / how-it-works ── */
+[data-theme="light"] .rail-node               { background: #FFFFFF; }
+[data-theme="light"] .rail-stage              { color: #6B7280; }
+[data-theme="light"] .step-detail li          { color: #6B7280; }
+
+/* ── Diff cards (differentiators) ── */
+[data-theme="light"] .diff-card               { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .diff-label              { color: #6B7280; }
+[data-theme="light"] .diff-card h4            { color: #0A0A0A; }
+
+/* ── Pillar features list ── */
+[data-theme="light"] .pillar-num              { color: #9CA3AF; }
+[data-theme="light"] .pillar-features li      { color: #4B5563; }
+
+/* ── Hero stats ── */
+[data-theme="light"] .stat-num                { color: #0A0A0A; }
+[data-theme="light"] .stat-label              { color: #6B7280; }
+[data-theme="light"] .hero-expand             { color: #6B7280; }
+[data-theme="light"] .hero-field              { opacity: 0.12; }
+
+/* ── Section / track backgrounds ── */
+[data-theme="light"] .track-gap               { background: #EAEAF2; }
+[data-theme="light"] .track-shield            { background: #EAEAF2; }
+
+/* ── Brandbeat section ── */
+[data-theme="light"] .brandbeat               { background: #F2F2F6; }
+
+/* ── Footer utility row ── */
+[data-theme="light"] .fu-chip                 { color: #6B7280; border-color: rgba(0,0,0,0.10); background: rgba(0,0,0,0.03); }
+[data-theme="light"] .fu-chip:hover           { color: #0A0A0A; border-color: rgba(0,0,0,0.2); background: rgba(0,0,0,0.06); }
+[data-theme="light"] .fu-trust                { color: #6B7280; border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .fu-label                { color: #6B7280; }
+[data-theme="light"] .fu-cap                  { color: #9CA3AF; }
+[data-theme="light"] .footer-tagline          { color: #6B7280; }
+
+/* ── Secondary buttons in comparison ── */
+[data-theme="light"] .cmp-btn-secondary       { border-color: rgba(0,0,0,0.15); color: #6B7280; }
+[data-theme="light"] .cmp-btn-secondary:hover { border-color: rgba(0,0,0,0.30); color: #0A0A0A; }
+
+/* ── Step cards ── */
+[data-theme="light"] .step-num                { background: rgba(232,93,84,0.08); border-color: rgba(232,93,84,0.25); color: var(--red); }
 
 /* ── Theme toggle button (shared styles) ── */
 .theme-toggle {
