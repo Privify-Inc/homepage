@@ -26,7 +26,7 @@
   --gray-600:     #9CA3AF;
   --gray-700:     #D1D5DB;
   --gray-800:     #E5E7EB;
-  --text-3:       #6B7280;
+  --text-3:       #4B5563;
   --red-dim:      rgba(232,93,84,0.10);
   --red-glow:     rgba(232,93,84,0.18);
   --cyan-dim:     rgba(34,211,238,0.08);
@@ -77,6 +77,62 @@
 [data-theme="light"] .integration-card{ background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
 [data-theme="light"] .product-card    { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
 [data-theme="light"] .stat-card       { background: #FFFFFF; }
+
+/* ── Homepage: mission stat cards and pricing ──
+   These use var(--surface-2) for background, but the page's own :root block
+   has equal CSS specificity and appears later, so the variable flip doesn't
+   land. Explicit overrides are required. */
+[data-theme="light"] .m-stat           { background: #EAEAEE; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .m-stat-num       { color: #0A0A0A; }
+[data-theme="light"] .m-stat-label     { color: #4B5563; }
+[data-theme="light"] .pricing          { background: #E2E2EA; border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .price-card       { background: #FFFFFF; border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .price-card h3    { color: #0A0A0A; }
+[data-theme="light"] .price-card > p   { color: #374151; }
+[data-theme="light"] .price-factor     { background: #EAEAEE; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .price-factor .pf-title { color: #0A0A0A; }
+[data-theme="light"] .price-factor .pf-sub   { color: #4B5563; }
+[data-theme="light"] .pi-chip          { background: #DDDDE6; border-color: rgba(0,0,0,0.10); color: #4B5563; }
+[data-theme="light"] .diff-card        { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .diff-card h4     { color: #0A0A0A; }
+[data-theme="light"] .diff-card p      { color: #4B5563; }
+[data-theme="light"] .fork-card        { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .track-gap        { background: #EAEAF0; border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .track-shield     { background: #EAEAF0; border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .gap-map-head     { background: #F2F2F6; }
+[data-theme="light"] .gap-inner-head   { background: #F2F2F6; }
+[data-theme="light"] .gap-node         { background: #FFFFFF; border-color: rgba(0,0,0,0.12); }
+
+/* ── Secondary text: no light gray in light mode ──
+   All descriptive, label and sub-text must be #4B5563 minimum.
+   Elements using var(--text-3) or var(--gray-400/500) that resolve
+   to light values because the page's :root overrides the variable flip. */
+[data-theme="light"] .section-eyebrow  { color: #4B5563; }
+[data-theme="light"] .section-sub      { color: #374151; }
+[data-theme="light"] .hero-sub         { color: #374151; }
+[data-theme="light"] .section-sub b,
+[data-theme="light"] .section-sub strong { color: #0A0A0A; }
+[data-theme="light"] .nav-link,
+[data-theme="light"] .dropdown-toggle  { color: #374151; }
+[data-theme="light"] .dropdown-item    { color: #374151; }
+[data-theme="light"] .di-sub           { color: #4B5563; }
+[data-theme="light"] .mob-section      { color: #4B5563; }
+[data-theme="light"] .fork-label       { color: #4B5563; }
+[data-theme="light"] .fork-expand      { color: #4B5563; }
+[data-theme="light"] .fork-value       { color: #374151; }
+[data-theme="light"] .fork-points li   { color: #374151; }
+[data-theme="light"] .trust-item       { color: #4B5563; }
+[data-theme="light"] .trust-item i     { color: #4B5563; }
+[data-theme="light"] .soc2-sub         { color: #4B5563; }
+[data-theme="light"] .diff-label       { color: #4B5563; }
+[data-theme="light"] .rail-stage       { color: #4B5563; }
+[data-theme="light"] .rail-step > p    { color: #374151; }
+[data-theme="light"] .step-detail li   { color: #4B5563; }
+[data-theme="light"] .gap-chip-s       { color: #4B5563; }
+[data-theme="light"] .gap-col-label    { color: #4B5563; }
+[data-theme="light"] .gap-inner-note   { color: #4B5563; }
+[data-theme="light"] .gap-caption      { color: #374151; }
+[data-theme="light"] .footer-bottom    { color: #6B7280; }
 
 /* Dashboard panel */
 [data-theme="light"] .dashboard-section { background: #F2F2F6; }
