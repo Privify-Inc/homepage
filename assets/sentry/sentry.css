@@ -17,17 +17,29 @@
 
   all: initial;
   font-family: var(--sentry-font);
-  color-scheme: dark;
-}
 
-[data-theme='light'] :host {
-  color-scheme: light;
+  /* Scrollbars are the only native UI left in here (the textarea and every
+     button carry their own colours), so we paint them directly rather than
+     leaning on color-scheme. This block used to say `color-scheme: dark`
+     with a `[data-theme='light'] :host` override below it, but that selector
+     can never match — inside a shadow stylesheet `:host` is not reachable as
+     the descendant of an outside element — so the widget stayed dark-schemed
+     and drew a dark scrollbar down the light panel. `:host-context()` would
+     fix Chromium and Safari and leave Firefox exactly as broken; a mid grey
+     reads against both surfaces and needs neither. scrollbar-color inherits,
+     so setting it here reaches the thread and the composer alike; its
+     scrollbar-width counterpart does not inherit and lives on the universal
+     rule below. */
+  scrollbar-color: rgba(128, 128, 128, 0.4) transparent;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  /* Not inherited, unlike scrollbar-color — it has to be stated on whichever
+     element actually scrolls, so state it on all of them. */
+  scrollbar-width: thin;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -201,7 +213,9 @@
 
 .icon-btn:hover {
   color: var(--sentry-text);
-  background: rgba(255, 255, 255, 0.06);
+  /* Mid grey, not white: a white wash is invisible on the light theme's
+     #F4F4F6 panel, leaving the close button with no hover fill at all. */
+  background: rgba(128, 128, 128, 0.14);
 }
 
 .icon-btn:focus-visible {
@@ -312,6 +326,43 @@
   align-self: flex-start;
   color: var(--sentry-accent);
   font-size: 0.85rem;
+}
+
+/* Sentry's replies are rendered from Markdown, so a reply bubble now holds
+   real block elements rather than one run of text. Nothing here is decorative:
+   these elements sit inside a shadow root, and the list rules in particular
+   have to be stated rather than assumed. */
+.msg-sentry p {
+  margin: 0 0 0.6rem;
+}
+
+.msg-sentry ul,
+.msg-sentry ol {
+  margin: 0 0 0.6rem;
+  padding-inline-start: 1.35rem;
+}
+
+.msg-sentry ul {
+  list-style: disc;
+}
+
+.msg-sentry ol {
+  list-style: decimal;
+}
+
+.msg-sentry li {
+  margin: 0 0 0.3rem;
+}
+
+/* The bubble's own padding provides the bottom gap; a trailing margin on the
+   last block would double it. */
+.msg-sentry > :last-child,
+.msg-sentry li:last-child {
+  margin-bottom: 0;
+}
+
+.msg-sentry strong {
+  font-weight: 600;
 }
 
 .pulse {

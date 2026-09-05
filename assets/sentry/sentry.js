@@ -257,10 +257,122 @@
       thread.scrollTop = thread.scrollHeight;
     }
 
+    /**
+     * Sentry answers in Markdown — bold for emphasis, dashes and numbers for
+     * lists — and the thread printed it literally, so visitors read
+     * "**FORGE**". Only the three constructs the model actually produces are
+     * handled here, and every node is built through el() rather than assigned
+     * as an HTML string, so model output still never reaches the DOM as
+     * markup.
+     *
+     * The regexes are function-local rather than shared above: hydrate() runs
+     * at load, well before this point in the file, and anything held in a
+     * `var` up here would still be undefined by the time it drew the restored
+     * transcript. Function declarations hoist; assignments do not.
+     */
+
+    /** One line into text and <strong> nodes. Only a CLOSED `**` pair counts,
+     * so a half-arrived `**FOR` mid-stream stays literal and settles into bold
+     * when its closing pair lands — it never flickers back the other way. */
+    function mdInline(text) {
+      var bold = /\*\*([^*]+)\*\*/g;
+      var out = [];
+      var last = 0;
+      var match;
+      while ((match = bold.exec(text)) !== null) {
+        if (match.index > last) out.push(text.slice(last, match.index));
+        out.push(el('strong', null, [match[1]]));
+        last = match.index + match[0].length;
+      }
+      if (last < text.length) out.push(text.slice(last));
+      return out;
+    }
+
+    /** Line-oriented on purpose. The model leaves a blank line between
+     * numbered items, so slicing the text into blank-line-delimited blocks
+     * would make every item its own list and restart each one at 1. */
+    function mdBlocks(text) {
+      var BULLET = /^[ \t]*[-*][ \t]+(.*)$/;
+      var ORDERED = /^[ \t]*(\d+)\.[ \t]+(.*)$/;
+      var lines = String(text).split('\n');
+      var blocks = [];
+      var para = [];
+      var list = null;
+
+      function flushPara() {
+        if (!para.length) return;
+        blocks.push(el('p', null, mdInline(para.join('\n'))));
+        para = [];
+      }
+
+      function flushList() {
+        if (!list) return;
+        var attrs = list.start > 1 ? { start: String(list.start) } : null;
+        blocks.push(el(list.tag, attrs, list.items.map(function (item) {
+          return el('li', null, mdInline(item));
+        })));
+        list = null;
+      }
+
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        var bullet = BULLET.exec(line);
+        var ordered = ORDERED.exec(line);
+        if (bullet) {
+          flushPara();
+          if (list && list.tag !== 'ul') flushList();
+          if (!list) list = { tag: 'ul', start: 1, items: [] };
+          list.items.push(bullet[1]);
+        } else if (ordered) {
+          flushPara();
+          if (list && list.tag !== 'ol') flushList();
+          if (!list) list = { tag: 'ol', start: parseInt(ordered[1], 10) || 1, items: [] };
+          list.items.push(ordered[2]);
+        } else if (!line.trim()) {
+          flushPara();
+          /* A blank line closes a paragraph, but only closes a list when what
+             follows isn't more of that same list. */
+          if (list) {
+            var j = i + 1;
+            while (j < lines.length && !lines[j].trim()) j++;
+            var next = j < lines.length ? lines[j] : '';
+            if (!(list.tag === 'ul' ? BULLET : ORDERED).test(next)) flushList();
+          }
+        } else {
+          flushList();
+          para.push(line);
+        }
+      }
+      flushPara();
+      flushList();
+      return blocks;
+    }
+
+    /** Swaps a bubble's contents for the rendered form of `text`. */
+    function renderRich(node, text) {
+      while (node.firstChild) node.removeChild(node.firstChild);
+      mdBlocks(text).forEach(function (block) {
+        node.appendChild(block);
+      });
+    }
+
+    /** What a screen reader should hear: the same words without the syntax, so
+     * the live region doesn't read out "star star FORGE star star". Ordered
+     * numbers stay because they carry meaning; bullet dashes go. */
+    function mdPlain(text) {
+      return String(text)
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/^[ \t]*[-*][ \t]+/gm, '')
+        .replace(/^[ \t]*(\d+)\.[ \t]+/gm, '$1. ');
+    }
+
     function appendMessage(role, text) {
       var node = document.createElement('div');
       node.className = 'msg ' + (role === 'visitor' ? 'msg-visitor' : role === 'error' ? 'msg-error' : 'msg-sentry');
-      node.textContent = text;
+      /* Only Sentry writes Markdown. Visitor text and our own error strings
+         stay literal, so a visitor who types "**" doesn't turn the thread bold. */
+      if (role === 'visitor' || role === 'error') node.textContent = text;
+      else renderRich(node, text);
       thread.appendChild(node);
       scrollToBottom();
       return node;
@@ -526,7 +638,7 @@
           if (pulse.parentNode) pulse.remove();
           if (!currentBubble) currentBubble = appendMessage('sentry', '');
           fullText += data.text;
-          currentBubble.textContent = fullText;
+          renderRich(currentBubble, fullText);
           scrollToBottom();
         } else if (eventType === 'tool_result') {
           renderToolResult(data.tool, data.result);
@@ -538,7 +650,7 @@
           if (pulse.parentNode) pulse.remove();
           appendMessage('error', data.message || 'Something went wrong.');
         } else if (eventType === 'done') {
-          if (fullText) announce(fullText);
+          if (fullText) announce(mdPlain(fullText));
           if (transcript[slot]) transcript[slot].text = fullText;
           saveTranscript();
           // Re-enable input here, not in .finally(). The reader loop runs until
