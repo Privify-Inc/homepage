@@ -89,4 +89,4 @@ capabilities, not certifications held by Privify.
 - [Contact](https://privify.io/contact.html)
 - General enquiries: sales@privify.io
 - Security issues: security@privify.io
-- Privacy: privacy@privify.io
+- Privacy: sales@privify.io
