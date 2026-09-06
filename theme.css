@@ -151,6 +151,32 @@
 [data-theme="light"] .final-cta p             { color: #374151; }
 [data-theme="light"] .final-cta               { background: #EAEAF0; }
 
+/* ── Shared layout pages: security, privacy, terms ──
+   These pages use .callout, code, strong, .back-link with dark-mode
+   variable values that need explicit light mode overrides. */
+[data-theme="light"] .callout           { background: #F0F0F6; border-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .callout p         { color: #374151; }
+[data-theme="light"] code               { background: #E4E4EC; border-color: rgba(0,0,0,0.10); color: #374151; }
+[data-theme="light"] strong             { color: #0A0A0A; }
+[data-theme="light"] .back-link         { color: #374151; }
+[data-theme="light"] .back-link:hover   { color: #0A0A0A; }
+[data-theme="light"] .lede              { color: #374151; }
+
+/* Security page — status table */
+[data-theme="light"] .status-table th                { color: #4B5563; border-bottom-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .status-table td                { color: #374151; border-bottom-color: rgba(0,0,0,0.07); }
+[data-theme="light"] .status-table td:first-child    { color: #0A0A0A; }
+[data-theme="light"] .status-table tr                { border-bottom-color: rgba(0,0,0,0.07); }
+[data-theme="light"] .pill-yes      { background: rgba(34,211,238,0.10); color: #0891B2; border-color: rgba(8,145,178,0.3); }
+[data-theme="light"] .pill-progress { background: rgba(232,93,84,0.08); }
+[data-theme="light"] .pill-no       { background: rgba(0,0,0,0.05); color: #6B7280; border-color: rgba(0,0,0,0.14); }
+
+/* Privacy page — data table */
+[data-theme="light"] .data-table th                  { color: #4B5563; border-bottom-color: rgba(0,0,0,0.10); }
+[data-theme="light"] .data-table td                  { color: #374151; border-bottom-color: rgba(0,0,0,0.07); }
+[data-theme="light"] .data-table td:first-child      { color: #0A0A0A; }
+[data-theme="light"] .data-table tr                  { border-bottom-color: rgba(0,0,0,0.07); }
+
 /* Dashboard panel */
 [data-theme="light"] .dashboard-section { background: #F2F2F6; }
 [data-theme="light"] .dash-panel        { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
