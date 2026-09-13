@@ -29,6 +29,19 @@
   --purple:      #9B59FF;
   --orange:      #F97316;
   --font-mono:   'JetBrains Mono','Fira Mono','Courier New',monospace;
+  /* opacity-scale foreground tokens, used inline for dynamically-rendered
+     content; flipped to black under [data-theme="light"] below */
+  --w07: rgba(255,255,255,0.07);
+  --w08: rgba(255,255,255,0.08);
+  --w12: rgba(255,255,255,0.12);
+  --w20: rgba(255,255,255,0.2);
+  --w25: rgba(255,255,255,0.25);
+  --w35: rgba(255,255,255,0.35);
+  --w40: rgba(255,255,255,0.4);
+  --w45: rgba(255,255,255,0.45);
+  --w50: rgba(255,255,255,0.5);
+  --w55: rgba(255,255,255,0.55);
+  --w65: rgba(255,255,255,0.65);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;overflow:hidden;}
@@ -647,7 +660,11 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 }
 
 /* Light mode — Sentium demo dashboard */
-[data-theme="light"] { --bg:#F0F0F4; --panel:#FFFFFF; --panel2:#F5F5FA; --border:rgba(0,0,0,0.08); --text:#0A0A0A; --text-muted:#6B7280; --text-dim:#9CA3AF; }
+[data-theme="light"] { --bg:#F0F0F4; --panel:#FFFFFF; --panel2:#F5F5FA; --border:rgba(0,0,0,0.08); --text:#0A0A0A; --text-muted:#6B7280; --text-dim:#9CA3AF;
+  --w07: rgba(0,0,0,0.07); --w08: rgba(0,0,0,0.08); --w12: rgba(0,0,0,0.12); --w20: rgba(0,0,0,0.2);
+  --w25: rgba(0,0,0,0.25); --w35: rgba(0,0,0,0.35); --w40: rgba(0,0,0,0.4); --w45: rgba(0,0,0,0.45);
+  --w50: rgba(0,0,0,0.5); --w55: rgba(0,0,0,0.55); --w65: rgba(0,0,0,0.65);
+}
 [data-theme="light"] html, [data-theme="light"] body { background: #F0F0F4; color: #0A0A0A; }
 [data-theme="light"] .sidebar { background: #FFFFFF; border-right-color: rgba(0,0,0,0.08); }
 [data-theme="light"] .main-header { background: #FFFFFF; border-bottom-color: rgba(0,0,0,0.08); }
@@ -660,10 +677,81 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 [data-theme="light"] #theme-toggle { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.4); }
 [data-theme="light"] .icon-sun { display: block; }
 [data-theme="light"] .icon-moon { display: none; }
+
+/* Light mode — everything below was styled with a fixed white foreground
+   (readable only on the dark background); give each the same opacity
+   scale in black so it stays legible when the panel flips to white. */
+[data-theme="light"] #back-link{color:rgba(0,0,0,0.4);}
+[data-theme="light"] #back-link:hover{color:rgba(0,0,0,0.75);}
+[data-theme="light"] .w-sub{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .w-tagline{color:rgba(0,0,0,0.85);}
+[data-theme="light"] .w-desc{color:rgba(0,0,0,0.4);}
+[data-theme="light"] .w-pillar-sub{color:rgba(0,0,0,0.28);}
+[data-theme="light"] .btn-explore{color:rgba(0,0,0,0.55);}
+[data-theme="light"] .btn-explore:hover{border-color:rgba(0,0,0,0.2);}
+[data-theme="light"] .sb-logo-full{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .sb-stat-label{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .nav-section{color:rgba(0,0,0,0.22);}
+[data-theme="light"] .nav-item.locked:hover{background:rgba(0,0,0,0.02);color:rgba(0,0,0,0.45);}
+[data-theme="light"] .lt-body{color:rgba(0,0,0,0.65);}
+[data-theme="light"] .sb-footer{color:rgba(0,0,0,0.2);}
+[data-theme="light"] .view-sub{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .stat-label{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .stat-sub{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .chart-title{color:rgba(0,0,0,0.4);}
+[data-theme="light"] .chart-toggle{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .chart-bar-label{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .chart-bar-type{color:rgba(0,0,0,0.2);}
+[data-theme="light"] .event-row{border-bottom:1px solid rgba(0,0,0,0.035);}
+[data-theme="light"] .ev-detail{color:rgba(0,0,0,0.45);}
+[data-theme="light"] .ev-conf{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .ev-time{color:rgba(0,0,0,0.2);}
+[data-theme="light"] .trace-id{color:rgba(0,0,0,0.6);}
+[data-theme="light"] .trace-meta{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .btn-replay:disabled{background:rgba(0,0,0,0.1);color:rgba(0,0,0,0.3);}
+[data-theme="light"] .dag-status{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .dag-node-bg{fill:rgba(0,0,0,0.04);stroke:rgba(0,0,0,0.12);}
+[data-theme="light"] .dag-node-label{fill:rgba(0,0,0,0.55);}
+[data-theme="light"] .dag-edge{stroke:rgba(0,0,0,0.12);}
+[data-theme="light"] .dag-edge.active{stroke:rgba(0,0,0,0.35);}
+[data-theme="light"] .dag-timing{fill:rgba(0,0,0,0.25);}
+[data-theme="light"] .dag-type-label{fill:rgba(0,0,0,0.28);}
+[data-theme="light"] marker#arrow path{fill:rgba(0,0,0,0.25);}
+[data-theme="light"] marker#arrow-active path{fill:rgba(0,0,0,0.5);}
+[data-theme="light"] .fw-group-label{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .fw-card:hover{border-color:rgba(0,0,0,0.15);}
+[data-theme="light"] .fw-ctrl-id{color:rgba(0,0,0,0.5);}
+[data-theme="light"] .fw-ctrl-name{color:rgba(0,0,0,0.65);}
+[data-theme="light"] .fw-ctrl-desc{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .policy-tab{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .policy-desc{color:rgba(0,0,0,0.4);}
+[data-theme="light"] .policy-meta-item{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .policy-meta-item span{color:rgba(0,0,0,0.55);}
+[data-theme="light"] .modal-field-label{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .modal-field-val{color:rgba(0,0,0,0.75);background:rgba(0,0,0,0.04);}
+[data-theme="light"] .tt-skip{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .tt-skip:hover{color:rgba(0,0,0,0.55);}
+[data-theme="light"] .tt-body{color:rgba(0,0,0,0.6);}
+[data-theme="light"] .tt-dot{background:rgba(0,0,0,0.15);}
+[data-theme="light"] .tt-back{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .end-sub{color:rgba(0,0,0,0.45);}
+[data-theme="light"] .end-stat-label{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .btn-cta-sec{color:rgba(0,0,0,0.55);}
+[data-theme="light"] .btn-cta-sec:hover{border-color:rgba(0,0,0,0.2);}
+[data-theme="light"] .end-footnote{color:rgba(0,0,0,0.25);}
+[data-theme="light"] ::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.1);}
+[data-theme="light"] .filter-btn{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .filter-sep{color:rgba(0,0,0,0.15);}
+[data-theme="light"] .sum-label{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .mob-hamburger{color:rgba(0,0,0,0.6);}
+[data-theme="light"] .mw-body{color:rgba(0,0,0,0.5);}
+[data-theme="light"] .mw-body strong{color:rgba(0,0,0,0.8);}
+[data-theme="light"] .mw-btn-secondary{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .mw-btn-secondary:hover{color:rgba(0,0,0,0.6);}
 </style>
 </head>
 <body>
-<button id="theme-toggle" aria-label="Toggle light/dark mode" style="position:fixed;top:10px;right:54px;z-index:9000;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);cursor:pointer;width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;padding:0;transition:all 0.2s;">
+<button id="theme-toggle" aria-label="Toggle light/dark mode" style="position:fixed;top:10px;right:54px;z-index:9000;background:var(--w07);border:1px solid var(--w12);color:var(--w40);cursor:pointer;width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;padding:0;transition:all 0.2s;">
     <svg class="icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
     <svg class="icon-sun"  width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -728,7 +816,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
       </div>
       <div class="sb-stat">
         <span class="sb-stat-label">EVENTS</span>
-        <span class="sb-stat-val" id="sb-events" style="color:rgba(255,255,255,0.45)">0</span>
+        <span class="sb-stat-val" id="sb-events" style="color:var(--w45)">0</span>
       </div>
     </div>
     <nav class="sb-nav">
@@ -768,7 +856,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 
     <!-- MOBILE TOPBAR -->
     <div class="mobile-topbar">
-      <a href="https://privify.io" style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.4);font-size:11px;font-weight:500;text-decoration:none;">
+      <a href="https://privify.io" style="display:flex;align-items:center;gap:6px;color:var(--w40);font-size:11px;font-weight:500;text-decoration:none;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
         Back to Privify
       </a>
@@ -788,7 +876,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
           <div class="view-title">Dashboard</div>
           <div class="view-sub" id="dash-sub">Real-time AI agent governance</div>
         </div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.25);font-family:var(--font-mono)" id="dash-time"></div>
+        <div style="font-size:11px;color:var(--w25);font-family:var(--font-mono)" id="dash-time"></div>
       </div>
       <div class="stat-cards" id="stat-cards">
         <div class="stat-card">
@@ -837,10 +925,10 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
           </div>
         </div>
         <div id="chart-bars"></div>
-        <div id="chart-time-label" style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:6px;font-family:var(--font-mono);"></div>
+        <div id="chart-time-label" style="font-size:10px;color:var(--w20);margin-top:6px;font-family:var(--font-mono);"></div>
       </div>
       <div style="padding:0 24px 6px;flex-shrink:0;">
-        <div style="font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;text-transform:uppercase;">Recent Events</div>
+        <div style="font-size:10px;color:var(--w25);letter-spacing:0.1em;text-transform:uppercase;">Recent Events</div>
       </div>
       <div class="events-scroll" id="dash-events"></div>
     </div>
@@ -855,7 +943,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
       </div>
       <div class="logs-toolbar">
         <div class="time-filters">
-          <span style="font-size:10px;color:rgba(255,255,255,0.25);margin-right:4px;">RANGE</span>
+          <span style="font-size:10px;color:var(--w25);margin-right:4px;">RANGE</span>
           <button class="filter-btn" data-range="1" onclick="setLogRange(1)">1h</button>
           <button class="filter-btn active" data-range="6" onclick="setLogRange(6)">6h</button>
           <button class="filter-btn" data-range="24" onclick="setLogRange(24)">24h</button>
@@ -863,7 +951,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
           <button class="filter-btn" data-range="null" onclick="setLogRange(null)">All</button>
         </div>
         <div class="type-filters" id="type-filters">
-          <span style="font-size:10px;color:rgba(255,255,255,0.25);margin-right:2px;">TYPE</span>
+          <span style="font-size:10px;color:var(--w25);margin-right:2px;">TYPE</span>
           <button class="filter-btn active" data-type="ALL" onclick="setTypeFilter('ALL')">ALL</button>
           <button class="filter-btn" data-type="AI_API_CALL" onclick="setTypeFilter('AI_API_CALL')">AI_API_CALL</button>
           <button class="filter-btn" data-type="DLP_MATCH" onclick="setTypeFilter('DLP_MATCH')">DLP_MATCH</button>
@@ -895,10 +983,10 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
           <svg id="dag-svg" viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,255,255,0.25)"/>
+                <path d="M0,0 L8,4 L0,8 Z" fill="var(--w25)"/>
               </marker>
               <marker id="arrow-active" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,255,255,0.5)"/>
+                <path d="M0,0 L8,4 L0,8 Z" fill="var(--w50)"/>
               </marker>
             </defs>
             <!-- Edges -->
@@ -1167,7 +1255,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
       <span class="risk-chip risk-info">Policy: system-file-write</span>
       <span class="risk-chip risk-info">DLP: CLEAN</span>
     </div>
-    <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;border-top:1px solid var(--border);padding-top:12px;">
+    <div style="font-size:11px;color:var(--w35);line-height:1.6;border-top:1px solid var(--border);padding-top:12px;">
       The agent is currently <strong style="color:var(--yellow)">paused</strong>. Your decision will be logged with your user ID and timestamp for the audit trail.
     </div>
     <div class="modal-actions">
@@ -1366,7 +1454,7 @@ function renderDashboard() {
   const el = document.getElementById('dash-events');
   if (!el) return;
   const html = liveEvents.slice(0, 20).map((ev, i) => eventRowHTML(ev, i === 0 && state.currentView === 'dashboard')).join('');
-  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:rgba(255,255,255,0.2);">Waiting for events…</div>';
+  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:var(--w20);">Waiting for events…</div>';
 }
 
 function setLogRange(hours) {
@@ -1395,7 +1483,7 @@ function renderLogs() {
     events = events.filter(ev => ev.type === state.typeFilter);
   }
   const html = events.map(ev => eventRowHTML(ev, false)).join('');
-  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:rgba(255,255,255,0.2);">No events match this filter yet — keep watching, the feed is live.</div>';
+  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:var(--w20);">No events match this filter yet — keep watching, the feed is live.</div>';
   const label = state.typeFilter && state.typeFilter !== 'ALL' ? state.typeFilter : 'all event types';
   document.getElementById('logs-sub').textContent = `${events.length} events · ${label} · live`;
 }
@@ -1712,7 +1800,7 @@ function renderCompliance() {
       return `<div class="fw-card${fw.id === selectedFw ? ' selected' : ''}" onclick="selectFw('${fw.id}')">
         <div class="fw-name">${fw.name}</div>
         <div class="fw-score" style="color:${scoreColor}">${fw.score}%</div>
-        <div style="font-size:8.5px;color:rgba(255,255,255,0.25);margin-top:2px;">coverage</div>
+        <div style="font-size:8.5px;color:var(--w25);margin-top:2px;">coverage</div>
         <div class="fw-bar-bg"><div class="fw-bar-fill" style="width:${fw.score}%;background:${scoreColor};"></div></div>
       </div>`;
     }).join('');
@@ -1725,7 +1813,7 @@ function renderCompliance() {
     const partialCount  = fw.controls.filter(c => c.st === 'partial').length;
     const atRiskCount   = fw.controls.filter(c => c.st === 'at_risk').length;
     html += `<div style="margin-top:4px;margin-bottom:6px;display:flex;align-items:center;gap:12px;">
-      <span style="font-size:11px;color:rgba(255,255,255,0.5);">${fw.name} — applicable controls covered by Sentium</span>
+      <span style="font-size:11px;color:var(--w50);">${fw.name} — applicable controls covered by Sentium</span>
       <span style="font-size:10px;color:var(--green);">● ${evidenceCount} direct</span>
       <span style="font-size:10px;color:var(--yellow);">● ${partialCount} partial</span>
       ${atRiskCount ? `<span style="font-size:10px;color:var(--primary);">● ${atRiskCount} at risk</span>` : ''}
@@ -1763,7 +1851,7 @@ function resolveApproval(decision) {
     banner.style.borderColor = 'rgba(0,201,122,0.3)';
     liveEvents.unshift({id:eventId++, type:'INTERVENTION', process:'orchestrator-7f2a', detail:'DENIED by admin · WriteFile /etc/crontab', conf:null, timestamp:new Date().toTimeString().slice(0,8), raw_ts:new Date()});
   } else {
-    banner.innerHTML = '<div class="ptb-text" style="color:rgba(255,255,255,0.4)">Action approved by admin. Agent resumed. Logged.</div>';
+    banner.innerHTML = '<div class="ptb-text" style="color:var(--w40)">Action approved by admin. Agent resumed. Logged.</div>';
     liveEvents.unshift({id:eventId++, type:'INTERVENTION', process:'orchestrator-7f2a', detail:'APPROVED by admin · WriteFile /etc/crontab', conf:null, timestamp:new Date().toTimeString().slice(0,8), raw_ts:new Date()});
   }
   if (state.currentView === 'logs') renderLogs();
@@ -1800,7 +1888,7 @@ const TOUR_STEPS = [
   {
     view:'policies', target:'view-policies',
     title:'Human-in-the-Loop. Agents Paused.',
-    body:'An agent tried to write to <code style="background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;">/etc/crontab</code>. Sentium intercepted it and <strong style="color:#F0A500">paused the agent</strong> pending your approval. Click <strong style="color:#F0A500">Review &amp; Decide</strong> to approve or deny — your decision is logged to the audit trail.',
+    body:'An agent tried to write to <code style="background:var(--w08);padding:1px 5px;border-radius:3px;">/etc/crontab</code>. Sentium intercepted it and <strong style="color:#F0A500">paused the agent</strong> pending your approval. Click <strong style="color:#F0A500">Review &amp; Decide</strong> to approve or deny — your decision is logged to the audit trail.',
     nextLabel:'Approve or Deny →',
   },
 ];
@@ -1989,11 +2077,11 @@ const LOCKED_DESCRIPTIONS = {
 };
 
 const LOCKED_PREVIEWS = {
-'Interactions': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0"><div><div style="font-size:17px;font-weight:700">Interactions</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">2,341 sessions · 7 agents</div></div><div style="display:flex;gap:8px"><div style="height:30px;width:90px;border-radius:4px;border:1px solid var(--border);background:var(--panel)"></div><div style="height:30px;width:90px;border-radius:4px;background:var(--primary-dim)"></div></div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['2,341','14.2k','$1.84','312ms'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['SESSIONS','TOKENS K','COST','AVG LATENCY'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono)">'+v+'</div></div>').join('')}</div><div style="display:grid;grid-template-columns:130px 1fr 80px 70px 70px;padding:6px 24px;border-bottom:1px solid var(--border);flex-shrink:0">${['SESSION ID','AGENT · MODEL','TOKENS','RISK','TIME'].map(h=>'<span style="font-size:9px;color:var(--text-muted);letter-spacing:.1em">'+h+'</span>').join('')}</div><div style="flex:1;overflow:hidden">${[['sess_7f2a','cursor.app · claude-3-5-sonnet','3,847','var(--green)','LOW','2m ago'],['sess_3d8b','vscode · gpt-4o','1,204','var(--yellow)','MED','5m ago'],['sess_9c1f','langchain · claude-3-haiku','892','var(--primary)','HIGH','8m ago'],['sess_2a4e','autogen · gpt-4o-mini','2,341','var(--green)','LOW','11m ago'],['sess_5b7c','crewai · gemini-1.5-pro','1,109','var(--yellow)','MED','16m ago'],['sess_8e2d','jupyter · claude-3-opus','4,502','var(--primary)','HIGH','21m ago'],['sess_1f6a','python3 · llama3.2','788','var(--green)','LOW','25m ago'],['sess_4c9b','lm-studio · mistral-7b','2,213','var(--yellow)','MED','31m ago']].map(([id,a,tok,col,risk,t])=>'<div style="display:grid;grid-template-columns:130px 1fr 80px 70px 70px;padding:8px 24px;border-bottom:1px solid var(--border)"><span style="font-size:10px;font-family:var(--font-mono);color:rgba(255,255,255,.5)">'+id+'</span><span style="font-size:11px;color:rgba(255,255,255,.65)">'+a+'</span><span style="font-size:11px;font-family:var(--font-mono)">'+tok+'</span><span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(128,128,128,.12);padding:1px 7px;border-radius:2px;align-self:center">'+risk+'</span><span style="font-size:10px;color:var(--text-dim)">'+t+'</span></div>').join('')}</div></div>`,
+'Interactions': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0"><div><div style="font-size:17px;font-weight:700">Interactions</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">2,341 sessions · 7 agents</div></div><div style="display:flex;gap:8px"><div style="height:30px;width:90px;border-radius:4px;border:1px solid var(--border);background:var(--panel)"></div><div style="height:30px;width:90px;border-radius:4px;background:var(--primary-dim)"></div></div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['2,341','14.2k','$1.84','312ms'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['SESSIONS','TOKENS K','COST','AVG LATENCY'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono)">'+v+'</div></div>').join('')}</div><div style="display:grid;grid-template-columns:130px 1fr 80px 70px 70px;padding:6px 24px;border-bottom:1px solid var(--border);flex-shrink:0">${['SESSION ID','AGENT · MODEL','TOKENS','RISK','TIME'].map(h=>'<span style="font-size:9px;color:var(--text-muted);letter-spacing:.1em">'+h+'</span>').join('')}</div><div style="flex:1;overflow:hidden">${[['sess_7f2a','cursor.app · claude-3-5-sonnet','3,847','var(--green)','LOW','2m ago'],['sess_3d8b','vscode · gpt-4o','1,204','var(--yellow)','MED','5m ago'],['sess_9c1f','langchain · claude-3-haiku','892','var(--primary)','HIGH','8m ago'],['sess_2a4e','autogen · gpt-4o-mini','2,341','var(--green)','LOW','11m ago'],['sess_5b7c','crewai · gemini-1.5-pro','1,109','var(--yellow)','MED','16m ago'],['sess_8e2d','jupyter · claude-3-opus','4,502','var(--primary)','HIGH','21m ago'],['sess_1f6a','python3 · llama3.2','788','var(--green)','LOW','25m ago'],['sess_4c9b','lm-studio · mistral-7b','2,213','var(--yellow)','MED','31m ago']].map(([id,a,tok,col,risk,t])=>'<div style="display:grid;grid-template-columns:130px 1fr 80px 70px 70px;padding:8px 24px;border-bottom:1px solid var(--border)"><span style="font-size:10px;font-family:var(--font-mono);color:var(--w50)">'+id+'</span><span style="font-size:11px;color:var(--w65)">'+a+'</span><span style="font-size:11px;font-family:var(--font-mono)">'+tok+'</span><span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(128,128,128,.12);padding:1px 7px;border-radius:2px;align-self:center">'+risk+'</span><span style="font-size:10px;color:var(--text-dim)">'+t+'</span></div>').join('')}</div></div>`,
 
-'Participants': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Participants</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">24 agents · 6 users · 4 active now</div></div><div style="flex:1;overflow:hidden;padding:16px 24px;display:flex;flex-wrap:wrap;gap:12px;align-content:flex-start">${[['orchestrator-7f2a','LangChain','ACTIVE','var(--green)','184 calls/day'],['cursor-agent-3d8b','Cursor IDE','ACTIVE','var(--green)','12 sessions'],['autogen-runner-9c1','AutoGen','IDLE','var(--text-muted)','last 2h ago'],['crewai-ops-2a4e','CrewAI','ACTIVE','var(--green)','7 sessions'],['jupyter-nb-5b7c','Jupyter','IDLE','var(--text-muted)','last 4h ago'],['vscode-cop-8e2d','VSCode','ACTIVE','var(--primary)','HIGH RISK'],['llama-local-1f6a','Local LLM','IDLE','var(--text-muted)','offline'],['gpt-wrapper-4c9b','GPT Bridge','ACTIVE','var(--yellow)','ELEVATED'],['gemini-adp-6d3f','Gemini Adapter','IDLE','var(--text-muted)','last 1h ago'],['claude-desktop','Claude Desktop','ACTIVE','var(--green)','3 sessions'],['mcp-server-a1b2','MCP Gateway','ACTIVE','var(--blue)','12 tools'],['scheduler-7c8d','Task Scheduler','IDLE','var(--text-muted)','paused']].map(([id,type,status,col,meta])=>'<div style="width:170px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="width:8px;height:8px;border-radius:50%;background:'+col+'"></div><div style="font-size:10px;font-weight:700;font-family:var(--font-mono);color:rgba(255,255,255,.45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+id+'</div></div><div style="font-size:12px;font-weight:700;margin-bottom:4px">'+type+'</div><div style="font-size:10px;color:'+col+';font-weight:700">'+status+'</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">'+meta+'</div></div>').join('')}</div></div>`,
+'Participants': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Participants</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">24 agents · 6 users · 4 active now</div></div><div style="flex:1;overflow:hidden;padding:16px 24px;display:flex;flex-wrap:wrap;gap:12px;align-content:flex-start">${[['orchestrator-7f2a','LangChain','ACTIVE','var(--green)','184 calls/day'],['cursor-agent-3d8b','Cursor IDE','ACTIVE','var(--green)','12 sessions'],['autogen-runner-9c1','AutoGen','IDLE','var(--text-muted)','last 2h ago'],['crewai-ops-2a4e','CrewAI','ACTIVE','var(--green)','7 sessions'],['jupyter-nb-5b7c','Jupyter','IDLE','var(--text-muted)','last 4h ago'],['vscode-cop-8e2d','VSCode','ACTIVE','var(--primary)','HIGH RISK'],['llama-local-1f6a','Local LLM','IDLE','var(--text-muted)','offline'],['gpt-wrapper-4c9b','GPT Bridge','ACTIVE','var(--yellow)','ELEVATED'],['gemini-adp-6d3f','Gemini Adapter','IDLE','var(--text-muted)','last 1h ago'],['claude-desktop','Claude Desktop','ACTIVE','var(--green)','3 sessions'],['mcp-server-a1b2','MCP Gateway','ACTIVE','var(--blue)','12 tools'],['scheduler-7c8d','Task Scheduler','IDLE','var(--text-muted)','paused']].map(([id,type,status,col,meta])=>'<div style="width:170px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="width:8px;height:8px;border-radius:50%;background:'+col+'"></div><div style="font-size:10px;font-weight:700;font-family:var(--font-mono);color:var(--w45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+id+'</div></div><div style="font-size:12px;font-weight:700;margin-bottom:4px">'+type+'</div><div style="font-size:10px;color:'+col+';font-weight:700">'+status+'</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">'+meta+'</div></div>').join('')}</div></div>`,
 
-'Quality': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Quality</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">SLA monitoring · accuracy · hallucination rates</div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['97.2%','0.3%','142ms','3'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['AVG QUALITY','HALLUCINATION','P95 LATENCY','SLA BREACHES'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono);color:'+['var(--green)','var(--green)','var(--blue)','var(--yellow)'][i]+'">'+v+'</div></div>').join('')}</div><div style="flex:1;overflow:hidden;padding:0 24px 16px">${[['orchestrator-7f2a','98.1','0.1','118ms','var(--green)'],['cursor-agent-3d8b','96.7','0.4','144ms','var(--green)'],['autogen-runner-9c1','94.2','0.8','167ms','var(--yellow)'],['crewai-ops-2a4e','91.0','1.2','198ms','var(--yellow)'],['vscode-cop-8e2d','88.4','2.1','231ms','var(--primary)'],['jupyter-nb-5b7c','97.8','0.2','127ms','var(--green)'],['gpt-wrapper-4c9b','93.5','0.9','188ms','var(--yellow)']].map(([agent,q,hall,lat,col])=>'<div style="display:grid;grid-template-columns:180px 80px 80px 80px 1fr;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;font-family:var(--font-mono);color:rgba(255,255,255,.55)">'+agent+'</span><span style="font-size:13px;font-weight:700;color:'+col+'">'+q+'%</span><span style="font-size:11px;color:var(--text-muted)">'+hall+'%</span><span style="font-size:11px;color:var(--text-muted)">'+lat+'</span><div style="height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:'+col+';width:'+q+'%"></div></div></div>').join('')}</div></div>`,
+'Quality': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Quality</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">SLA monitoring · accuracy · hallucination rates</div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['97.2%','0.3%','142ms','3'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['AVG QUALITY','HALLUCINATION','P95 LATENCY','SLA BREACHES'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono);color:'+['var(--green)','var(--green)','var(--blue)','var(--yellow)'][i]+'">'+v+'</div></div>').join('')}</div><div style="flex:1;overflow:hidden;padding:0 24px 16px">${[['orchestrator-7f2a','98.1','0.1','118ms','var(--green)'],['cursor-agent-3d8b','96.7','0.4','144ms','var(--green)'],['autogen-runner-9c1','94.2','0.8','167ms','var(--yellow)'],['crewai-ops-2a4e','91.0','1.2','198ms','var(--yellow)'],['vscode-cop-8e2d','88.4','2.1','231ms','var(--primary)'],['jupyter-nb-5b7c','97.8','0.2','127ms','var(--green)'],['gpt-wrapper-4c9b','93.5','0.9','188ms','var(--yellow)']].map(([agent,q,hall,lat,col])=>'<div style="display:grid;grid-template-columns:180px 80px 80px 80px 1fr;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;font-family:var(--font-mono);color:var(--w55)">'+agent+'</span><span style="font-size:13px;font-weight:700;color:'+col+'">'+q+'%</span><span style="font-size:11px;color:var(--text-muted)">'+hall+'%</span><span style="font-size:11px;color:var(--text-muted)">'+lat+'</span><div style="height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:'+col+';width:'+q+'%"></div></div></div>').join('')}</div></div>`,
 
 'MCP Servers': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">MCP Servers</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">12 servers discovered · 47 tools exposed</div></div><div style="flex:1;overflow:hidden;padding:12px 24px">${[['filesystem-server','localhost:3001','12 tools','var(--green)','ACTIVE'],['github-mcp','api.github.com:443','8 tools','var(--green)','ACTIVE'],['postgres-bridge','localhost:5434','6 tools','var(--yellow)','RESTRICTED'],['web-fetch-mcp','localhost:3003','4 tools','var(--green)','ACTIVE'],['slack-connector','api.slack.com:443','7 tools','var(--blue)','MONITORED'],['aws-s3-mcp','s3.amazonaws.com','5 tools','var(--yellow)','RESTRICTED'],['kubectl-server','localhost:8080','9 tools','var(--primary)','BLOCKED'],['notion-mcp','api.notion.so','4 tools','var(--green)','ACTIVE'],['jira-connector','atlassian.net','6 tools','var(--green)','ACTIVE'],['code-exec-mcp','localhost:4001','3 tools','var(--primary)','QUARANTINED']].map(([name,host,tools,col,status])=>'<div style="background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:12px;font-weight:700;margin-bottom:3px">'+name+'</div><div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono)">'+host+'</div></div><div style="display:flex;align-items:center;gap:14px"><span style="font-size:11px;color:var(--text-muted)">'+tools+'</span><span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(128,128,128,.1);padding:2px 8px;border-radius:3px">'+status+'</span></div></div>').join('')}</div></div>`,
 
@@ -2001,7 +2089,7 @@ const LOCKED_PREVIEWS = {
 
 'Reports & SIEM': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Reports &amp; SIEM</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Compliance exports · 11 SIEM integrations</div></div><div style="flex:1;overflow-y:auto;padding:16px 24px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px">COMPLIANCE REPORTS</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">${['SOC 2','HIPAA','PCI-DSS','GDPR','CCPA','EU AI Act','NIST AI RMF','ISO 42001'].map(fw=>'<div style="background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:8px 14px;display:flex;align-items:center;gap:8px"><span style="font-size:11px;font-weight:700">'+fw+'</span><span style="font-size:9px;background:var(--primary-dim);color:#fff;padding:1px 6px;border-radius:2px">EXPORT</span></div>').join('')}</div><div style="font-size:9px;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px">SIEM DESTINATIONS</div>${[['Splunk','splunk.internal:8089','var(--green)','CONNECTED'],['Elastic SIEM','elastic.internal:9200','var(--green)','CONNECTED'],['Datadog','api.datadoghq.com','var(--yellow)','DEGRADED'],['IBM QRadar','qradar.internal','var(--text-muted)','DISCONNECTED'],['Azure Sentinel','sentinel.azure.com','var(--green)','CONNECTED'],['Sumo Logic','api.sumologic.com','var(--text-muted)','DISCONNECTED'],['Chronicle','chronicle.googleapis.com','var(--blue)','CONFIGURED'],['Palo Alto XSIAM','xsiam.paloalto.com','var(--text-muted)','DISCONNECTED']].map(([name,host,col,status])=>'<div style="background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:11px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:12px;font-weight:700">'+name+'</div><div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);margin-top:2px">'+host+'</div></div><span style="font-size:9px;font-weight:700;color:'+col+'">'+status+'</span></div>').join('')}</div></div>`,
 
-'Feedback': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Feedback</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Human-in-the-loop quality ratings</div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['4.2/5','1,204','91%','38'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['AVG RATING','REVIEWS','THUMBS UP','ESCALATIONS'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono);color:'+['var(--yellow)','var(--text)','var(--green)','var(--primary)'][i]+'">'+v+'</div></div>').join('')}</div><div style="flex:1;overflow:hidden;padding:0 24px 16px">${[['orchestrator-7f2a','Executed database migration without confirming with user','4.0','var(--yellow)','2m ago'],['cursor-agent-3d8b','Generated correct TypeScript interface, no issues','5.0','var(--green)','8m ago'],['autogen-runner-9c1','Hallucinated API endpoint that does not exist','1.0','var(--primary)','15m ago'],['crewai-ops-2a4e','Completed task but took 3x longer than expected','3.0','var(--yellow)','22m ago'],['vscode-cop-8e2d','Tried to access /etc/passwd during code generation','1.0','var(--primary)','31m ago'],['jupyter-nb-5b7c','Data analysis was accurate and well-explained','5.0','var(--green)','40m ago'],['gpt-wrapper-4c9b','Response contained PII from training data','2.0','var(--primary)','51m ago'],['cursor-agent-3d8b','Refactored code cleanly with good test coverage','5.0','var(--green)','1h ago']].map(([agent,comment,score,col,t])=>'<div style="padding:10px 0;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:10px;font-family:var(--font-mono);color:rgba(255,255,255,.5)">'+agent+'</span><div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;font-weight:900;color:'+col+'">'+score+'</span><span style="font-size:10px;color:var(--text-dim)">'+t+'</span></div></div><div style="font-size:11px;color:rgba(255,255,255,.45)">'+comment+'</div></div>').join('')}</div></div>`,
+'Feedback': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Feedback</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Human-in-the-loop quality ratings</div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['4.2/5','1,204','91%','38'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['AVG RATING','REVIEWS','THUMBS UP','ESCALATIONS'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono);color:'+['var(--yellow)','var(--text)','var(--green)','var(--primary)'][i]+'">'+v+'</div></div>').join('')}</div><div style="flex:1;overflow:hidden;padding:0 24px 16px">${[['orchestrator-7f2a','Executed database migration without confirming with user','4.0','var(--yellow)','2m ago'],['cursor-agent-3d8b','Generated correct TypeScript interface, no issues','5.0','var(--green)','8m ago'],['autogen-runner-9c1','Hallucinated API endpoint that does not exist','1.0','var(--primary)','15m ago'],['crewai-ops-2a4e','Completed task but took 3x longer than expected','3.0','var(--yellow)','22m ago'],['vscode-cop-8e2d','Tried to access /etc/passwd during code generation','1.0','var(--primary)','31m ago'],['jupyter-nb-5b7c','Data analysis was accurate and well-explained','5.0','var(--green)','40m ago'],['gpt-wrapper-4c9b','Response contained PII from training data','2.0','var(--primary)','51m ago'],['cursor-agent-3d8b','Refactored code cleanly with good test coverage','5.0','var(--green)','1h ago']].map(([agent,comment,score,col,t])=>'<div style="padding:10px 0;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:10px;font-family:var(--font-mono);color:var(--w50)">'+agent+'</span><div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;font-weight:900;color:'+col+'">'+score+'</span><span style="font-size:10px;color:var(--text-dim)">'+t+'</span></div></div><div style="font-size:11px;color:var(--w45)">'+comment+'</div></div>').join('')}</div></div>`,
 };
 
 function showLockedToast(panelName) {
