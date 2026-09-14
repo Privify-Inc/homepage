@@ -77,6 +77,9 @@
         .submit-btn:disabled { opacity:0.7;cursor:not-allowed;transform:none; }
         @keyframes spin { to { transform:rotate(360deg); } }
         .form-note { font-size:0.76rem;color:var(--text-3);text-align:center;margin-top:1rem;line-height:1.6; }
+        .consent-field { display:flex;align-items:flex-start;gap:0.6rem;margin:0.25rem 0 1.1rem;cursor:pointer; }
+        .consent-field input { margin-top:0.2rem;width:15px;height:15px;flex-shrink:0;accent-color:var(--red);cursor:pointer; }
+        .consent-field span { font-size:0.8rem;color:var(--text-3);line-height:1.5; }
         .tier-note { display:none;background:var(--red-dim);border:1px solid rgba(232,93,84,0.3);color:var(--red);border-radius:8px;padding:0.6rem 0.9rem;font-size:0.8rem;margin-bottom:1rem;font-weight:600; }
         .form-error { display:none;background:rgba(232,93,84,0.08);border:1px solid rgba(232,93,84,0.3);color:#f2a09a;border-radius:8px;padding:0.75rem 0.9rem;font-size:0.82rem;margin-bottom:1rem;line-height:1.55; }
         .success { display:none;text-align:center;padding:2.5rem 1rem; }
@@ -251,6 +254,13 @@
                             <div class="ai-s">Our consumer product is pre-launch — join the waitlist instead.</div>
                         </div>
                     </div>
+                    <div class="aside-item">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <div>
+                            <div class="ai-t"><a href="scout/index.html">Want a free discovery scan?</a></div>
+                            <div class="ai-s">Privify SCOUT is free — reach out to <a href="mailto:sales@privify.io">sales@privify.io</a> or request a copy on the SCOUT page.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -306,7 +316,7 @@
                             <option value="demo">Request a demo</option>
                             <option value="pricing">Pricing for my organization</option>
                             <option value="poc">Proof of concept in our environment</option>
-                            <option value="partner">Partnership / reseller enquiry</option>
+                            <option value="partner">Partnership / reseller inquiry</option>
                             <option value="other">Something else</option>
                         </select>
                     </div>
@@ -315,6 +325,11 @@
                         <label for="cMessage">Tell us about your AI deployment</label>
                         <textarea id="cMessage" class="textarea" placeholder="How many agents are you running, on what platforms, and what's driving the timeline? (optional)"></textarea>
                     </div>
+
+                    <label class="consent-field">
+                        <input type="checkbox" id="cConsent">
+                        <span>I agree to be contacted by Privify&rsquo;s sales and marketing team about this inquiry.</span>
+                    </label>
 
                     <button class="submit-btn" id="submitBtn" onclick="handleContact()">
                         Contact sales <i class="fa-solid fa-arrow-right fa-xs"></i>
@@ -352,7 +367,7 @@ const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/meajvnve';
 //  Prefill intent from the CTA that sent the visitor here, e.g. contact.html?intent=pricing
 const TIER_NAMES = { 'smb':'SMB — up to 50 agents', 'mid-market':'Mid-market — 50–500 agents',
                      'enterprise':'Enterprise — 1,000+ agents', 'cloud-native':'Cloud-native — Kubernetes' };
-let enquiryTier = '';
+let inquiryTier = '';
 
 (function prefillFromQuery(){
     const params = new URLSearchParams(window.location.search);
@@ -364,10 +379,10 @@ let enquiryTier = '';
     // Deployment tier, when the visitor arrived from a tier card on the Privify FORGE page.
     const tier = params.get('tier');
     if (tier && TIER_NAMES[tier]) {
-        enquiryTier = TIER_NAMES[tier];
+        inquiryTier = TIER_NAMES[tier];
         const note = document.getElementById('tierNote');
         if (note) {
-            note.textContent = 'Enquiring about: ' + enquiryTier;
+            note.textContent = 'Inquiring about: ' + inquiryTier;
             note.style.display = 'block';
         }
     }
@@ -388,6 +403,7 @@ async function handleContact() {
     const role    = document.getElementById('cRole').value;
     const intent  = document.getElementById('cIntent').value;
     const message = document.getElementById('cMessage').value.trim();
+    const marketingConsent = document.getElementById('cConsent').checked;
 
     document.getElementById('formError').style.display = 'none';
 
@@ -412,12 +428,13 @@ async function handleContact() {
             method: 'POST',
             headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
             body: JSON.stringify({
-                _subject: 'Privify contact — ' + intentLabel + (enquiryTier ? ' (' + enquiryTier + ')' : '') + ' — ' + company,
+                _subject: 'Privify contact — ' + intentLabel + (inquiryTier ? ' (' + inquiryTier + ')' : '') + ' — ' + company,
                 name, email, company,
-                organisation_size: size,
-                role, enquiry_type: intent, deployment_tier: enquiryTier || '(not specified)', message,
+                organization_size: size,
+                role, inquiry_type: intent, deployment_tier: inquiryTier || '(not specified)', message,
                 _replyto: email,
-                source: 'contact.html'
+                source: 'contact.html',
+                marketing_consent: marketingConsent ? 'yes' : 'no'
             })
         });
 

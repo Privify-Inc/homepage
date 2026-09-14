@@ -154,6 +154,17 @@ h1 {
   width: 100%; min-height: 90px; resize: vertical;
   margin-bottom: 0.65rem;
 }
+.form-consent {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  margin-bottom: 1rem; cursor: pointer;
+}
+.form-consent input {
+  margin-top: 0.2rem; width: 15px; height: 15px; flex-shrink: 0;
+  accent-color: var(--red); cursor: pointer;
+}
+.form-consent span {
+  font-size: 0.8rem; color: var(--text-3); line-height: 1.5;
+}
 .form-submit {
   width: 100%;
   background: var(--red); color: #fff;
@@ -199,6 +210,7 @@ h1 {
 [data-theme="light"] .form-input::placeholder { color: #9CA3AF; }
 [data-theme="light"] .form-select option { background: #fff; color: #0A0A0A; }
 [data-theme="light"] .form-note { color: #9CA3AF; }
+[data-theme="light"] .form-consent span { color: #6B7280; }
 [data-theme="light"] .trust { border-top-color: rgba(0,0,0,0.08); }
 [data-theme="light"] .trust-item { color: #9CA3AF; }
 [data-theme="light"] body { background: #F2F2F6; }
@@ -239,7 +251,7 @@ h1 {
     <div id="requestForm">
       <div class="eyebrow"><span class="dot" id="rEyebrowDot"></span><span id="rEyebrowText">Early access &mdash; limited seats</span></div>
       <h1 id="rHeading">Request access to Privify FORGE</h1>
-      <p class="sub" id="rSub">We onboard enterprises in cohorts. Tell us about your environment and we&rsquo;ll be in touch within 2 business days with a personalised demo and deployment plan.</p>
+      <p class="sub" id="rSub">We onboard enterprises in cohorts. Tell us about your environment and we&rsquo;ll be in touch within 2 business days with a personalized demo and deployment plan.</p>
 
       <div class="form-row">
         <input type="text"  class="form-input" id="rName"    placeholder="Your name"    required>
@@ -248,7 +260,7 @@ h1 {
       <div class="form-row">
         <input type="text"  class="form-input" id="rCompany" placeholder="Company name" required>
         <select class="form-select" id="rSize">
-          <option value="" disabled selected>Organisation size</option>
+          <option value="" disabled selected>Organization size</option>
           <option value="1-50">1&ndash;50 employees</option>
           <option value="51-200">51&ndash;200 employees</option>
           <option value="201-1000">201&ndash;1,000 employees</option>
@@ -267,6 +279,10 @@ h1 {
         </select>
       </div>
       <textarea class="form-textarea" id="rMessage" placeholder="Tell us about your AI deployment &mdash; how many agents, what platforms (optional)"></textarea>
+      <label class="form-consent">
+        <input type="checkbox" id="rConsent">
+        <span>I agree to be contacted by Privify&rsquo;s sales and marketing team about this request.</span>
+      </label>
       <button class="form-submit" id="rSubmit" onclick="submitRequest()">Request access &rarr;</button>
       <p class="form-note">No spam. No sales calls without consent.</p>
     </div>
@@ -274,7 +290,7 @@ h1 {
     <div class="success" id="requestSuccess">
       <div class="success-icon">&#10003;</div>
       <h2 id="rSuccessHeading">Request received</h2>
-      <p id="rSuccessSub">Thanks &mdash; we&rsquo;ll review your details and be in touch within 2 business days with a personalised demo and deployment plan.</p>
+      <p id="rSuccessSub">Thanks &mdash; we&rsquo;ll review your details and be in touch within 2 business days with a personalized demo and deployment plan.</p>
       <a href="../forge/index.html" class="success-back" id="rSuccessBack">&#8592; Back to Privify FORGE</a>
     </div>
 
@@ -296,9 +312,9 @@ const REQUEST_PRODUCTS = {
     label: 'Privify FORGE', backHref: '../forge/index.html', backLabel: 'Back to Privify FORGE',
     eyebrow: 'Early access &mdash; limited seats',
     heading: 'Request access to Privify FORGE',
-    sub: 'We onboard enterprises in cohorts. Tell us about your environment and we&rsquo;ll be in touch within 2 business days with a personalised demo and deployment plan.',
+    sub: 'We onboard enterprises in cohorts. Tell us about your environment and we&rsquo;ll be in touch within 2 business days with a personalized demo and deployment plan.',
     submitLabel: 'Request access &rarr;', subject: 'Privify FORGE Early Access Request',
-    successHeading: 'Request received', successSub: 'Thanks &mdash; we&rsquo;ll review your details and be in touch within 2 business days with a personalised demo and deployment plan.',
+    successHeading: 'Request received', successSub: 'Thanks &mdash; we&rsquo;ll review your details and be in touch within 2 business days with a personalized demo and deployment plan.',
     trust: [
       ['fa-lock', 'Self-hosted available'], ['fa-shield-halved', 'Data stays in your network'],
       ['fa-clock', 'Deploy in under 15 min'], ['fa-code', 'API-first, 66 endpoints']
@@ -319,13 +335,13 @@ const REQUEST_PRODUCTS = {
   scout: {
     label: 'Privify SCOUT', backHref: '../scout/index.html', backLabel: 'Back to Privify SCOUT',
     eyebrow: 'Free &mdash; no credit card',
-    heading: 'Get Privify SCOUT, free',
-    sub: 'Tell us where to send it. Privify SCOUT is a free, agentless discovery scan &mdash; nothing leaves your machine, no admin rights required, report in under 5 minutes.',
-    submitLabel: 'Send me Privify SCOUT &rarr;', subject: 'Privify SCOUT Download Request',
-    successHeading: 'Check your inbox', successSub: 'Thanks &mdash; we&rsquo;ve sent Privify SCOUT to your email along with a quick-start guide.',
+    heading: 'Reach out to get a copy',
+    sub: 'Tell us a bit about yourself and we&rsquo;ll follow up with a copy of Privify SCOUT &mdash; a free, agentless discovery scan. Nothing scanned leaves your machine, and a report is ready in under 5 minutes.',
+    submitLabel: 'Request a copy &rarr;', subject: 'Privify SCOUT Download Request',
+    successHeading: 'Request received', successSub: 'Thanks &mdash; we&rsquo;ll follow up by email with a copy of Privify SCOUT and a quick-start guide.',
     trust: [
       ['fa-download', 'No install, no agent'], ['fa-shield-halved', 'Nothing scanned leaves the machine'],
-      ['fa-user-shield', 'No admin rights required'], ['fa-clock', 'Report in under 5 minutes']
+      ['fa-clock', 'Report in under 5 minutes']
     ]
   }
 };
@@ -333,7 +349,7 @@ const REQUEST_PRODUCTS = {
 function applyRequestProduct() {
   const key = new URLSearchParams(location.search).get('product');
   const p = REQUEST_PRODUCTS[key] || REQUEST_PRODUCTS.forge;
-  document.title = (p === REQUEST_PRODUCTS.forge ? 'Request Access' : key === 'scout' ? 'Get Privify SCOUT — free' : 'Join the Waitlist') + ' — Privify';
+  document.title = (p === REQUEST_PRODUCTS.forge ? 'Request Access' : key === 'scout' ? 'Request Privify SCOUT' : 'Join the Waitlist') + ' — Privify';
   document.getElementById('rBackLink').href = p.backHref;
   document.getElementById('rBackLabel').textContent = p.backLabel;
   document.getElementById('rEyebrowText').innerHTML = p.eyebrow;
@@ -358,6 +374,7 @@ async function submitRequest() {
   const size    = document.getElementById('rSize').value;
   const role    = document.getElementById('rRole').value;
   const message = document.getElementById('rMessage').value.trim();
+  const marketingConsent = document.getElementById('rConsent').checked;
 
   if (!name || !email || !company) {
     alert('Please fill in your name, email, and company name.');
@@ -379,10 +396,11 @@ async function submitRequest() {
       body: JSON.stringify({
         _subject: requestProduct.subject + ' — ' + company,
         name, email, company,
-        organisation_size: size,
+        organization_size: size,
         role, message,
         _replyto: email,
-        product: requestProduct.label
+        product: requestProduct.label,
+        marketing_consent: marketingConsent ? 'yes' : 'no'
       })
     });
 
