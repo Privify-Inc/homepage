@@ -6,14 +6,14 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Privify — FORGE. Discover, observe, and govern every AI agent across your enterprise in real time.">
+    <meta name="description" content="Privify — Privify FORGE. Discover, observe, and govern every AI agent across your enterprise in real time.">
     <meta name="keywords" content="AI governance, AI agent security, LLM observability, enterprise AI, shadow AI detection, AI compliance">
-    <meta property="og:title" content="Privify — FORGE">
+    <meta property="og:title" content="Privify — Privify FORGE">
     <meta property="og:description" content="Discover every AI agent. Observe every interaction. Govern every decision. Real-time AI governance for the enterprise.">
     <meta property="og:image" content="/images/og-image.png">
     <meta property="og:url content="https://privify.io/forge/">
     <meta name="twitter:card" content="summary_large_image">
-    <title>FORGE — Privify</title>
+    <title>Privify FORGE — Privify</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -316,6 +316,7 @@
         .dash-dot.r{background:#ff5f57;} .dash-dot.y{background:#febc2e;} .dash-dot.g{background:#28c840;}
         .dash-url { font-family:var(--mono); font-size:0.75rem; color:var(--gray-600); margin-left:0.75rem; }
         .dash-body { display:grid; grid-template-columns:200px 1fr; min-height:480px; }
+        .dash-screenshot { display:block; width:100%; height:auto; }
         .dash-sidebar {
             background:var(--surface-3); border-right:1px solid var(--border);
             padding:1.25rem 0;
@@ -541,7 +542,7 @@
             .forge-badge-name{font-size:1.25rem;}
         }
 
-        /* FORGE IMAGE SECTION */
+        /* Privify FORGE IMAGE SECTION */
         .forge-image-section { padding:5rem 0; background:var(--black); overflow:hidden; }
         .forge-image-inner { display:grid; grid-template-columns:1fr 1.6fr; gap:4rem; align-items:center; }
         .forge-image-wrap { position:relative; }
@@ -549,6 +550,35 @@
         .forge-image-badge { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); padding:2rem 1.5rem 1.25rem; }
         .forge-badge-name { display:block; font-size:1.75rem; font-weight:900; color:var(--red); letter-spacing:0.12em; line-height:1; }
         .forge-badge-sub { display:block; font-size:0.7rem; color:rgba(255,255,255,0.5); letter-spacing:0.08em; margin-top:4px; text-transform:uppercase; }
+
+        /* LIVE CAPABILITIES — four real captures, alternating text/media rows */
+        .live-cap-section { padding:5rem 0; }
+        .live-cap-row {
+            display:grid; grid-template-columns:1fr 1.5fr; gap:3rem; align-items:center;
+            padding:2.5rem 0; border-bottom:1px solid var(--border);
+        }
+        .live-cap-row:last-child { border-bottom:none; padding-bottom:0; }
+        /* order alone flips which side each element paints, but grid track
+           sizing follows track position, not the element — so media ended up
+           in the 1fr track and text in the 1.5fr one, exactly backwards.
+           Swapping the track sizes alongside order keeps media the larger
+           column on both sides. */
+        .live-cap-reverse { grid-template-columns:1.5fr 1fr; }
+        .live-cap-reverse .live-cap-text { order:2; }
+        .live-cap-reverse .live-cap-media { order:1; }
+        .live-cap-text h3 { font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; line-height:1.3; }
+        .live-cap-text p { font-size:0.95rem; color:var(--gray-500); line-height:1.65; }
+        .live-cap-media {
+            border-radius:12px; overflow:hidden; border:1px solid var(--border);
+            box-shadow:0 20px 50px rgba(0,0,0,0.35);
+        }
+        .live-cap-media img { display:block; width:100%; height:auto; }
+        @media(max-width:1024px) {
+            .live-cap-row, .live-cap-reverse .live-cap-text, .live-cap-reverse .live-cap-media {
+                grid-template-columns:1fr; order:0;
+            }
+            .live-cap-row { grid-template-columns:1fr; text-align:center; }
+        }
 
         /* EASY DEPLOY NOTE */
         .easy-deploy-note { margin-top:2.5rem; }
@@ -855,12 +885,6 @@
         .deploy-spec-link i { font-size:0.6rem; transition:transform 0.2s; }
         .deploy-spec-link:hover i { transform:translateX(2px); }
 
-        /*  Names the product directly under the headline. Mono and muted so it
-            reads as a definition, not a second headline.  */
-        .hero-expand { font-family:var(--mono); font-size:0.74rem; letter-spacing:0.02em;
-                       color:var(--text-3); margin:-0.35rem 0 1.35rem; }
-        .hero-expand strong { color:var(--red); font-weight:600; letter-spacing:0.08em; }
-        @media(max-width:768px){ .hero-expand { font-size:0.68rem; } }
 
         /* ── LIGHT MODE THEME ── */
         /* Dark is default; light overrides only color tokens */
@@ -951,8 +975,8 @@
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="index.html">
-                            <div class="di-title">FORGE</div>
-                            <div class="di-sub">Federated Oversight &amp; Risk Governance Engine</div>
+                            <div class="di-title">Privify FORGE</div>
+                            <div class="di-sub">AI agent discovery, observability &amp; governance</div>
                         </a>
                         <a class="dropdown-item" href="../shield/index.html">
                             <div class="di-title">SHIELD</div>
@@ -974,7 +998,7 @@
                         <a class="dropdown-item" href="tools/photoScrubber/index.html">Photo Scrubber</a>
                     </div>
                 </div>
-                <a href="../forge/demo/index.html" class="nav-link" style="color:var(--red);font-weight:600;">&#9654; Live Demo</a>
+                <a href="demo/index.html" class="nav-link" style="color:var(--red);font-weight:600;">&#9654; Live Demo</a>
                 <a href="../request/index.html" class="nav-pill">Request Access</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
                     <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
@@ -1003,18 +1027,12 @@
                 <span class="highlight">AI agent</span><br>
                 across your enterprise
             </h1>
-            <!-- Product name expanded here: it appeared nowhere a reader would
-                 see it — only a hover-only nav dropdown and the brand section at
-                 the very foot of the page. -->
-            <div class="hero-expand fade-in delay-1">
-                <strong>FORGE</strong> &mdash; Federated Oversight &amp; Risk Governance Engine
-            </div>
             <p class="hero-subtitle fade-in delay-2">
                 Privify discovers every AI agent running in your environment — sanctioned or shadow — maps every interaction, and enforces policy in real time. Three pillars: Discovery, Observability, Governance.
             </p>
             <div class="hero-actions fade-in delay-3">
                 <a href="../request/index.html" class="btn-primary">Request early access</a>
-                <a href="../forge/demo/index.html" class="btn-secondary">&#9654; Try interactive demo</a>
+                <a href="demo/index.html" class="btn-secondary">&#9654; Try interactive demo</a>
                 <a href="#platform" class="btn-secondary" style="border-color:var(--border);">See how it works</a>
                 <a href="forge_brochure.pdf" download class="btn-secondary" style="border-color:var(--border);display:inline-flex;align-items:center;gap:0.4rem;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1088,14 +1106,14 @@
     </div>
 </section>
 
-<!--  FORGE HERO IMAGE  -->
+<!--  Privify FORGE HERO IMAGE  -->
 <section class="forge-image-section">
     <div class="container">
         <div class="forge-image-inner">
             <div class="forge-image-text fade-in">
                 <div class="section-eyebrow">The discovery gap</div>
                 <h2 class="section-title">You cannot govern<br>what you cannot see.</h2>
-                <p class="section-sub">Every AI policy names a handful of approved tools. The first FORGE scan usually finds an order of magnitude more already running — including agents nobody registered, and models that never leave the laptop.</p>
+                <p class="section-sub">Every AI policy names a handful of approved tools. The first Privify FORGE scan usually finds an order of magnitude more already running — including agents nobody registered, and models that never leave the laptop.</p>
             </div>
             <div class="forge-image-wrap fade-in delay-2">
                 <div class="dgap">
@@ -1108,13 +1126,13 @@
                     <div class="dgap-vs" aria-hidden="true">vs</div>
 
                     <div class="dgap-panel dgap-found">
-                        <div class="dgap-label">What FORGE finds</div>
+                        <div class="dgap-label">What Privify FORGE finds</div>
                         <div class="dgap-grid"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div>
                         <div class="dgap-fig">47<span>agents running</span></div>
                         <div class="dgap-sub">3 critical &middot; 12 policy violations</div>
                     </div>
                 </div>
-                <p class="dgap-note">Representative first-scan result, from the FORGE demo environment.</p>
+                <p class="dgap-note">Representative first-scan result, from the Privify FORGE demo environment.</p>
             </div>
         </div>
     </div>
@@ -1206,70 +1224,64 @@
         <div class="dashboard-showcase">
             <div class="dash-topbar">
                 <div class="dash-dots"><div class="dash-dot r"></div><div class="dash-dot y"></div><div class="dash-dot g"></div></div>
-                <div class="dash-url">localhost:8000 — Privify Fleet Dashboard</div>
+                <div class="dash-url">forge.privify.io:8000 — Privify Forge</div>
             </div>
-            <div class="dash-body">
-                <div class="dash-sidebar">
-                    <div class="dash-nav-section">Overview</div>
-                    <div class="dash-nav-item active"><i class="fa-solid fa-chart-line"></i> Dashboard</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-network-wired"></i> Interactions</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-route"></i> Traces</div>
-                    <div class="dash-nav-section">Discovery</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-users"></i> Participants</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-server"></i> MCP Servers</div>
-                    <div class="dash-nav-section">Governance</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-shield"></i> Policies</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-check-circle"></i> Approvals</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-star"></i> Quality</div>
-                    <div class="dash-nav-section">Security</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-file-shield"></i> Compliance</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-file-export"></i> Reports & SIEM</div>
-                    <div class="dash-nav-item"><i class="fa-solid fa-list"></i> Event Logs</div>
-                </div>
-                <div class="dash-main">
-                    <div class="dash-top-stats">
-                        <div class="dash-stat-card">
-                            <div class="dsc-label">Active agents</div>
-                            <div class="dsc-val">47</div>
-                            <div class="dsc-change up">↑ 3 since yesterday</div>
-                        </div>
-                        <div class="dash-stat-card">
-                            <div class="dsc-label">Policy violations</div>
-                            <div class="dsc-val red">12</div>
-                            <div class="dsc-change down">↑ 4 this hour</div>
-                        </div>
-                        <div class="dash-stat-card">
-                            <div class="dsc-label">Today's AI cost</div>
-                            <div class="dsc-val amber">$84.20</div>
-                            <div class="dsc-change down">84% of $100 budget</div>
-                        </div>
-                        <div class="dash-stat-card">
-                            <div class="dsc-label">Pending approvals</div>
-                            <div class="dsc-val">2</div>
-                            <div class="dsc-change">Awaiting review</div>
-                        </div>
-                    </div>
-                    <div class="dash-row">
-                        <div class="dash-panel">
-                            <div class="dash-panel-title">Detected agents — risk level</div>
-                            <div class="agent-row"><div class="agent-dot" style="background:#E85D54"></div><div class="agent-name">unknown-agent-7f2a</div><div class="agent-conf">shadow · unregistered</div><div class="risk-badge rb-critical">Critical</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:var(--ok)"></div><div class="agent-name">research-agent-v2</div><div class="agent-conf">autonomous · 94%</div><div class="risk-badge rb-low">Compliant</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:var(--warn)"></div><div class="agent-name">sales-copilot-prod</div><div class="agent-conf">api_consumer · 78%</div><div class="risk-badge rb-medium">Review</div></div>
-                            <div class="agent-row"><div class="agent-dot" style="background:var(--ok)"></div><div class="agent-name">ollama-local-3</div><div class="agent-conf">local_llm · endpoint probe</div><div class="risk-badge rb-low">Governed</div></div>
-                        </div>
-                        <div class="dash-panel">
-                            <div class="dash-panel-title">Live event feed</div>
-                            <div class="event-row"><span class="event-type">DLP_MATCH</span><div class="event-msg">SSN detected in outbound agent message</div><div class="event-time">2s ago</div></div>
-                            <div class="event-row"><span class="event-type">THREAT</span><div class="event-msg">Prompt injection in agent↔agent delegation</div><div class="event-time">14s ago</div></div>
-                            <div class="event-row"><span class="event-type">COST_ALERT</span><div class="event-msg">research-agent-v2 at 84% daily budget</div><div class="event-time">1m ago</div></div>
-                            <div class="event-row"><span class="event-type">APPROVAL</span><div class="event-msg">Interaction paused — awaiting human review</div><div class="event-time">3m ago</div></div>
-                        </div>
-                    </div>
-                    <div class="dash-panel" style="margin-bottom:0">
-                        <div class="dash-panel-title">AI API call volume — last 12 hours</div>
-                        <div class="mini-bars" id="showcaseBars"></div>
-                    </div>
-                </div>
+            <!-- Real capture, not a mock: infra/scripts/capture.py in the Privify FORGE repo,
+                 logged into the live deployment with the API key. Re-run it and swap
+                 this file whenever the dashboard changes meaningfully. -->
+            <img class="dash-screenshot" src="screenshots/dashboard.png" alt="The Privify Forge dashboard showing active agents, policy violations, event volume, tracked participants and the live event feed" loading="lazy" width="1920" height="1200">
+        </div>
+    </div>
+</section>
+
+<!--  LIVE CAPABILITIES — real captures, not mocks. Source: infra/scripts/capture.py
+      in the Privify FORGE repo, run against the live deployment. Re-capture and swap the
+      four GIFs in screenshots/ whenever the underlying panel changes meaningfully. -->
+<section class="live-cap-section" id="live-capabilities">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">See it live</div>
+            <h2 class="section-title">Not a mockup. This is the product.</h2>
+            <p class="section-sub">Four panels, captured directly from a running deployment.</p>
+        </div>
+
+        <div class="live-cap-row fade-in">
+            <div class="live-cap-text">
+                <h3>Platform that watches every surface an agent has</h3>
+                <p>Browser sessions, the CLI proxy, tool calls, file probes — one event stream. Every match carries its confidence score and where it was caught, so a security review is a filter, not an investigation.</p>
+            </div>
+            <div class="live-cap-media">
+                <img src="screenshots/logs.gif" alt="Event Logs panel filtering down to one match type, then opening its detail" loading="lazy" width="900" height="563">
+            </div>
+        </div>
+
+        <div class="live-cap-row live-cap-reverse fade-in delay-1">
+            <div class="live-cap-text">
+                <h3>One event, mapped to every framework you report on</h3>
+                <p>SOC 2, GDPR, HIPAA, the EU AI Act, ISO 42001 — switch frameworks and the same underlying evidence re-maps to the controls that framework actually asks for, article by article.</p>
+            </div>
+            <div class="live-cap-media">
+                <img src="screenshots/compliance.gif" alt="Compliance panel switching between SOC 2, GDPR and other frameworks, each showing control-level coverage" loading="lazy" width="900" height="563">
+            </div>
+        </div>
+
+        <div class="live-cap-row fade-in delay-2">
+            <div class="live-cap-text">
+                <h3>The full delegation chain, down to the step that got blocked</h3>
+                <p>An orchestrator hands work to three other agents; one of them tries to email a board report to an external address. The graph shows the whole chain — and the detail pane shows exactly why that one step was refused.</p>
+            </div>
+            <div class="live-cap-media">
+                <img src="screenshots/interactions.gif" alt="Interactions panel selecting a session, revealing the interaction graph and a blocked tool call's detail" loading="lazy" width="900" height="563">
+            </div>
+        </div>
+
+        <div class="live-cap-row live-cap-reverse fade-in delay-3">
+            <div class="live-cap-text">
+                <h3>Every endpoint, grouped by the network it's actually on</h3>
+                <p>No spreadsheet of hostnames — a live topology grouped by subnet, so "what's running in production" and "what's on someone's laptop" are visibly different questions.</p>
+            </div>
+            <div class="live-cap-media">
+                <img src="screenshots/topology.gif" alt="Network Topology view showing endpoints grouped into subnets around the Privify Forge management server" loading="lazy" width="900" height="563">
             </div>
         </div>
     </div>
@@ -1351,7 +1363,7 @@
             <p class="section-sub">Six deployment components. Layer them for defence in depth. Start with one in five minutes. Scale to global enterprise without rearchitecting.</p>
         </div>
         <div class="topo-slot">
-<div class="topo" role="img" aria-label="FORGE topology: Windows, macOS and Linux endpoints run probes that report to a FORGE control plane self-hosted inside your network, which exports to your SIEM. No agent data is sent to Privify.">
+<div class="topo" role="img" aria-label="Privify FORGE topology: Windows, macOS and Linux endpoints run probes that report to a Privify FORGE control plane self-hosted inside your network, which exports to your SIEM. No agent data is sent to Privify.">
                     <div class="topo-head">Your network</div>
 
                     <div class="topo-body">
@@ -1369,7 +1381,7 @@
                         </div>
 
                         <div class="topo-col">
-                            <div class="topo-col-label">FORGE control plane</div>
+                            <div class="topo-col-label">Privify FORGE control plane</div>
                             <div class="topo-plane">
                                 <span>Policy engine</span>
                                 <span>Interaction graph</span>
@@ -1524,12 +1536,12 @@
             <h2 class="section-title">The agents your gateway will never see</h2>
             <p class="section-sub">
                 An MCP gateway governs what routes through it. That's real coverage — but an agent only
-                routes through it when it chooses to speak MCP. FORGE runs on the endpoint, where the
+                routes through it when it chooses to speak MCP. Privify FORGE runs on the endpoint, where the
                 agent actually executes.
             </p>
         </div>
         <div class="gap-map">
-            <div class="gap-map-head">Your environment — where FORGE runs</div>
+            <div class="gap-map-head">Your environment — where Privify FORGE runs</div>
             <div class="gap-map-body">
 
                 <div class="gap-inner">
@@ -1565,11 +1577,11 @@
             </div>
             <div class="gap-map-foot">
                 <i class="fa-solid fa-shield-halved"></i>
-                FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
+                Privify FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
             </div>
         </div>
         <p class="gap-caption">
-            Three kinds of AI activity, none of which pass through a protocol gateway. FORGE catches all
+            Three kinds of AI activity, none of which pass through a protocol gateway. Privify FORGE catches all
             three because it runs where the code runs, not where the traffic is supposed to go.
         </p>
     </div>
@@ -1580,7 +1592,7 @@
         <div class="section-header">
             <div class="section-eyebrow">Capability Comparison</div>
             <h2 class="section-title">Built for what others <span style="color:var(--red)">weren't</span></h2>
-            <p class="section-sub">Most AI tools were built for a single persona &mdash; the engineer, the security team, or the compliance officer. FORGE was designed from day one to serve all three, from a single deployment.</p>
+            <p class="section-sub">Most AI tools were built for a single persona &mdash; the engineer, the security team, or the compliance officer. Privify FORGE was designed from day one to serve all three, from a single deployment.</p>
         </div>
 
         <div class="cmp-wrap">
@@ -1604,12 +1616,12 @@
                         <td class="cmp-forge-cell"><span class="cmp-yes">OS + network + file system</span></td>
                     </tr>
                     <tr>
-                        <td class="cmp-cap">Local LLM detection <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-cap">Local LLM detection <span class="cmp-unique">only Privify FORGE</span></td>
                         <td class="cmp-others"><span class="cmp-no">Not available</span></td>
                         <td class="cmp-forge-cell"><span class="cmp-yes">Endpoint probe</span></td>
                     </tr>
                     <tr>
-                        <td class="cmp-cap">Agent-to-agent visibility <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-cap">Agent-to-agent visibility <span class="cmp-unique">only Privify FORGE</span></td>
                         <td class="cmp-others"><span class="cmp-no">Not available</span></td>
                         <td class="cmp-forge-cell"><span class="cmp-yes">Full interaction graph</span></td>
                     </tr>
@@ -1644,7 +1656,7 @@
                         <td class="cmp-forge-cell"><span class="cmp-yes">10 signatures &middot; inline block</span></td>
                     </tr>
                     <tr>
-                        <td class="cmp-cap">Human-in-the-loop approvals <span class="cmp-unique">only FORGE</span></td>
+                        <td class="cmp-cap">Human-in-the-loop approvals <span class="cmp-unique">only Privify FORGE</span></td>
                         <td class="cmp-others"><span class="cmp-no">Not available</span></td>
                         <td class="cmp-forge-cell"><span class="cmp-yes">Approval queue &middot; configurable</span></td>
                     </tr>
@@ -1690,11 +1702,11 @@
         <div class="cmp-observation">
             <div class="cmp-obs-icon">&#9654;</div>
             <div>
-                <div class="cmp-obs-eyebrow">The FORGE difference</div>
+                <div class="cmp-obs-eyebrow">The Privify FORGE difference</div>
                 <div class="cmp-obs-text">
                     No other platform governs the <strong>full AI stack</strong> &mdash; detection, observability,
                     security, cost, and compliance &mdash; from a single deployment.
-                    FORGE is purpose-built to serve the <strong>CISO, the AI engineer, and the compliance team</strong>
+                    Privify FORGE is purpose-built to serve the <strong>CISO, the AI engineer, and the compliance team</strong>
                     without asking any of them to compromise.
                 </div>
             </div>
@@ -1720,7 +1732,7 @@
         </div>
 
         <div class="cmp-actions">
-            <a href="../forge/demo/index.html" class="nav-pill" style="text-decoration:none;padding:0.75rem 1.5rem;">&#9654; Try Interactive Demo</a>
+            <a href="demo/index.html" class="nav-pill" style="text-decoration:none;padding:0.75rem 1.5rem;">&#9654; Try Interactive Demo</a>
             <a href="../request/index.html" class="cmp-btn-secondary">Request Access</a>
         </div>
     </div>
@@ -1843,7 +1855,7 @@
             <div class="step-card">
                 <div class="step-num">1</div>
                 <h4>Single container</h4>
-                <p>FORGE runs as a single Docker container. No database to configure, no agents to install, no proxy to route traffic through. Up and running in minutes.</p>
+                <p>Privify FORGE runs as a single Docker container. No database to configure, no agents to install, no proxy to route traffic through. Up and running in minutes.</p>
             </div>
             <div class="step-card">
                 <div class="step-num">2</div>
@@ -1878,10 +1890,10 @@
         <div class="brandbeat-inner">
             <img src="forge_hero.png" alt="" aria-hidden="true" class="brandbeat-img" loading="lazy"/>
             <div class="brandbeat-copy">
-                <div class="section-eyebrow">Powered by FORGE</div>
+                <div class="section-eyebrow">Powered by Privify FORGE</div>
                 <h2 class="section-title">Where AI governance<br>is forged.</h2>
                 <p class="section-sub">
-                    Federated Oversight &amp; Risk Governance Engine. Every AI agent in your enterprise
+                    Every AI agent in your enterprise
                     shaped, governed, and held to policy — the moment it acts.
                 </p>
             </div>
@@ -1933,7 +1945,7 @@
                 <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
             </div>
         </div>
-        <a href="../forge/demo/index.html" style="color:var(--red);font-weight:600;">&#9654; Try Interactive Demo</a>
+        <a href="demo/index.html" style="color:var(--red);font-weight:600;">&#9654; Try Interactive Demo</a>
         <a href="../request/index.html">Request Access</a>
     </div>
 </div>
@@ -2071,9 +2083,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
             </div>
             <div class="footer-cols">
                 <div class="footer-col">
-                    <div class="footer-col-title">FORGE</div>
+                    <div class="footer-col-title">Privify FORGE</div>
                     <a href="index.html" class="footer-link">Overview</a>
-                    <a href="../forge/demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
+                    <a href="demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
                     <a href="#deployment" class="footer-link">Deployment</a>
                     <a href="#compliance" class="footer-link">Compliance</a>
                     <a href="#integrations" class="footer-link">Integrations</a>
@@ -2113,7 +2125,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
             </div>
             <div class="fu-right">
                 <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
-                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in Privify FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
             </div>
         </div>
         <div class="footer-bottom">
