@@ -162,6 +162,10 @@
             letter-spacing:-0.03em; margin-bottom:1.75rem;
         }
         .highlight { color:var(--red); }
+        .hero-tagline {
+            font-family:var(--mono); font-size:0.85rem; color:var(--gray-500);
+            letter-spacing:0.02em; margin:-0.75rem 0 1.5rem;
+        }
         .hero-subtitle {
             font-size:1.125rem; color:var(--gray-400);
             line-height:1.7; margin-bottom:2.5rem; font-weight:400;
@@ -979,7 +983,7 @@
                             <div class="di-sub">AI agent discovery, observability &amp; governance</div>
                         </a>
                         <a class="dropdown-item" href="../shield/index.html">
-                            <div class="di-title">SHIELD</div>
+                            <div class="di-title">Privify SHIELD</div>
                             <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
                         </a>
                     </div>
@@ -988,17 +992,7 @@
                 <a href="#comparison" class="nav-link">Compare</a>
                 <a href="#integrations" class="nav-link">Integrations</a>
                 <a href="#compliance" class="nav-link">Compliance</a>
-                <a href="../careers.html" class="nav-link">Careers</a>
-                <div class="dropdown">
-                    <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        Tools
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="tools/photoScrubber/index.html">Photo Scrubber</a>
-                    </div>
-                </div>
-                <a href="demo/index.html" class="nav-link" style="color:var(--red);font-weight:600;">&#9654; Live Demo</a>
+                <a href="../careers.html" class="nav-link">Careers</a>                <a href="demo/index.html" class="nav-link" style="color:var(--red);font-weight:600;">&#9654; Live Demo</a>
                 <a href="../request/index.html" class="nav-pill">Request Access</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
                     <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
@@ -1027,6 +1021,7 @@
                 <span class="highlight">AI agent</span><br>
                 across your enterprise
             </h1>
+            <p class="hero-tagline fade-in delay-1">Privify FORGE — Federated Oversight &amp; Risk Governance Engine</p>
             <p class="hero-subtitle fade-in delay-2">
                 Privify discovers every AI agent running in your environment — sanctioned or shadow — maps every interaction, and enforces policy in real time. Three pillars: Discovery, Observability, Governance.
             </p>
@@ -1071,11 +1066,11 @@
                     <div class="db-stats-row">
                         <div class="db-stat"><div class="db-stat-label">Active agents</div><div class="db-stat-val">47</div></div>
                         <div class="db-stat"><div class="db-stat-label">Critical risk</div><div class="db-stat-val red">3</div></div>
-                        <div class="db-stat"><div class="db-stat-label">Today cost</div><div class="db-stat-val amber">$84</div></div>
+                        <div class="db-stat"><div class="db-stat-label">Probes active</div><div class="db-stat-val">4</div></div>
                         <div class="db-stat"><div class="db-stat-label">Violations</div><div class="db-stat-val red">12</div></div>
                     </div>
                     <div class="db-chart">
-                        <div class="db-chart-label">API calls / hour</div>
+                        <div class="db-chart-label">Event volume</div>
                         <div class="db-bars" id="heroBars"></div>
                     </div>
                     <div class="db-agents">
@@ -1224,7 +1219,7 @@
         <div class="dashboard-showcase">
             <div class="dash-topbar">
                 <div class="dash-dots"><div class="dash-dot r"></div><div class="dash-dot y"></div><div class="dash-dot g"></div></div>
-                <div class="dash-url">forge.privify.io:8000 — Privify Forge</div>
+                <div class="dash-url">forge.privify.io — Privify FORGE</div>
             </div>
             <!-- Real capture, not a mock: infra/scripts/capture.py in the Privify FORGE repo,
                  logged into the live deployment with the API key. Re-run it and swap
@@ -1935,17 +1930,7 @@
         <a href="#comparison">Compare</a>
         <a href="#integrations">Integrations</a>
         <a href="#compliance">Compliance</a>
-        <a href="../careers.html">Careers</a>
-        <div>
-            <button class="mobile-submenu-toggle" aria-expanded="false" aria-controls="mobile-tools-menu">
-                <span>Tools</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div id="mobile-tools-menu" class="mobile-submenu" hidden>
-                <a href="tools/photoScrubber/index.html">Photo Scrubber</a>
-            </div>
-        </div>
-        <a href="demo/index.html" style="color:var(--red);font-weight:600;">&#9654; Try Interactive Demo</a>
+        <a href="../careers.html">Careers</a>        <a href="demo/index.html" style="color:var(--red);font-weight:600;">&#9654; Try Interactive Demo</a>
         <a href="../request/index.html">Request Access</a>
     </div>
 </div>
@@ -1961,19 +1946,29 @@ window.addEventListener('scroll', () => {
 });
 
 //  Animated bars (hero)
+// color accepts either one CSS color (every bar the same, the original
+// behaviour) or an array, cycled per bar — used for the hero chart so it
+// reads as an event-type breakdown, like the real dashboard's, rather than
+// a single volume metric.
 function makeBars(containerId, count, color) {
     const c = document.getElementById(containerId);
     if (!c) return;
+    const palette = Array.isArray(color) ? color : null;
     const heights = Array.from({length:count}, () => 20 + Math.random() * 80);
-    heights.forEach(h => {
+    heights.forEach((h, i) => {
         const b = document.createElement('div');
         b.className = 'db-bar';
         b.style.height = h + '%';
-        b.style.background = color || 'rgba(232,93,84,0.3)';
+        b.style.background = palette ? palette[i % palette.length] : (color || 'rgba(232,93,84,0.3)');
         c.appendChild(b);
     });
 }
-makeBars('heroBars', 24, 'rgba(232,93,84,0.35)');
+// Same palette the real Event Logs / Compliance views use per event type
+// (PROMPT_ARTIFACT_FOUND, DLP_MATCH, AI_API_CALL, POLICY_AUDIT, THREAT,
+// OTLP_SPAN, LOOP_DETECTED) — cycled here rather than tied to real labels,
+// since this mockup shows volume, not a literal breakdown.
+const HERO_BAR_PALETTE = ['#9B59FF', '#F0A500', '#E85D54', '#3D8BFF', '#F1707B', '#479EF5', '#00C97A'];
+makeBars('heroBars', 24, HERO_BAR_PALETTE);
 makeBars('showcaseBars', 24, 'rgba(232,93,84,0.3)');
 
 //  Mini bar animation
@@ -2092,11 +2087,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
                     <a href="../index.html#pricing" class="footer-link">Pricing</a>
                 </div>
                 <div class="footer-col">
-                    <div class="footer-col-title">SHIELD</div>
+                    <div class="footer-col-title">Privify SHIELD</div>
                     <a href="../shield/index.html" class="footer-link">Overview</a>
-                    <a href="../shield/index.html#waitlist" class="footer-link">Join waitlist</a>
-                    <a href="../tools/photoScrubber/index.html" class="footer-link">Photo Scrubber</a>
-                </div>
+                    <a href="../shield/index.html#waitlist" class="footer-link">Join waitlist</a>                </div>
                 <div class="footer-col">
                     <div class="footer-col-title">Company</div>
                     <a href="../careers.html" class="footer-link">Careers</a>
