@@ -994,7 +994,22 @@
         .scout-node { fill:var(--red); opacity:0; animation:scoutPop 0.35s ease forwards; }
         .scout-node-label { fill:var(--gray-400); font-size:9.5px; font-family:'Inter',sans-serif; opacity:0; animation:scoutPop 0.35s ease forwards; }
         @keyframes scoutPop { from{opacity:0;transform:scale(0.6)} to{opacity:1;transform:scale(1)} }
-        .scout-report-caption { margin-top:0.75rem; font-family:var(--mono); font-size:0.68rem; color:var(--gray-500); text-align:center; }
+        .scout-report-caption { margin-top:0.75rem; font-family:var(--mono); font-size:0.68rem; color:var(--gray-500); text-align:center; transition:opacity 0.2s ease; }
+        .scout-report-svg.drilled .scout-node:not(.drill-target),
+        .scout-report-svg.drilled .scout-node-label:not(.drill-target),
+        .scout-report-svg.drilled .scout-link:not(.drill-target) { opacity:0.15 !important; transition:opacity 0.35s ease; }
+        .scout-node.drill-target { stroke:var(--white); stroke-width:1.75; transition:stroke 0.2s ease; }
+        .scout-link.drill-target { stroke:var(--red); opacity:1; transition:opacity 0.35s ease,stroke 0.2s ease; }
+        .scout-node-label.drill-target { opacity:0 !important; transition:opacity 0.2s ease; }
+        .scout-drill-link { fill:none; stroke:var(--gray-600); stroke-width:1.25;
+            stroke-dasharray:90; stroke-dashoffset:90; opacity:0; animation:scoutDrillDraw 0.5s ease forwards; }
+        .scout-drill-link.warn { stroke:var(--red); }
+        @keyframes scoutDrillDraw { from{opacity:1} to{stroke-dashoffset:0;opacity:1} }
+        .scout-drill-node { fill:var(--gray-500); opacity:0; animation:scoutPop 0.3s ease forwards; }
+        .scout-drill-node.warn { fill:var(--red); }
+        .scout-drill-label { fill:var(--gray-400); font-size:8.5px; font-weight:600; font-family:'Inter',sans-serif; opacity:0; animation:scoutPop 0.3s ease forwards; }
+        .scout-drill-label.warn { fill:var(--red); }
+        .scout-drill-note { fill:var(--gray-600); font-size:7.5px; font-family:var(--mono); opacity:0; animation:scoutPop 0.3s ease forwards; }
 
         .scout-surface-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
         .scout-surface-card { background:var(--black); padding:1.5rem 1.25rem; }
@@ -1044,7 +1059,7 @@
                 <a href="#surfaces" class="nav-link">What it finds</a>
                 <a href="#easy-run" class="nav-link">Get started</a>
                 <a href="../careers.html" class="nav-link">Careers</a>
-                <a href="../request/index.html?product=scout" class="nav-pill">Get Privify SCOUT &mdash; free</a>
+                <a href="../request/index.html?product=scout" class="nav-pill">Request a copy</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
                     <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
                     <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -1065,7 +1080,7 @@
         <div class="hero-text">
             <div class="hero-eyebrow fade-in">
                 <span class="dot"></span>
-                Free &middot; agentless &middot; try it today
+                Free &middot; agentless &middot; reach out for a copy
             </div>
             <h1 class="fade-in delay-1">
                 See every AI tool<br>
@@ -1073,10 +1088,10 @@
                 on your network
             </h1>
             <p class="hero-subtitle fade-in delay-2">
-                Privify SCOUT is a free discovery scan that finds shadow AI across your endpoints and local network in minutes — CLI tools, browser extensions, MCP servers, local models, leaked API keys and more. Nothing to install, nothing left behind.
+                Privify SCOUT is a free discovery scan that finds shadow AI across your endpoints and local network in minutes — CLI tools, browser extensions, MCP servers, local models, leaked API keys and more. Reach out and we'll send you a copy.
             </p>
             <div class="hero-actions fade-in delay-3">
-                <a href="../request/index.html?product=scout" class="btn-primary">Get Privify SCOUT — free</a>
+                <a href="../request/index.html?product=scout" class="btn-primary">Request a copy</a>
                 <a href="#how-it-works" class="btn-secondary">See how it works</a>
             </div>
             <div class="hero-stats fade-in delay-4">
@@ -1110,8 +1125,8 @@
                         <div class="scout-surfaces" id="scoutSurfaces"></div>
                     </div>
                     <div class="scout-report-view" id="scoutReportView">
-                        <svg class="scout-report-svg" id="scoutReportSvg" viewBox="0 0 520 320" aria-hidden="true"></svg>
-                        <div class="scout-report-caption">Report generated &mdash; 8 of 13 surfaces active</div>
+                        <svg class="scout-report-svg" id="scoutReportSvg" viewBox="0 0 560 320" aria-hidden="true"></svg>
+                        <div class="scout-report-caption" id="scoutReportCaption">Report generated &mdash; 8 of 13 surfaces active</div>
                     </div>
                 </div>
             </div>
@@ -1153,7 +1168,7 @@
                 <p>13 surfaces, checked in sequence: CLI tools, environment and file-based API keys, MCP servers, IDE extensions, local model servers, running processes, Python and npm packages, shell and browser history, Docker containers, and your local subnet.</p>
                 <ul class="pillar-features">
                     <li>Agentless — reads what's already on the machine</li>
-                    <li>No account, no cloud upload, no signup to try it</li>
+                    <li>No account, no cloud upload — everything runs locally</li>
                     <li>Point it at one subnet, or your whole LAN</li>
                 </ul>
                 <div class="pillar-glow"></div>
@@ -1251,13 +1266,13 @@
         <div class="section-header">
             <div class="section-eyebrow">Try it</div>
             <h2 class="section-title">Free. No install. Nothing to configure.</h2>
-            <p class="section-sub">Three steps, no infrastructure changes, no account required to run it once.</p>
+            <p class="section-sub">Three steps, no infrastructure changes, nothing to configure once you have it.</p>
         </div>
         <div class="integration-steps">
             <div class="step-card">
                 <div class="step-num">1</div>
-                <h4>Get Privify SCOUT</h4>
-                <p>Request it below — a single binary, no Python or dependencies required.</p>
+                <h4>Reach out</h4>
+                <p>Request a copy below — a single binary, no Python or dependencies required.</p>
             </div>
             <div class="step-card">
                 <div class="step-num">2</div>
@@ -1281,15 +1296,14 @@
                 Free &mdash; every time you run it
             </div>
             <h2>Find out what's actually running.</h2>
-            <p>Point Privify SCOUT at a laptop or a subnet and see, in minutes, what your inventory has been missing. No cost, no commitment, no sales call to get started.</p>
+            <p>Point Privify SCOUT at a laptop or a subnet and see, in minutes, what your inventory has been missing. No cost, no commitment — reach out and we'll send you a copy.</p>
             <a href="../request/index.html?product=scout" class="cta-btn">
-                Get Privify SCOUT — free
+                Request a copy
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <p class="cta-note">No spam. No sales calls without consent.</p>
             <div class="cta-trust">
                 <div class="trust-item"><i class="fa-solid fa-lock"></i> Nothing scanned leaves the machine</div>
-                <div class="trust-item"><i class="fa-solid fa-user-shield"></i> No admin rights required</div>
                 <div class="trust-item"><i class="fa-solid fa-hand-holding-dollar"></i> Free, every run</div>
                 <div class="trust-item"><i class="fa-solid fa-clock"></i> Report in under 5 minutes</div>
             </div>
@@ -1309,7 +1323,7 @@
         <a href="#surfaces">What it finds</a>
         <a href="#easy-run">Get started</a>
         <a href="../careers.html">Careers</a>
-        <a href="../request/index.html?product=scout" style="color:var(--red);font-weight:600;">Get Privify SCOUT &mdash; free</a>
+        <a href="../request/index.html?product=scout" style="color:var(--red);font-weight:600;">Request a copy</a>
     </div>
 </div>
 
@@ -1361,18 +1375,27 @@ function buildScoutRows() {
         </div>`).join('');
 }
 
+const SCOUT_REPORT_CX = 260, SCOUT_REPORT_CY = 150, SCOUT_REPORT_R = 112;
+const SCOUT_DRILL_TARGET = 'MCP Servers';
+const SCOUT_DRILL_ITEMS = [
+    {name:'figma-mcp',          status:'ok',   note:'authenticated'},
+    {name:'linear-mcp',         status:'ok',   note:'authenticated'},
+    {name:'internal-mcp',       status:'warn', note:'unauthenticated'},
+];
+
 function drawScoutReport() {
     const svg = document.getElementById('scoutReportSvg');
     if (!svg) return;
+    svg.classList.remove('drilled');
     const active = SCOUT_SURFACES.filter(s => s.active);
-    const cx = 260, cy = 150, r = 112;
+    const cx = SCOUT_REPORT_CX, cy = SCOUT_REPORT_CY, r = SCOUT_REPORT_R;
     const n = active.length;
     let html = '';
     active.forEach((s, i) => {
         const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
         const x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle);
         const mx = cx + (r * 0.5) * Math.cos(angle), my = cy + (r * 0.5) * Math.sin(angle);
-        html += `<path d="M ${cx} ${cy} Q ${mx} ${my} ${x} ${y}" class="scout-link" style="animation-delay:${i*110}ms"/>`;
+        html += `<path d="M ${cx} ${cy} Q ${mx} ${my} ${x} ${y}" class="scout-link" data-name="${s.name}" style="animation-delay:${i*110}ms"/>`;
     });
     html += `<circle cx="${cx}" cy="${cy}" r="26" class="scout-hub"/>`;
     html += `<text x="${cx}" y="${cy+4}" class="scout-hub-label" text-anchor="middle">SCAN</text>`;
@@ -1384,15 +1407,61 @@ function drawScoutReport() {
         const dx = cos > 0.3 ? 10 : (cos < -0.3 ? -10 : 0);
         const dy = sin > 0.5 ? 16 : (sin < -0.5 ? -10 : 4);
         const delay = i * 110 + 260;
-        html += `<circle cx="${x}" cy="${y}" r="6.5" class="scout-node" style="animation-delay:${delay}ms"/>`;
-        html += `<text x="${x+dx}" y="${y+dy}" class="scout-node-label" text-anchor="${anchor}" style="animation-delay:${delay}ms">${s.name}</text>`;
+        html += `<circle cx="${x}" cy="${y}" r="6.5" class="scout-node" data-name="${s.name}" style="animation-delay:${delay}ms"/>`;
+        html += `<text x="${x+dx}" y="${y+dy}" class="scout-node-label" data-name="${s.name}" text-anchor="${anchor}" style="animation-delay:${delay}ms">${s.name}</text>`;
     });
     svg.innerHTML = html;
+}
+
+// Drills one level deeper into the MCP Servers node — mirrors the real
+// report's category → satellite-item drill-down (see forge-context.md §7.3).
+function drawScoutDrilldown() {
+    const svg = document.getElementById('scoutReportSvg');
+    if (!svg) return;
+    const active = SCOUT_SURFACES.filter(s => s.active);
+    const idx = active.findIndex(s => s.name === SCOUT_DRILL_TARGET);
+    if (idx === -1) return;
+    const cx = SCOUT_REPORT_CX, cy = SCOUT_REPORT_CY, r = SCOUT_REPORT_R;
+    const n = active.length;
+    const angle = (Math.PI * 2 * idx / n) - Math.PI / 2;
+    const tx = cx + r * Math.cos(angle), ty = cy + r * Math.sin(angle);
+
+    svg.classList.add('drilled');
+    svg.querySelectorAll(`[data-name="${SCOUT_DRILL_TARGET}"]`).forEach(el => el.classList.add('drill-target'));
+
+    const spread = 0.6, dr = 66;
+    let html = '<g class="scout-drill">';
+    SCOUT_DRILL_ITEMS.forEach((item, i) => {
+        const off = (i - (SCOUT_DRILL_ITEMS.length - 1) / 2) * spread;
+        const a = angle + off;
+        const sx = tx + dr * Math.cos(a), sy = ty + dr * Math.sin(a);
+        const cos = Math.cos(a);
+        const anchor = cos > 0.25 ? 'start' : (cos < -0.25 ? 'end' : 'middle');
+        const ddx = cos > 0.25 ? 9 : (cos < -0.25 ? -9 : 0);
+        const warn = item.status === 'warn';
+        const delay = i * 140;
+        html += `<path d="M ${tx} ${ty} L ${sx} ${sy}" class="scout-drill-link${warn ? ' warn' : ''}" style="animation-delay:${delay}ms"/>`;
+        html += `<circle cx="${sx}" cy="${sy}" r="5" class="scout-drill-node${warn ? ' warn' : ''}" style="animation-delay:${delay}ms"/>`;
+        html += `<text x="${sx+ddx}" y="${sy-10}" class="scout-drill-label${warn ? ' warn' : ''}" text-anchor="${anchor}" style="animation-delay:${delay}ms">${item.name}</text>`;
+        html += `<text x="${sx+ddx}" y="${sy+3}" class="scout-drill-note" text-anchor="${anchor}" style="animation-delay:${delay}ms">${item.note}</text>`;
+    });
+    html += '</g>';
+    svg.insertAdjacentHTML('beforeend', html);
+}
+
+function clearScoutDrilldown() {
+    const svg = document.getElementById('scoutReportSvg');
+    if (!svg) return;
+    svg.classList.remove('drilled');
+    svg.querySelectorAll('.drill-target').forEach(el => el.classList.remove('drill-target'));
+    const g = svg.querySelector('.scout-drill');
+    if (g) g.remove();
 }
 
 async function runScoutScan() {
     const rows = document.querySelectorAll('#scoutSurfaces .scout-row');
     const statusEl = document.getElementById('scoutStatus');
+    const captionEl = document.getElementById('scoutReportCaption');
     const scanView = document.getElementById('scoutScanView');
     const reportView = document.getElementById('scoutReportView');
     if (!rows.length || !statusEl || !scanView || !reportView) return;
@@ -1415,7 +1484,18 @@ async function runScoutScan() {
     scanView.style.display = 'none';
     reportView.style.display = 'flex';
     drawScoutReport();
-    await scoutWait(4500);
+    if (captionEl) captionEl.textContent = 'Report generated — 8 of 13 surfaces active';
+    await scoutWait(2200);
+
+    statusEl.textContent = 'drilling in…';
+    drawScoutDrilldown();
+    if (captionEl) captionEl.textContent = 'MCP Servers — 3 found, 1 unauthenticated';
+    await scoutWait(2800);
+
+    clearScoutDrilldown();
+    statusEl.textContent = 'report ready';
+    if (captionEl) captionEl.textContent = 'Report generated — 8 of 13 surfaces active';
+    await scoutWait(1600);
     runScoutScan();
 }
 
@@ -1543,7 +1623,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
                     <div class="footer-col-title">Privify SCOUT</div>
                     <a href="index.html" class="footer-link">Overview</a>
                     <a href="#surfaces" class="footer-link">What it finds</a>
-                    <a href="../request/index.html?product=scout" class="footer-link" style="color:var(--red);">Get it free</a>
+                    <a href="../request/index.html?product=scout" class="footer-link" style="color:var(--red);">Request a copy</a>
                 </div>
                 <div class="footer-col">
                     <div class="footer-col-title">Company</div>
