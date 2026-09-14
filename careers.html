@@ -202,6 +202,12 @@
         [data-theme="light"] .job-card:hover { border-color: rgba(232,93,84,0.3); }
         [data-theme="light"] .value-card { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
         [data-theme="light"] .dept-tag { background: rgba(0,0,0,0.06); color: #4B5563; }
+        [data-theme="light"] .why-card { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .why-card h3 { color: #0A0A0A; }
+        [data-theme="light"] .job-toggle { background: #F3F4F6; border-color: rgba(0,0,0,0.1); color: #0A0A0A; }
+        [data-theme="light"] .job-toggle:hover { border-color: rgba(0,0,0,0.2); }
+        [data-theme="light"] .apply-bar { background: #FFFFFF; }
+        [data-theme="light"] .apply-bar-left a { color: #0A0A0A; }
 
         /* Honour the OS-level reduced-motion preference across the whole page. */
         @media (prefers-reduced-motion: reduce) {
@@ -296,10 +302,6 @@
                 <a href="#ux-designer">UX Designer</a>
                 <a href="#senior-ux-designer">Senior UX Designer</a>
                 <a href="#senior-frontend-engineer">Senior Frontend Engineer</a>
-                <a href="#senior-backend-engineer">Senior Backend Engineer</a>
-                <a href="#marketing-specialist">Marketing Specialist</a>
-                <a href="#sales-executive">Sales Executive</a>
-                <a href="#mobile-app-developer">Mobile App Developer</a>
             </div>
 
             <!-- Why Privify -->
@@ -372,78 +374,6 @@
                         <div class="job-section"><h4>Responsibilities</h4><ul><li>Architect and build key frontend modules using React or Vue</li><li>Convert designs into high-quality responsive UI for web and desktop</li><li>Optimise performance, load times and rendering</li><li>Build reusable components and strengthen internal UI libraries</li><li>Integrate cleanly with backend APIs</li><li>Drive engineering best practices, testing and code reviews</li><li>Work with product and design to plan and implement features</li></ul></div>
                         <div class="job-section"><h4>Requirements</h4><ul><li>5+ years in frontend engineering</li><li>Expertise in React or Vue and TypeScript</li><li>Strong understanding of state management and frontend architecture</li><li>Experience building complex dashboards or interactive views</li><li>Ability to lead decisions and mentor engineers</li></ul></div>
                         <a class="apply-link" href="mailto:careers@privify.io?subject=Application%3A%20Senior%20Frontend%20Engineer">Apply for this role</a>
-                    </div>
-                </div>
-
-                <div class="job-card" id="senior-backend-engineer">
-                    <div class="job-header" onclick="toggleJob(this)">
-                        <div class="job-header-text">
-                            <div class="job-dept">Engineering &middot; Backend &middot; Full-time</div>
-                            <h3 class="job-title">Senior Backend Engineer</h3>
-                            <div class="job-exp">5+ years experience</div>
-                            <div class="job-location"><i class="fa-solid fa-location-dot"></i> San Jose, California or Hyderabad, India — Hybrid</div>
-                        </div>
-                        <button class="job-toggle" aria-label="Toggle details">Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-                    </div>
-                    <div class="job-body">
-                        <div class="job-section"><h4>Role overview</h4><p>You will lead backend architecture for an AI-driven data security product that works across macOS, Windows, Android and iOS. You will build scalable APIs, data pipelines, authentication systems, logging infrastructure and core backend logic that powers user insights and security features. Deep ownership, clean design, strong systems thinking required.</p></div>
-                        <div class="job-section"><h4>Responsibilities</h4><ul><li>Architect backend services and APIs that support multi-platform clients</li><li>Design data models for logs, analytics, workflows and events</li><li>Work on authentication, authorisation, key security and role systems</li><li>Build background jobs and automation pipelines</li><li>Improve system performance, reliability and observability</li><li>Collaborate with product, engineering and founders on technical decisions</li><li>Mentor engineers and maintain backend quality</li></ul></div>
-                        <div class="job-section"><h4>Requirements</h4><ul><li>5+ years of backend engineering experience</li><li>Strong knowledge of Python, Node, Go or Java</li><li>Hands-on experience with SQL and NoSQL systems</li><li>Experience with microservices, caching, queues and monitoring</li><li>Ability to design systems for security, scale and reliability</li></ul></div>
-                        <a class="apply-link" href="mailto:careers@privify.io?subject=Application%3A%20Senior%20Backend%20Engineer">Apply for this role</a>
-                    </div>
-                </div>
-
-                <div class="job-card" id="marketing-specialist">
-                    <div class="job-header" onclick="toggleJob(this)">
-                        <div class="job-header-text">
-                            <div class="job-dept">Marketing &middot; Growth &middot; Full-time</div>
-                            <h3 class="job-title">Marketing Specialist</h3>
-                            <div class="job-exp">2+ years experience</div>
-                            <div class="job-location"><i class="fa-solid fa-location-dot"></i> San Jose, California or Hyderabad, India — Hybrid</div>
-                        </div>
-                        <button class="job-toggle" aria-label="Toggle details">Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-                    </div>
-                    <div class="job-body">
-                        <div class="job-section"><h4>Role overview</h4><p>You will lead marketing execution for an AI and data security startup. You will work on messaging, campaigns, content and product storytelling across digital channels, collaborating with sales, product and design to communicate the value of a multi-platform security product.</p></div>
-                        <div class="job-section"><h4>Responsibilities</h4><ul><li>Plan and run marketing campaigns on web, email and social platforms</li><li>Create content for macOS, Windows, Android, iOS and web users</li><li>Manage content calendars and coordinate with design teams</li><li>Track campaign results and improve performance</li><li>Support sales with collateral, case studies and product messaging</li><li>Conduct competitor mapping and positioning analysis</li><li>Support events and partner programmes</li></ul></div>
-                        <div class="job-section"><h4>Requirements</h4><ul><li>2+ years in marketing</li><li>Strong writing and communication skills</li><li>Experience with analytics and marketing tools</li><li>Ability to create simple messaging for technical products</li><li>SaaS or cybersecurity experience is a plus</li></ul></div>
-                        <a class="apply-link" href="mailto:careers@privify.io?subject=Application%3A%20Marketing%20Specialist">Apply for this role</a>
-                    </div>
-                </div>
-
-                <div class="job-card" id="sales-executive">
-                    <div class="job-header" onclick="toggleJob(this)">
-                        <div class="job-header-text">
-                            <div class="job-dept">Sales &middot; GTM &middot; Full-time</div>
-                            <h3 class="job-title">Sales Executive — AI and Data Security</h3>
-                            <div class="job-exp">2+ years experience</div>
-                            <div class="job-location"><i class="fa-solid fa-location-dot"></i> San Jose, California or Hyderabad, India — Hybrid</div>
-                        </div>
-                        <button class="job-toggle" aria-label="Toggle details">Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-                    </div>
-                    <div class="job-body">
-                        <div class="job-section"><h4>Role overview</h4><p>You will manage sales for a security platform powered by AI. You will engage prospects, run demos, explain platform capabilities and guide customers through adoption. You will need to communicate technical concepts simply and build trust with customers in a domain where security, accuracy and reliability matter.</p></div>
-                        <div class="job-section"><h4>Responsibilities</h4><ul><li>Identify and qualify leads across SMB and enterprise</li><li>Run product demos focused on AI-driven insights and multi-platform security features</li><li>Understand customer needs and communicate product value clearly</li><li>Manage CRM updates, outreach and follow-ups</li><li>Work with marketing on targeted campaigns</li><li>Provide customer feedback to product and engineering</li><li>Support onboarding and ensure adoption success</li></ul></div>
-                        <div class="job-section"><h4>Requirements</h4><ul><li>2+ years in sales with experience in SaaS, cybersecurity or AI products</li><li>Strong communication and relationship skills</li><li>Ability to explain technical capabilities in simple language</li><li>Experience running demos and handling objections</li><li>Comfort working in early-stage teams</li></ul></div>
-                        <a class="apply-link" href="mailto:careers@privify.io?subject=Application%3A%20Sales%20Executive">Apply for this role</a>
-                    </div>
-                </div>
-
-                <div class="job-card" id="mobile-app-developer">
-                    <div class="job-header" onclick="toggleJob(this)">
-                        <div class="job-header-text">
-                            <div class="job-dept">Engineering &middot; Mobile &middot; Full-time</div>
-                            <h3 class="job-title">Mobile App Developer</h3>
-                            <div class="job-exp">4 to 8 years experience</div>
-                            <div class="job-location"><i class="fa-solid fa-location-dot"></i> Hyderabad, India — Preferred</div>
-                        </div>
-                        <button class="job-toggle" aria-label="Toggle details">Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-                    </div>
-                    <div class="job-body">
-                        <div class="job-section"><h4>Role overview</h4><p>We are looking for a Mobile App Developer with hands-on experience in Android and iOS development to build, enhance and maintain high-quality mobile applications. The role involves working closely with designers, backend teams and product managers to deliver reliable and scalable mobile solutions.</p></div>
-                        <div class="job-section"><h4>Key responsibilities</h4><ul><li>Develop and maintain Android (Kotlin/Java) and iOS (Swift) applications</li><li>Implement UI designs and ensure performance, stability and responsiveness</li><li>Integrate REST APIs and third-party SDKs</li><li>Debug, optimise and improve app performance</li><li>Participate in code reviews and release cycles</li><li>Collaborate with product, backend and QA teams</li></ul></div>
-                        <div class="job-section"><h4>Requirements</h4><ul><li>4 to 8 years experience in Android and iOS development</li><li>Proficiency in Kotlin/Java (Android) and Swift (iOS)</li><li>Experience with REST APIs, JSON and mobile app architecture</li><li>Familiarity with Git and version control workflows</li><li>Understanding of app store deployment (Play Store and App Store)</li></ul></div>
-                        <a class="apply-link" href="mailto:careers@privify.io?subject=Application%3A%20Mobile%20App%20Developer">Apply for this role</a>
                     </div>
                 </div>
 
