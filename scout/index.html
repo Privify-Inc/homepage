@@ -6,14 +6,14 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Privify — Privify FORGE. Discover, observe, and govern every AI agent across your enterprise in real time.">
-    <meta name="keywords" content="AI governance, AI agent security, LLM observability, enterprise AI, shadow AI detection, AI compliance">
-    <meta property="og:title" content="Privify — Privify FORGE">
-    <meta property="og:description" content="Discover every AI agent. Observe every interaction. Govern every decision. Real-time AI governance for the enterprise.">
+    <meta name="description" content="Privify SCOUT — a free, agentless discovery scan that finds shadow AI across your endpoints and local network in minutes.">
+    <meta name="keywords" content="shadow AI detection, AI discovery scan, MCP server discovery, AI inventory, free security scan">
+    <meta property="og:title" content="Privify — Privify SCOUT">
+    <meta property="og:description" content="See every AI tool already running on your network — free, agentless, in minutes.">
     <meta property="og:image" content="/images/og-image.png">
-    <meta property="og:url content="https://privify.io/forge/">
+    <meta property="og:url content="https://privify.io/scout/">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Privify FORGE — Privify</title>
+    <title>Privify SCOUT — Free AI Discovery Scan | Privify</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -710,13 +710,14 @@
         .footer-top { display:grid;grid-template-columns:280px 1fr;gap:4rem;margin-bottom:2.5rem;text-align:left; }
         .footer-logo { display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--gray-400);font-weight:700;font-size:1rem;margin-bottom:0.875rem;border-bottom:none; }
         .footer-tagline { font-size:0.8rem;color:var(--pf-text);line-height:1.6;margin:0; }
-        .footer-cols { display:grid;grid-template-columns:repeat(4,1fr);gap:2rem; }
+        .footer-cols { display:grid;grid-template-columns:repeat(5,1fr);gap:2rem; }
         .footer-col-title { font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--pf-text);margin-bottom:0.875rem; }
         .footer-col { display:flex;flex-direction:column;gap:0.5rem;align-items:flex-start; }
         .footer-link { color:var(--pf-text);text-decoration:none;font-size:0.825rem;transition:color 0.2s;border-bottom:none; }
         .footer-link:hover { color:var(--white); }
         .footer-bottom { display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.8rem;color:var(--gray-500);gap:1rem;flex-wrap:wrap;text-align:left; }
         .footer-bottom a { border-bottom:none; }
+        @media(max-width:1100px){ .footer-cols{grid-template-columns:repeat(3,1fr);} }
         @media(max-width:900px){ .footer-cols{grid-template-columns:repeat(2,1fr);} }
         @media(max-width:768px){
             .footer-top{grid-template-columns:1fr;gap:2rem;}
@@ -957,6 +958,53 @@
         .theme-toggle .icon-moon { display: block; }
         [data-theme="light"] .theme-toggle .icon-sun  { display: block; }
         [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+        /* ── SCOUT animated scan / report widget ──────────────────────────
+           Deliberately not a screenshot of the real CLI or the real HTML
+           report — an original, looping illustration of the same shape:
+           13 surfaces checked in sequence, then a connected-findings view
+           echoing the real report's hub-and-spoke style. */
+        .scout-frame { animation: float 8s ease-in-out infinite; }
+        .scout-status { margin-left:auto; font-family:var(--mono); font-size:0.68rem; color:var(--gray-500); letter-spacing:0.02em; }
+        .scout-body { padding:1.1rem 1.25rem; min-height:308px; }
+        .scout-surfaces { display:flex; flex-direction:column; gap:0; }
+        .scout-row {
+            display:flex; align-items:center; gap:0.625rem;
+            padding:0.5rem 0.125rem; border-bottom:1px solid var(--border);
+            opacity:0.35; transition:opacity 0.25s ease;
+        }
+        .scout-row:last-child { border-bottom:none; }
+        .scout-row.scanning, .scout-row.done-active, .scout-row.done-clear { opacity:1; }
+        .scout-row-icon { position:relative; width:14px; height:14px; flex-shrink:0; color:var(--gray-500); }
+        .scout-row-icon svg { position:absolute; top:0; left:0; opacity:0; transition:opacity 0.15s ease; }
+        .scout-row.scanning .scout-spin { opacity:1; animation:scoutSpin 0.8s linear infinite; color:var(--red); }
+        .scout-row.done-active .scout-check { opacity:1; color:var(--ok); }
+        .scout-row.done-clear .scout-dash { opacity:1; color:var(--gray-600); }
+        @keyframes scoutSpin { to { transform:rotate(360deg); } }
+        .scout-row-name { font-size:0.78rem; font-weight:600; color:var(--white); flex-shrink:0; width:132px; }
+        .scout-row-detail { font-size:0.72rem; color:var(--gray-500); font-family:var(--mono); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .scout-row.done-clear .scout-row-detail { color:var(--gray-700); }
+        .scout-report-view { display:none; flex-direction:column; align-items:center; }
+        .scout-report-svg { width:100%; height:auto; }
+        .scout-link { fill:none; stroke:var(--border-hover); stroke-width:1.5;
+            stroke-dasharray:140; stroke-dashoffset:140; animation:scoutDraw 0.6s ease forwards; }
+        @keyframes scoutDraw { to { stroke-dashoffset:0; } }
+        .scout-hub { fill:var(--surface-3); stroke:var(--red); stroke-width:1.5; }
+        .scout-hub-label { fill:var(--white); font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:0.05em; }
+        .scout-node { fill:var(--red); opacity:0; animation:scoutPop 0.35s ease forwards; }
+        .scout-node-label { fill:var(--gray-400); font-size:9.5px; font-family:'Inter',sans-serif; opacity:0; animation:scoutPop 0.35s ease forwards; }
+        @keyframes scoutPop { from{opacity:0;transform:scale(0.6)} to{opacity:1;transform:scale(1)} }
+        .scout-report-caption { margin-top:0.75rem; font-family:var(--mono); font-size:0.68rem; color:var(--gray-500); text-align:center; }
+
+        .scout-surface-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+        .scout-surface-card { background:var(--black); padding:1.5rem 1.25rem; }
+        .scout-surface-card i { color:var(--red); font-size:1.1rem; margin-bottom:0.75rem; display:block; }
+        .scout-surface-card h4 { font-size:0.875rem; font-weight:700; margin-bottom:0.375rem; }
+        .scout-surface-card p { font-size:0.75rem; color:var(--gray-500); line-height:1.55; }
+        [data-theme="light"] .scout-surface-card { background:#F4F4F6; }
+        [data-theme="light"] .scout-row-name { color:#0A0A0A; }
+        @media(max-width:900px) { .scout-surface-grid{grid-template-columns:repeat(2,1fr);} }
+        @media(max-width:640px) { .scout-surface-grid{grid-template-columns:1fr;} .scout-row-name{width:112px;} }
 </style>
 </head>
 <body>
@@ -978,7 +1026,7 @@
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="index.html">
+                        <a class="dropdown-item" href="../forge/index.html">
                             <div class="di-title">Privify FORGE</div>
                             <div class="di-sub">AI agent discovery, observability &amp; governance</div>
                         </a>
@@ -986,18 +1034,17 @@
                             <div class="di-title">Privify SHIELD</div>
                             <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
                         </a>
-                        <a class="dropdown-item" href="../scout/index.html">
+                        <a class="dropdown-item" href="index.html">
                             <div class="di-title">Privify SCOUT</div>
                             <div class="di-sub">Free agentless discovery scan for shadow AI</div>
                         </a>
                     </div>
                 </div>
-                <a href="#deployment" class="nav-link">Deployment</a>
-                <a href="#comparison" class="nav-link">Compare</a>
-                <a href="#integrations" class="nav-link">Integrations</a>
-                <a href="#compliance" class="nav-link">Compliance</a>
-                <a href="../careers.html" class="nav-link">Careers</a>                <a href="demo/index.html" class="nav-link" style="color:var(--red);font-weight:600;">&#9654; Live Demo</a>
-                <a href="../request/index.html" class="nav-pill">Request Access</a>
+                <a href="#how-it-works" class="nav-link">How it works</a>
+                <a href="#surfaces" class="nav-link">What it finds</a>
+                <a href="#easy-run" class="nav-link">Get started</a>
+                <a href="../careers.html" class="nav-link">Careers</a>
+                <a href="../request/index.html?product=scout" class="nav-pill">Get Privify SCOUT &mdash; free</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
                     <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
                     <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -1018,193 +1065,120 @@
         <div class="hero-text">
             <div class="hero-eyebrow fade-in">
                 <span class="dot"></span>
-                Now in early access
+                Free &middot; agentless &middot; try it today
             </div>
             <h1 class="fade-in delay-1">
-                Govern every<br>
-                <span class="highlight">AI agent</span><br>
-                across your enterprise
+                See every AI tool<br>
+                <span class="highlight">already running</span><br>
+                on your network
             </h1>
-            <p class="hero-tagline fade-in delay-1">Privify FORGE — Federated Oversight &amp; Risk Governance Engine</p>
             <p class="hero-subtitle fade-in delay-2">
-                Privify discovers every AI agent running in your environment — sanctioned or shadow — maps every interaction, and enforces policy in real time. Three pillars: Discovery, Observability, Governance.
+                Privify SCOUT is a free discovery scan that finds shadow AI across your endpoints and local network in minutes — CLI tools, browser extensions, MCP servers, local models, leaked API keys and more. Nothing to install, nothing left behind.
             </p>
             <div class="hero-actions fade-in delay-3">
-                <a href="../request/index.html" class="btn-primary">Request early access</a>
-                <a href="demo/index.html" class="btn-secondary">&#9654; Try interactive demo</a>
-                <a href="#platform" class="btn-secondary" style="border-color:var(--border);">See how it works</a>
-                <a href="forge_brochure.pdf" download class="btn-secondary" style="border-color:var(--border);display:inline-flex;align-items:center;gap:0.4rem;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Download brochure
-                </a>
+                <a href="../request/index.html?product=scout" class="btn-primary">Get Privify SCOUT — free</a>
+                <a href="#how-it-works" class="btn-secondary">See how it works</a>
             </div>
             <div class="hero-stats fade-in delay-4">
-                <!-- Counts verified against ../AgentDiscovery: PROVIDERS (116),
-                     FRAMEWORKS (13), DLP_PATTERNS (12), SIEM connectors (11). -->
-                <div class="stat">
-                    <div class="stat-num">116</div>
-                    <div class="stat-label">AI providers tracked</div>
-                </div>
                 <div class="stat">
                     <div class="stat-num">13</div>
-                    <div class="stat-label">Compliance frameworks</div>
+                    <div class="stat-label">Surfaces scanned</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-num">12</div>
-                    <div class="stat-label">DLP patterns, live</div>
+                    <div class="stat-num">0</div>
+                    <div class="stat-label">Agents installed</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-num">11</div>
-                    <div class="stat-label">SIEM platforms</div>
+                    <div class="stat-num">&lt;5</div>
+                    <div class="stat-label">Minutes to a report</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">$0</div>
+                    <div class="stat-label">Cost to run</div>
                 </div>
             </div>
         </div>
         <div class="hero-visual fade-in delay-3">
-            <!-- Live dashboard mockup -->
-            <div class="dashboard-frame">
+            <div class="dashboard-frame scout-frame" id="scoutFrame">
                 <div class="dashboard-bar">
                     <div class="db-dot r"></div><div class="db-dot y"></div><div class="db-dot g"></div>
-                    <span class="db-title">privify — fleet dashboard</span>
+                    <span class="db-title">privify-scout &mdash; discovery scan</span>
+                    <span class="scout-status" id="scoutStatus">scanning&hellip;</span>
                 </div>
-                <div class="dashboard-body">
-                    <div class="db-stats-row">
-                        <div class="db-stat"><div class="db-stat-label">Active agents</div><div class="db-stat-val">47</div></div>
-                        <div class="db-stat"><div class="db-stat-label">Critical risk</div><div class="db-stat-val red">3</div></div>
-                        <div class="db-stat"><div class="db-stat-label">Probes active</div><div class="db-stat-val">4</div></div>
-                        <div class="db-stat"><div class="db-stat-label">Violations</div><div class="db-stat-val red">12</div></div>
+                <div class="scout-body">
+                    <div class="scout-scan-view" id="scoutScanView">
+                        <div class="scout-surfaces" id="scoutSurfaces"></div>
                     </div>
-                    <div class="db-chart">
-                        <div class="db-chart-label">Event volume</div>
-                        <div class="db-bars" id="heroBars"></div>
-                    </div>
-                    <div class="db-agents">
-                        <div class="db-agent">
-                            <div class="db-agent-dot" style="background:var(--ok)"></div>
-                            <div class="db-agent-info"><div class="db-agent-name">research-agent-v2</div><div class="db-agent-sub">autonomous · 94% conf</div></div>
-                            <div class="db-agent-risk risk-ok">Active</div>
-                        </div>
-                        <div class="db-agent">
-                            <div class="db-agent-dot" style="background:#E85D54"></div>
-                            <div class="db-agent-info"><div class="db-agent-name">unknown-agent-7f2</div><div class="db-agent-sub">shadow · unregistered</div></div>
-                            <div class="db-agent-risk risk-high">Critical</div>
-                        </div>
-                        <div class="db-agent">
-                            <div class="db-agent-dot" style="background:var(--warn)"></div>
-                            <div class="db-agent-info"><div class="db-agent-name">sales-copilot-prod</div><div class="db-agent-sub">api_consumer · 78%</div></div>
-                            <div class="db-agent-risk risk-med">Review</div>
-                        </div>
-                        <div class="db-agent">
-                            <div class="db-agent-dot" style="background:var(--ok)"></div>
-                            <div class="db-agent-info"><div class="db-agent-name">ollama-local-3</div><div class="db-agent-sub">local_llm · endpoint</div></div>
-                            <div class="db-agent-risk risk-ok">Governed</div>
-                        </div>
+                    <div class="scout-report-view" id="scoutReportView">
+                        <svg class="scout-report-svg" id="scoutReportSvg" viewBox="0 0 520 320" aria-hidden="true"></svg>
+                        <div class="scout-report-caption">Report generated &mdash; 8 of 13 surfaces active</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!--  Privify FORGE HERO IMAGE  -->
-<section class="forge-image-section">
-    <div class="container">
-        <div class="forge-image-inner">
-            <div class="forge-image-text fade-in">
-                <div class="section-eyebrow">The discovery gap</div>
-                <h2 class="section-title">You cannot govern<br>what you cannot see.</h2>
-                <p class="section-sub">Every AI policy names a handful of approved tools. The first Privify FORGE scan usually finds an order of magnitude more already running — including agents nobody registered, and models that never leave the laptop.</p>
-            </div>
-            <div class="forge-image-wrap fade-in delay-2">
-                <div class="dgap">
-                    <div class="dgap-panel">
-                        <div class="dgap-label">What your policy names</div>
-                        <div class="dgap-grid"><i class=""></i><i class=""></i><i class=""></i></div>
-                        <div class="dgap-fig">3<span>approved tools</span></div>
-                    </div>
-
-                    <div class="dgap-vs" aria-hidden="true">vs</div>
-
-                    <div class="dgap-panel dgap-found">
-                        <div class="dgap-label">What Privify FORGE finds</div>
-                        <div class="dgap-grid"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div>
-                        <div class="dgap-fig">47<span>agents running</span></div>
-                        <div class="dgap-sub">3 critical &middot; 12 policy violations</div>
-                    </div>
-                </div>
-                <p class="dgap-note">Representative first-scan result, from the Privify FORGE demo environment.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 
 <!--  LOGOS  -->
 <div class="logos-bar">
     <div class="container">
-        <div class="logos-bar-label">Designed for teams running agents on</div>
+        <div class="logos-bar-label">Finds shadow usage of</div>
         <div class="logos-scroll">
             <span class="logo-item">OpenAI</span>
             <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>Anthropic</span>
             <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>Google Gemini</span>
-            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.796 0a6.93 6.93 0 0 0-4.91 2.019L5.451 5.455l3.273 3.27 3.432-3.432a2.284 2.284 0 0 1 3.277 0 2.28 2.28 0 0 1 0 3.275L12 12.001l3.273 3.273 3.433-3.435c2.692-2.692 2.692-7.127 0-9.82A6.92 6.92 0 0 0 13.796 0m-5.07 8.728-3.433 3.434c-2.692 2.693-2.692 7.126 0 9.819A6.92 6.92 0 0 0 10.203 24a6.93 6.93 0 0 0 4.911-2.02l3.432-3.432-3.271-3.272-3.433 3.433a2.284 2.284 0 0 1-3.277 0 2.28 2.28 0 0 1 0-3.276L12 12z"/></svg>LangChain</span>
-            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.482.18C7.161 1.319 1.478 9.069 1.426 15.372c-.051 5.527 3.1 8.68 8.68 8.627 6.716-.05 14.259-6.87 12.09-10.9-.672-1.292-1.396-1.344-2.687-.207-1.602 1.395-1.654.31-.207-2.893 1.757-3.98 1.705-5.322-.31-7.544C17.03.388 14.962-.388 12.482.181Zm5.322 2.068c2.273 2.015 2.376 4.236.465 8.42-1.395 3.1-2.17 3.515-3.824 1.86-1.24-1.24-1.343-3.46-.258-6.044 1.137-2.635.982-3.1-.568-1.653-3.72 3.358-6.458 9.765-5.424 12.503.464 1.189.825 1.395 2.737 1.395 2.79 0 6.303-1.705 7.957-3.926 1.756-2.274 2.79-2.274 2.79-.052 0 3.875-6.459 8.627-11.625 8.627-6.251 0-9.351-4.752-7.491-11.47.878-2.995 4.443-7.904 7.077-9.66 3.255-2.17 5.684-2.17 8.164 0z"/></svg>CrewAI</span>
-            <span class="logo-item">AutoGen</span>
-            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m23.6 0-8.721 4.59L9.829 24h7.41zM9.83 24V5.142H.4Z"/></svg>vLLM</span>
-            <span class="logo-item"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.361 10.26a.894.894 0 0 0-.558.47l-.072.148.001.207c0 .193.004.217.059.353.076.193.152.312.291.448.24.238.51.3.872.205a.86.86 0 0 0 .517-.436.752.752 0 0 0 .08-.498c-.064-.453-.33-.782-.724-.897a1.06 1.06 0 0 0-.466 0zm-9.203.005c-.305.096-.533.32-.65.639a1.187 1.187 0 0 0-.06.52c.057.309.31.59.598.667.362.095.632.033.872-.205.14-.136.215-.255.291-.448.055-.136.059-.16.059-.353l.001-.207-.072-.148a.894.894 0 0 0-.565-.472 1.02 1.02 0 0 0-.474.007Zm4.184 2c-.131.071-.223.25-.195.383.031.143.157.288.353.407.105.063.112.072.117.136.004.038-.01.146-.029.243-.02.094-.036.194-.036.222.002.074.07.195.143.253.064.052.076.054.255.059.164.005.198.001.264-.03.169-.082.212-.234.15-.525-.052-.243-.042-.28.087-.355.137-.08.281-.219.324-.314a.365.365 0 0 0-.175-.48.394.394 0 0 0-.181-.033c-.126 0-.207.03-.355.124l-.085.053-.053-.032c-.219-.13-.259-.145-.391-.143a.396.396 0 0 0-.193.032zm.39-2.195c-.373.036-.475.05-.654.086-.291.06-.68.195-.951.328-.94.46-1.589 1.226-1.787 2.114-.04.176-.045.234-.045.53 0 .294.005.357.043.524.264 1.16 1.332 2.017 2.714 2.173.3.033 1.596.033 1.896 0 1.11-.125 2.064-.727 2.493-1.571.114-.226.169-.372.22-.602.039-.167.044-.23.044-.523 0-.297-.005-.355-.045-.531-.288-1.29-1.539-2.304-3.072-2.497a6.873 6.873 0 0 0-.855-.031zm.645.937a3.283 3.283 0 0 1 1.44.514c.223.148.537.458.671.662.166.251.26.508.303.82.02.143.01.251-.043.482-.08.345-.332.705-.672.957a3.115 3.115 0 0 1-.689.348c-.382.122-.632.144-1.525.138-.582-.006-.686-.01-.853-.042-.57-.107-1.022-.334-1.35-.68-.264-.28-.385-.535-.45-.946-.03-.192.025-.509.137-.776.136-.326.488-.73.836-.963.403-.269.934-.46 1.422-.512.187-.02.586-.02.773-.002zm-5.503-11a1.653 1.653 0 0 0-.683.298C5.617.74 5.173 1.666 4.985 2.819c-.07.436-.119 1.04-.119 1.503 0 .544.064 1.24.155 1.721.02.107.031.202.023.208a8.12 8.12 0 0 1-.187.152 5.324 5.324 0 0 0-.949 1.02 5.49 5.49 0 0 0-.94 2.339 6.625 6.625 0 0 0-.023 1.357c.091.78.325 1.438.727 2.04l.13.195-.037.064c-.269.452-.498 1.105-.605 1.732-.084.496-.095.629-.095 1.294 0 .67.009.803.088 1.266.095.555.288 1.143.503 1.534.071.128.243.393.264.407.007.003-.014.067-.046.141a7.405 7.405 0 0 0-.548 1.873c-.062.417-.071.552-.071.991 0 .56.031.832.148 1.279L3.42 24h1.478l-.05-.091c-.297-.552-.325-1.575-.068-2.597.117-.472.25-.819.498-1.296l.148-.29v-.177c0-.165-.003-.184-.057-.293a.915.915 0 0 0-.194-.25 1.74 1.74 0 0 1-.385-.543c-.424-.92-.506-2.286-.208-3.451.124-.486.329-.918.544-1.154a.787.787 0 0 0 .223-.531c0-.195-.07-.355-.224-.522a3.136 3.136 0 0 1-.817-1.729c-.14-.96.114-2.005.69-2.834.563-.814 1.353-1.336 2.237-1.475.199-.033.57-.028.776.01.226.04.367.028.512-.041.179-.085.268-.19.374-.431.093-.215.165-.333.36-.576.234-.29.46-.489.822-.729.413-.27.884-.467 1.352-.561.17-.035.25-.04.569-.04.319 0 .398.005.569.04a4.07 4.07 0 0 1 1.914.997c.117.109.398.457.488.602.034.057.095.177.132.267.105.241.195.346.374.43.14.068.286.082.503.045.343-.058.607-.053.943.016 1.144.23 2.14 1.173 2.581 2.437.385 1.108.276 2.267-.296 3.153-.097.15-.193.27-.333.419-.301.322-.301.722-.001 1.053.493.539.801 1.866.708 3.036-.062.772-.26 1.463-.533 1.854a2.096 2.096 0 0 1-.224.258.916.916 0 0 0-.194.25c-.054.109-.057.128-.057.293v.178l.148.29c.248.476.38.823.498 1.295.253 1.008.231 2.01-.059 2.581a.845.845 0 0 0-.044.098c0 .006.329.009.732.009h.73l.02-.074.036-.134c.019-.076.057-.3.088-.516.029-.217.029-1.016 0-1.258-.11-.875-.295-1.57-.597-2.226-.032-.074-.053-.138-.046-.141.008-.005.057-.074.108-.152.376-.569.607-1.284.724-2.228.031-.26.031-1.378 0-1.628-.083-.645-.182-1.082-.348-1.525a6.083 6.083 0 0 0-.329-.7l-.038-.064.131-.194c.402-.604.636-1.262.727-2.04a6.625 6.625 0 0 0-.024-1.358 5.512 5.512 0 0 0-.939-2.339 5.325 5.325 0 0 0-.95-1.02 8.097 8.097 0 0 1-.186-.152.692.692 0 0 1 .023-.208c.208-1.087.201-2.443-.017-3.503-.19-.924-.535-1.658-.98-2.082-.354-.338-.716-.482-1.15-.455-.996.059-1.8 1.205-2.116 3.01a6.805 6.805 0 0 0-.097.726c0 .036-.007.066-.015.066a.96.96 0 0 1-.149-.078A4.857 4.857 0 0 0 12 3.03c-.832 0-1.687.243-2.456.698a.958.958 0 0 1-.148.078c-.008 0-.015-.03-.015-.066a6.71 6.71 0 0 0-.097-.725C8.997 1.392 8.337.319 7.46.048a2.096 2.096 0 0 0-.585-.041Zm.293 1.402c.248.197.523.759.682 1.388.03.113.06.244.069.292.007.047.026.152.041.233.067.365.098.76.102 1.24l.002.475-.12.175-.118.178h-.278c-.324 0-.646.041-.954.124l-.238.06c-.033.007-.038-.003-.057-.144a8.438 8.438 0 0 1 .016-2.323c.124-.788.413-1.501.696-1.711.067-.05.079-.049.157.013zm9.825-.012c.17.126.358.46.498.888.28.854.36 2.028.212 3.145-.019.14-.024.151-.057.144l-.238-.06a3.693 3.693 0 0 0-.954-.124h-.278l-.119-.178-.119-.175.002-.474c.004-.669.066-1.19.214-1.772.157-.623.434-1.185.68-1.382.078-.062.09-.063.159-.012z"/></svg>Ollama</span>
-            <span class="logo-item">AWS Bedrock</span>
-            <span class="logo-item">Azure OpenAI</span>
+            <span class="logo-item">Ollama</span>
+            <span class="logo-item">LM Studio</span>
+            <span class="logo-item">Model Context Protocol</span>
+            <span class="logo-item">GitHub Copilot</span>
+            <span class="logo-item">Cursor</span>
+            <span class="logo-item">Continue</span>
         </div>
     </div>
 </div>
 
-<!--  THREE PILLARS  -->
-<section class="pillars" id="platform">
+<!--  HOW IT WORKS  -->
+<section class="pillars" id="how-it-works">
     <div class="container">
         <div class="section-header">
-            <div class="section-eyebrow">Platform</div>
-            <h2 class="section-title">Three pillars. One control plane.</h2>
-            <p class="section-sub">Privify is not a single tool. It is an integrated governance layer operating at every point where AI agents exist in your enterprise.</p>
+            <div class="section-eyebrow">How it works</div>
+            <h2 class="section-title">Point it at a machine. Get a report.</h2>
+            <p class="section-sub">SCOUT runs as your own user — no root, no admin rights, no software left behind. Run it on one laptop, or point it at your local subnet to see every endpoint at once.</p>
         </div>
         <div class="pillars-grid">
             <div class="pillar">
                 <div class="pillar-num">01 /</div>
-                <div class="pillar-icon blue"><i class="fa-solid fa-radar" style="color:var(--red)"></i></div>
-                <h3>Discovery</h3>
-                <p>Find every agent — sanctioned or shadow, cloud or local. Four parallel probes across endpoints, network traffic, filesystem, and behaviour patterns.</p>
+                <div class="pillar-icon blue"><i class="fa-solid fa-magnifying-glass" style="color:var(--red)"></i></div>
+                <h3>Scan</h3>
+                <p>13 surfaces, checked in sequence: CLI tools, environment and file-based API keys, MCP servers, IDE extensions, local model servers, running processes, Python and npm packages, shell and browser history, Docker containers, and your local subnet.</p>
                 <ul class="pillar-features">
-                    <li>Endpoint probe: detects AI library imports & local LLMs (Ollama, LM Studio, vLLM)</li>
-                    <li>Network probe: maps outbound calls to 116 AI providers</li>
-                    <li>File probe: finds prompt artifacts, API keys, agent configs</li>
-                    <li>MCP server auto-discovery with security assessment</li>
-                    <li>Participant registry: humans, agents, tools, APIs</li>
+                    <li>Agentless — reads what's already on the machine</li>
+                    <li>No account, no cloud upload, no signup to try it</li>
+                    <li>Point it at one subnet, or your whole LAN</li>
                 </ul>
                 <div class="pillar-glow"></div>
             </div>
             <div class="pillar">
                 <div class="pillar-num">02 /</div>
-                <div class="pillar-icon teal"></div>
-                <h3>Observability</h3>
-                <p>See what agents do — not just that they ran. Full interaction graph across human↔agent, agent↔agent, and agent↔tool. The delegation chain made visible.</p>
+                <div class="pillar-icon teal"><i class="fa-solid fa-diagram-project" style="color:var(--red)"></i></div>
+                <h3>Correlate</h3>
+                <p>Findings are grouped by surface and cross-referenced — an API key in a shell history next to a CLI tool next to an unauthenticated MCP server tells a very different story than any one of them alone.</p>
                 <ul class="pillar-features">
-                    <li>Live interaction graph: every delegation, message, and tool call</li>
-                    <li>Trace DAG with 800ms animated replay</li>
-                    <li>Quality scoring: 6-dimension radar per agent</li>
-                    <li>Anomaly detection with baseline deviation alerts</li>
-                    <li>OpenTelemetry OTLP receiver — no rip-and-replace</li>
+                    <li>Every finding is scored for risk, not just listed</li>
+                    <li>Duplicate signals collapse into one entity</li>
+                    <li>Runs entirely on the machine you scan</li>
                 </ul>
                 <div class="pillar-glow"></div>
             </div>
             <div class="pillar">
                 <div class="pillar-num">03 /</div>
-                <div class="pillar-icon purple"></div>
-                <h3>Governance</h3>
-                <p>Stop bad things before they complete. Policy evaluation on every interaction, mid-flight intervention, human approval gates, cost budgets, and quality SLAs.</p>
+                <div class="pillar-icon purple"><i class="fa-solid fa-chart-simple" style="color:var(--red)"></i></div>
+                <h3>Report</h3>
+                <p>An interactive report — not a spreadsheet. Findings render as connected, explorable views you can walk through with whoever needs convincing there's a gap.</p>
                 <ul class="pillar-features">
-                    <li>Policy engine: condition DSL, simulation mode, versioned rules</li>
-                    <li>DLP scanning: 12 patterns including SSN, PHI, API keys</li>
-                    <li>AI firewall: 10 threat signatures including prompt injection & jailbreak</li>
-                    <li>Human-in-the-loop: pause any interaction for approval</li>
-                    <li>Cost governance: per-agent budgets with threshold alerts</li>
+                    <li>Self-contained HTML, shareable in one file</li>
+                    <li>No data leaves the machine unless you send it</li>
+                    <li>Free, every time — no report is metered</li>
                 </ul>
                 <div class="pillar-glow"></div>
             </div>
@@ -1212,713 +1186,112 @@
     </div>
 </section>
 
-<!--  DASHBOARD SECTION  -->
-<section class="dashboard-section">
+<!--  Privify SCOUT DISCOVERY GAP  -->
+<section class="forge-image-section">
     <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">Live dashboard</div>
-            <h2 class="section-title">Your entire AI fleet. One screen.</h2>
-            <p class="section-sub">11 real-time panels powered by WebSocket and SSE streams. Every agent, every interaction, every policy match — visible the moment it happens.</p>
-        </div>
-        <div class="dashboard-showcase">
-            <div class="dash-topbar">
-                <div class="dash-dots"><div class="dash-dot r"></div><div class="dash-dot y"></div><div class="dash-dot g"></div></div>
-                <div class="dash-url">forge.privify.io — Privify FORGE</div>
+        <div class="forge-image-inner">
+            <div class="forge-image-text fade-in">
+                <div class="section-eyebrow">The first scan is the argument</div>
+                <h2 class="section-title">You already know<br>some of this is true.</h2>
+                <p class="section-sub">Most teams can name three or four AI tools people use. SCOUT's first run on a single laptop routinely finds several times that — API keys sitting in shell history, an unauthenticated MCP server, a model running locally that nobody provisioned.</p>
             </div>
-            <!-- Real capture, not a mock: infra/scripts/capture.py in the Privify FORGE repo,
-                 logged into the live deployment with the API key. Re-run it and swap
-                 this file whenever the dashboard changes meaningfully. -->
-            <img class="dash-screenshot" src="screenshots/dashboard.png" alt="The Privify Forge dashboard showing active agents, policy violations, event volume, tracked participants and the live event feed" loading="lazy" width="1920" height="1200">
-        </div>
-    </div>
-</section>
-
-<!--  LIVE CAPABILITIES — real captures, not mocks. Source: infra/scripts/capture.py
-      in the Privify FORGE repo, run against the live deployment. Re-capture and swap the
-      four GIFs in screenshots/ whenever the underlying panel changes meaningfully. -->
-<section class="live-cap-section" id="live-capabilities">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">See it live</div>
-            <h2 class="section-title">Not a mockup. This is the product.</h2>
-            <p class="section-sub">Four panels, captured directly from a running deployment.</p>
-        </div>
-
-        <div class="live-cap-row fade-in">
-            <div class="live-cap-text">
-                <h3>Platform that watches every surface an agent has</h3>
-                <p>Browser sessions, the CLI proxy, tool calls, file probes — one event stream. Every match carries its confidence score and where it was caught, so a security review is a filter, not an investigation.</p>
-            </div>
-            <div class="live-cap-media">
-                <img src="screenshots/logs.gif" alt="Event Logs panel filtering down to one match type, then opening its detail" loading="lazy" width="900" height="563">
-            </div>
-        </div>
-
-        <div class="live-cap-row live-cap-reverse fade-in delay-1">
-            <div class="live-cap-text">
-                <h3>One event, mapped to every framework you report on</h3>
-                <p>SOC 2, GDPR, HIPAA, the EU AI Act, ISO 42001 — switch frameworks and the same underlying evidence re-maps to the controls that framework actually asks for, article by article.</p>
-            </div>
-            <div class="live-cap-media">
-                <img src="screenshots/compliance.gif" alt="Compliance panel switching between SOC 2, GDPR and other frameworks, each showing control-level coverage" loading="lazy" width="900" height="563">
-            </div>
-        </div>
-
-        <div class="live-cap-row fade-in delay-2">
-            <div class="live-cap-text">
-                <h3>The full delegation chain, down to the step that got blocked</h3>
-                <p>An orchestrator hands work to three other agents; one of them tries to email a board report to an external address. The graph shows the whole chain — and the detail pane shows exactly why that one step was refused.</p>
-            </div>
-            <div class="live-cap-media">
-                <img src="screenshots/interactions.gif" alt="Interactions panel selecting a session, revealing the interaction graph and a blocked tool call's detail" loading="lazy" width="900" height="563">
-            </div>
-        </div>
-
-        <div class="live-cap-row live-cap-reverse fade-in delay-3">
-            <div class="live-cap-text">
-                <h3>Every endpoint, grouped by the network it's actually on</h3>
-                <p>No spreadsheet of hostnames — a live topology grouped by subnet, so "what's running in production" and "what's on someone's laptop" are visibly different questions.</p>
-            </div>
-            <div class="live-cap-media">
-                <img src="screenshots/topology.gif" alt="Network Topology view showing endpoints grouped into subnets around the Privify Forge management server" loading="lazy" width="900" height="563">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!--  KEY FEATURES  -->
-<section id="features">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">Capabilities</div>
-            <h2 class="section-title">Everything you need to govern AI at scale</h2>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>Shadow AI detection</h4>
-                <p>Discovers agents nobody registered — including local LLMs running on Ollama or LM Studio that generate zero outbound traffic. Process-level scanning, not proxy-level.</p>
-                <span class="feature-tag">Discovery</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>Interaction graph</h4>
-                <p>Live SVG graph of every human→agent, agent→agent, and agent→tool interaction. Colour-coded by policy status. Click any edge for full context, token counts, and latency.</p>
-                <span class="feature-tag">Observability</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>Real-time intervention</h4>
-                <p>BLOCK, REDACT, FLAG, or PAUSE any interaction before the response reaches its destination. Policy evaluation runs on every message the moment it's captured.</p>
-                <span class="feature-tag">Governance</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>DLP scanning</h4>
-                <p>12 patterns scan all interaction content: SSN, credit cards, API keys (OpenAI sk-*, AWS AKIA*), PHI, connection strings. Catches data in agent↔agent messages too.</p>
-                <span class="feature-tag">Security</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>AI firewall</h4>
-                <p>10 threat signatures covering the OWASP LLM Top 10: prompt injection, jailbreak (DAN), system prompt extraction, data exfiltration, indirect injection via tools.</p>
-                <span class="feature-tag">Security</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>Cost governance</h4>
-                <p>Per-agent cost ledger with team attribution, daily/weekly/monthly budgets, threshold alerts, and monthly spend forecasting. Chargeback-ready reports.</p>
-                <span class="feature-tag">FinOps</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>Quality SLAs</h4>
-                <p>6-dimension quality scoring (relevance, accuracy, safety, compliance, helpfulness, hallucination risk) with per-agent thresholds and automatic ALERT or SUSPEND on breach.</p>
-                <span class="feature-tag">Governance</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>Human-in-the-loop</h4>
-                <p>Approval queue pauses policy-violating interactions. Reviewer sees full context — interaction graph, participants, risk score, matched policy — before approving or denying.</p>
-                <span class="feature-tag">Governance</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>Compliance reporting</h4>
-                <p>13 frameworks: GDPR, HIPAA, SOC 2, PCI DSS, DPDP Act (India), PDPA (Singapore/Thailand), PIPEDA (Canada), EU AI Act, DSA, CA SB 53/AB 853, NIST AI RMF, ISO 42001, CCPA/CPRA. Tamper-evident SHA256 audit chain. CSV export.</p>
-                <span class="feature-tag">Compliance</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!--  DEPLOYMENT SCENARIOS  -->
-<section id="deployment" style="background:var(--surface)">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">Deployment</div>
-
-            <h2 class="section-title">Meets you where your agents run</h2>
-            <p class="section-sub">Six deployment components. Layer them for defence in depth. Start with one in five minutes. Scale to global enterprise without rearchitecting.</p>
-        </div>
-        <div class="topo-slot">
-<div class="topo" role="img" aria-label="Privify FORGE topology: Windows, macOS and Linux endpoints run probes that report to a Privify FORGE control plane self-hosted inside your network, which exports to your SIEM. No agent data is sent to Privify.">
-                    <div class="topo-head">Your network</div>
-
-                    <div class="topo-body">
-                        <div class="topo-col">
-                            <div class="topo-col-label">Endpoints</div>
-                            <div class="topo-node">Windows</div>
-                            <div class="topo-node">macOS</div>
-                            <div class="topo-node">Linux</div>
-                            <div class="topo-note">4 probes &middot; inline blocking</div>
-                        </div>
-
-                        <div class="topo-link" aria-hidden="true">
-                            <span class="topo-link-label">probes</span>
-                            <span class="topo-arrow"></span>
-                        </div>
-
-                        <div class="topo-col">
-                            <div class="topo-col-label">Privify FORGE control plane</div>
-                            <div class="topo-plane">
-                                <span>Policy engine</span>
-                                <span>Interaction graph</span>
-                                <span>Audit trail</span>
-                            </div>
-                            <div class="topo-note">self-hosted &middot; your infrastructure</div>
-                        </div>
-
-                        <div class="topo-link" aria-hidden="true">
-                            <span class="topo-link-label">export</span>
-                            <span class="topo-arrow"></span>
-                        </div>
-
-                        <div class="topo-col topo-col-end">
-                            <div class="topo-col-label">Your stack</div>
-                            <div class="topo-node">SIEM</div>
-                            <div class="topo-note">11 platforms</div>
-                        </div>
+            <div class="forge-image-wrap fade-in delay-2">
+                <div class="dgap">
+                    <div class="dgap-panel">
+                        <div class="dgap-label">What IT has on record</div>
+                        <div class="dgap-grid"><i class=""></i><i class=""></i><i class=""></i></div>
+                        <div class="dgap-fig">3<span>approved tools</span></div>
                     </div>
-
-                    <div class="topo-foot">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-                        Nothing crosses this boundary. In a self-hosted deployment Privify never receives your agent activity, traces or DLP findings.
+                    <div class="dgap-vs" aria-hidden="true">vs</div>
+                    <div class="dgap-panel dgap-found">
+                        <div class="dgap-label">What one scan finds</div>
+                        <div class="dgap-grid">
+                            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+                            <i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i>
+                        </div>
+                        <div class="dgap-fig">8<span>of 13 surfaces active</span></div>
+                        <div class="dgap-sub">3 MCP servers &middot; 1 unauthenticated</div>
                     </div>
                 </div>
-        </div>
-
-        <div class="deployment-grid">
-            <div class="deploy-card">
-                <div class="deploy-tier" style="color:var(--red)">SMB — up to 50 agents</div>
-                <h3>Single appliance or Docker</h3>
-                <div class="desc">One Docker container or a compact network appliance. Plug it in, run one command, govern your entire team's AI usage in under 15 minutes.</div>
-                <div class="deploy-components">
-                    <span class="deploy-chip">Docker container</span>
-                    <span class="deploy-chip">Endpoint agent</span>
-                    <span class="deploy-chip">DNS sinkhole</span>
-                </div>
-                <div class="deploy-specs">
-                    <div class="deploy-spec"><div class="deploy-spec-val">15 min</div><div class="deploy-spec-label">Time to deploy</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">~2ms</div><div class="deploy-spec-label">Added latency</div></div>
-                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=smb" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'smb'}})" aria-label="Contact us about pricing for SMB, up to 50 agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
-                </div>
-            </div>
-            <div class="deploy-card">
-                <div class="deploy-tier" style="color:var(--red)">Mid-market — 50–500 agents</div>
-                <h3>Network probe + HA appliance pair</h3>
-                <div class="desc">DNS sinkhole discovers shadow AI across every device. Network probe at egress inspects payloads. Endpoint agents catch local LLMs. HA pair for production uptime.</div>
-                <div class="deploy-components">
-                    <span class="deploy-chip">DNS sinkhole</span>
-                    <span class="deploy-chip">Network probe</span>
-                    <span class="deploy-chip">HA appliance pair</span>
-                    <span class="deploy-chip">PostgreSQL</span>
-                </div>
-                <div class="deploy-specs">
-                    <div class="deploy-spec"><div class="deploy-spec-val">1–2 days</div><div class="deploy-spec-label">Full deployment</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">11 SIEMs</div><div class="deploy-spec-label">Supported</div></div>
-                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=mid-market" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'mid-market'}})" aria-label="Contact us about pricing for Mid-market, 50 to 500 agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
-                </div>
-            </div>
-            <div class="deploy-card">
-                <div class="deploy-tier" style="color:var(--red)">Enterprise — 1,000+ agents</div>
-                <h3>All layers · global · per-region compliance</h3>
-                <div class="desc">All six deployment components. Regional Privify hubs feed a central governance cluster. Per-region compliance — GDPR in EU, DPDP Act in India, CCPA/NIST in US. Data residency enforced.</div>
-                <div class="deploy-components">
-                    <span class="deploy-chip">All 6 layers</span>
-                    <span class="deploy-chip">Regional hubs</span>
-                    <span class="deploy-chip">RBAC</span>
-                    <span class="deploy-chip">Multi-SIEM</span>
-                </div>
-                <div class="deploy-specs">
-                    <div class="deploy-spec"><div class="deploy-spec-val">Global</div><div class="deploy-spec-label">Deployment</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">HA pairs</div><div class="deploy-spec-label">Availability</div></div>
-                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=enterprise" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'enterprise'}})" aria-label="Contact us about pricing for Enterprise, 1,000+ agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
-                </div>
-            </div>
-            <div class="deploy-card">
-                <div class="deploy-tier" style="color:var(--red)">Cloud-native — Kubernetes</div>
-                <h3>Admission webhook · zero config per pod</h3>
-                <div class="desc">One Helm install. Admission webhook auto-injects our sidecar into every AI pod at creation. No code changes. Integrates with Istio/Linkerd, exposes Prometheus metrics. Runs on EKS, GKE and AKS.</div>
-                <div class="deploy-components">
-                    <span class="deploy-chip">Helm chart</span>
-                    <span class="deploy-chip">K8s sidecar</span>
-                    <span class="deploy-chip">Admission webhook</span>
-                    <span class="deploy-chip">Istio / Linkerd</span>
-                </div>
-                <div class="deploy-specs">
-                    <div class="deploy-spec"><div class="deploy-spec-val">1 cmd</div><div class="deploy-spec-label">Helm install</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">~1ms</div><div class="deploy-spec-label">Sidecar latency</div></div>
-                    <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=cloud-native" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'cloud-native'}})" aria-label="Contact us about pricing for Cloud-native on Kubernetes"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
-                </div>
+                <p class="dgap-note">Representative first-scan result, from a single unmanaged laptop.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!--  ADVANTAGES  -->
-<section id="advantages">
+<!--  WHAT IT FINDS  -->
+<section class="dashboard-section" id="surfaces">
     <div class="container">
         <div class="section-header">
-            <div class="section-eyebrow">Why Privify</div>
-            <h2 class="section-title">Built differently. Governed deeper.</h2>
-            <p class="section-sub">Most governance tools sit at the network boundary. Privify reaches further — into the endpoint, into the delegation chain, into the cost ledger.</p>
+            <div class="section-eyebrow">Coverage</div>
+            <h2 class="section-title">13 surfaces. One free scan.</h2>
+            <p class="section-sub">Every place shadow AI actually hides on an endpoint and the network around it.</p>
         </div>
-        <div class="advantages-grid">
-            <div class="advantage">
-                <div class="adv-icon"></div>
-                <h4>OS-level endpoint detection</h4>
-                <p>Privify's endpoint probe scans running processes, detects AI library imports, and discovers local LLM servers (Ollama, LM Studio, vLLM) that generate zero outbound traffic. Network-only tools are completely blind to these. We aren't.</p>
-                <span class="adv-tag adv-unique">Unique capability</span>
-            </div>
-            <div class="advantage">
-                <div class="adv-icon"></div>
-                <h4>Full interaction graph including agent↔agent</h4>
-                <p>When Agent A delegates to Agent B who calls Tool C, we see and govern the entire chain. Most platforms only see the first hop — human sends prompt, AI responds. The real risk — data leakage, prompt injection, unauthorised delegation — lives in the delegation path.</p>
-                <span class="adv-tag adv-unique">Unique capability</span>
-            </div>
-            <div class="advantage">
-                <div class="adv-icon">⏸</div>
-                <h4>Mid-flight intervention — not post-hoc alerting</h4>
-                <p>Policy evaluation runs the moment an interaction is captured — before the response reaches its destination. BLOCK halts instantly. REDACT strips sensitive content and allows through. PAUSE suspends and opens a human approval queue. This is control, not just visibility.</p>
-                <span class="adv-tag adv-unique">Unique capability</span>
-            </div>
-            <div class="advantage">
-                <div class="adv-icon"></div>
-                <h4>Quality SLAs linked to governance</h4>
-                <p>Quality scoring (6 dimensions, every interaction) feeds directly into the governance engine. A quality SLA breach — hallucination rate exceeds threshold, task completion drops — triggers the same ALERT or SUSPEND workflow as a security policy violation. One control plane for both.</p>
-                <span class="adv-tag adv-unique">Unique capability</span>
-            </div>
-            <div class="advantage">
-                <div class="adv-icon"></div>
-                <h4>Per-agent cost governance</h4>
-                <p>Token costs tracked per agent, attributed to teams and cost centres, measured against daily/weekly/monthly budgets. Forecasting projects end-of-month spend from 14-day trend data. The only platform that can answer: which agent cost your team $4,200 last month?</p>
-                <span class="adv-tag adv-unique">Unique capability</span>
-            </div>
-            <div class="advantage">
-                <div class="adv-icon"></div>
-                <h4>SIEM-native, not SIEM-replacing</h4>
-                <p>11 SIEM platforms supported across 6 export formats — CEF for Splunk, LEEF for QRadar, ECS for Elastic, STIX 2.1 for threat intel platforms. Every event auto-forwards in real time. Your SOC team gets AI agent telemetry in the platform they already use.</p>
-                <span class="adv-tag adv-parity">Enterprise ready</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!--  COMPARISON  -->
-<!-- ══ COVERAGE MAP — ported from the homepage. Leads into the capability
-     comparison: the gap first, the feature-by-feature detail after. ══ -->
-<section class="cmp-section" id="coverage">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">Why not just use a gateway?</div>
-            <h2 class="section-title">The agents your gateway will never see</h2>
-            <p class="section-sub">
-                An MCP gateway governs what routes through it. That's real coverage — but an agent only
-                routes through it when it chooses to speak MCP. Privify FORGE runs on the endpoint, where the
-                agent actually executes.
-            </p>
-        </div>
-        <div class="gap-map">
-            <div class="gap-map-head">Your environment — where Privify FORGE runs</div>
-            <div class="gap-map-body">
-
-                <div class="gap-inner">
-                    <div class="gap-inner-head">What an MCP gateway sees</div>
-                    <div class="gap-node">MCP tool calls</div>
-                    <div class="gap-inner-note">Everything that chose to speak the protocol</div>
-                </div>
-
-                <div class="gap-chips">
-                    <div class="gap-chip">
-                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
-                        <span>
-                            <span class="gap-chip-t">Local models</span>
-                            <span class="gap-chip-s">Ollama, LM Studio, llama.cpp — the traffic never leaves the machine, so it never reaches a gateway</span>
-                        </span>
-                    </div>
-                    <div class="gap-chip">
-                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
-                        <span>
-                            <span class="gap-chip-t">Direct API calls</span>
-                            <span class="gap-chip-s">Code hitting a provider's REST endpoint isn't speaking MCP, so there's nothing at the protocol layer to inspect</span>
-                        </span>
-                    </div>
-                    <div class="gap-chip">
-                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
-                        <span>
-                            <span class="gap-chip-t">Browser AI</span>
-                            <span class="gap-chip-s">An employee pasting into a chat window — the most common AI risk in an enterprise, and entirely outside the protocol</span>
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-            <div class="gap-map-foot">
-                <i class="fa-solid fa-shield-halved"></i>
-                Privify FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
-            </div>
-        </div>
-        <p class="gap-caption">
-            Three kinds of AI activity, none of which pass through a protocol gateway. Privify FORGE catches all
-            three because it runs where the code runs, not where the traffic is supposed to go.
-        </p>
-    </div>
-</section>
-
-<section class="cmp-section" id="comparison">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">Capability Comparison</div>
-            <h2 class="section-title">Built for what others <span style="color:var(--red)">weren't</span></h2>
-            <p class="section-sub">Most AI tools were built for a single persona &mdash; the engineer, the security team, or the compliance officer. Privify FORGE was designed from day one to serve all three, from a single deployment.</p>
-        </div>
-
-        <div class="cmp-wrap">
-            <div class="cmp-glow"></div>
-            <table class="cmp-table">
-                <thead>
-                    <tr>
-                        <th class="cmp-col-cap">Capability</th>
-                        <th class="cmp-col-others">Other platforms</th>
-                        <th class="cmp-col-forge">Privify FORGE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="cmp-group">
-                        <td colspan="2">Detection &amp; Visibility</td>
-                        <td class="cmp-forge-cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Shadow AI detection</td>
-                        <td class="cmp-others"><span class="cmp-partial">Network layer only</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">OS + network + file system</span></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Local LLM detection <span class="cmp-unique">only Privify FORGE</span></td>
-                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">Endpoint probe</span></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Agent-to-agent visibility <span class="cmp-unique">only Privify FORGE</span></td>
-                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">Full interaction graph</span></td>
-                    </tr>
-
-                    <tr class="cmp-group">
-                        <td colspan="2">Observability &amp; Tracing</td>
-                        <td class="cmp-forge-cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Trace DAG with replay</td>
-                        <td class="cmp-others"><span class="cmp-partial">Basic or partial</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">Full DAG &middot; 800ms replay</span></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">MCP server governance</td>
-                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">Autodiscovery</span></td>
-                    </tr>
-
-                    <tr class="cmp-group">
-                        <td colspan="2">Security &amp; Data Protection</td>
-                        <td class="cmp-forge-cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">DLP scanning</td>
-                        <td class="cmp-others"><span class="cmp-partial">Limited or vendor-locked</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">12 patterns &middot; real-time</span></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">AI firewall &amp; intervention</td>
-                        <td class="cmp-others"><span class="cmp-partial">Guardrails only</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">10 signatures &middot; inline block</span></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Human-in-the-loop approvals <span class="cmp-unique">only Privify FORGE</span></td>
-                        <td class="cmp-others"><span class="cmp-no">Not available</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">Approval queue &middot; configurable</span></td>
-                    </tr>
-
-                    <tr class="cmp-group">
-                        <td colspan="2">Cost &amp; Quality Governance</td>
-                        <td class="cmp-forge-cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Cost governance</td>
-                        <td class="cmp-others"><span class="cmp-partial">Usage totals only</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">Per-agent budget enforcement</span></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Quality SLAs</td>
-                        <td class="cmp-others"><span class="cmp-partial">Partial &mdash; single dimension</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">6 dimensions &middot; enforced</span></td>
-                    </tr>
-
-                    <tr class="cmp-group">
-                        <td colspan="2">Compliance &amp; Integration</td>
-                        <td class="cmp-forge-cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Compliance frameworks</td>
-                        <td class="cmp-others"><span class="cmp-partial">1&ndash;3 frameworks, basic</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">13 frameworks &middot; audit-ready</span></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">SIEM integration</td>
-                        <td class="cmp-others"><span class="cmp-partial">Basic or single platform</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">11 platforms &middot; real-time forward</span></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Deployment model</td>
-                        <td class="cmp-others"><span class="cmp-partial">SaaS only or cloud-locked</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">Cloud &middot; on-prem &middot; airgap &middot; hybrid</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="cmp-observation">
-            <div class="cmp-obs-icon">&#9654;</div>
-            <div>
-                <div class="cmp-obs-eyebrow">The Privify FORGE difference</div>
-                <div class="cmp-obs-text">
-                    No other platform governs the <strong>full AI stack</strong> &mdash; detection, observability,
-                    security, cost, and compliance &mdash; from a single deployment.
-                    Privify FORGE is purpose-built to serve the <strong>CISO, the AI engineer, and the compliance team</strong>
-                    without asking any of them to compromise.
-                </div>
-            </div>
-        </div>
-
-        <div class="cmp-stats">
-            <div class="cmp-stat">
-                <div class="cmp-stat-val">5</div>
-                <div class="cmp-stat-label">Capabilities no other<br>platform offers</div>
-            </div>
-            <div class="cmp-stat">
-                <div class="cmp-stat-val">11</div>
-                <div class="cmp-stat-label">Compliance<br>frameworks</div>
-            </div>
-            <div class="cmp-stat">
-                <div class="cmp-stat-val">11</div>
-                <div class="cmp-stat-label">SIEM platform<br>integrations</div>
-            </div>
-            <div class="cmp-stat">
-                <div class="cmp-stat-val">1</div>
-                <div class="cmp-stat-label">Deployment for<br>all three personas</div>
-            </div>
-        </div>
-
-        <div class="cmp-actions">
-            <a href="demo/index.html" class="nav-pill" style="text-decoration:none;padding:0.75rem 1.5rem;">&#9654; Try Interactive Demo</a>
-            <a href="../request/index.html" class="cmp-btn-secondary">Request Access</a>
-        </div>
-    </div>
-</section>
-
-<!--  INTEGRATIONS  -->
-<section class="integrations-section" id="integrations">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">Integrations</div>
-            <h2 class="section-title">Fits into your existing stack</h2>
-            <p class="section-sub">116 AI providers seeded. 11 SIEM platforms. Cloud discovery for AWS, GCP, and Azure. You don't rebuild your infrastructure — Privify slots into it.</p>
-        </div>
-        <div class="int-grid">
-            <div class="int-category">
-                <h4>AI providers</h4>
-                <div class="int-item"><div class="int-dot"></div>OpenAI / Azure OpenAI</div>
-                <div class="int-item"><div class="int-dot"></div>Anthropic</div>
-                <div class="int-item"><div class="int-dot"></div>Google Gemini / Vertex</div>
-                <div class="int-item"><div class="int-dot"></div>AWS Bedrock</div>
-                <div class="int-item"><div class="int-dot"></div>Ollama / vLLM / LM Studio</div>
-                <div class="int-item"><div class="int-dot"></div>+111 more providers</div>
-            </div>
-            <div class="int-category">
-                <h4>SIEM & Security</h4>
-                <div class="int-item"><div class="int-dot"></div>Splunk (CEF / HEC)</div>
-                <div class="int-item"><div class="int-dot"></div>Microsoft Sentinel</div>
-                <div class="int-item"><div class="int-dot"></div>IBM QRadar (LEEF)</div>
-                <div class="int-item"><div class="int-dot"></div>Elastic SIEM (ECS)</div>
-                <div class="int-item"><div class="int-dot"></div>Datadog / CrowdStrike</div>
-                <div class="int-item"><div class="int-dot"></div>STIX 2.1 threat intel</div>
-            </div>
-            <div class="int-category">
-                <h4>Cloud platforms</h4>
-                <div class="int-item"><div class="int-dot"></div>AWS (ECS, Lambda, Bedrock)</div>
-                <div class="int-item"><div class="int-dot"></div>GCP (Vertex, Cloud Run)</div>
-                <div class="int-item"><div class="int-dot"></div>Azure (OpenAI, AKS, Functions)</div>
-                <div class="int-item"><div class="int-dot"></div>Kubernetes (EKS / GKE / AKS)</div>
-                <div class="int-item"><div class="int-dot"></div>Run:ai / NVIDIA workloads</div>
-                <div class="int-item"><div class="int-dot"></div>Serverless (Lambda, Cloud Run)</div>
-            </div>
-            <div class="int-category">
-                <h4>Observability & ITSM</h4>
-                <div class="int-item"><div class="int-dot"></div>OpenTelemetry (OTLP)</div>
-                <div class="int-item"><div class="int-dot"></div>Langfuse</div>
-                <div class="int-item"><div class="int-dot"></div>Datadog / New Relic</div>
-                <div class="int-item"><div class="int-dot"></div>ServiceNow</div>
-                <div class="int-item"><div class="int-dot"></div>Jira</div>
-                <div class="int-item"><div class="int-dot"></div>Slack / PagerDuty / Teams</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!--  COMPLIANCE  -->
-<section id="compliance">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">Compliance</div>
-            <!-- Framework count and list: single source of truth is core_engine/compliance.py -> FRAMEWORKS (13). Update there first. -->
-            <h2 class="section-title">13 frameworks. Audit-ready out of the box.</h2>
-            <p class="section-sub">Every AI agent interaction is mapped to regulatory controls. SHA256 hash chain on every event. CSV export for audit submission. No manual work for your GRC team.</p>
-        </div>
-        <div class="compliance-grid">
-            <div class="compliance-card">
-                <div class="compliance-name">GDPR</div>
-                <div class="compliance-controls">7 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-            <div class="compliance-card">
-                <div class="compliance-name">HIPAA</div>
-                <div class="compliance-controls">6 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-            <div class="compliance-card">
-                <div class="compliance-name">SOC 2</div>
-                <div class="compliance-controls">7 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-            <div class="compliance-card">
-                <div class="compliance-name">PCI-DSS</div>
-                <div class="compliance-controls">5 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-            <div class="compliance-card" style="position:relative">
-                
-                <div class="compliance-name">DPDP</div>
-                <div class="compliance-controls">6 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-        </div>
-        <div style="text-align:center">
-            <div style="font-size:0.8rem;color:var(--gray-600);margin-bottom:1.25rem;">Also covers</div>
-            <div class="compliance-badges">
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127470;&#127475; DPDP Rules 2025</span><span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127466;&#127482; EU AI Act</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; NIST AI RMF</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127760; ISO 42001</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; CCPA</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127466;&#127482; DSA</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; California SB53</span>
-            </div>
+        <div class="scout-surface-grid">
+            <div class="scout-surface-card"><i class="fa-solid fa-terminal"></i><h4>CLI Tools</h4><p>claude, copilot, gemini and other AI CLIs installed on the machine</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-key"></i><h4>API Keys (env)</h4><p>Provider keys sitting in environment variables</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-file-shield"></i><h4>API Keys (files)</h4><p>Keys committed to config files and dotfiles</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-server"></i><h4>MCP Servers</h4><p>Model Context Protocol servers, and which ones ship without auth</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-puzzle-piece"></i><h4>IDE Extensions</h4><p>Copilot, Cursor, Continue and other AI coding extensions</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-microchip"></i><h4>Local AI Servers</h4><p>Ollama, LM Studio and other local model runtimes</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-gears"></i><h4>Running Processes</h4><p>AI-related processes active right now</p></div>
+            <div class="scout-surface-card"><i class="fa-brands fa-python"></i><h4>Python Packages</h4><p>anthropic, openai, langchain and similar libraries installed</p></div>
+            <div class="scout-surface-card"><i class="fa-brands fa-npm"></i><h4>npm Packages</h4><p>AI SDKs pulled into JavaScript projects</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-clock-rotate-left"></i><h4>Shell History</h4><p>Past commands that invoked an AI tool or model</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-globe"></i><h4>Browser History</h4><p>Visits to AI chat and API console domains</p></div>
+            <div class="scout-surface-card"><i class="fa-brands fa-docker"></i><h4>Docker Containers</h4><p>Containers running model servers or AI tooling</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-network-wired"></i><h4>Network Scan</h4><p>Every reachable host on the subnet, probed for AI ports and MCP endpoints</p></div>
         </div>
     </div>
 </section>
 
 <!--  EASY ADOPTION  -->
-<section style="background:var(--surface)" id="easy-deploy">
+<section style="background:var(--surface)" id="easy-run">
     <div class="container">
         <div class="section-header">
-            <div class="section-eyebrow">Easy adoption</div>
-            <h2 class="section-title">Running in minutes. Not months.</h2>
-            <p class="section-sub">Start with zero infrastructure changes. Add layers as your needs grow. Each step delivers immediate value — independently.</p>
+            <div class="section-eyebrow">Try it</div>
+            <h2 class="section-title">Free. No install. Nothing to configure.</h2>
+            <p class="section-sub">Three steps, no infrastructure changes, no account required to run it once.</p>
         </div>
         <div class="integration-steps">
             <div class="step-card">
                 <div class="step-num">1</div>
-                <h4>Single container</h4>
-                <p>Privify FORGE runs as a single Docker container. No database to configure, no agents to install, no proxy to route traffic through. Up and running in minutes.</p>
+                <h4>Get Privify SCOUT</h4>
+                <p>Request it below — a single binary, no Python or dependencies required.</p>
             </div>
             <div class="step-card">
                 <div class="step-num">2</div>
-                <h4>DNS sinkhole</h4>
-                <p>One config change to your internal DNS resolver. Instantly see every AI domain lookup from every device on your network — no agent install needed on any machine.</p>
+                <h4>Run one command</h4>
+                <p>Scans the local machine by default, or point it at a subnet with a single flag.</p>
             </div>
             <div class="step-card">
                 <div class="step-num">3</div>
-                <h4>Endpoint agents</h4>
-                <p>Deploy lightweight endpoint agents on developer machines and servers. Detects local LLMs, AI library imports, and filesystem artifacts — invisible to network-only tools.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num">4</div>
-                <h4>SIEM integration</h4>
-                <p>Connect your existing Splunk, Sentinel, or QRadar. All events forward automatically in CEF, LEEF, ECS, or STIX 2.1 — your SOC team sees AI telemetry immediately.</p>
-            </div>
-        </div>
-        <div class="easy-deploy-note">
-            <div class="edn-inner">
-                <span class="edn-icon">&#9432;</span>
-                <span>Each deployment layer works independently. Start with Step 1 and add coverage when you need it — no rearchitecting required.</span>
+                <h4>Open the report</h4>
+                <p>An interactive, self-contained HTML report — open it, walk through it, share it.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!--  INTEREST / SIGN UP  -->
-<!--  BRAND BEAT — the forge metaphor, placed after the rational case is
-      made and immediately before the ask. Decorative by intent.  -->
-<section class="brandbeat">
-    <div class="container">
-        <div class="brandbeat-inner">
-            <img src="forge_hero.png" alt="" aria-hidden="true" class="brandbeat-img" loading="lazy"/>
-            <div class="brandbeat-copy">
-                <div class="section-eyebrow">Powered by Privify FORGE</div>
-                <h2 class="section-title">Where AI governance<br>is forged.</h2>
-                <p class="section-sub">
-                    Every AI agent in your enterprise
-                    shaped, governed, and held to policy — the moment it acts.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="cta-section" id="interest">
+<section class="cta-section" id="get-scout">
     <div class="container">
         <div class="cta-inner">
             <div class="hero-eyebrow" style="display:inline-flex;margin-bottom:1.5rem">
                 <span class="dot"></span>
-                Early access &mdash; limited seats
+                Free &mdash; every time you run it
             </div>
-            <h2>Ready to govern your AI fleet?</h2>
-            <p>We onboard enterprises in cohorts. Tell us about your environment and we&rsquo;ll be in touch within 2 business days with a personalised demo and deployment plan.</p>
-            <a href="../request/index.html" class="cta-btn">
-                Request access
+            <h2>Find out what's actually running.</h2>
+            <p>Point Privify SCOUT at a laptop or a subnet and see, in minutes, what your inventory has been missing. No cost, no commitment, no sales call to get started.</p>
+            <a href="../request/index.html?product=scout" class="cta-btn">
+                Get Privify SCOUT — free
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <p class="cta-note">No spam. No sales calls without consent.</p>
             <div class="cta-trust">
-                <div class="trust-item"><i class="fa-solid fa-lock"></i> Self-hosted available</div>
-                <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Data never leaves your network</div>
-                <div class="trust-item"><i class="fa-solid fa-clock"></i> Deploy in under 15 minutes</div>
-                <div class="trust-item"><i class="fa-solid fa-code"></i> API-first, 66 endpoints</div>
+                <div class="trust-item"><i class="fa-solid fa-lock"></i> Nothing scanned leaves the machine</div>
+                <div class="trust-item"><i class="fa-solid fa-user-shield"></i> No admin rights required</div>
+                <div class="trust-item"><i class="fa-solid fa-hand-holding-dollar"></i> Free, every run</div>
+                <div class="trust-item"><i class="fa-solid fa-clock"></i> Report in under 5 minutes</div>
             </div>
         </div>
     </div>
@@ -1929,13 +1302,14 @@
 <!--  MOBILE MENU  -->
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner container">
-        <a href="#platform">Platform</a>
-        <a href="#deployment">Deployment</a>
-        <a href="#comparison">Compare</a>
-        <a href="#integrations">Integrations</a>
-        <a href="#compliance">Compliance</a>
-        <a href="../careers.html">Careers</a>        <a href="demo/index.html" style="color:var(--red);font-weight:600;">&#9654; Try Interactive Demo</a>
-        <a href="../request/index.html">Request Access</a>
+        <a href="../forge/index.html">Privify FORGE</a>
+        <a href="../shield/index.html">Privify SHIELD</a>
+        <a href="index.html">Privify SCOUT</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#surfaces">What it finds</a>
+        <a href="#easy-run">Get started</a>
+        <a href="../careers.html">Careers</a>
+        <a href="../request/index.html?product=scout" style="color:var(--red);font-weight:600;">Get Privify SCOUT &mdash; free</a>
     </div>
 </div>
 
@@ -1949,43 +1323,117 @@ window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.pageYOffset > 50);
 });
 
-//  Animated bars (hero)
-// color accepts either one CSS color (every bar the same, the original
-// behaviour) or an array, cycled per bar — used for the hero chart so it
-// reads as an event-type breakdown, like the real dashboard's, rather than
-// a single volume metric.
-function makeBars(containerId, count, color) {
-    const c = document.getElementById(containerId);
-    if (!c) return;
-    const palette = Array.isArray(color) ? color : null;
-    const heights = Array.from({length:count}, () => 20 + Math.random() * 80);
-    heights.forEach((h, i) => {
-        const b = document.createElement('div');
-        b.className = 'db-bar';
-        b.style.height = h + '%';
-        b.style.background = palette ? palette[i % palette.length] : (color || 'rgba(232,93,84,0.3)');
-        c.appendChild(b);
-    });
-}
-// Same palette the real Event Logs / Compliance views use per event type
-// (PROMPT_ARTIFACT_FOUND, DLP_MATCH, AI_API_CALL, POLICY_AUDIT, THREAT,
-// OTLP_SPAN, LOOP_DETECTED) — cycled here rather than tied to real labels,
-// since this mockup shows volume, not a literal breakdown.
-const HERO_BAR_PALETTE = ['#9B59FF', '#F0A500', '#E85D54', '#3D8BFF', '#F1707B', '#479EF5', '#00C97A'];
-makeBars('heroBars', 24, HERO_BAR_PALETTE);
-makeBars('showcaseBars', 24, 'rgba(232,93,84,0.3)');
+//  SCOUT animated scan → report widget
+// Grounded in the real 13 surfaces forge-scout.py checks (see
+// forge-context.md §7.3); the specific findings below are illustrative,
+// not a real customer's data — same "representative first-scan result"
+// framing the discovery-gap panel above states explicitly.
+const SCOUT_SURFACES = [
+    {name:'CLI Tools',          active:true,  detail:'claude, copilot, gemini'},
+    {name:'API Keys (env)',     active:true,  detail:'2 provider keys found'},
+    {name:'API Keys (files)',   active:false, detail:'none found'},
+    {name:'MCP Servers',        active:true,  detail:'3 servers · 1 unauthenticated'},
+    {name:'IDE Extensions',     active:true,  detail:'Copilot, Cursor, Continue'},
+    {name:'Local AI Servers',   active:true,  detail:'Ollama on :11434'},
+    {name:'Running Processes',  active:true,  detail:'ollama (1 process)'},
+    {name:'Python Packages',    active:false, detail:'none found'},
+    {name:'npm Packages',       active:false, detail:'none found'},
+    {name:'Shell History',      active:false, detail:'none found'},
+    {name:'Browser History',    active:true,  detail:'claude.ai, chat.openai.com'},
+    {name:'Docker Containers',  active:false, detail:'none found'},
+    {name:'Network Scan',       active:true,  detail:'2 hosts responding'},
+];
 
-//  Mini bar animation
-function animateBars() {
-    document.querySelectorAll('.db-bar, .mini-bar').forEach(b => {
-        if (Math.random() > 0.7) {
-            const h = 10 + Math.random() * 90;
-            b.style.height = h + '%';
-            b.style.transition = 'height 1.5s ease';
-        }
-    });
+function scoutWait(ms) { return new Promise(res => setTimeout(res, ms)); }
+
+function buildScoutRows() {
+    const container = document.getElementById('scoutSurfaces');
+    if (!container) return;
+    container.innerHTML = SCOUT_SURFACES.map(s => `
+        <div class="scout-row" data-active="${s.active}">
+            <span class="scout-row-icon">
+                <svg class="scout-spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="9" stroke-dasharray="42" stroke-dashoffset="14"/></svg>
+                <svg class="scout-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                <svg class="scout-dash" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/></svg>
+            </span>
+            <span class="scout-row-name">${s.name}</span>
+            <span class="scout-row-detail">${s.detail}</span>
+        </div>`).join('');
 }
-setInterval(animateBars, 2000);
+
+function drawScoutReport() {
+    const svg = document.getElementById('scoutReportSvg');
+    if (!svg) return;
+    const active = SCOUT_SURFACES.filter(s => s.active);
+    const cx = 260, cy = 150, r = 112;
+    const n = active.length;
+    let html = '';
+    active.forEach((s, i) => {
+        const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+        const x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle);
+        const mx = cx + (r * 0.5) * Math.cos(angle), my = cy + (r * 0.5) * Math.sin(angle);
+        html += `<path d="M ${cx} ${cy} Q ${mx} ${my} ${x} ${y}" class="scout-link" style="animation-delay:${i*110}ms"/>`;
+    });
+    html += `<circle cx="${cx}" cy="${cy}" r="26" class="scout-hub"/>`;
+    html += `<text x="${cx}" y="${cy+4}" class="scout-hub-label" text-anchor="middle">SCAN</text>`;
+    active.forEach((s, i) => {
+        const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+        const x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle);
+        const cos = Math.cos(angle), sin = Math.sin(angle);
+        const anchor = cos > 0.3 ? 'start' : (cos < -0.3 ? 'end' : 'middle');
+        const dx = cos > 0.3 ? 10 : (cos < -0.3 ? -10 : 0);
+        const dy = sin > 0.5 ? 16 : (sin < -0.5 ? -10 : 4);
+        const delay = i * 110 + 260;
+        html += `<circle cx="${x}" cy="${y}" r="6.5" class="scout-node" style="animation-delay:${delay}ms"/>`;
+        html += `<text x="${x+dx}" y="${y+dy}" class="scout-node-label" text-anchor="${anchor}" style="animation-delay:${delay}ms">${s.name}</text>`;
+    });
+    svg.innerHTML = html;
+}
+
+async function runScoutScan() {
+    const rows = document.querySelectorAll('#scoutSurfaces .scout-row');
+    const statusEl = document.getElementById('scoutStatus');
+    const scanView = document.getElementById('scoutScanView');
+    const reportView = document.getElementById('scoutReportView');
+    if (!rows.length || !statusEl || !scanView || !reportView) return;
+
+    scanView.style.display = 'block';
+    reportView.style.display = 'none';
+    statusEl.textContent = 'scanning…';
+    rows.forEach(r => { r.className = 'scout-row'; });
+
+    for (const row of rows) {
+        row.classList.add('scanning');
+        await scoutWait(230 + Math.random() * 150);
+        row.classList.remove('scanning');
+        row.classList.add(row.dataset.active === 'true' ? 'done-active' : 'done-clear');
+        await scoutWait(60);
+    }
+
+    statusEl.textContent = 'report ready';
+    await scoutWait(650);
+    scanView.style.display = 'none';
+    reportView.style.display = 'flex';
+    drawScoutReport();
+    await scoutWait(4500);
+    runScoutScan();
+}
+
+buildScoutRows();
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    runScoutScan();
+} else {
+    // Reduced motion: show the finished report at rest, no looping animation.
+    document.querySelectorAll('#scoutSurfaces .scout-row').forEach(row => {
+        row.classList.add(row.dataset.active === 'true' ? 'done-active' : 'done-clear');
+    });
+    const scanView = document.getElementById('scoutScanView');
+    const reportView = document.getElementById('scoutReportView');
+    if (scanView) scanView.style.display = 'none';
+    if (reportView) { reportView.style.display = 'flex'; drawScoutReport(); }
+    const statusEl = document.getElementById('scoutStatus');
+    if (statusEl) statusEl.textContent = 'report ready';
+}
 
 //  Mobile menu
 document.addEventListener('DOMContentLoaded', () => {
@@ -2049,7 +1497,7 @@ const observer = new IntersectionObserver(entries => {
 //  Skipped when the visitor asks for reduced motion — elements stay visible
 //  rather than being hidden by JS and revealed on scroll.
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.feature-card, .deploy-card, .advantage, .compliance-card, .int-category, .step-card, .pillar').forEach(el => {
+    document.querySelectorAll('.step-card, .pillar, .scout-surface-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -2083,17 +1531,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
             <div class="footer-cols">
                 <div class="footer-col">
                     <div class="footer-col-title">Privify FORGE</div>
-                    <a href="index.html" class="footer-link">Overview</a>
-                    <a href="demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
-                    <a href="#deployment" class="footer-link">Deployment</a>
-                    <a href="#compliance" class="footer-link">Compliance</a>
-                    <a href="#integrations" class="footer-link">Integrations</a>
+                    <a href="../forge/index.html" class="footer-link">Overview</a>
+                    <a href="../forge/demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
                     <a href="../index.html#pricing" class="footer-link">Pricing</a>
                 </div>
                 <div class="footer-col">
                     <div class="footer-col-title">Privify SHIELD</div>
                     <a href="../shield/index.html" class="footer-link">Overview</a>
                     <a href="../shield/index.html#waitlist" class="footer-link">Join waitlist</a>                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Privify SCOUT</div>
+                    <a href="index.html" class="footer-link">Overview</a>
+                    <a href="#surfaces" class="footer-link">What it finds</a>
+                    <a href="../request/index.html?product=scout" class="footer-link" style="color:var(--red);">Get it free</a>
+                </div>
                 <div class="footer-col">
                     <div class="footer-col-title">Company</div>
                     <a href="../careers.html" class="footer-link">Careers</a>
@@ -2122,7 +1573,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
             </div>
             <div class="fu-right">
                 <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
-                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in Privify FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Agentless &mdash; nothing leaves the machine</span>
             </div>
         </div>
         <div class="footer-bottom">
@@ -2144,6 +1595,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 <script src="/theme.js"></script>
 
-<script src="/assets/sentry/sentry.js" defer data-sentry-page="forge" data-sentry-api="https://privify-sentry.azurewebsites.net/api"></script>
+<script src="/assets/sentry/sentry.js" defer data-sentry-page="scout" data-sentry-api="https://privify-sentry.azurewebsites.net/api"></script>
 </body>
 </html>
