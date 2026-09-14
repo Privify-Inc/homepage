@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Privify builds AI control infrastructure. FORGE governs AI agents for enterprises. SHIELD protects individuals from data harvesting.">
+    <meta name="description" content="Privify builds AI control infrastructure. Privify FORGE governs AI agents for enterprises. SHIELD protects individuals from data harvesting.">
     <meta property="og:title" content="Privify — Control Your AI">
-    <meta property="og:description" content="FORGE for enterprises: discover, observe and govern every AI agent. SHIELD for individuals: take back your data.">
+    <meta property="og:description" content="Privify FORGE for enterprises: discover, observe and govern every AI agent. SHIELD for individuals: take back your data.">
     <title>Privify — Control Your AI</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         :root {
-            /* FORGE / enterprise track — existing brand accent */
+            /* Privify FORGE / enterprise track — existing brand accent */
             --red:#E85D54; --red-dim:rgba(232,93,84,0.1); --red-glow:rgba(232,93,84,0.22);
             /* SHIELD / consumer track — introduced for product-track separation */
             --cyan:#22D3EE; --cyan-dim:rgba(34,211,238,0.1); --cyan-glow:rgba(34,211,238,0.22);
@@ -375,15 +375,15 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Where does FORGE run, and does our data leave our network?",
+      "name": "Where does Privify FORGE run, and does our data leave our network?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "FORGE is designed to run inside your own environment. The management plane, database and event store are yours, and the discovery probes execute on the endpoint and report to your management plane, not to Privify. In a self-hosted deployment your agent activity, traces and DLP findings never reach Privify."
+        "text": "Privify FORGE is designed to run inside your own environment. The management plane, database and event store are yours, and the discovery probes execute on the endpoint and report to your management plane, not to Privify. In a self-hosted deployment your agent activity, traces and DLP findings never reach Privify."
       }
     },
     {
       "@type": "Question",
-      "name": "Which platforms does FORGE support?",
+      "name": "Which platforms does Privify FORGE support?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Inline blocking on Windows, macOS and Linux. Policy is evaluated at the moment an agent acts, and a blocked call is stopped before it reaches the provider rather than logged after the fact. On Windows, enforcement additionally runs in the OS network stack via a kernel driver, evaluating policy at the TCP connect boundary, which applies regardless of how the agent routes its traffic."
@@ -391,15 +391,15 @@
     },
     {
       "@type": "Question",
-      "name": "How is FORGE different from a DLP or CASB we already own?",
+      "name": "How is Privify FORGE different from a DLP or CASB we already own?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Those tools were not built for AI. A CASB governs sanctioned SaaS and a DLP inspects data leaving a known channel. Neither was designed for one agent calling another, a tool invocation, or a model running locally on a developer's laptop. FORGE watches that layer and feeds what it finds back into your existing stack across 11 SIEM platforms, so existing controls see what they were blind to."
+        "text": "Those tools were not built for AI. A CASB governs sanctioned SaaS and a DLP inspects data leaving a known channel. Neither was designed for one agent calling another, a tool invocation, or a model running locally on a developer's laptop. Privify FORGE watches that layer and feeds what it finds back into your existing stack across 11 SIEM platforms, so existing controls see what they were blind to."
       }
     },
     {
       "@type": "Question",
-      "name": "How does FORGE deploy?",
+      "name": "How does Privify FORGE deploy?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Through several protection points chosen to fit where your agents run: an endpoint agent, a browser extension for AI used in the browser, a proxy for CLI-based AI tools, and host probes for discovery. Some teams start with discovery only and add enforcement later; others go straight to inline policy."
@@ -428,7 +428,7 @@
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="forge/index.html">
-                            <div class="di-title">FORGE</div>
+                            <div class="di-title">Privify FORGE</div>
                             <div class="di-sub">AI agent governance for enterprises</div>
                         </a>
                         <a class="dropdown-item" href="shield/index.html" style="border-top:1px solid var(--border);">
@@ -467,7 +467,7 @@
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner container">
         <div class="mob-section">Products</div>
-        <a href="forge/index.html">FORGE — for enterprises</a>
+        <a href="forge/index.html">Privify FORGE — for enterprises</a>
         <a href="shield/index.html">SHIELD — for individuals</a>
         <div class="mob-section">Company</div>
         <a href="#pricing">Pricing</a>
@@ -505,7 +505,7 @@
                     For enterprises
                     <span class="fork-status">Early access</span>
                 </div>
-                <div class="fork-name">FORGE</div>
+                <div class="fork-name">Privify FORGE</div>
                 <div class="fork-expand">Federated Oversight &amp; Risk Governance Engine</div>
                 <p class="fork-value">
                     Discover every AI agent running in your environment, trace what it does, and stop it in
@@ -521,7 +521,7 @@
                     <a href="contact.html?product=forge" class="btn btn-forge" onclick="track('CTA_ForgeDemo')">
                         Request a demo <i class="fa-solid fa-arrow-right fa-xs"></i>
                     </a>
-                    <a href="forge/index.html" class="btn btn-ghost">Explore FORGE</a>
+                    <a href="forge/index.html" class="btn btn-ghost">Explore Privify FORGE</a>
                 </div>
                 <div class="fork-glow"></div>
             </div>
@@ -584,24 +584,24 @@
     </div>
 </section>
 
-<!-- ══ FORGE TRACK ══════════════════════════════════════════════════════ -->
+<!-- ══ Privify FORGE TRACK ══════════════════════════════════════════════════════ -->
 <!-- ══ THE WEDGE — coverage gap, placed ahead of the mechanism ══════════ -->
 <section class="track track-gap" id="why">
     <div class="container">
 
         <div class="section-header">
-            <div class="track-tag">FORGE · For enterprises</div>
+            <div class="track-tag">Privify FORGE · For enterprises</div>
             <div class="section-eyebrow">Why not just use a gateway?</div>
             <h2 class="section-title">The agents your gateway will never see</h2>
             <p class="section-sub">
                 An MCP gateway governs what routes through it. That's real coverage — but an agent only
-                routes through it when it chooses to speak MCP. FORGE runs on the endpoint, where the
+                routes through it when it chooses to speak MCP. Privify FORGE runs on the endpoint, where the
                 agent actually executes.
             </p>
         </div>
 
         <div class="gap-map">
-            <div class="gap-map-head">Your environment — where FORGE runs</div>
+            <div class="gap-map-head">Your environment — where Privify FORGE runs</div>
             <div class="gap-map-body">
 
                 <div class="gap-inner">
@@ -637,12 +637,12 @@
             </div>
             <div class="gap-map-foot">
                 <i class="fa-solid fa-shield-halved"></i>
-                FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
+                Privify FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
             </div>
         </div>
 
         <p class="gap-caption">
-            Three kinds of AI activity, none of which pass through a protocol gateway. FORGE catches all
+            Three kinds of AI activity, none of which pass through a protocol gateway. Privify FORGE catches all
             three because it runs where the code runs, not where the traffic is supposed to go.
         </p>
 
@@ -678,7 +678,7 @@
 
         <div class="section-header">
             <div class="section-eyebrow">How it works</div>
-            <h2 class="section-title">How FORGE actually works</h2>
+            <h2 class="section-title">How Privify FORGE actually works</h2>
             <p class="section-sub">
                 Three stages, running continuously on every endpoint in your environment. No agent registry to
                 maintain, no cooperation required from the tools you're trying to govern.
@@ -745,7 +745,7 @@
             <div class="section-eyebrow" style="justify-content:center">Pricing</div>
             <h2 class="section-title">Pricing tailored to your organization</h2>
             <p class="section-sub">
-                FORGE is priced per deployment, not per seat off a rate card. Environment size, deployment model
+                Privify FORGE is priced per deployment, not per seat off a rate card. Environment size, deployment model
                 and enforcement scope all move the number — so we quote it properly instead of guessing publicly.
             </p>
         </div>
@@ -804,10 +804,10 @@
             <div class="faq-list">
 
                 <details class="faq-item" name="faq">
-                    <summary>Where does FORGE run, and does our data leave our network?</summary>
+                    <summary>Where does Privify FORGE run, and does our data leave our network?</summary>
                     <div class="faq-answer">
                         <p>
-                            FORGE is designed to run inside your own environment. The management plane, database
+                            Privify FORGE is designed to run inside your own environment. The management plane, database
                             and event store are yours, and the discovery probes execute on the endpoint and
                             report to your management plane — not to us.
                         </p>
@@ -846,7 +846,7 @@
                             developer's laptop.
                         </p>
                         <p>
-                            FORGE watches the layer they were never pointed at — and then feeds what it finds
+                            Privify FORGE watches the layer they were never pointed at — and then feeds what it finds
                             back into the stack you already run, across 11 SIEM platforms. You don't replace
                             your existing controls. You make them see what they were blind to.
                         </p>
@@ -965,7 +965,7 @@
             </div>
             <div class="footer-cols">
                 <div class="footer-col">
-                    <div class="footer-col-title">FORGE</div>
+                    <div class="footer-col-title">Privify FORGE</div>
                     <a href="forge/index.html" class="footer-link">Overview</a>
                     <a href="forge/demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
                     <a href="forge/index.html#deployment" class="footer-link">Deployment</a>
@@ -1007,7 +1007,7 @@
             </div>
             <div class="fu-right">
                 <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
-                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in Privify FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
             </div>
         </div>
         <div class="footer-bottom">

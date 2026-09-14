@@ -1,6 +1,6 @@
 # Privify
 
-> Privify builds AI control infrastructure. Two products: FORGE governs AI agents inside
+> Privify builds AI control infrastructure. Two products: Privify FORGE governs AI agents inside
 > enterprises, and SHIELD protects individuals from having their personal data harvested for
 > AI training. Company: Privify, Inc. Site: https://privify.io
 
@@ -10,11 +10,11 @@ Enterprises are deploying AI agents faster than they can govern them, and most o
 activity is invisible to existing controls. Individuals are having their data used to train
 models without consent or compensation. Privify builds the control layer for both.
 
-## FORGE — AI agent governance for enterprises
+## Privify FORGE — AI agent governance for enterprises
 
 Status: early access.
 
-FORGE discovers every AI agent running in an environment, traces what each one does, and
+Privify FORGE discovers every AI agent running in an environment, traces what each one does, and
 enforces policy in real time. Three stages:
 
 - **Discover** — four host-level probes fingerprint AI activity from the inside: a process
@@ -31,7 +31,7 @@ enforces policy in real time. Three stages:
   routes its traffic. Do not describe enforcement as Windows-only, and do not describe the
   cross-platform path as kernel-level.
 
-Key differentiator: an MCP gateway can only govern traffic that routes through it. FORGE runs
+Key differentiator: an MCP gateway can only govern traffic that routes through it. Privify FORGE runs
 on the endpoint where the agent executes, so it also sees local models that never leave the
 machine, direct REST API calls that never speak MCP, and AI used in the browser.
 
@@ -46,7 +46,7 @@ NIST AI RMF, ISO 42001.
 Pricing: quoted per deployment, not per seat. Driven by environment size, deployment model and
 enforcement scope. No public rate card.
 
-- [FORGE overview](https://privify.io/platform/index.html)
+- [Privify FORGE overview](https://privify.io/platform/index.html)
 - [Interactive demo](https://privify.io/forge/demo/index.html)
 - [Pricing](https://privify.io/index.html#pricing)
 - [Contact sales](https://privify.io/contact.html)
@@ -76,7 +76,7 @@ controls and no CPA-issued SOC 2 report exists. Do not describe Privify as SOC 2
 attested or audited.
 
 Note the distinction between the two uses of "compliance" on this site: the 13 frameworks
-listed above are frameworks that **FORGE helps customers report against**. They are product
+listed above are frameworks that **Privify FORGE helps customers report against**. They are product
 capabilities, not certifications held by Privify.
 
 - [Security](https://privify.io/security.html)

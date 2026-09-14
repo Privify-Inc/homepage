@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Talk to the Privify team about FORGE — AI agent governance for enterprises. Request a demo or pricing.">
+    <meta name="description" content="Talk to the Privify team about Privify FORGE — AI agent governance for enterprises. Request a demo or pricing.">
     <meta property="og:title" content="Contact Privify">
-    <meta property="og:description" content="Request a FORGE demo, ask about pricing, or get in touch with the Privify team.">
+    <meta property="og:description" content="Request a Privify FORGE demo, ask about pricing, or get in touch with the Privify team.">
     <title>Contact — Privify</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -174,7 +174,7 @@
                 PRIVIFY
             </a>
             <div class="nav-links">
-                <a href="forge/index.html" class="nav-link">FORGE</a>
+                <a href="forge/index.html" class="nav-link">Privify FORGE</a>
                 <a href="shield/index.html" class="nav-link">SHIELD</a>
                 <a href="index.html#pricing" class="nav-link">Pricing</a>
                 <a href="careers.html" class="nav-link">Careers</a>
@@ -240,7 +240,7 @@
                         <i class="fa-solid fa-play"></i>
                         <div>
                             <div class="ai-t"><a href="forge/demo/index.html">Try the interactive demo</a></div>
-                            <div class="ai-s">Explore FORGE right now — no form, no signup.</div>
+                            <div class="ai-s">Explore Privify FORGE right now — no form, no signup.</div>
                         </div>
                     </div>
                     <div class="aside-item">
@@ -344,7 +344,7 @@
 const hdr = document.getElementById('header');
 window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.pageYOffset > 50));
 
-//  Shares the Formspree endpoint used by the FORGE early-access form on platform/index.html
+//  Shares the Formspree endpoint used by the Privify FORGE early-access form on platform/index.html
 //  Delivers to sales@privify.io + sales@privify.io
 const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/meajvnve';
 
@@ -360,7 +360,7 @@ let enquiryTier = '';
         const sel = document.getElementById('cIntent');
         if ([...sel.options].some(o => o.value === intent)) sel.value = intent;
     }
-    // Deployment tier, when the visitor arrived from a tier card on the FORGE page.
+    // Deployment tier, when the visitor arrived from a tier card on the Privify FORGE page.
     const tier = params.get('tier');
     if (tier && TIER_NAMES[tier]) {
         enquiryTier = TIER_NAMES[tier];
@@ -445,7 +445,7 @@ async function handleContact() {
             </div>
             <div class="footer-cols">
                 <div class="footer-col">
-                    <div class="footer-col-title">FORGE</div>
+                    <div class="footer-col-title">Privify FORGE</div>
                     <a href="forge/index.html" class="footer-link">Overview</a>
                     <a href="forge/demo/index.html" class="footer-link" style="color:var(--red);">&#9654; Live Demo</a>
                     <a href="forge/index.html#deployment" class="footer-link">Deployment</a>
@@ -487,7 +487,7 @@ async function handleContact() {
             </div>
             <div class="fu-right">
                 <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
-                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in Privify FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
             </div>
         </div>
         <div class="footer-bottom">

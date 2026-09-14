@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="FORGE interactive demo — see how Privify discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance.">
-<meta property="og:title" content="FORGE Interactive Demo | Privify">
+<meta name="description" content="Privify FORGE interactive demo — see how Privify discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance.">
+<meta property="og:title" content="Privify FORGE Interactive Demo | Privify">
 <meta property="og:description" content="Experience the platform that discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance.">
-<title>FORGE — Interactive Product Demo | Privify</title>
+<title>Privify FORGE — Interactive Product Demo | Privify</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="stylesheet" href="/theme.css">
 <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
@@ -17,9 +17,9 @@
   --panel:       #0D0D16;
   --panel2:      #111120;
   --border:      rgba(255,255,255,0.07);
-  --primary:     #FF2E2E;
-  --primary-glow:rgba(255,46,46,0.10);
-  --primary-dim: rgba(255,46,46,0.55);
+  --primary:     #E85D54;
+  --primary-glow:rgba(232,93,84,0.10);
+  --primary-dim: rgba(232,93,84,0.55);
   --text:        #E8E8F0;
   --text-muted:  #666688;
   --text-dim:    #44445a;
@@ -29,6 +29,19 @@
   --purple:      #9B59FF;
   --orange:      #F97316;
   --font-mono:   'JetBrains Mono','Fira Mono','Courier New',monospace;
+  /* opacity-scale foreground tokens, used inline for dynamically-rendered
+     content; flipped to black under [data-theme="light"] below */
+  --w07: rgba(255,255,255,0.07);
+  --w08: rgba(255,255,255,0.08);
+  --w12: rgba(255,255,255,0.12);
+  --w20: rgba(255,255,255,0.2);
+  --w25: rgba(255,255,255,0.25);
+  --w35: rgba(255,255,255,0.35);
+  --w40: rgba(255,255,255,0.4);
+  --w45: rgba(255,255,255,0.45);
+  --w50: rgba(255,255,255,0.5);
+  --w55: rgba(255,255,255,0.55);
+  --w65: rgba(255,255,255,0.65);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;overflow:hidden;}
@@ -64,21 +77,21 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 #welcome .particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
 #welcome .content{position:relative;text-align:center;max-width:540px;padding:0 24px;}
 .w-logo{font-size:72px;font-weight:900;color:var(--primary);letter-spacing:-4px;line-height:1;
-  text-shadow:0 0 60px rgba(255,46,46,0.35);}
+  text-shadow:0 0 60px rgba(232,93,84,0.35);}
 .w-sub{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.25em;text-transform:uppercase;margin-top:6px;}
 .w-tagline{font-size:22px;font-weight:300;color:rgba(255,255,255,0.85);margin-top:24px;line-height:1.4;}
 .w-tagline strong{color:var(--primary);font-weight:800;}
 .w-desc{font-size:12px;color:rgba(255,255,255,0.4);margin-top:14px;line-height:1.7;}
-.w-pillars{display:flex;gap:0;margin-top:28px;border:1px solid rgba(255,46,46,0.2);border-radius:6px;overflow:hidden;}
-.w-pillar{flex:1;padding:10px 0;text-align:center;border-right:1px solid rgba(255,46,46,0.15);}
+.w-pillars{display:flex;gap:0;margin-top:28px;border:1px solid rgba(232,93,84,0.2);border-radius:6px;overflow:hidden;}
+.w-pillar{flex:1;padding:10px 0;text-align:center;border-right:1px solid rgba(232,93,84,0.15);}
 .w-pillar:last-child{border-right:none;}
 .w-pillar-name{font-size:10px;font-weight:700;color:var(--primary);letter-spacing:0.2em;}
 .w-pillar-sub{font-size:8.5px;color:rgba(255,255,255,0.28);margin-top:2px;}
 .w-buttons{display:flex;gap:12px;margin-top:32px;justify-content:center;}
 .btn-tour{background:var(--primary);color:#fff;border:none;border-radius:6px;
   padding:13px 28px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:0.03em;
-  transition:all 0.15s;box-shadow:0 4px 20px rgba(255,46,46,0.3);}
-.btn-tour:hover{background:#FF4444;transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,46,46,0.4);}
+  transition:all 0.15s;box-shadow:0 4px 20px rgba(232,93,84,0.3);}
+.btn-tour:hover{background:#d44e46;transform:translateY(-1px);box-shadow:0 6px 24px rgba(232,93,84,0.4);}
 .btn-explore{background:transparent;color:rgba(255,255,255,0.55);border:1px solid var(--border);
   border-radius:6px;padding:13px 24px;font-size:13px;cursor:pointer;transition:all 0.15s;}
 .btn-explore:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
@@ -102,6 +115,10 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .sb-stat-val{font-weight:700;font-family:var(--font-mono);}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);}
 .sb-nav{flex:1;padding:6px 0;}
+.nav-section{
+  padding:14px 16px 4px;font-size:9.5px;font-weight:700;letter-spacing:0.09em;
+  color:rgba(255,255,255,0.22);text-transform:uppercase;
+}
 .nav-item{
   width:100%;display:flex;align-items:center;gap:10px;
   padding:9px 16px;background:transparent;border:none;
@@ -161,9 +178,9 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   filter:blur(14px) brightness(0.18) saturate(0.45);
 }
 #locked-modal{
-  background:#0E0E1E;border:1px solid rgba(255,46,46,0.35);border-radius:14px;
+  background:#0E0E1E;border:1px solid rgba(232,93,84,0.35);border-radius:14px;
   padding:36px 40px 32px;max-width:480px;width:calc(100% - 48px);
-  box-shadow:0 24px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,46,46,0.08);
+  box-shadow:0 24px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(232,93,84,0.08);
   position:relative;z-index:1;isolation:isolate;
   transform:scale(0.94);
   transition:transform 0.25s ease;
@@ -177,12 +194,12 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .lt-link{
   display:inline-block;background:var(--primary);color:#fff;text-decoration:none;
   font-size:13px;font-weight:700;padding:10px 22px;border-radius:6px;
-  transition:background 0.15s;box-shadow:0 4px 18px rgba(255,46,46,0.3);
+  transition:background 0.15s;box-shadow:0 4px 18px rgba(232,93,84,0.3);
 }
-.lt-link:hover{background:#FF4444;}
+.lt-link:hover{background:#d44e46;}
 
 .sb-footer{padding:10px 16px;border-top:1px solid var(--border);font-size:9.5px;color:rgba(255,255,255,0.2);}
-.sb-footer a{color:rgba(255,46,46,0.6);text-decoration:none;}
+.sb-footer a{color:rgba(232,93,84,0.6);text-decoration:none;}
 
 /* — MAIN AREA — */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
@@ -198,9 +215,9 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .view-sub{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;}
 
 /* — STAT CARDS — */
-.stat-cards{display:flex;gap:12px;padding:16px 24px;flex-shrink:0;}
+.stat-cards{display:flex;flex-wrap:wrap;gap:12px;padding:16px 24px;flex-shrink:0;}
 .stat-card{
-  flex:1;background:var(--panel);border:1px solid var(--border);
+  flex:1 1 150px;background:var(--panel);border:1px solid var(--border);
   border-radius:6px;padding:14px 16px;
 }
 .stat-label{font-size:9.5px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
@@ -237,7 +254,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 }
 .event-row:hover{background:var(--panel2);}
 .event-row.new-flash{animation:flashin 0.5s ease;}
-@keyframes flashin{from{background:rgba(255,46,46,0.12);}to{background:transparent;}}
+@keyframes flashin{from{background:rgba(232,93,84,0.12);}to{background:transparent;}}
 .ev-type{font-size:10px;font-family:var(--font-mono);flex-shrink:0;min-width:175px;padding-top:1px;}
 .ev-detail{font-size:11px;color:rgba(255,255,255,0.45);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .ev-conf{font-size:10px;color:rgba(255,255,255,0.25);flex-shrink:0;width:36px;text-align:right;}
@@ -264,7 +281,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;
   transition:all 0.15s;
 }
-.btn-replay:hover{background:#FF4444;}
+.btn-replay:hover{background:#d44e46;}
 .btn-replay:disabled{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);cursor:default;}
 .dag-status{font-size:11px;color:rgba(255,255,255,0.35);}
 #dag-svg{flex:1;width:100%;}
@@ -306,6 +323,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .fw-ctrl-badge.evidence{background:rgba(0,201,122,0.18);color:var(--green);}
 .fw-ctrl-badge.partial{background:rgba(240,165,0,0.18);color:var(--yellow);}
 .fw-ctrl-badge.process{background:rgba(120,120,160,0.18);color:rgba(200,200,220,0.5);}
+.fw-ctrl-badge.at_risk{background:rgba(232,93,84,0.18);color:var(--primary);}
 .fw-ctrl-desc{font-size:10px;color:rgba(255,255,255,0.3);line-height:1.5;margin-top:3px;}
 
 /* — POLICIES — */
@@ -320,6 +338,17 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .policy-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:0.06em;}
 .policy-badge.active{background:rgba(0,201,122,0.15);color:var(--green);}
 .policy-badge.triggered{background:rgba(240,165,0,0.2);color:var(--yellow);}
+.policy-badge.default{background:rgba(155,89,255,0.15);color:var(--purple);}
+.policy-badge.block{background:rgba(232,93,84,0.15);color:var(--primary);}
+.policy-badge.observe{background:rgba(61,139,255,0.15);color:var(--blue);}
+.policy-tabs{display:flex;gap:4px;margin-bottom:16px;}
+.policy-tab{
+  font-size:11px;font-weight:600;padding:6px 14px;border-radius:5px;
+  border:1px solid transparent;background:transparent;color:rgba(255,255,255,0.35);
+  cursor:default;font-family:inherit;
+}
+.policy-tab.active{background:var(--primary);color:#fff;}
+.policy-lib-label{font-size:13px;font-weight:700;margin-bottom:12px;}
 .policy-desc{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.6;}
 .policy-meta{display:flex;gap:16px;margin-top:8px;}
 .policy-meta-item{font-size:10px;color:rgba(255,255,255,0.3);}
@@ -354,12 +383,12 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .modal-field-val{font-size:12px;color:rgba(255,255,255,0.75);font-family:var(--font-mono);background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:4px;}
 .modal-risk{display:flex;gap:10px;margin:14px 0;}
 .risk-chip{padding:4px 12px;border-radius:4px;font-size:11px;font-weight:700;}
-.risk-high{background:rgba(255,46,46,0.2);color:var(--primary);border:1px solid rgba(255,46,46,0.3);}
+.risk-high{background:rgba(232,93,84,0.2);color:var(--primary);border:1px solid rgba(232,93,84,0.3);}
 .risk-info{background:rgba(61,139,255,0.15);color:var(--blue);border:1px solid rgba(61,139,255,0.3);}
 .modal-actions{display:flex;gap:12px;margin-top:22px;}
-.btn-deny{flex:1;background:rgba(255,46,46,0.15);color:var(--primary);border:1px solid rgba(255,46,46,0.3);
+.btn-deny{flex:1;background:rgba(232,93,84,0.15);color:var(--primary);border:1px solid rgba(232,93,84,0.3);
   border-radius:6px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s;}
-.btn-deny:hover{background:rgba(255,46,46,0.25);}
+.btn-deny:hover{background:rgba(232,93,84,0.25);}
 .btn-approve{flex:1;background:rgba(0,201,122,0.15);color:var(--green);border:1px solid rgba(0,201,122,0.3);
   border-radius:6px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s;}
 .btn-approve:hover{background:rgba(0,201,122,0.25);}
@@ -373,13 +402,13 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 
 .tour-highlight{
   position:relative;z-index:6001;
-  box-shadow:0 0 0 3px var(--primary),0 0 30px rgba(255,46,46,0.25)!important;
+  box-shadow:0 0 0 3px var(--primary),0 0 30px rgba(232,93,84,0.25)!important;
   border-radius:6px;
   animation:tour-pulse 2s infinite;
 }
 @keyframes tour-pulse{
-  0%,100%{box-shadow:0 0 0 3px var(--primary),0 0 20px rgba(255,46,46,0.2);}
-  50%{box-shadow:0 0 0 4px var(--primary),0 0 36px rgba(255,46,46,0.4);}
+  0%,100%{box-shadow:0 0 0 3px var(--primary),0 0 20px rgba(232,93,84,0.2);}
+  50%{box-shadow:0 0 0 4px var(--primary),0 0 36px rgba(232,93,84,0.4);}
 }
 
 #tour-tooltip{
@@ -387,7 +416,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   z-index:6002;pointer-events:all;
   background:#0C0C1E;border:1px solid var(--primary);border-radius:10px;
   padding:20px 24px;width:500px;
-  box-shadow:0 12px 48px rgba(0,0,0,0.6),0 0 0 1px rgba(255,46,46,0.2);
+  box-shadow:0 12px 48px rgba(0,0,0,0.6),0 0 0 1px rgba(232,93,84,0.2);
 }
 #tour-tooltip.active{display:block;}
 .tt-step{font-size:9.5px;color:var(--primary);font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;
@@ -406,8 +435,8 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .tt-back:hover{color:var(--text);}
 .tt-next{background:var(--primary);color:#fff;border:none;border-radius:5px;
   padding:7px 20px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;
-  box-shadow:0 2px 12px rgba(255,46,46,0.3);}
-.tt-next:hover{background:#FF4444;}
+  box-shadow:0 2px 12px rgba(232,93,84,0.3);}
+.tt-next:hover{background:#d44e46;}
 
 /* — END SCREEN — */
 #end-screen{
@@ -425,8 +454,8 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 .end-buttons{display:flex;gap:12px;justify-content:center;margin-top:28px;}
 .btn-cta-primary{background:var(--primary);color:#fff;border:none;border-radius:7px;
   padding:14px 30px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
-  box-shadow:0 4px 20px rgba(255,46,46,0.3);transition:all 0.15s;}
-.btn-cta-primary:hover{background:#FF4444;transform:translateY(-1px);}
+  box-shadow:0 4px 20px rgba(232,93,84,0.3);transition:all 0.15s;}
+.btn-cta-primary:hover{background:#d44e46;transform:translateY(-1px);}
 .btn-cta-sec{background:transparent;color:rgba(255,255,255,0.55);border:1px solid var(--border);
   border-radius:7px;padding:14px 26px;font-size:14px;cursor:pointer;font-family:inherit;transition:all 0.15s;}
 .btn-cta-sec:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
@@ -581,7 +610,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   .w-tagline{font-size:17px;}
   .w-desc{font-size:11px;}
   .w-pillars{flex-direction:column;}
-  .w-pillar{border-right:none;border-bottom:1px solid rgba(255,46,46,0.15);padding:8px 0;}
+  .w-pillar{border-right:none;border-bottom:1px solid rgba(232,93,84,0.15);padding:8px 0;}
   .w-pillar:last-child{border-bottom:none;}
   .w-buttons{flex-direction:column;}
   .btn-tour,.btn-explore{width:100%;}
@@ -608,7 +637,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   padding:32px 24px;text-align:center;
 }
 .mw-logo{font-size:48px;font-weight:900;color:var(--primary);letter-spacing:-3px;
-  font-family:var(--font-mono);text-shadow:0 0 40px rgba(255,46,46,0.3);margin-bottom:24px;}
+  font-family:var(--font-mono);text-shadow:0 0 40px rgba(232,93,84,0.3);margin-bottom:24px;}
 .mw-icon{font-size:40px;margin-bottom:16px;}
 .mw-title{font-size:20px;font-weight:800;margin-bottom:10px;}
 .mw-body{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:300px;margin-bottom:28px;}
@@ -618,7 +647,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   background:var(--primary);color:#fff;border:none;border-radius:7px;
   padding:13px 28px;font-size:13px;font-weight:700;cursor:pointer;
   font-family:inherit;width:100%;max-width:280px;margin-bottom:10px;
-  box-shadow:0 4px 16px rgba(255,46,46,0.3);
+  box-shadow:0 4px 16px rgba(232,93,84,0.3);
 }
 .mw-btn-secondary{
   background:transparent;color:rgba(255,255,255,0.35);border:1px solid var(--border);
@@ -630,8 +659,12 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   #mobile-warning{display:flex;}
 }
 
-/* Light mode — FORGE demo dashboard */
-[data-theme="light"] { --bg:#F0F0F4; --panel:#FFFFFF; --panel2:#F5F5FA; --border:rgba(0,0,0,0.08); --text:#0A0A0A; --text-muted:#6B7280; --text-dim:#9CA3AF; }
+/* Light mode — Privify FORGE demo dashboard */
+[data-theme="light"] { --bg:#F0F0F4; --panel:#FFFFFF; --panel2:#F5F5FA; --border:rgba(0,0,0,0.08); --text:#0A0A0A; --text-muted:#6B7280; --text-dim:#9CA3AF;
+  --w07: rgba(0,0,0,0.07); --w08: rgba(0,0,0,0.08); --w12: rgba(0,0,0,0.12); --w20: rgba(0,0,0,0.2);
+  --w25: rgba(0,0,0,0.25); --w35: rgba(0,0,0,0.35); --w40: rgba(0,0,0,0.4); --w45: rgba(0,0,0,0.45);
+  --w50: rgba(0,0,0,0.5); --w55: rgba(0,0,0,0.55); --w65: rgba(0,0,0,0.65);
+}
 [data-theme="light"] html, [data-theme="light"] body { background: #F0F0F4; color: #0A0A0A; }
 [data-theme="light"] .sidebar { background: #FFFFFF; border-right-color: rgba(0,0,0,0.08); }
 [data-theme="light"] .main-header { background: #FFFFFF; border-bottom-color: rgba(0,0,0,0.08); }
@@ -644,17 +677,88 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 [data-theme="light"] #theme-toggle { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.4); }
 [data-theme="light"] .icon-sun { display: block; }
 [data-theme="light"] .icon-moon { display: none; }
+
+/* Light mode — everything below was styled with a fixed white foreground
+   (readable only on the dark background); give each the same opacity
+   scale in black so it stays legible when the panel flips to white. */
+[data-theme="light"] #back-link{color:rgba(0,0,0,0.4);}
+[data-theme="light"] #back-link:hover{color:rgba(0,0,0,0.75);}
+[data-theme="light"] .w-sub{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .w-tagline{color:rgba(0,0,0,0.85);}
+[data-theme="light"] .w-desc{color:rgba(0,0,0,0.4);}
+[data-theme="light"] .w-pillar-sub{color:rgba(0,0,0,0.28);}
+[data-theme="light"] .btn-explore{color:rgba(0,0,0,0.55);}
+[data-theme="light"] .btn-explore:hover{border-color:rgba(0,0,0,0.2);}
+[data-theme="light"] .sb-logo-full{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .sb-stat-label{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .nav-section{color:rgba(0,0,0,0.22);}
+[data-theme="light"] .nav-item.locked:hover{background:rgba(0,0,0,0.02);color:rgba(0,0,0,0.45);}
+[data-theme="light"] .lt-body{color:rgba(0,0,0,0.65);}
+[data-theme="light"] .sb-footer{color:rgba(0,0,0,0.2);}
+[data-theme="light"] .view-sub{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .stat-label{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .stat-sub{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .chart-title{color:rgba(0,0,0,0.4);}
+[data-theme="light"] .chart-toggle{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .chart-bar-label{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .chart-bar-type{color:rgba(0,0,0,0.2);}
+[data-theme="light"] .event-row{border-bottom:1px solid rgba(0,0,0,0.035);}
+[data-theme="light"] .ev-detail{color:rgba(0,0,0,0.45);}
+[data-theme="light"] .ev-conf{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .ev-time{color:rgba(0,0,0,0.2);}
+[data-theme="light"] .trace-id{color:rgba(0,0,0,0.6);}
+[data-theme="light"] .trace-meta{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .btn-replay:disabled{background:rgba(0,0,0,0.1);color:rgba(0,0,0,0.3);}
+[data-theme="light"] .dag-status{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .dag-node-bg{fill:rgba(0,0,0,0.04);stroke:rgba(0,0,0,0.12);}
+[data-theme="light"] .dag-node-label{fill:rgba(0,0,0,0.55);}
+[data-theme="light"] .dag-edge{stroke:rgba(0,0,0,0.12);}
+[data-theme="light"] .dag-edge.active{stroke:rgba(0,0,0,0.35);}
+[data-theme="light"] .dag-timing{fill:rgba(0,0,0,0.25);}
+[data-theme="light"] .dag-type-label{fill:rgba(0,0,0,0.28);}
+[data-theme="light"] marker#arrow path{fill:rgba(0,0,0,0.25);}
+[data-theme="light"] marker#arrow-active path{fill:rgba(0,0,0,0.5);}
+[data-theme="light"] .fw-group-label{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .fw-card:hover{border-color:rgba(0,0,0,0.15);}
+[data-theme="light"] .fw-ctrl-id{color:rgba(0,0,0,0.5);}
+[data-theme="light"] .fw-ctrl-name{color:rgba(0,0,0,0.65);}
+[data-theme="light"] .fw-ctrl-desc{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .policy-tab{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .policy-desc{color:rgba(0,0,0,0.4);}
+[data-theme="light"] .policy-meta-item{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .policy-meta-item span{color:rgba(0,0,0,0.55);}
+[data-theme="light"] .modal-field-label{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .modal-field-val{color:rgba(0,0,0,0.75);background:rgba(0,0,0,0.04);}
+[data-theme="light"] .tt-skip{color:rgba(0,0,0,0.25);}
+[data-theme="light"] .tt-skip:hover{color:rgba(0,0,0,0.55);}
+[data-theme="light"] .tt-body{color:rgba(0,0,0,0.6);}
+[data-theme="light"] .tt-dot{background:rgba(0,0,0,0.15);}
+[data-theme="light"] .tt-back{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .end-sub{color:rgba(0,0,0,0.45);}
+[data-theme="light"] .end-stat-label{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .btn-cta-sec{color:rgba(0,0,0,0.55);}
+[data-theme="light"] .btn-cta-sec:hover{border-color:rgba(0,0,0,0.2);}
+[data-theme="light"] .end-footnote{color:rgba(0,0,0,0.25);}
+[data-theme="light"] ::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.1);}
+[data-theme="light"] .filter-btn{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .filter-sep{color:rgba(0,0,0,0.15);}
+[data-theme="light"] .sum-label{color:rgba(0,0,0,0.3);}
+[data-theme="light"] .mob-hamburger{color:rgba(0,0,0,0.6);}
+[data-theme="light"] .mw-body{color:rgba(0,0,0,0.5);}
+[data-theme="light"] .mw-body strong{color:rgba(0,0,0,0.8);}
+[data-theme="light"] .mw-btn-secondary{color:rgba(0,0,0,0.35);}
+[data-theme="light"] .mw-btn-secondary:hover{color:rgba(0,0,0,0.6);}
 </style>
 </head>
 <body>
-<button id="theme-toggle" aria-label="Toggle light/dark mode" style="position:fixed;top:10px;right:54px;z-index:9000;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);cursor:pointer;width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;padding:0;transition:all 0.2s;">
+<button id="theme-toggle" aria-label="Toggle light/dark mode" style="position:fixed;top:10px;right:54px;z-index:9000;background:var(--w07);border:1px solid var(--w12);color:var(--w40);cursor:pointer;width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;padding:0;transition:all 0.2s;">
     <svg class="icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
     <svg class="icon-sun"  width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
 
 <!-- MOBILE WARNING -->
 <div id="mobile-warning">
-  <div class="mw-logo">FORGE</div>
+  <div class="mw-logo">Privify FORGE</div>
   <div class="mw-icon">🖥</div>
   <div class="mw-title">Best on a larger screen</div>
   <div class="mw-divider"></div>
@@ -676,8 +780,8 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 <div id="welcome">
   <div class="particles" id="particles"></div>
   <div class="content">
-    <div class="w-logo">FORGE</div>
-    <div class="w-sub">Federated Oversight &amp; Risk Governance Engine</div>
+    <div class="w-logo">Privify FORGE</div>
+    <div class="w-sub">AI Agent Discovery, Observability &amp; Governance</div>
     <div class="w-tagline">Every AI agent. Every interaction.<br><strong>Governed.</strong></div>
     <div class="w-desc">Experience the platform that discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance — all in one place.</div>
     <div class="w-pillars">
@@ -698,8 +802,8 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
   <!-- SIDEBAR -->
   <div class="sidebar" id="sidebar">
     <div class="sb-logo">
-      <div class="sb-logo-name">FORGE</div>
-      <div class="sb-logo-full">Federated Oversight &amp;<br>Risk Governance Engine</div>
+      <div class="sb-logo-name">Privify FORGE</div>
+      <div class="sb-logo-full">AI Agent Discovery,<br>Observability &amp; Governance</div>
     </div>
     <div class="sb-status">
       <div class="sb-stat">
@@ -708,29 +812,39 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
       </div>
       <div class="sb-stat">
         <span class="sb-stat-label">AGENTS</span>
-        <span class="sb-stat-val" id="sb-agents" style="color:var(--primary)">24</span>
+        <span class="sb-stat-val" id="sb-agents" style="color:var(--primary)">2</span>
       </div>
       <div class="sb-stat">
         <span class="sb-stat-label">EVENTS</span>
-        <span class="sb-stat-val" id="sb-events" style="color:rgba(255,255,255,0.45)">0</span>
+        <span class="sb-stat-val" id="sb-events" style="color:var(--w45)">0</span>
       </div>
     </div>
     <nav class="sb-nav">
       <button class="nav-item active" data-view="dashboard"><span class="ni-icon">⬡</span>Dashboard</button>
+      <div class="nav-section">Discovery</div>
+      <button class="nav-item locked" onclick="showLockedToast('Probe Control')"><span class="ni-icon">◈</span>Probe Control<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('Endpoints')"><span class="ni-icon">▣</span>Endpoints<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('Participants')"><span class="ni-icon">◎</span>Participants<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('MCP Servers')"><span class="ni-icon">⬢</span>MCP Servers<span class="ni-lock">🔒</span></button>
+      <div class="nav-section">Observability</div>
       <button class="nav-item locked" onclick="showLockedToast('Interactions')"><span class="ni-icon">◉</span>Interactions<span class="ni-lock">🔒</span></button>
       <button class="nav-item" data-view="traces"><span class="ni-icon">↗</span>Traces</button>
-      <button class="nav-item locked" onclick="showLockedToast('Participants')"><span class="ni-icon">◎</span>Participants<span class="ni-lock">🔒</span></button>
-      <button class="nav-item locked" onclick="showLockedToast('Quality')"><span class="ni-icon">★</span>Quality<span class="ni-lock">🔒</span></button>
-      <button class="nav-item" data-view="policies"><span class="ni-icon">⚙</span>Policies</button>
-      <button class="nav-item locked" onclick="showLockedToast('MCP Servers')"><span class="ni-icon">⬢</span>MCP Servers<span class="ni-lock">🔒</span></button>
-      <button class="nav-item locked" onclick="showLockedToast('Probe Control')"><span class="ni-icon">◈</span>Probe Control<span class="ni-lock">🔒</span></button>
       <button class="nav-item" data-view="logs"><span class="ni-icon">▤</span>Event Logs</button>
+      <div class="nav-section">Governance</div>
+      <button class="nav-item locked" onclick="showLockedToast('Parallax')"><span class="ni-icon">◫</span>Parallax<span class="ni-lock">🔒</span></button>
+      <button class="nav-item" data-view="policies"><span class="ni-icon">⚙</span>Policies</button>
       <button class="nav-item" data-view="compliance"><span class="ni-icon">✓</span>Compliance</button>
       <button class="nav-item locked" onclick="showLockedToast('Reports & SIEM')"><span class="ni-icon">⊞</span>Reports &amp; SIEM<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('ECP')"><span class="ni-icon">▤</span>ECP<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('ACE')"><span class="ni-icon">▥</span>ACE<span class="ni-lock">🔒</span></button>
+      <div class="nav-section">Configuration</div>
+      <button class="nav-item locked" onclick="showLockedToast('Agent Registry')"><span class="ni-icon">◎</span>Agent Registry<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('Users & Roles')"><span class="ni-icon">◈</span>Users &amp; Roles<span class="ni-lock">🔒</span></button>
+      <button class="nav-item locked" onclick="showLockedToast('License')"><span class="ni-icon">⬢</span>License<span class="ni-lock">🔒</span></button>
       <button class="nav-item locked" onclick="showLockedToast('Feedback')"><span class="ni-icon">✉</span>Feedback<span class="ni-lock">🔒</span></button>
     </nav>
     <div class="sb-footer">
-      FORGE v0.1.3 &nbsp;&middot;&nbsp; <a href="https://privify.io">privify.io</a>
+      Privify FORGE v0.1.3 &nbsp;&middot;&nbsp; <a href="https://privify.io">privify.io</a>
     </div>
   </div>
 
@@ -742,11 +856,11 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 
     <!-- MOBILE TOPBAR -->
     <div class="mobile-topbar">
-      <a href="https://privify.io" style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.4);font-size:11px;font-weight:500;text-decoration:none;">
+      <a href="https://privify.io" style="display:flex;align-items:center;gap:6px;color:var(--w40);font-size:11px;font-weight:500;text-decoration:none;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
         Back to Privify
       </a>
-      <span class="mob-logo">FORGE</span>
+      <span class="mob-logo">Privify FORGE</span>
       <div class="mob-right">
         <span class="live-dot pulse"></span>
         <button class="mob-hamburger" onclick="toggleSidebar()" aria-label="Menu">
@@ -760,30 +874,45 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
       <div class="view-header">
         <div>
           <div class="view-title">Dashboard</div>
-          <div class="view-sub" id="dash-sub">Monitoring 24 active agents</div>
+          <div class="view-sub" id="dash-sub">Real-time AI agent governance</div>
         </div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.25);font-family:var(--font-mono)" id="dash-time"></div>
+        <div style="font-size:11px;color:var(--w25);font-family:var(--font-mono)" id="dash-time"></div>
       </div>
       <div class="stat-cards" id="stat-cards">
         <div class="stat-card">
           <div class="stat-label">Active Agents</div>
-          <div class="stat-val" id="s-agents" style="color:var(--primary)">24</div>
-          <div class="stat-sub">3 local LLMs detected</div>
+          <div class="stat-val" id="s-agents" style="color:var(--primary)">2</div>
+          <div class="stat-sub">Detected this session</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Events (24h)</div>
-          <div class="stat-val" id="s-events" style="color:var(--yellow)">847</div>
-          <div class="stat-sub" id="s-events-sub">+12 last minute</div>
+          <div class="stat-label">Critical Risk</div>
+          <div class="stat-val" style="color:var(--primary)">0</div>
+          <div class="stat-sub">Confidence &ge; 85%</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">DLP Matches</div>
-          <div class="stat-val" id="s-dlp" style="color:var(--purple)">12</div>
-          <div class="stat-sub">SSN &middot; email &middot; API keys</div>
+          <div class="stat-label">Total Events</div>
+          <div class="stat-val" id="s-events" style="color:var(--text)">13366</div>
+          <div class="stat-sub" id="s-events-sub">Since engine start</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Probes Active</div>
+          <div class="stat-val" style="color:var(--blue)">3</div>
+          <div class="stat-sub">of 3 configured</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Policy Violations</div>
           <div class="stat-val" id="s-violations" style="color:var(--yellow)">3</div>
-          <div class="stat-sub" id="s-violations-sub">1 pending approval</div>
+          <div class="stat-sub" id="s-violations-sub">Last 24h</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Open Anomalies</div>
+          <div class="stat-val" style="color:var(--purple)">10</div>
+          <div class="stat-sub">Unresolved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending Approvals</div>
+          <div class="stat-val" style="color:var(--green)">0</div>
+          <div class="stat-sub">Awaiting review</div>
         </div>
       </div>
       <div class="chart-box" id="chart-box">
@@ -796,10 +925,10 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
           </div>
         </div>
         <div id="chart-bars"></div>
-        <div id="chart-time-label" style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:6px;font-family:var(--font-mono);"></div>
+        <div id="chart-time-label" style="font-size:10px;color:var(--w20);margin-top:6px;font-family:var(--font-mono);"></div>
       </div>
       <div style="padding:0 24px 6px;flex-shrink:0;">
-        <div style="font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;text-transform:uppercase;">Recent Events</div>
+        <div style="font-size:10px;color:var(--w25);letter-spacing:0.1em;text-transform:uppercase;">Recent Events</div>
       </div>
       <div class="events-scroll" id="dash-events"></div>
     </div>
@@ -814,16 +943,23 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
       </div>
       <div class="logs-toolbar">
         <div class="time-filters">
-          <span style="font-size:10px;color:rgba(255,255,255,0.25);margin-right:4px;">RANGE</span>
-          <button class="filter-btn" onclick="setLogRange(1)">1h</button>
-          <button class="filter-btn active" onclick="setLogRange(6)">6h</button>
-          <button class="filter-btn" onclick="setLogRange(24)">24h</button>
-          <button class="filter-btn" onclick="setLogRange(168)">7d</button>
-          <button class="filter-btn" onclick="setLogRange(null)">All</button>
+          <span style="font-size:10px;color:var(--w25);margin-right:4px;">RANGE</span>
+          <button class="filter-btn" data-range="1" onclick="setLogRange(1)">1h</button>
+          <button class="filter-btn active" data-range="6" onclick="setLogRange(6)">6h</button>
+          <button class="filter-btn" data-range="24" onclick="setLogRange(24)">24h</button>
+          <button class="filter-btn" data-range="168" onclick="setLogRange(168)">7d</button>
+          <button class="filter-btn" data-range="null" onclick="setLogRange(null)">All</button>
         </div>
         <div class="type-filters" id="type-filters">
-          <span style="font-size:10px;color:rgba(255,255,255,0.25);margin-right:2px;">TYPE</span>
-          <button class="filter-btn active" onclick="setTypeFilter('ALL')">ALL</button>
+          <span style="font-size:10px;color:var(--w25);margin-right:2px;">TYPE</span>
+          <button class="filter-btn active" data-type="ALL" onclick="setTypeFilter('ALL')">ALL</button>
+          <button class="filter-btn" data-type="AI_API_CALL" onclick="setTypeFilter('AI_API_CALL')">AI_API_CALL</button>
+          <button class="filter-btn" data-type="DLP_MATCH" onclick="setTypeFilter('DLP_MATCH')">DLP_MATCH</button>
+          <button class="filter-btn" data-type="LOOP_DETECTED" onclick="setTypeFilter('LOOP_DETECTED')">LOOP_DETECTED</button>
+          <button class="filter-btn" data-type="OTLP_SPAN" onclick="setTypeFilter('OTLP_SPAN')">OTLP_SPAN</button>
+          <button class="filter-btn" data-type="POLICY_AUDIT" onclick="setTypeFilter('POLICY_AUDIT')">POLICY_AUDIT</button>
+          <button class="filter-btn" data-type="PROMPT_ARTIFACT_FOUND" onclick="setTypeFilter('PROMPT_ARTIFACT_FOUND')">PROMPT_ARTIFACT_FOUND</button>
+          <button class="filter-btn" data-type="THREAT" onclick="setTypeFilter('THREAT')">THREAT</button>
         </div>
       </div>
       <div class="events-scroll" id="logs-events"></div>
@@ -846,19 +982,21 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
           </div>
           <svg id="dag-svg" viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,255,255,0.25)"/>
+              <marker id="arrow-hidden" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="transparent"/>
               </marker>
               <marker id="arrow-active" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,255,255,0.5)"/>
+                <path d="M0,0 L8,4 L0,8 Z" fill="var(--w50)"/>
               </marker>
             </defs>
-            <!-- Edges -->
-            <line class="dag-edge" id="e-u-o"  x1="110" y1="60"  x2="220" y2="120" marker-end="url(#arrow)"/>
-            <line class="dag-edge" id="e-o-ws" x1="280" y1="145" x2="190" y2="210" marker-end="url(#arrow)"/>
-            <line class="dag-edge" id="e-o-ce" x1="330" y1="145" x2="420" y2="210" marker-end="url(#arrow)"/>
-            <line class="dag-edge" id="e-ws-m" x1="205" y1="255" x2="285" y2="308" marker-end="url(#arrow)"/>
-            <line class="dag-edge" id="e-ce-m" x1="430" y1="250" x2="345" y2="308" marker-end="url(#arrow)"/>
+            <!-- Edges: marker-end starts hidden and is swapped to arrow-active by
+                 setDagEdge()/resetDag() so the arrowhead appears with the line,
+                 instead of always sitting visible at the path's endpoint. -->
+            <line class="dag-edge" id="e-u-o"  x1="110" y1="60"  x2="220" y2="120" marker-end="url(#arrow-hidden)"/>
+            <line class="dag-edge" id="e-o-ws" x1="280" y1="145" x2="190" y2="210" marker-end="url(#arrow-hidden)"/>
+            <line class="dag-edge" id="e-o-ce" x1="330" y1="145" x2="420" y2="210" marker-end="url(#arrow-hidden)"/>
+            <line class="dag-edge" id="e-ws-m" x1="205" y1="255" x2="285" y2="308" marker-end="url(#arrow-hidden)"/>
+            <line class="dag-edge" id="e-ce-m" x1="430" y1="250" x2="345" y2="308" marker-end="url(#arrow-hidden)"/>
 
             <!-- Node: User Input -->
             <rect class="dag-node-bg" id="n-u"  x="40"  y="28"  width="140" height="40" rx="5"/>
@@ -904,15 +1042,14 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
     <div class="view" id="view-compliance">
       <div class="view-header">
         <div>
-          <div class="view-title">Compliance &amp; Cost Governance</div>
+          <div class="view-title">Compliance Governance</div>
           <div class="view-sub">13 frameworks &middot; Automated evidence collection</div>
         </div>
       </div>
       <div class="summary-bar">
-        <div class="sum-card"><div class="sum-label">Total Cost</div><div class="sum-val" style="color:var(--orange)">$2.47</div></div>
-        <div class="sum-card"><div class="sum-label">DLP Matches</div><div class="sum-val" style="color:var(--primary)">12</div></div>
+        <div class="sum-card"><div class="sum-label">DLP Matches</div><div class="sum-val" style="color:var(--primary)">153</div></div>
         <div class="sum-card"><div class="sum-label">Policy Violations</div><div class="sum-val" style="color:var(--yellow)">3</div></div>
-        <div class="sum-card"><div class="sum-label">Open Anomalies</div><div class="sum-val" style="color:var(--purple)">5</div></div>
+        <div class="sum-card"><div class="sum-label">Open Anomalies</div><div class="sum-val" style="color:var(--purple)">10</div></div>
       </div>
       <div class="compliance-body" id="compliance-body"></div>
     </div>
@@ -921,61 +1058,175 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
     <div class="view" id="view-policies">
       <div class="view-header">
         <div>
-          <div class="view-title">Policies</div>
-          <div class="view-sub">5 active rules &middot; 1 triggered</div>
+          <div class="view-title">Governance Policies</div>
+          <div class="view-sub">13 default policies &middot; content pattern matching</div>
         </div>
       </div>
       <div class="policies-body">
+        <div class="policy-tabs">
+          <button class="policy-tab active">Policies</button>
+          <button class="policy-tab">Observation Log</button>
+          <button class="policy-tab">Audit Log</button>
+        </div>
         <div class="policy-trigger-banner" id="approval-banner">
           <div class="ptb-text">&#9888;&nbsp; <strong>APPROVAL REQUIRED</strong> &mdash; Agent action intercepted and paused. Review now.</div>
           <button class="btn-review" onclick="openApproval()">Review &amp; Decide &rarr;</button>
         </div>
+        <div class="policy-lib-label">Default Library (13)</div>
         <div class="policy-card">
           <div class="policy-header">
-            <div class="policy-name">DLP &mdash; Sensitive Data Guard</div>
-            <span class="policy-badge active">ACTIVE</span>
+            <div class="policy-name">SSN Detection</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
           </div>
-          <div class="policy-desc">Scans all LLM prompts and responses for PII, SSN, credit card numbers, API keys, and PHI. Actions: alert + redact on match.</div>
+          <div class="policy-desc">Detects US Social Security Numbers</div>
           <div class="policy-meta">
-            <div class="policy-meta-item">Patterns: <span>12</span></div>
-            <div class="policy-meta-item">Action: <span>Alert + Redact</span></div>
-            <div class="policy-meta-item">Triggers today: <span>12</span></div>
-          </div>
-        </div>
-        <div class="policy-card triggered">
-          <div class="policy-header">
-            <div class="policy-name">Human-in-the-Loop &mdash; High-Risk File Write</div>
-            <span class="policy-badge triggered">TRIGGERED</span>
-          </div>
-          <div class="policy-desc">Intercept and pause any agent action that attempts to write to system-level file paths (/etc, /usr, /bin) or modify cron jobs. Requires human approval before execution continues.</div>
-          <div class="policy-meta">
-            <div class="policy-meta-item">Risk threshold: <span>High (&ge;80)</span></div>
-            <div class="policy-meta-item">Action: <span>Pause + Request Approval</span></div>
-            <div class="policy-meta-item">Last trigger: <span>just now</span></div>
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
           </div>
         </div>
         <div class="policy-card">
           <div class="policy-header">
-            <div class="policy-name">Cost Cap &mdash; Per-Agent Budget</div>
-            <span class="policy-badge active">ACTIVE</span>
+            <div class="policy-name">Credit Card (PAN)</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
           </div>
-          <div class="policy-desc">Enforces $1.00 per-session token spend limit. Automatically terminates sessions that exceed budget and logs a COST_ALERT event.</div>
+          <div class="policy-desc">Detects payment card numbers</div>
           <div class="policy-meta">
-            <div class="policy-meta-item">Limit: <span>$1.00 / session</span></div>
-            <div class="policy-meta-item">Action: <span>Terminate + Alert</span></div>
-            <div class="policy-meta-item">Triggers today: <span>2</span></div>
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
           </div>
         </div>
         <div class="policy-card">
           <div class="policy-header">
-            <div class="policy-name">Loop Detection</div>
-            <span class="policy-badge active">ACTIVE</span>
+            <div class="policy-name">IBAN</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
           </div>
-          <div class="policy-desc">Detects agent sessions with more than 5 consecutive self-calls or tool calls in a tight loop. Kills the loop and emits LOOP_DETECTED.</div>
+          <div class="policy-desc">Detects International Bank Account Numbers</div>
           <div class="policy-meta">
-            <div class="policy-meta-item">Threshold: <span>5 iterations</span></div>
-            <div class="policy-meta-item">Action: <span>Kill + Alert</span></div>
-            <div class="policy-meta-item">Triggers today: <span>1</span></div>
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">Routing + Account Numbers</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects US bank routing numbers</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">US Passport Number</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects US passport numbers</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">Driver&#39;s License</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects common driver&#39;s license formats</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">Email Address</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects email addresses</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">Phone Number</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects US phone numbers</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">Date of Birth</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects dates of birth patterns</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">Medical Record Number (MRN)</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects medical record numbers</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">NPI Number</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects National Provider Identifiers</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">ICD-10 Code</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects ICD-10 diagnostic codes</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-header">
+            <div class="policy-name">API Keys / Secrets</div>
+            <div style="display:flex;gap:6px;"><span class="policy-badge default">DEFAULT</span><span class="policy-badge block">BLOCK</span><span class="policy-badge observe">OBSERVE</span></div>
+          </div>
+          <div class="policy-desc">Detects common API key patterns</div>
+          <div class="policy-meta">
+            <div class="policy-meta-item">Scope: <span>fleet</span></div>
+            <div class="policy-meta-item">Priority: <span>50</span></div>
+            <div class="policy-meta-item">Condition: <span>regex (1 pattern)</span></div>
           </div>
         </div>
       </div>
@@ -1006,7 +1257,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
       <span class="risk-chip risk-info">Policy: system-file-write</span>
       <span class="risk-chip risk-info">DLP: CLEAN</span>
     </div>
-    <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;border-top:1px solid var(--border);padding-top:12px;">
+    <div style="font-size:11px;color:var(--w35);line-height:1.6;border-top:1px solid var(--border);padding-top:12px;">
       The agent is currently <strong style="color:var(--yellow)">paused</strong>. Your decision will be logged with your user ID and timestamp for the audit trail.
     </div>
     <div class="modal-actions">
@@ -1038,7 +1289,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 <div id="end-screen">
   <div class="end-box">
     <div class="end-check">🛡</div>
-    <div class="end-title">That's FORGE.</div>
+    <div class="end-title">That's Privify FORGE.</div>
     <div class="end-sub">Discover every AI agent. Observe every interaction.<br>Govern every policy. Prove every compliance control.</div>
     <div class="end-stats">
       <div><div class="end-stat-val" style="color:var(--primary)">4</div><div class="end-stat-label">PROBE TYPES</div></div>
@@ -1070,41 +1321,37 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:va
 const state = {
   currentView: 'dashboard',
   tourStep: -1,
-  totalEvents: 847,
-  dlpCount: 12,
+  totalEvents: 13366,
+  dlpCount: 153,
   violations: 3,
-  agents: 24,
+  agents: 2,
   chartRange: 6,
+  logRangeHours: 6,
+  typeFilter: 'ALL',
   replayRunning: false,
   selectedTrace: 0,
 };
 
 const TYPE_COLORS = {
-  AI_API_CALL:'#FF2E2E', AI_AGENT_DETECTED:'#cc2020', THREAT:'#ef4444',
-  INTERVENTION:'#f97316', DLP_MATCH:'#fb923c', SLA_BREACH:'#f59e0b',
-  ANOMALY:'#facc15', LOOP_DETECTED:'#84cc16', COST_ALERT:'#a855f7',
-  AI_LIB_DETECTED:'#d946ef', LOCAL_LLM_DETECTED:'#ec4899',
-  POLICY_MATCH:'#3b82f6', APPROVAL_REQUESTED:'#06b6d4',
-  APPROVAL_RESOLVED:'#22c55e', INTERACTION:'#818cf8', ACTION_TAKEN:'#6b7280',
+  AI_API_CALL:'#E85D54', THREAT:'#ef4444', DLP_MATCH:'#fb923c',
+  LOOP_DETECTED:'#84cc16', OTLP_SPAN:'#3b82f6', POLICY_AUDIT:'#06b6d4',
+  PROMPT_ARTIFACT_FOUND:'#a855f7', INTERVENTION:'#22c55e',
 };
 const tc = t => TYPE_COLORS[t] || '#6b7280';
 
-// FAKE EVENTS
+// FAKE EVENTS — restricted to the 7 event types the real Event Logs panel
+// actually shows as filter chips today. Sample process/detail text is
+// illustrative; the type values themselves are not invented.
 const FAKE_POOL = [
-  {type:'AI_API_CALL',       process:'cursor.app',       detail:'claude-3-5-sonnet · 2847 tok · 142ms', conf:0.98},
-  {type:'INTERACTION',       process:'vscode',            detail:'gpt-4o · 1204 tok · openai', conf:0.97},
-  {type:'DLP_MATCH',         process:'network_probe',     detail:'SSN pattern detected in response', conf:0.96},
-  {type:'AI_AGENT_DETECTED', process:'python3',           detail:'ollama:11434 · llama3.2 local inference', conf:0.94},
-  {type:'POLICY_MATCH',      process:'langchain-agent',   detail:'data_exfiltration policy · high risk', conf:0.89},
-  {type:'ANOMALY',           process:'jupyter-kernel',    detail:'token rate 3.2x baseline', conf:0.82},
-  {type:'COST_ALERT',        process:'autogen-agent',     detail:'$0.84 budget threshold reached', conf:null},
-  {type:'LOCAL_LLM_DETECTED',process:'lm-studio',         detail:'mistral-7b-instruct · localhost:1234', conf:0.99},
-  {type:'THREAT',            process:'network_probe',     detail:'prompt injection attempt blocked', conf:0.87},
-  {type:'LOOP_DETECTED',     process:'crewai-orchestrator',detail:'7 iterations · circular tool call', conf:0.91},
-  {type:'AI_API_CALL',       process:'chrome',            detail:'gemini-1.5-pro · 891 tok · google', conf:0.98},
-  {type:'APPROVAL_REQUESTED',process:'orchestrator-7f2a', detail:'WriteFile /etc/crontab · risk 94%', conf:null},
-  {type:'INTERACTION',       process:'claude-desktop',    detail:'claude-3-haiku · 445 tok', conf:0.97},
-  {type:'DLP_MATCH',         process:'file_probe',        detail:'API key pattern · .env file scanned', conf:0.95},
+  {type:'AI_API_CALL',           process:'chrome',           detail:'claude-sonnet-4-5 · 2847 tok · 142ms', conf:0.98},
+  {type:'DLP_MATCH',             process:'Browser session',  detail:'SSN pattern detected in outbound request', conf:0.96},
+  {type:'PROMPT_ARTIFACT_FOUND', process:'file_probe',       detail:'tool_call reference found in local file', conf:0.9},
+  {type:'THREAT',                process:'network_probe',    detail:'prompt injection attempt blocked', conf:0.87},
+  {type:'LOOP_DETECTED',         process:'orchestrator-agent',detail:'7 iterations · circular tool call', conf:0.91},
+  {type:'OTLP_SPAN',             process:'otlp_receiver',    detail:'span exported · agent:orchestrator', conf:null},
+  {type:'AI_API_CALL',           process:'ForgeProxy/CLI',   detail:'gpt-4o · 891 tok · openai', conf:0.98},
+  {type:'POLICY_AUDIT',          process:'forge-cli-proxy',  detail:'rule matched in audit mode · not enforced', conf:null},
+  {type:'DLP_MATCH',             process:'ForgeProxy/CLI',   detail:'API key pattern in request body', conf:0.95},
 ];
 
 let liveEvents = [];
@@ -1132,7 +1379,7 @@ function addLiveEvent() {
   if (liveEvents.length > 80) liveEvents.pop();
   state.totalEvents++;
   if (ev.type === 'DLP_MATCH') state.dlpCount++;
-  if (ev.type === 'POLICY_MATCH' || ev.type === 'THREAT') state.violations++;
+  if (ev.type === 'THREAT') state.violations++;
   updateSidebar();
   if (state.currentView === 'dashboard') renderDashboard();
   if (state.currentView === 'logs') renderLogs();
@@ -1140,9 +1387,8 @@ function addLiveEvent() {
 
 // CHART DATA
 const chartData = {
-  AI_API_CALL:240, INTERACTION:180, DLP_MATCH:90,
-  POLICY_MATCH:70, ANOMALY:55, THREAT:40,
-  LOCAL_LLM_DETECTED:38, COST_ALERT:22, LOOP_DETECTED:18,
+  PROMPT_ARTIFACT_FOUND:397, DLP_MATCH:153, AI_API_CALL:90,
+  POLICY_AUDIT:70, THREAT:40, OTLP_SPAN:22, LOOP_DETECTED:18,
 };
 
 function setChartRange(h) {
@@ -1204,22 +1450,44 @@ function updateSidebar() {
 function renderDashboard() {
   document.getElementById('s-agents').textContent    = state.agents;
   document.getElementById('s-events').textContent    = state.totalEvents;
-  document.getElementById('s-dlp').textContent       = state.dlpCount;
   document.getElementById('s-violations').textContent = state.violations;
   document.getElementById('dash-time').textContent   = new Date().toUTCString().slice(5,25) + ' UTC';
   renderChart();
   const el = document.getElementById('dash-events');
   if (!el) return;
   const html = liveEvents.slice(0, 20).map((ev, i) => eventRowHTML(ev, i === 0 && state.currentView === 'dashboard')).join('');
-  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:rgba(255,255,255,0.2);">Waiting for events…</div>';
+  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:var(--w20);">Waiting for events…</div>';
+}
+
+function setLogRange(hours) {
+  state.logRangeHours = hours;
+  document.querySelectorAll('.time-filters .filter-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.range === String(hours)));
+  renderLogs();
+}
+
+function setTypeFilter(t) {
+  state.typeFilter = t;
+  document.querySelectorAll('.type-filters .filter-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.type === t));
+  showView('logs');
 }
 
 function renderLogs() {
   const el = document.getElementById('logs-events');
   if (!el) return;
-  const html = liveEvents.map(ev => eventRowHTML(ev, false)).join('');
-  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:rgba(255,255,255,0.2);">No events yet…</div>';
-  document.getElementById('logs-sub').textContent = `${liveEvents.length} events · live`;
+  let events = liveEvents;
+  if (state.logRangeHours) {
+    const cutoff = new Date() - state.logRangeHours * 3600000;
+    events = events.filter(ev => ev.raw_ts >= cutoff);
+  }
+  if (state.typeFilter && state.typeFilter !== 'ALL') {
+    events = events.filter(ev => ev.type === state.typeFilter);
+  }
+  const html = events.map(ev => eventRowHTML(ev, false)).join('');
+  el.innerHTML = html || '<div style="padding:32px;text-align:center;color:var(--w20);">No events match this filter yet — keep watching, the feed is live.</div>';
+  const label = state.typeFilter && state.typeFilter !== 'ALL' ? state.typeFilter : 'all event types';
+  document.getElementById('logs-sub').textContent = `${events.length} events · ${label} · live`;
 }
 
 function eventRowHTML(ev, isNew) {
@@ -1271,7 +1539,7 @@ function resetDag() {
   });
   ['e-u-o','e-o-ws','e-o-ce','e-ws-m','e-ce-m'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.className.baseVal = 'dag-edge';
+    if (el) { el.className.baseVal = 'dag-edge'; el.setAttribute('marker-end', 'url(#arrow-hidden)'); }
   });
   const dlpB = document.getElementById('dlp-badge');
   const dlpT = document.getElementById('dlp-text');
@@ -1294,7 +1562,7 @@ function setDagNode(nodeId, st, timing) {
 
 function setDagEdge(edgeId) {
   const el = document.getElementById(edgeId);
-  if (el) el.className.baseVal = 'dag-edge active';
+  if (el) { el.className.baseVal = 'dag-edge active'; el.setAttribute('marker-end', 'url(#arrow-active)'); }
 }
 
 function replayDone(msg) {
@@ -1362,77 +1630,169 @@ function replay3() {
 
 // COMPLIANCE
 // Evidence tiers:
-//   'evidence' — FORGE directly implements or produces this control
-//   'partial'  — FORGE contributes data/logging that informs this control; org process also required
-//   'process'  — Organisational/legal process; FORGE provides supporting audit trail only
+//   'evidence' — Privify FORGE directly implements or produces this control
+//   'partial'  — Privify FORGE contributes data/logging that informs this control; org process also required
+//   'process'  — Organisational/legal process; Privify FORGE provides supporting audit trail only
 const FRAMEWORKS = [
-  {id:'eu_ai_act', name:'EU AI Act', score:78, color:'#9B59FF', controls:[
-    {id:'Art. 9',  st:'evidence', name:'Risk management system',
-     desc:'FORGE\'s policy engine, DLP scanning, threat signatures, and anomaly detection constitute the ongoing risk management and monitoring layer required for AI deployments.'},
-    {id:'Art. 12', st:'evidence', name:'Logging & record-keeping',
-     desc:'Every LLM API call, agent action, and interaction is captured with timestamps, model versions, token counts, and full context — directly satisfying Art.12 logging obligations.'},
-    {id:'Art. 14', st:'evidence', name:'Human oversight mechanisms',
-     desc:'FORGE\'s human-in-the-loop workflow is a direct implementation of Art.14 — high-risk agent actions are paused and require human approval before execution continues.'},
-    {id:'Art. 15', st:'evidence', name:'Accuracy & robustness monitoring',
-     desc:'Quality scoring, SLA breach detection, loop detection, and anomaly alerts provide the post-deployment monitoring mandated under Art.15.'},
-    {id:'Art. 11', st:'partial',  name:'Technical documentation support',
-     desc:'FORGE generates an AI system inventory (models, API endpoints, agent configurations, versions) that forms the factual basis for Art.11 documentation. The documentation itself must be authored by your compliance or legal team.'},
-  ]},
-  {id:'gdpr', name:'GDPR', score:62, color:'#3D8BFF', controls:[
-    {id:'Art. 32', st:'evidence', name:'Security of AI data processing',
-     desc:'DLP scanning, AI firewall, and 10 threat signatures provide technical security measures for personal data processed through AI — directly addressing Art.32 obligations.'},
-    {id:'Art. 5',  st:'partial',  name:'Data minimisation in AI pipelines',
-     desc:'FORGE DLP detects when excessive personal data (PII, SSN, health records) is transmitted to AI models and can alert or block. Does not enforce upstream data collection policies.'},
-    {id:'Art. 25', st:'partial',  name:'Data protection by design',
-     desc:'FORGE operates as a monitoring and enforcement layer that contributes to DPbD. Architectural decisions around data retention and purpose limitation are made outside FORGE.'},
-    {id:'Art. 35', st:'partial',  name:'DPIA evidence trail',
-     desc:'FORGE\'s event logs and DLP match records support DPIA documentation for AI processing activities. Scoping and conducting the DPIA itself is an organisational responsibility.'},
-  ]},
-  {id:'soc2', name:'SOC 2', score:84, color:'#FF2E2E', controls:[
-    {id:'CC7.2', st:'evidence', name:'System monitoring & anomaly detection',
-     desc:'Continuous event streaming across 17 event types, threat signature matching, and real-time alerting directly implements the SOC2 CC7.2 monitoring requirement.'},
-    {id:'CC6.7', st:'evidence', name:'Restrict data transmission to AI services',
-     desc:'FORGE monitors all outbound traffic to LLM APIs, enforces model allowlists, and blocks transmissions to unauthorised AI endpoints.'},
+  {id:'soc2', name:'SOC 2', score:50, controls:[
+    {id:'CC7.1', st:'evidence', name:'Detection of unauthorised AI activity',
+     desc:'Four host-level probes detect shadow AI, rogue agents, and local LLMs that bypass sanctioned channels.'},
+    {id:'CC6.6', st:'at_risk', name:'AI API traffic boundary monitoring',
+     desc:'Network probe monitors all outbound LLM API connections, enforces allowlists, and blocks transmissions to unauthorised AI endpoints.', violations:128, vtype:'DLP_MATCH'},
+    {id:'CC7.2', st:'at_risk', name:'System monitoring and anomaly detection',
+     desc:'Continuous event streaming across 17 event types, threat signature matching, and real-time alerting directly implements the CC7.2 monitoring requirement.', violations:10, vtype:'THREAT'},
     {id:'CC7.3', st:'evidence', name:'Incident response for AI security events',
-     desc:'Automated policy enforcement, HITL approvals, SIEM push to 11 platforms, and a full audit trail support SOC2 CC7.3 incident identification and response.'},
-    {id:'CC9.1', st:'partial',  name:'AI vendor risk mitigation',
-     desc:'FORGE surfaces Shadow AI vendors and monitors approved API usage. Formal vendor risk assessments and contract reviews are organisational processes outside FORGE\'s scope.'},
+     desc:'Automated policy enforcement, human-in-the-loop approvals, SIEM push to 11 platforms, and full audit trail support CC7.3 incident identification and response.'},
+    {id:'CC9.1', st:'partial', name:'AI vendor risk mitigation',
+     desc:'Privify Forge surfaces Shadow AI vendors and monitors approved API usage. Formal vendor risk assessments and contract reviews are organisational processes outside Privify Forge\'s scope.'},
   ]},
-  {id:'dpdp', name:'DPDP', score:54, color:'#F97316', controls:[
-    {id:'Sec. 8(5)', st:'evidence', name:'Data fiduciary audit trail for AI',
-     desc:'FORGE logs all personal data processed by AI agents — what data, which model, which agent, and when — fulfilling the data fiduciary\'s accountability obligations under DPDP.'},
-    {id:'Sec. 4',   st:'partial',  name:'Lawful processing evidence for AI',
-     desc:'FORGE logs AI data processing activities with context, supporting demonstration of lawful basis. Determining and recording the actual legal basis requires a separate legal process.'},
-    {id:'Sec. 8(1)', st:'process', name:'Data principal rights fulfilment',
-     desc:'Rights of access, correction, and erasure are organisational processes. FORGE\'s logs inform these responses, but consumer request handling is outside the platform\'s scope.'},
+  {id:'hipaa', name:'HIPAA', score:50, controls:[
+    {id:'§164.312(b)', st:'evidence', name:'Audit controls for PHI in AI',
+     desc:'Privify Forge logs every AI interaction that may involve PHI — agent ID, model, timestamp, and content context — providing the audit controls required under the HIPAA Security Rule.'},
+    {id:'§164.312(e)(1)', st:'at_risk', name:'PHI transmission monitoring',
+     desc:'DLP pattern matching detects protected health information (diagnoses, MRN, insurance data, SSN) in AI prompts and responses before PHI leaves the perimeter.', violations:19, vtype:'DLP_MATCH'},
+    {id:'§164.308(a)(1)', st:'partial', name:'AI-specific security risk analysis',
+     desc:'Privify Forge\'s threat detection and anomaly monitoring contribute evidence for the required risk analysis. Full HIPAA risk analysis encompasses broader technical and organisational scope.'},
   ]},
-  {id:'hipaa', name:'HIPAA', score:79, color:'#00C97A', controls:[
-    {id:'§164.312(b)',    st:'evidence', name:'Audit controls for PHI in AI',
-     desc:'FORGE logs all AI interactions that may involve PHI — agent, model, timestamp, and content context — providing the audit controls required under the HIPAA Security Rule.'},
-    {id:'§164.312(e)(1)', st:'evidence', name:'PHI transmission monitoring',
-     desc:'DLP pattern matching detects protected health information (diagnoses, MRN, insurance data) in AI prompts and responses before PHI leaves the perimeter.'},
-    {id:'§164.308(a)(1)', st:'partial',  name:'AI-specific security risk analysis',
-     desc:'FORGE\'s threat detection and anomaly monitoring contribute evidence for the required risk analysis. Full HIPAA risk analysis encompasses broader technical and organisational scope.'},
+  {id:'pci', name:'PCI DSS', score:70, controls:[
+    {id:'Req 3.4', st:'at_risk', name:'Detect card data in AI pipelines',
+     desc:'DLP scanner detects PANs, CVVs, and card-related data in AI prompts and responses before they are transmitted or stored.', violations:109, vtype:'DLP_MATCH'},
+    {id:'Req 6.5', st:'evidence', name:'Protect AI against injection attacks',
+     desc:'AI firewall with 10 threat signatures detects and blocks prompt injection, jailbreak, and data exfiltration attempts targeting cardholder data environments.'},
+    {id:'Req 10.2', st:'evidence', name:'Audit trail for AI access to CDE',
+     desc:'Full tamper-evident event log records every AI agent interaction with systems in scope, satisfying Req 10.2 audit trail obligations.'},
+    {id:'Req 11.4', st:'evidence', name:'Intrusion detection on AI traffic',
+     desc:'Network probe and anomaly detection flag unusual AI API traffic patterns, supporting the intrusion detection requirement.'},
+    {id:'Req 1.3', st:'partial', name:'AI API traffic segmentation monitoring',
+     desc:'Privify Forge monitors AI API traffic crossing network boundaries. Network segmentation itself is implemented by infrastructure controls outside Privify Forge.'},
   ]},
-  {id:'ccpa', name:'CCPA', score:66, color:'#06b6d4', controls:[
+  {id:'gdpr', name:'GDPR', score:60, controls:[
+    {id:'Art. 30', st:'evidence', name:'Records of AI processing activities',
+     desc:'Privify Forge\'s interaction log is a continuous record of processing activities involving personal data via AI — directly satisfying the Art.30 obligation for deployers.'},
+    {id:'Art. 32', st:'at_risk', name:'Security of AI data processing',
+     desc:'DLP scanning, AI firewall, and threat signatures provide technical security measures for personal data processed through AI systems.', violations:128, vtype:'DLP_MATCH'},
+    {id:'Art. 33', st:'evidence', name:'Breach detection and notification support',
+     desc:'Real-time DLP and policy violation alerts enable timely breach identification. Privify Forge provides the detection layer; the 72-hour notification to the supervisory authority is an organisational action.'},
+    {id:'Art. 25', st:'partial', name:'Data protection by design',
+     desc:'Privify Forge operates as a monitoring and enforcement layer that contributes to DPbD. Architectural decisions around data retention and purpose limitation are made outside Privify Forge.'},
+    {id:'Art. 35', st:'partial', name:'DPIA evidence trail',
+     desc:'Privify Forge\'s event logs and DLP match records support DPIA documentation for AI processing activities. Conducting the DPIA is an organisational responsibility.'},
+  ]},
+  {id:'ccpa', name:'CCPA / CPRA', score:66, controls:[
     {id:'§1798.150', st:'evidence', name:'Detect personal data exposure via AI',
-     desc:'DLP scanning and threat detection identify when California residents\' personal data is exposed through AI interactions, enabling timely breach response obligations.'},
-    {id:'§1798.100', st:'partial',  name:'AI data processing log for right-to-know',
-     desc:'FORGE logs what personal data AI systems process, supporting the audit trail for right-to-know requests. Consumer request handling itself is an organisational process.'},
+     desc:'DLP scanning and threat detection identify when California residents\' personal data is exposed through AI interactions, enabling timely breach response.'},
+    {id:'§1798.100d', st:'partial', name:'Data minimisation in AI processing',
+     desc:'Privify Forge DLP detects when excessive personal data is transmitted to AI models and can alert or block. Does not enforce upstream data collection policies.'},
+    {id:'§1798.100', st:'partial', name:'AI data processing log for right-to-know',
+     desc:'Privify Forge logs what personal data AI systems process, supporting the audit trail for right-to-know requests. Consumer request handling itself is an organisational process.'},
+  ]},
+  {id:'dpdp', name:'DPDP Act (India)', score:50, controls:[
+    {id:'Sec. 8(5)', st:'evidence', name:'Data fiduciary audit trail for AI',
+     desc:'Privify Forge logs all personal data processed by AI agents — what data, which model, which agent, and when — fulfilling the data fiduciary\'s accountability obligations under DPDP.'},
+    {id:'Sec. 4', st:'partial', name:'Lawful processing evidence for AI',
+     desc:'Privify Forge logs AI data processing activities with full context, supporting demonstration of lawful basis. Determining and recording the actual legal basis requires a separate legal process.'},
+    {id:'Sec. 8(1)', st:'process', name:'Data principal rights fulfilment',
+     desc:'Rights of access, correction, and erasure are organisational processes. Privify Forge\'s logs inform these responses, but consumer request handling is outside the platform\'s scope.'},
+    {id:'Sec. 10', st:'partial', name:'Significant Data Fiduciary identification',
+     desc:'Privify Forge\'s risk scoring and agent classification help identify AI workloads with Significant Data Fiduciary characteristics. Full SDF assessment requires legal evaluation.'},
+  ]},
+  {id:'pdpa', name:'PDPA (SG / TH)', score:75, controls:[
+    {id:'Sec. 24', st:'evidence', name:'Protection of personal data in AI',
+     desc:'DLP scanner detects personal data exposure across AI agent communications, fulfilling the PDPA protection obligation for data processed by AI systems.'},
+    {id:'Sec. 26D', st:'evidence', name:'Mandatory breach notification support',
+     desc:'Real-time alerting on DLP matches and policy violations triggers the internal breach notification workflow. The formal notification to PDPC is an organisational action.'},
+    {id:'Sec. 18', st:'partial', name:'Purpose limitation monitoring',
+     desc:'Privify Forge\'s policy engine can restrict what data AI agents access and transmit, contributing to purpose limitation. Defining and communicating purposes to individuals requires an organisational process.'},
+    {id:'Sec. 11', st:'partial', name:'Data Protection Officer accountability',
+     desc:'Participant registry establishes accountability for all AI entities. DPO designation and formal accountability structures are organisational responsibilities.'},
+  ]},
+  {id:'pipeda', name:'PIPEDA (Canada)', score:80, controls:[
+    {id:'Principle 4', st:'evidence', name:'Limit personal data collected by AI',
+     desc:'DLP scanner detects and flags unnecessary personal data collection by AI agents, directly supporting the limiting-collection principle.'},
+    {id:'Principle 5', st:'evidence', name:'Limit use and disclosure of personal data',
+     desc:'Policy engine enforces data minimisation rules and blocks AI agents from sharing personal data with unauthorised models or destinations.'},
+    {id:'Principle 7', st:'evidence', name:'Safeguards for personal data in AI',
+     desc:'Threat probe detects prompt injection and exfiltration attacks targeting personal data processed by AI agents.'},
+    {id:'Principle 8', st:'partial', name:'Openness — AI processing transparency',
+     desc:'Privify Forge\'s exportable audit trail provides transparent records of all AI data processing. Organisation-wide privacy policy and communication to individuals are outside scope.'},
+    {id:'Principle 1', st:'partial', name:'Accountability for AI data processing',
+     desc:'Participant registry tracks ownership and accountability for all AI entities. Designating a Privacy Officer and full accountability structures are organisational responsibilities.'},
+  ]},
+  {id:'eu_ai_act', name:'EU AI Act', score:90, controls:[
+    {id:'Art. 9', st:'evidence', name:'Risk management system',
+     desc:'Privify Forge\'s policy engine, DLP scanning, threat signatures, and anomaly detection constitute the ongoing risk management and monitoring layer required for AI deployers.'},
+    {id:'Art. 12', st:'evidence', name:'Logging and record-keeping',
+     desc:'Every LLM API call, agent action, and interaction is captured with timestamps, model versions, token counts, and full context — directly satisfying Art.12 logging obligations for deployers.'},
+    {id:'Art. 14', st:'evidence', name:'Human oversight mechanisms',
+     desc:'Privify Forge\'s human-in-the-loop approval workflow is a direct implementation of Art.14 — high-risk agent actions are paused and require human approval before execution continues.'},
+    {id:'Art. 15', st:'evidence', name:'Accuracy and robustness monitoring',
+     desc:'Quality scoring, SLA breach detection, loop detection, and anomaly alerts provide the post-deployment monitoring mandated under Art.15.'},
+    {id:'Art. 11', st:'partial', name:'Technical documentation support',
+     desc:'Privify Forge generates an AI system inventory (models, API endpoints, agent configurations, versions) that forms the factual basis for Art.11 documentation. The documentation itself must be authored by your compliance team.'},
+  ]},
+  {id:'dsa', name:'DSA (Digital Services Act)', score:62, controls:[
+    {id:'Art. 35', st:'evidence', name:'Mitigation of systemic AI risks',
+     desc:'Policy engine with BLOCK/SUSPEND/APPROVE actions mitigates identified AI risks in real time, directly supporting Art.35 risk mitigation obligations.'},
+    {id:'Art. 34', st:'partial', name:'Risk assessment data for AI systems',
+     desc:'Privify Forge\'s agent risk classification and anomaly detection provide the data inputs for Art.34 systemic risk assessments. Conducting and documenting the assessment is an organisational responsibility.'},
+    {id:'Art. 37', st:'partial', name:'Audit evidence for independent review',
+     desc:'Tamper-evident hash chain and exportable audit data support Art.37 independent audit requirements. Privify Forge provides evidence; the audit itself is conducted by a third party.'},
+    {id:'Art. 14', st:'partial', name:'AI decision transparency logging',
+     desc:'Full interaction logging with reasoning chain traces supports transparency reporting. Disclosure to affected users requires a separate organisational process.'},
+  ]},
+  {id:'ca_sb53', name:'CA SB 53 / AB 853', score:80, controls:[
+    {id:'SB53 §3', st:'evidence', name:'Shutdown and intervention capability',
+     desc:'Kill, suspend, and quarantine governance actions provide immediate shutdown capability for any AI agent — fulfilling the mandatory shutdown requirement.'},
+    {id:'SB53 §5', st:'evidence', name:'Cybersecurity protections for AI',
+     desc:'AI firewall with 10 threat signatures protects against prompt injection, jailbreaks, and exfiltration attacks targeting AI systems.'},
+    {id:'AB853 §3', st:'evidence', name:'Compute and token resource tracking',
+     desc:'Privify Forge tracks API calls, token usage, latency, and cost per agent — satisfying the compute and resource tracking requirements.'},
+    {id:'SB53 §4', st:'partial', name:'Incident reporting to regulators',
+     desc:'SIEM integration and exportable compliance reports support regulatory incident reporting workflows. Filing the report itself is an organisational responsibility.'},
+    {id:'SB53 §6', st:'partial', name:'Audit evidence for third-party testing',
+     desc:'Exportable audit trails and compliance reports provide the evidence base for third-party safety testing. Commissioning the test is outside Privify Forge\'s scope.'},
+  ]},
+  {id:'nist_ai_rmf', name:'NIST AI RMF', score:91, controls:[
+    {id:'GOVERN 1', st:'evidence', name:'AI risk governance policies',
+     desc:'Policy engine defines and enforces governance rules — DLP, cost caps, HITL approvals, threat blocking — across the entire AI fleet.'},
+    {id:'MAP 1', st:'evidence', name:'AI risk identification and inventory',
+     desc:'Four discovery probes automatically identify all AI agents, tools, LLM APIs, and MCP servers — building the risk inventory required under MAP.'},
+    {id:'MEASURE 1', st:'evidence', name:'AI risk measurement',
+     desc:'Correlation engine measures risk via confidence scoring, anomaly detection, and threat classification across all discovered AI entities.'},
+    {id:'MEASURE 2', st:'evidence', name:'AI system performance monitoring',
+     desc:'Real-time monitoring with quality scoring, SLA tracking, and cost attribution tracks AI performance continuously.'},
+    {id:'MANAGE 1', st:'evidence', name:'AI risk response and remediation',
+     desc:'Block, suspend, quarantine, and HITL approval actions enable immediate, auditable risk response to identified AI incidents.'},
+    {id:'GOVERN 4', st:'partial', name:'Organisational AI accountability',
+     desc:'Participant registry tracks ownership and accountability for all AI entities. Enterprise-wide accountability structures and executive ownership are organisational responsibilities.'},
+  ]},
+  {id:'iso_42001', name:'ISO 42001', score:91, controls:[
+    {id:'§5.2', st:'evidence', name:'AI management system policy',
+     desc:'Policy engine serves as the operational AI management system — configurable rules enforced in real time across all AI interactions.'},
+    {id:'§6.1', st:'evidence', name:'AI risk assessment',
+     desc:'Automated risk scoring and classification for all discovered AI agents, updated continuously as new events are detected.'},
+    {id:'§7.1', st:'evidence', name:'Protect data in AI operations',
+     desc:'DLP scanner protects sensitive data (12 patterns) flowing through AI agent interactions — a core operational control under §7.1.'},
+    {id:'§8.1', st:'evidence', name:'Operational planning and control',
+     desc:'Agent lifecycle management with HITL approval workflows provides the operational planning and control layer required under §8.1.'},
+    {id:'§9.1', st:'evidence', name:'AI performance evaluation',
+     desc:'Quality scoring, SLA monitoring, and fleet-wide metrics continuously evaluate AI system performance against defined thresholds.'},
+    {id:'§10.1', st:'partial', name:'Continual improvement',
+     desc:'Anomaly detection and trend analysis surface improvement opportunities. Acting on them and updating the management system is an organisational process.'},
   ]},
 ];
 
-let selectedFw = 'eu_ai_act';
+let selectedFw = 'soc2';
 
 function renderCompliance() {
   const body = document.getElementById('compliance-body');
   const groups = [
-    {label:'AI Regulation', ids:['eu_ai_act']},
-    {label:'Privacy',       ids:['gdpr','ccpa','dpdp']},
-    {label:'Security',      ids:['soc2','hipaa']},
+    {label:'Security',      ids:['soc2','hipaa','pci']},
+    {label:'Privacy',       ids:['gdpr','ccpa','dpdp','pdpa','pipeda']},
+    {label:'AI Regulation', ids:['eu_ai_act','dsa','ca_sb53','nist_ai_rmf','iso_42001']},
   ];
 
-  const BADGE_LABEL = {evidence:'EVIDENCE', partial:'PARTIAL', process:'PROCESS'};
+  const BADGE_LABEL = {evidence:'DIRECT', partial:'PARTIAL', process:'PROCESS', at_risk:'AT RISK'};
 
   let html = groups.map(g => {
     const cards = g.ids.map(id => {
@@ -1440,9 +1800,9 @@ function renderCompliance() {
       if (!fw) return '';
       const scoreColor = fw.score >= 75 ? 'var(--green)' : fw.score >= 55 ? 'var(--yellow)' : 'var(--primary)';
       return `<div class="fw-card${fw.id === selectedFw ? ' selected' : ''}" onclick="selectFw('${fw.id}')">
-        <div class="fw-name" style="color:${fw.color}">${fw.name}</div>
+        <div class="fw-name">${fw.name}</div>
         <div class="fw-score" style="color:${scoreColor}">${fw.score}%</div>
-        <div style="font-size:8.5px;color:rgba(255,255,255,0.25);margin-top:2px;">coverage</div>
+        <div style="font-size:8.5px;color:var(--w25);margin-top:2px;">coverage</div>
         <div class="fw-bar-bg"><div class="fw-bar-fill" style="width:${fw.score}%;background:${scoreColor};"></div></div>
       </div>`;
     }).join('');
@@ -1453,16 +1813,18 @@ function renderCompliance() {
   if (fw) {
     const evidenceCount = fw.controls.filter(c => c.st === 'evidence').length;
     const partialCount  = fw.controls.filter(c => c.st === 'partial').length;
+    const atRiskCount   = fw.controls.filter(c => c.st === 'at_risk').length;
     html += `<div style="margin-top:4px;margin-bottom:6px;display:flex;align-items:center;gap:12px;">
-      <span style="font-size:11px;color:rgba(255,255,255,0.5);">${fw.name} — applicable controls covered by FORGE</span>
+      <span style="font-size:11px;color:var(--w50);">${fw.name} — applicable controls covered by Privify FORGE</span>
       <span style="font-size:10px;color:var(--green);">● ${evidenceCount} direct</span>
       <span style="font-size:10px;color:var(--yellow);">● ${partialCount} partial</span>
+      ${atRiskCount ? `<span style="font-size:10px;color:var(--primary);">● ${atRiskCount} at risk</span>` : ''}
     </div>`;
     html += `<div class="fw-controls">${fw.controls.map(c => `
       <div class="fw-ctrl-row" style="align-items:flex-start;">
         <span class="fw-ctrl-id" style="padding-top:2px;">${c.id}</span>
         <div class="fw-ctrl-name" style="flex:1;margin:0 12px;">
-          <div>${c.name}</div>
+          <div>${c.name}${c.violations ? ` <span style="color:var(--primary);font-weight:700;cursor:pointer;font-size:10.5px;" onclick="setTypeFilter('${c.vtype}')">${c.violations} violations detected →</span>` : ''}</div>
           <div class="fw-ctrl-desc">${c.desc}</div>
         </div>
         <span class="fw-ctrl-badge ${c.st}" style="margin-top:2px;">${BADGE_LABEL[c.st]}</span>
@@ -1489,10 +1851,10 @@ function resolveApproval(decision) {
     banner.innerHTML = '<div class="ptb-text" style="color:var(--green)">✓&nbsp;<strong>ACTION DENIED</strong> — Agent blocked. Event logged to SIEM. Audit trail updated.</div>';
     banner.style.background = 'rgba(0,201,122,0.08)';
     banner.style.borderColor = 'rgba(0,201,122,0.3)';
-    liveEvents.unshift({id:eventId++, type:'APPROVAL_RESOLVED', process:'orchestrator-7f2a', detail:'DENIED by admin · WriteFile /etc/crontab', conf:null, timestamp:new Date().toTimeString().slice(0,8)});
+    liveEvents.unshift({id:eventId++, type:'INTERVENTION', process:'orchestrator-7f2a', detail:'DENIED by admin · WriteFile /etc/crontab', conf:null, timestamp:new Date().toTimeString().slice(0,8), raw_ts:new Date()});
   } else {
-    banner.innerHTML = '<div class="ptb-text" style="color:rgba(255,255,255,0.4)">Action approved by admin. Agent resumed. Logged.</div>';
-    liveEvents.unshift({id:eventId++, type:'APPROVAL_RESOLVED', process:'orchestrator-7f2a', detail:'APPROVED by admin · WriteFile /etc/crontab', conf:null, timestamp:new Date().toTimeString().slice(0,8)});
+    banner.innerHTML = '<div class="ptb-text" style="color:var(--w40)">Action approved by admin. Agent resumed. Logged.</div>';
+    liveEvents.unshift({id:eventId++, type:'INTERVENTION', process:'orchestrator-7f2a', detail:'APPROVED by admin · WriteFile /etc/crontab', conf:null, timestamp:new Date().toTimeString().slice(0,8), raw_ts:new Date()});
   }
   if (state.currentView === 'logs') renderLogs();
   if (state.tourStep === 4) showEndScreen();
@@ -1503,32 +1865,32 @@ const TOUR_STEPS = [
   {
     view:'dashboard', target:'stat-cards',
     title:'AI Agent Command Center',
-    body:'FORGE has discovered <strong style="color:#FF2E2E">24 active AI agents</strong> across your organization — including 3 running local LLMs that bypassed your proxy. Every interaction is captured in real time by 4 host-level probes. Watch the events climb.',
+    body:'Privify FORGE has discovered <strong style="color:#E85D54">24 active AI agents</strong> across your organization — including 3 running local LLMs that bypassed your proxy. Every interaction is captured in real time by 4 host-level probes. Watch the events climb.',
     nextLabel:'See live events →',
   },
   {
     view:'logs', target:'logs-events',
     title:'Every Event. Sub-100ms.',
-    body:'FORGE streams every API call, DLP hit, policy violation, and anomaly here in under 100 milliseconds. Notice the <strong style="color:#fb923c">DLP_MATCH</strong> event — FORGE just intercepted an SSN in a Claude response and alerted before it was logged anywhere.',
+    body:'Privify FORGE streams every API call, DLP hit, policy violation, and anomaly here in under 100 milliseconds. Notice the <strong style="color:#fb923c">DLP_MATCH</strong> event — Privify FORGE just intercepted an SSN in a Claude response and alerted before it was logged anywhere.',
     nextLabel:'See trace DAG →',
   },
   {
     view:'traces', target:'traces-dag',
     title:'Full Trace DAG — Replay Any Session',
-    body:'FORGE reconstructs every agent session as a directed acyclic graph. Click <strong style="color:#FF2E2E">Replay Session</strong> now to watch the top session execute step by step, including where the DLP hit occurred. This is the only platform with agent-to-agent span visibility.',
+    body:'Privify FORGE reconstructs every agent session as a directed acyclic graph. Click <strong style="color:#E85D54">Replay Session</strong> now to watch the top session execute step by step, including where the DLP hit occurred. This is the only platform with agent-to-agent span visibility.',
     nextLabel:'See compliance →',
     action: () => { selectTrace(0); },
   },
   {
     view:'compliance', target:'compliance-body',
     title:'13 Frameworks. Zero Manual Work.',
-    body:'FORGE automatically evaluates your AI posture across <strong style="color:#9B59FF">EU AI Act</strong>, <strong style="color:#3D8BFF">GDPR</strong>, <strong style="color:#F97316">DPDP</strong>, SOC 2, HIPAA, and 9 more frameworks. No spreadsheets. No manual evidence collection. Each control maps directly to FORGE event data.',
+    body:'Privify FORGE automatically evaluates your AI posture across <strong style="color:#9B59FF">EU AI Act</strong>, <strong style="color:#3D8BFF">GDPR</strong>, <strong style="color:#F97316">DPDP</strong>, SOC 2, HIPAA, and 9 more frameworks. No spreadsheets. No manual evidence collection. Each control maps directly to Privify FORGE event data.',
     nextLabel:'See policy control →',
   },
   {
     view:'policies', target:'view-policies',
     title:'Human-in-the-Loop. Agents Paused.',
-    body:'An agent tried to write to <code style="background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;">/etc/crontab</code>. FORGE intercepted it and <strong style="color:#F0A500">paused the agent</strong> pending your approval. Click <strong style="color:#F0A500">Review &amp; Decide</strong> to approve or deny — your decision is logged to the audit trail.',
+    body:'An agent tried to write to <code style="background:var(--w08);padding:1px 5px;border-radius:3px;">/etc/crontab</code>. Privify FORGE intercepted it and <strong style="color:#F0A500">paused the agent</strong> pending your approval. Click <strong style="color:#F0A500">Review &amp; Decide</strong> to approve or deny — your decision is logged to the audit trail.',
     nextLabel:'Approve or Deny →',
   },
 ];
@@ -1665,7 +2027,7 @@ function initParticles() {
     dot.style.cssText = `
       position:absolute;
       width:${size}px;height:${size}px;border-radius:50%;
-      background:#FF2E2E;opacity:${Math.random() * 0.25 + 0.05};
+      background:#E85D54;opacity:${Math.random() * 0.25 + 0.05};
       left:${Math.random() * 100}%;top:${Math.random() * 100}%;
       animation:float-${i % 3} ${6 + Math.random() * 8}s ${Math.random() * 5}s infinite linear;
     `;
@@ -1717,11 +2079,11 @@ const LOCKED_DESCRIPTIONS = {
 };
 
 const LOCKED_PREVIEWS = {
-'Interactions': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0"><div><div style="font-size:17px;font-weight:700">Interactions</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">2,341 sessions · 7 agents</div></div><div style="display:flex;gap:8px"><div style="height:30px;width:90px;border-radius:4px;border:1px solid var(--border);background:var(--panel)"></div><div style="height:30px;width:90px;border-radius:4px;background:var(--primary-dim)"></div></div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['2,341','14.2k','$1.84','312ms'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['SESSIONS','TOKENS K','COST','AVG LATENCY'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono)">'+v+'</div></div>').join('')}</div><div style="display:grid;grid-template-columns:130px 1fr 80px 70px 70px;padding:6px 24px;border-bottom:1px solid var(--border);flex-shrink:0">${['SESSION ID','AGENT · MODEL','TOKENS','RISK','TIME'].map(h=>'<span style="font-size:9px;color:var(--text-muted);letter-spacing:.1em">'+h+'</span>').join('')}</div><div style="flex:1;overflow:hidden">${[['sess_7f2a','cursor.app · claude-3-5-sonnet','3,847','var(--green)','LOW','2m ago'],['sess_3d8b','vscode · gpt-4o','1,204','var(--yellow)','MED','5m ago'],['sess_9c1f','langchain · claude-3-haiku','892','var(--primary)','HIGH','8m ago'],['sess_2a4e','autogen · gpt-4o-mini','2,341','var(--green)','LOW','11m ago'],['sess_5b7c','crewai · gemini-1.5-pro','1,109','var(--yellow)','MED','16m ago'],['sess_8e2d','jupyter · claude-3-opus','4,502','var(--primary)','HIGH','21m ago'],['sess_1f6a','python3 · llama3.2','788','var(--green)','LOW','25m ago'],['sess_4c9b','lm-studio · mistral-7b','2,213','var(--yellow)','MED','31m ago']].map(([id,a,tok,col,risk,t])=>'<div style="display:grid;grid-template-columns:130px 1fr 80px 70px 70px;padding:8px 24px;border-bottom:1px solid var(--border)"><span style="font-size:10px;font-family:var(--font-mono);color:rgba(255,255,255,.5)">'+id+'</span><span style="font-size:11px;color:rgba(255,255,255,.65)">'+a+'</span><span style="font-size:11px;font-family:var(--font-mono)">'+tok+'</span><span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(128,128,128,.12);padding:1px 7px;border-radius:2px;align-self:center">'+risk+'</span><span style="font-size:10px;color:var(--text-dim)">'+t+'</span></div>').join('')}</div></div>`,
+'Interactions': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0"><div><div style="font-size:17px;font-weight:700">Interactions</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">2,341 sessions · 7 agents</div></div><div style="display:flex;gap:8px"><div style="height:30px;width:90px;border-radius:4px;border:1px solid var(--border);background:var(--panel)"></div><div style="height:30px;width:90px;border-radius:4px;background:var(--primary-dim)"></div></div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['2,341','14.2k','$1.84','312ms'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['SESSIONS','TOKENS K','COST','AVG LATENCY'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono)">'+v+'</div></div>').join('')}</div><div style="display:grid;grid-template-columns:130px 1fr 80px 70px 70px;padding:6px 24px;border-bottom:1px solid var(--border);flex-shrink:0">${['SESSION ID','AGENT · MODEL','TOKENS','RISK','TIME'].map(h=>'<span style="font-size:9px;color:var(--text-muted);letter-spacing:.1em">'+h+'</span>').join('')}</div><div style="flex:1;overflow:hidden">${[['sess_7f2a','cursor.app · claude-3-5-sonnet','3,847','var(--green)','LOW','2m ago'],['sess_3d8b','vscode · gpt-4o','1,204','var(--yellow)','MED','5m ago'],['sess_9c1f','langchain · claude-3-haiku','892','var(--primary)','HIGH','8m ago'],['sess_2a4e','autogen · gpt-4o-mini','2,341','var(--green)','LOW','11m ago'],['sess_5b7c','crewai · gemini-1.5-pro','1,109','var(--yellow)','MED','16m ago'],['sess_8e2d','jupyter · claude-3-opus','4,502','var(--primary)','HIGH','21m ago'],['sess_1f6a','python3 · llama3.2','788','var(--green)','LOW','25m ago'],['sess_4c9b','lm-studio · mistral-7b','2,213','var(--yellow)','MED','31m ago']].map(([id,a,tok,col,risk,t])=>'<div style="display:grid;grid-template-columns:130px 1fr 80px 70px 70px;padding:8px 24px;border-bottom:1px solid var(--border)"><span style="font-size:10px;font-family:var(--font-mono);color:var(--w50)">'+id+'</span><span style="font-size:11px;color:var(--w65)">'+a+'</span><span style="font-size:11px;font-family:var(--font-mono)">'+tok+'</span><span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(128,128,128,.12);padding:1px 7px;border-radius:2px;align-self:center">'+risk+'</span><span style="font-size:10px;color:var(--text-dim)">'+t+'</span></div>').join('')}</div></div>`,
 
-'Participants': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Participants</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">24 agents · 6 users · 4 active now</div></div><div style="flex:1;overflow:hidden;padding:16px 24px;display:flex;flex-wrap:wrap;gap:12px;align-content:flex-start">${[['orchestrator-7f2a','LangChain','ACTIVE','var(--green)','184 calls/day'],['cursor-agent-3d8b','Cursor IDE','ACTIVE','var(--green)','12 sessions'],['autogen-runner-9c1','AutoGen','IDLE','var(--text-muted)','last 2h ago'],['crewai-ops-2a4e','CrewAI','ACTIVE','var(--green)','7 sessions'],['jupyter-nb-5b7c','Jupyter','IDLE','var(--text-muted)','last 4h ago'],['vscode-cop-8e2d','VSCode','ACTIVE','var(--primary)','HIGH RISK'],['llama-local-1f6a','Local LLM','IDLE','var(--text-muted)','offline'],['gpt-wrapper-4c9b','GPT Bridge','ACTIVE','var(--yellow)','ELEVATED'],['gemini-adp-6d3f','Gemini Adapter','IDLE','var(--text-muted)','last 1h ago'],['claude-desktop','Claude Desktop','ACTIVE','var(--green)','3 sessions'],['mcp-server-a1b2','MCP Gateway','ACTIVE','var(--blue)','12 tools'],['scheduler-7c8d','Task Scheduler','IDLE','var(--text-muted)','paused']].map(([id,type,status,col,meta])=>'<div style="width:170px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="width:8px;height:8px;border-radius:50%;background:'+col+'"></div><div style="font-size:10px;font-weight:700;font-family:var(--font-mono);color:rgba(255,255,255,.45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+id+'</div></div><div style="font-size:12px;font-weight:700;margin-bottom:4px">'+type+'</div><div style="font-size:10px;color:'+col+';font-weight:700">'+status+'</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">'+meta+'</div></div>').join('')}</div></div>`,
+'Participants': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Participants</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">24 agents · 6 users · 4 active now</div></div><div style="flex:1;overflow:hidden;padding:16px 24px;display:flex;flex-wrap:wrap;gap:12px;align-content:flex-start">${[['orchestrator-7f2a','LangChain','ACTIVE','var(--green)','184 calls/day'],['cursor-agent-3d8b','Cursor IDE','ACTIVE','var(--green)','12 sessions'],['autogen-runner-9c1','AutoGen','IDLE','var(--text-muted)','last 2h ago'],['crewai-ops-2a4e','CrewAI','ACTIVE','var(--green)','7 sessions'],['jupyter-nb-5b7c','Jupyter','IDLE','var(--text-muted)','last 4h ago'],['vscode-cop-8e2d','VSCode','ACTIVE','var(--primary)','HIGH RISK'],['llama-local-1f6a','Local LLM','IDLE','var(--text-muted)','offline'],['gpt-wrapper-4c9b','GPT Bridge','ACTIVE','var(--yellow)','ELEVATED'],['gemini-adp-6d3f','Gemini Adapter','IDLE','var(--text-muted)','last 1h ago'],['claude-desktop','Claude Desktop','ACTIVE','var(--green)','3 sessions'],['mcp-server-a1b2','MCP Gateway','ACTIVE','var(--blue)','12 tools'],['scheduler-7c8d','Task Scheduler','IDLE','var(--text-muted)','paused']].map(([id,type,status,col,meta])=>'<div style="width:170px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="width:8px;height:8px;border-radius:50%;background:'+col+'"></div><div style="font-size:10px;font-weight:700;font-family:var(--font-mono);color:var(--w45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+id+'</div></div><div style="font-size:12px;font-weight:700;margin-bottom:4px">'+type+'</div><div style="font-size:10px;color:'+col+';font-weight:700">'+status+'</div><div style="font-size:10px;color:var(--text-dim);margin-top:2px">'+meta+'</div></div>').join('')}</div></div>`,
 
-'Quality': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Quality</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">SLA monitoring · accuracy · hallucination rates</div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['97.2%','0.3%','142ms','3'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['AVG QUALITY','HALLUCINATION','P95 LATENCY','SLA BREACHES'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono);color:'+['var(--green)','var(--green)','var(--blue)','var(--yellow)'][i]+'">'+v+'</div></div>').join('')}</div><div style="flex:1;overflow:hidden;padding:0 24px 16px">${[['orchestrator-7f2a','98.1','0.1','118ms','var(--green)'],['cursor-agent-3d8b','96.7','0.4','144ms','var(--green)'],['autogen-runner-9c1','94.2','0.8','167ms','var(--yellow)'],['crewai-ops-2a4e','91.0','1.2','198ms','var(--yellow)'],['vscode-cop-8e2d','88.4','2.1','231ms','var(--primary)'],['jupyter-nb-5b7c','97.8','0.2','127ms','var(--green)'],['gpt-wrapper-4c9b','93.5','0.9','188ms','var(--yellow)']].map(([agent,q,hall,lat,col])=>'<div style="display:grid;grid-template-columns:180px 80px 80px 80px 1fr;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;font-family:var(--font-mono);color:rgba(255,255,255,.55)">'+agent+'</span><span style="font-size:13px;font-weight:700;color:'+col+'">'+q+'%</span><span style="font-size:11px;color:var(--text-muted)">'+hall+'%</span><span style="font-size:11px;color:var(--text-muted)">'+lat+'</span><div style="height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:'+col+';width:'+q+'%"></div></div></div>').join('')}</div></div>`,
+'Quality': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Quality</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">SLA monitoring · accuracy · hallucination rates</div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['97.2%','0.3%','142ms','3'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['AVG QUALITY','HALLUCINATION','P95 LATENCY','SLA BREACHES'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono);color:'+['var(--green)','var(--green)','var(--blue)','var(--yellow)'][i]+'">'+v+'</div></div>').join('')}</div><div style="flex:1;overflow:hidden;padding:0 24px 16px">${[['orchestrator-7f2a','98.1','0.1','118ms','var(--green)'],['cursor-agent-3d8b','96.7','0.4','144ms','var(--green)'],['autogen-runner-9c1','94.2','0.8','167ms','var(--yellow)'],['crewai-ops-2a4e','91.0','1.2','198ms','var(--yellow)'],['vscode-cop-8e2d','88.4','2.1','231ms','var(--primary)'],['jupyter-nb-5b7c','97.8','0.2','127ms','var(--green)'],['gpt-wrapper-4c9b','93.5','0.9','188ms','var(--yellow)']].map(([agent,q,hall,lat,col])=>'<div style="display:grid;grid-template-columns:180px 80px 80px 80px 1fr;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;font-family:var(--font-mono);color:var(--w55)">'+agent+'</span><span style="font-size:13px;font-weight:700;color:'+col+'">'+q+'%</span><span style="font-size:11px;color:var(--text-muted)">'+hall+'%</span><span style="font-size:11px;color:var(--text-muted)">'+lat+'</span><div style="height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:'+col+';width:'+q+'%"></div></div></div>').join('')}</div></div>`,
 
 'MCP Servers': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">MCP Servers</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">12 servers discovered · 47 tools exposed</div></div><div style="flex:1;overflow:hidden;padding:12px 24px">${[['filesystem-server','localhost:3001','12 tools','var(--green)','ACTIVE'],['github-mcp','api.github.com:443','8 tools','var(--green)','ACTIVE'],['postgres-bridge','localhost:5434','6 tools','var(--yellow)','RESTRICTED'],['web-fetch-mcp','localhost:3003','4 tools','var(--green)','ACTIVE'],['slack-connector','api.slack.com:443','7 tools','var(--blue)','MONITORED'],['aws-s3-mcp','s3.amazonaws.com','5 tools','var(--yellow)','RESTRICTED'],['kubectl-server','localhost:8080','9 tools','var(--primary)','BLOCKED'],['notion-mcp','api.notion.so','4 tools','var(--green)','ACTIVE'],['jira-connector','atlassian.net','6 tools','var(--green)','ACTIVE'],['code-exec-mcp','localhost:4001','3 tools','var(--primary)','QUARANTINED']].map(([name,host,tools,col,status])=>'<div style="background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:12px;font-weight:700;margin-bottom:3px">'+name+'</div><div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono)">'+host+'</div></div><div style="display:flex;align-items:center;gap:14px"><span style="font-size:11px;color:var(--text-muted)">'+tools+'</span><span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(128,128,128,.1);padding:2px 8px;border-radius:3px">'+status+'</span></div></div>').join('')}</div></div>`,
 
@@ -1729,7 +2091,7 @@ const LOCKED_PREVIEWS = {
 
 'Reports & SIEM': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Reports &amp; SIEM</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Compliance exports · 11 SIEM integrations</div></div><div style="flex:1;overflow-y:auto;padding:16px 24px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px">COMPLIANCE REPORTS</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">${['SOC 2','HIPAA','PCI-DSS','GDPR','CCPA','EU AI Act','NIST AI RMF','ISO 42001'].map(fw=>'<div style="background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:8px 14px;display:flex;align-items:center;gap:8px"><span style="font-size:11px;font-weight:700">'+fw+'</span><span style="font-size:9px;background:var(--primary-dim);color:#fff;padding:1px 6px;border-radius:2px">EXPORT</span></div>').join('')}</div><div style="font-size:9px;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px">SIEM DESTINATIONS</div>${[['Splunk','splunk.internal:8089','var(--green)','CONNECTED'],['Elastic SIEM','elastic.internal:9200','var(--green)','CONNECTED'],['Datadog','api.datadoghq.com','var(--yellow)','DEGRADED'],['IBM QRadar','qradar.internal','var(--text-muted)','DISCONNECTED'],['Azure Sentinel','sentinel.azure.com','var(--green)','CONNECTED'],['Sumo Logic','api.sumologic.com','var(--text-muted)','DISCONNECTED'],['Chronicle','chronicle.googleapis.com','var(--blue)','CONFIGURED'],['Palo Alto XSIAM','xsiam.paloalto.com','var(--text-muted)','DISCONNECTED']].map(([name,host,col,status])=>'<div style="background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:11px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:12px;font-weight:700">'+name+'</div><div style="font-size:10px;color:var(--text-muted);font-family:var(--font-mono);margin-top:2px">'+host+'</div></div><span style="font-size:9px;font-weight:700;color:'+col+'">'+status+'</span></div>').join('')}</div></div>`,
 
-'Feedback': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Feedback</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Human-in-the-loop quality ratings</div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['4.2/5','1,204','91%','38'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['AVG RATING','REVIEWS','THUMBS UP','ESCALATIONS'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono);color:'+['var(--yellow)','var(--text)','var(--green)','var(--primary)'][i]+'">'+v+'</div></div>').join('')}</div><div style="flex:1;overflow:hidden;padding:0 24px 16px">${[['orchestrator-7f2a','Executed database migration without confirming with user','4.0','var(--yellow)','2m ago'],['cursor-agent-3d8b','Generated correct TypeScript interface, no issues','5.0','var(--green)','8m ago'],['autogen-runner-9c1','Hallucinated API endpoint that does not exist','1.0','var(--primary)','15m ago'],['crewai-ops-2a4e','Completed task but took 3x longer than expected','3.0','var(--yellow)','22m ago'],['vscode-cop-8e2d','Tried to access /etc/passwd during code generation','1.0','var(--primary)','31m ago'],['jupyter-nb-5b7c','Data analysis was accurate and well-explained','5.0','var(--green)','40m ago'],['gpt-wrapper-4c9b','Response contained PII from training data','2.0','var(--primary)','51m ago'],['cursor-agent-3d8b','Refactored code cleanly with good test coverage','5.0','var(--green)','1h ago']].map(([agent,comment,score,col,t])=>'<div style="padding:10px 0;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:10px;font-family:var(--font-mono);color:rgba(255,255,255,.5)">'+agent+'</span><div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;font-weight:900;color:'+col+'">'+score+'</span><span style="font-size:10px;color:var(--text-dim)">'+t+'</span></div></div><div style="font-size:11px;color:rgba(255,255,255,.45)">'+comment+'</div></div>').join('')}</div></div>`,
+'Feedback': `<div style="display:flex;flex-direction:column;height:100%;background:var(--bg)"><div style="padding:14px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0"><div style="font-size:17px;font-weight:700">Feedback</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Human-in-the-loop quality ratings</div></div><div style="display:flex;gap:12px;padding:12px 24px;flex-shrink:0">${['4.2/5','1,204','91%','38'].map((v,i)=>'<div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 16px"><div style="font-size:9px;color:var(--text-muted);letter-spacing:.1em;margin-bottom:6px">'+['AVG RATING','REVIEWS','THUMBS UP','ESCALATIONS'][i]+'</div><div style="font-size:26px;font-weight:900;font-family:var(--font-mono);color:'+['var(--yellow)','var(--text)','var(--green)','var(--primary)'][i]+'">'+v+'</div></div>').join('')}</div><div style="flex:1;overflow:hidden;padding:0 24px 16px">${[['orchestrator-7f2a','Executed database migration without confirming with user','4.0','var(--yellow)','2m ago'],['cursor-agent-3d8b','Generated correct TypeScript interface, no issues','5.0','var(--green)','8m ago'],['autogen-runner-9c1','Hallucinated API endpoint that does not exist','1.0','var(--primary)','15m ago'],['crewai-ops-2a4e','Completed task but took 3x longer than expected','3.0','var(--yellow)','22m ago'],['vscode-cop-8e2d','Tried to access /etc/passwd during code generation','1.0','var(--primary)','31m ago'],['jupyter-nb-5b7c','Data analysis was accurate and well-explained','5.0','var(--green)','40m ago'],['gpt-wrapper-4c9b','Response contained PII from training data','2.0','var(--primary)','51m ago'],['cursor-agent-3d8b','Refactored code cleanly with good test coverage','5.0','var(--green)','1h ago']].map(([agent,comment,score,col,t])=>'<div style="padding:10px 0;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:10px;font-family:var(--font-mono);color:var(--w50)">'+agent+'</span><div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;font-weight:900;color:'+col+'">'+score+'</span><span style="font-size:10px;color:var(--text-dim)">'+t+'</span></div></div><div style="font-size:11px;color:var(--w45)">'+comment+'</div></div>').join('')}</div></div>`,
 };
 
 function showLockedToast(panelName) {
@@ -1750,6 +2112,15 @@ initParticles();
 document.getElementById('dash-time').textContent = new Date().toUTCString().slice(5, 25) + ' UTC';
 </script>
 <script src="/theme.js"></script>
+<script>
+/* This simulator mirrors the real Privify FORGE dashboard, which is dark-themed.
+   The shared theme.js defaults new visitors to light (right for marketing
+   pages); override that default here unless the visitor explicitly chose
+   light mode themselves. */
+if (localStorage.getItem('privify-theme') !== 'light') {
+  document.documentElement.removeAttribute('data-theme');
+}
+</script>
 <script src="/assets/sentry/sentry.js" defer data-sentry-page="forge-demo" data-sentry-api="https://privify-sentry.azurewebsites.net/api"></script>
 </body>
 </html>

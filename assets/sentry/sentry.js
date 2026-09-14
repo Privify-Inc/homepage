@@ -846,7 +846,7 @@
     bookingRequest: "I'd like to book a call.",
     greeting: IS_SHIELD
       ? "I'm Sentry, Privify's AI assistant. I can answer questions about SHIELD and get you on the waitlist."
-      : "I'm Sentry, Privify's AI assistant. I can answer questions about FORGE and Scout, and book you time with our team.",
+      : "I'm Sentry, Privify's AI assistant. I can answer questions about Privify FORGE and Scout, and book you time with our team.",
     sessionExpiredNotice:
       "That conversation had timed out, so I've started a fresh one — I've lost what we said above, so you may need to recap.",
 
