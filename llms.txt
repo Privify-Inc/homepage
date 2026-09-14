@@ -1,7 +1,7 @@
 # Privify
 
 > Privify builds AI control infrastructure. Two products: Privify FORGE governs AI agents inside
-> enterprises, and SHIELD protects individuals from having their personal data harvested for
+> enterprises, and Privify SHIELD protects individuals from having their personal data harvested for
 > AI training. Company: Privify, Inc. Site: https://privify.io
 
 ## What Privify does
@@ -51,14 +51,14 @@ enforcement scope. No public rate card.
 - [Pricing](https://privify.io/index.html#pricing)
 - [Contact sales](https://privify.io/contact.html)
 
-## SHIELD — personal data protection for individuals
+## Privify SHIELD — personal data protection for individuals
 
 Status: pre-launch, waitlist open.
 
-SHIELD is being built to let individuals see which services are harvesting their data, opt out
+Privify SHIELD is being built to let individuals see which services are harvesting their data, opt out
 of AI training datasets, and earn rewards when their data is licensed ethically.
 
-- [SHIELD overview](https://privify.io/privacy/index.html)
+- [Privify SHIELD overview](https://privify.io/privacy/index.html)
 - [Join the waitlist](https://privify.io/privacy/index.html#waitlist)
 
 ## Free tools
