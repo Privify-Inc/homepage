@@ -958,6 +958,13 @@
         [data-theme="light"] .theme-toggle .icon-sun  { display: block; }
         [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3SNRHD3G91"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3SNRHD3G91');
+</script>
 </head>
 <body>
 
@@ -1198,13 +1205,12 @@
                 <div class="pillar-num">03 /</div>
                 <div class="pillar-icon purple"></div>
                 <h3>Governance</h3>
-                <p>Stop bad things before they complete. Policy evaluation on every interaction, mid-flight intervention, human approval gates, cost budgets, and quality SLAs.</p>
+                <p>Stop bad things before they complete. Policy evaluation on every interaction, mid-flight intervention, human approval gates, and quality SLAs.</p>
                 <ul class="pillar-features">
                     <li>Policy engine: condition DSL, simulation mode, versioned rules</li>
                     <li>DLP scanning: 12 patterns including SSN, PHI, API keys</li>
                     <li>AI firewall: 10 threat signatures including prompt injection & jailbreak</li>
                     <li>Human-in-the-loop: pause any interaction for approval</li>
-                    <li>Cost governance: per-agent budgets with threshold alerts</li>
                 </ul>
                 <div class="pillar-glow"></div>
             </div>
@@ -1323,12 +1329,6 @@
                 <h4>AI firewall</h4>
                 <p>10 threat signatures covering the OWASP LLM Top 10: prompt injection, jailbreak (DAN), system prompt extraction, data exfiltration, indirect injection via tools.</p>
                 <span class="feature-tag">Security</span>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h4>Cost governance</h4>
-                <p>Per-agent cost ledger with team attribution, daily/weekly/monthly budgets, threshold alerts, and monthly spend forecasting. Chargeback-ready reports.</p>
-                <span class="feature-tag">FinOps</span>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"></div>
@@ -1482,7 +1482,7 @@
         <div class="section-header">
             <div class="section-eyebrow">Why Privify</div>
             <h2 class="section-title">Built differently. Governed deeper.</h2>
-            <p class="section-sub">Most governance tools sit at the network boundary. Privify reaches further — into the endpoint, into the delegation chain, into the cost ledger.</p>
+            <p class="section-sub">Most governance tools sit at the network boundary. Privify reaches further — into the endpoint and into the delegation chain.</p>
         </div>
         <div class="advantages-grid">
             <div class="advantage">
@@ -1507,12 +1507,6 @@
                 <div class="adv-icon"></div>
                 <h4>Quality SLAs linked to governance</h4>
                 <p>Quality scoring (6 dimensions, every interaction) feeds directly into the governance engine. A quality SLA breach — hallucination rate exceeds threshold, task completion drops — triggers the same ALERT or SUSPEND workflow as a security policy violation. One control plane for both.</p>
-                <span class="adv-tag adv-unique">Unique capability</span>
-            </div>
-            <div class="advantage">
-                <div class="adv-icon"></div>
-                <h4>Per-agent cost governance</h4>
-                <p>Token costs tracked per agent, attributed to teams and cost centers, measured against daily/weekly/monthly budgets. Forecasting projects end-of-month spend from 14-day trend data. The only platform that can answer: which agent cost your team $4,200 last month?</p>
                 <span class="adv-tag adv-unique">Unique capability</span>
             </div>
             <div class="advantage">
@@ -1661,13 +1655,8 @@
                     </tr>
 
                     <tr class="cmp-group">
-                        <td colspan="2">Cost &amp; Quality Governance</td>
+                        <td colspan="2">Quality Governance</td>
                         <td class="cmp-forge-cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cap">Cost governance</td>
-                        <td class="cmp-others"><span class="cmp-partial">Usage totals only</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">Per-agent budget enforcement</span></td>
                     </tr>
                     <tr>
                         <td class="cmp-cap">Quality SLAs</td>
@@ -1704,7 +1693,7 @@
                 <div class="cmp-obs-eyebrow">The Privify FORGE difference</div>
                 <div class="cmp-obs-text">
                     No other platform governs the <strong>full AI stack</strong> &mdash; detection, observability,
-                    security, cost, and compliance &mdash; from a single deployment.
+                    security, and compliance &mdash; from a single deployment.
                     Privify FORGE is purpose-built to serve the <strong>CISO, the AI engineer, and the compliance team</strong>
                     without asking any of them to compromise.
                 </div>
