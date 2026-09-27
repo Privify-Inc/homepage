@@ -32,6 +32,17 @@
         html { scroll-behavior:smooth; overflow-x:hidden; }
         body { font-family:'Inter',-apple-system,sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; -webkit-font-smoothing:antialiased; max-width:100%; }
         body::before { content:''; position:fixed; top:0;left:0;right:0;bottom:0; background:radial-gradient(ellipse 80% 60% at 70% -10%,rgba(232,93,84,0.07) 0%,transparent 60%); pointer-events:none; z-index:1; }
+        body.intro-active { overflow:hidden; }
+        /* Intro splash: the dot-to-logo animation plays alone, full-screen
+           and centered, before the page underneath is revealed. Background
+           matches body's own per-theme color exactly so the fade-out never
+           flashes. */
+        .intro-splash { position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+            background:#000;opacity:1;transition:opacity 0.7s ease; }
+        [data-theme="light"] .intro-splash { background:#F2F2F6; }
+        .intro-splash img { width:clamp(160px,20vw,300px);height:auto; }
+        .intro-splash.hide { opacity:0;pointer-events:none; }
+        @media (prefers-reduced-motion: reduce) { .intro-splash { display:none; } }
         .container { max-width:1200px; margin:0 auto; padding:0 2rem; position:relative; z-index:2; }
 
         /* NAV */
@@ -52,7 +63,7 @@
         .dropdown-item { display:block;padding:0.625rem 0.875rem;border-radius:6px;color:var(--gray-400);text-decoration:none; }
         .dropdown-item:hover { background:rgba(255,255,255,0.05);color:var(--white); }
         .di-title { font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px; }
-        .di-sub { font-size:0.75rem;color:var(--text-3); }
+        .di-sub { font-size:0.75rem;color:var(--gray-500); }
         .mobile-menu-btn { display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:0.5rem; }
         .mobile-menu { display:none;position:fixed;top:68px;left:0;right:0;background:#0d0d0d;border-top:1px solid var(--border);z-index:999;max-height:calc(100vh - 68px);overflow-y:auto; }
         .mobile-menu.open { display:block; }
@@ -78,7 +89,15 @@
         .hero-field { position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.72;
                       -webkit-mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,0.25) 34%,#000 72%);
                       mask-image:linear-gradient(102deg,transparent 6%,rgba(0,0,0,0.25) 34%,#000 72%); }
-        .hero-inner { max-width:760px;margin-bottom:3.25rem; }
+        /* The dot-to-logo animation plays once, full-screen and centered, in
+           the #introSplash gate below — this is just its resting mark: the
+           finished logo, left behind at very low opacity to the right of
+           the headline once the splash clears. */
+        .hero-logo-mark { position:absolute;inset:0;z-index:1;display:flex;align-items:flex-start;justify-content:flex-end;
+            padding-right:clamp(1rem,5vw,4.5rem);padding-top:9.5rem;pointer-events:none; }
+        .hero-logo-mark img { width:clamp(320px,34vw,560px);height:auto;opacity:0.06; }
+        @media (max-width:900px) { .hero-logo-mark { display:none; } }
+        .hero-inner { max-width:760px;margin-bottom:3.25rem;min-height:280px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start; }
         .eyebrow { display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red);padding:0.35rem 0.875rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem; }
         .eyebrow-dot { width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s infinite; }
         @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
@@ -123,8 +142,17 @@
         .fork-card.shield .fork-glow { background:var(--cyan); }
 
         /* TRUST STRIP + SOC 2 BADGE */
+        .backed-by { border-bottom:1px solid var(--border);background:var(--bg);padding:2.25rem 0 2rem; }
+        .backed-by-label { text-align:center;font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;color:var(--gray-400);
+            max-width:36rem;margin:0 auto 1.5rem;padding:0 1.5rem;line-height:1.4; }
+        .backed-by-row { display:flex;align-items:center;justify-content:center;gap:3.5rem;flex-wrap:wrap;padding:0 1.75rem; }
+        .backed-by-row img { display:block;height:44px;width:auto;flex-shrink:0; }
+        .backed-by-row img.gcp-logo { height:26px; }
+        img.gcp-logo-dark { display:none; }
+        html:not([data-theme="light"]) img.gcp-logo-light { display:none; }
+        html:not([data-theme="light"]) img.gcp-logo-dark { display:block; }
         .trust-strip { border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface-2);padding:1.75rem 0; }
-        .trust-inner { display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap; }
+        .trust-inner { display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap; }
         .soc2-badge { display:inline-flex;align-items:center;gap:0.9rem;background:var(--surface);border:1px solid var(--border-h);border-radius:12px;padding:0.85rem 1.25rem;flex-shrink:0; }
         .soc2-title { font-size:0.86rem;font-weight:700;color:var(--white);letter-spacing:-0.01em;line-height:1.3; }
         .soc2-sub { font-size:0.68rem;color:var(--text-3);margin-top:3px;font-family:var(--mono);letter-spacing:-0.01em; }
@@ -142,55 +170,10 @@
         .track-forge .track-tag { background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);color:var(--red); }
         .track-shield .track-tag { background:var(--cyan-dim);border:1px solid rgba(34,211,238,0.25);color:var(--cyan); }
 
-        /* COVERAGE MAP — the gateway blind-spot diagram.
-           Built from CSS boxes rather than SVG so the labels stay selectable
-           and the whole thing reflows to one column on narrow screens. */
-        .gap-map { position:relative;border:1px solid rgba(232,93,84,0.35);border-radius:18px;
-                   padding:2.75rem 1.75rem 1.75rem;margin-top:2.75rem;
-                   background:radial-gradient(ellipse 70% 90% at 80% 10%,rgba(232,93,84,0.05),transparent 70%); }
-        .gap-map-head { position:absolute;top:-0.62rem;left:1.5rem;background:var(--surface);
-                        padding:0 0.7rem;font-family:var(--mono);font-size:0.68rem;font-weight:500;
-                        letter-spacing:0.12em;text-transform:uppercase;color:var(--red); }
-        .gap-map-body { display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:1.75rem;align-items:center; }
-        /* Sized to its contents on purpose — the gateway's coverage should look
-           small next to the list of what falls outside it. */
-        .gap-inner { position:relative;border:1px dashed var(--gray-700);border-radius:13px;
-                     padding:2.25rem 1.35rem 1.5rem;background:rgba(255,255,255,0.015); }
+        /* COVERAGE MAP diagram itself now lives only on forge/index.html#coverage —
+           this page links to it instead of repeating it. Kept: the section-header
+           style it still shares with the rest of the track. */
         .track-gap .section-header .section-eyebrow { display:flex;margin-top:0.9rem;margin-bottom:0.7rem; }
-        .gap-inner-head { position:absolute;top:-0.58rem;left:1.15rem;background:var(--surface);
-                          padding:0 0.6rem;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;
-                          text-transform:uppercase;color:var(--text-3); }
-        .gap-node { border:1px solid var(--border-h);border-radius:8px;background:var(--surface-2);
-                    padding:0.8rem 1rem;font-size:0.85rem;font-weight:600;color:var(--gray-400);text-align:center; }
-        .gap-inner-note { font-size:0.72rem;color:var(--gray-500);text-align:center;margin-top:0.85rem;line-height:1.5; }
-        .gap-chips { display:flex;flex-direction:column;gap:0.85rem; }
-        .gap-chip { display:flex;gap:0.8rem;align-items:flex-start; }
-        .gap-chip-mark { flex-shrink:0;width:1.4rem;height:1.4rem;border-radius:50%;border:1px solid rgba(232,93,84,0.4);
-                         color:var(--red);font-size:0.7rem;display:flex;align-items:center;justify-content:center;margin-top:1px; }
-        .gap-chip-t { font-size:0.88rem;font-weight:650;color:var(--white);display:block;margin-bottom:1px; }
-        .gap-chip-s { font-size:0.79rem;color:var(--text-3);line-height:1.5;display:block; }
-        .gap-map-foot { margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid rgba(232,93,84,0.18);
-                        font-size:0.79rem;color:var(--gray-400);display:flex;align-items:center;gap:0.6rem;line-height:1.5; }
-        .gap-map-foot i { color:var(--red);font-size:0.8rem;flex-shrink:0; }
-        .gap-caption { font-size:0.9rem;color:var(--gray-400);line-height:1.7;margin-top:1.5rem;max-width:720px; }
-
-        /* HOW IT WORKS — sequence rail.
-           Discover → Observe → Govern is a real sequence, so it reads as a
-           connected progression rather than three parallel cards. */
-        .rail { list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;position:relative; }
-        .rail::before { content:'';position:absolute;top:14px;left:calc(16.66% + 14px);right:calc(16.66% + 14px);
-                        height:1px;background:linear-gradient(90deg,var(--red),rgba(232,93,84,0.25)); }
-        .rail-step { position:relative;padding-right:1rem; }
-        .rail-node { width:29px;height:29px;border-radius:50%;border:1px solid rgba(232,93,84,0.45);
-                     background:var(--black);color:var(--red);font-family:var(--mono);font-size:0.68rem;font-weight:500;
-                     display:flex;align-items:center;justify-content:center;position:relative;z-index:2;margin-bottom:1.1rem; }
-        .rail-stage { font-family:var(--mono);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;
-                      color:var(--gray-500);margin-bottom:0.4rem; }
-        .rail-step h3 { font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.6rem; }
-        .rail-step > p { font-size:0.87rem;color:var(--gray-400);line-height:1.65;margin-bottom:1.1rem; }
-        .step-detail { list-style:none;display:flex;flex-direction:column;gap:0.4rem;border-top:1px solid var(--border);padding-top:0.9rem; }
-        .step-detail li { font-size:0.76rem;color:var(--text-3);font-family:var(--mono);line-height:1.5;display:flex;gap:0.45rem; }
-        .step-detail li::before { content:'›';color:var(--red);flex-shrink:0; }
 
         /* DIFFERENTIATOR */
         .diff-label { font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
@@ -278,15 +261,6 @@
         .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s}
 
         @media(max-width:900px) {
-            /* Rail turns vertical: the connecting line runs down the left gutter */
-            .rail{grid-template-columns:1fr;gap:2.25rem;padding-left:1.25rem;}
-            .rail::before{top:14px;bottom:14px;left:14px;right:auto;width:1px;height:auto;
-                          background:linear-gradient(180deg,var(--red),rgba(232,93,84,0.2));}
-            .rail-step{padding-right:0;padding-left:2.5rem;}
-            .rail-node{position:absolute;left:-1.25rem;top:0;margin-bottom:0;}
-            /* Coverage map stacks: gateway box first, blind spots beneath it */
-            .gap-map-body{grid-template-columns:1fr;gap:1.5rem;}
-            .gap-inner{min-height:0;}
             .diff-grid{grid-template-columns:repeat(2,1fr);}
             .faq-grid{grid-template-columns:1fr;gap:2.25rem;}
             .price-factors{grid-template-columns:1fr;}
@@ -307,8 +281,8 @@
             .diff-grid{grid-template-columns:1fr;}
             .fork-actions{flex-direction:column;align-items:stretch;}
             .fork-actions .btn{justify-content:center;}
-            .trust-inner{flex-direction:column;align-items:flex-start;gap:1.5rem;}
-            .trust-items{gap:1rem 1.5rem;}
+            .trust-inner{flex-direction:column;align-items:center;gap:1.5rem;}
+            .trust-items{gap:1rem 1.5rem;justify-content:center;}
             .mission-inner{grid-template-columns:1fr;gap:3rem;}
             .price-card{padding:2rem 1.5rem;}
             .final-actions{flex-direction:column;align-items:stretch;}
@@ -418,6 +392,11 @@
 </head>
 <body>
 
+<!-- ══ INTRO SPLASH — dot-to-logo plays alone, centered, page reveals after -->
+<div class="intro-splash" id="introSplash" aria-hidden="true">
+    <img src="images/privify-dot-to-logo.png" alt="">
+</div>
+
 <header class="header" id="header">
     <div class="container">
         <nav>
@@ -436,11 +415,11 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="forge/index.html">
                             <div class="di-title">Privify FORGE</div>
-                            <div class="di-sub">AI agent governance for enterprises</div>
+                            <div class="di-sub"><u>F</u>ederated <u>O</u>versight &amp; <u>R</u>isk <u>G</u>overnance <u>E</u>ngine</div>
                         </a>
                         <a class="dropdown-item" href="shield/index.html" style="border-top:1px solid var(--border);">
                             <div class="di-title">Privify SHIELD</div>
-                            <div class="di-sub">Personal data protection</div>
+                            <div class="di-sub"><u>S</u>overeignty <u>H</u>ub for <u>I</u>ndividual <u>L</u>iberty and <u>D</u>ata</div>
                         </a>
                         <a class="dropdown-item" href="scout/index.html" style="border-top:1px solid var(--border);">
                             <div class="di-title">Privify SCOUT</div>
@@ -480,6 +459,9 @@
 <!-- ══ HERO + PRODUCT FORK ══════════════════════════════════════════════ -->
 <section class="hero">
     <canvas class="hero-field" id="heroField" aria-hidden="true"></canvas>
+    <div class="hero-logo-mark" aria-hidden="true">
+        <img src="images/privify-logo-mark.png" alt="">
+    </div>
     <div class="container">
         <div class="hero-inner">
             <div class="eyebrow fade-in"><span class="eyebrow-dot"></span>AI control infrastructure</div>
@@ -487,10 +469,6 @@
                 Put enterprises and people in
                 <span class="red">control of AI</span>
             </h1>
-            <p class="hero-sub fade-in delay-2">
-                Enterprises can't see what their AI agents are doing. Individuals can't stop their data
-                training models they never agreed to.
-            </p>
         </div>
 
         <span class="fork-label fade-in delay-2">Choose your path</span>
@@ -552,6 +530,16 @@
     </div>
 </section>
 
+<!-- ══ PARTNER STRIP — partner/program badges ════════════════════════════ -->
+<section class="backed-by">
+    <div class="backed-by-label">We partner with the world&rsquo;s leading organizations</div>
+    <div class="backed-by-row">
+        <img src="images/nvidia-inception-badge-mono.svg" alt="NVIDIA Inception Program member">
+        <img src="images/google-cloud-logo.svg" alt="Google Cloud Partner" class="gcp-logo gcp-logo-light">
+        <img src="images/google-cloud-logo-reverse.svg" alt="Google Cloud Partner" class="gcp-logo gcp-logo-dark">
+    </div>
+</section>
+
 <!-- ══ TRUST STRIP + SOC 2 READINESS BADGE ══════════════════════════════ -->
 <section class="trust-strip">
     <div class="container">
@@ -590,57 +578,15 @@
             <div class="section-eyebrow">Why not just use a gateway?</div>
             <h2 class="section-title">The agents your gateway will never see</h2>
             <p class="section-sub">
-                An MCP gateway governs what routes through it. That's real coverage — but an agent only
-                routes through it when it chooses to speak MCP. Privify FORGE runs on the endpoint, where the
-                agent actually executes.
+                An MCP gateway only sees traffic that chooses to speak MCP. Local models, direct API calls, and
+                an employee pasting into a chat window all reach the internet without ever routing through
+                one — and that's exactly where AI risk actually shows up. Privify FORGE runs on the endpoint,
+                where the agent actually executes, so it catches all three.
             </p>
+            <a href="forge/index.html#coverage" class="btn btn-forge" style="margin-top:1.5rem;display:inline-flex;">
+                See the full coverage map <i class="fa-solid fa-arrow-right fa-xs"></i>
+            </a>
         </div>
-
-        <div class="gap-map">
-            <div class="gap-map-head">Your environment — where Privify FORGE runs</div>
-            <div class="gap-map-body">
-
-                <div class="gap-inner">
-                    <div class="gap-inner-head">What an MCP gateway sees</div>
-                    <div class="gap-node">MCP tool calls</div>
-                    <div class="gap-inner-note">Everything that chose to speak the protocol</div>
-                </div>
-
-                <div class="gap-chips">
-                    <div class="gap-chip">
-                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
-                        <span>
-                            <span class="gap-chip-t">Local models</span>
-                            <span class="gap-chip-s">Ollama, LM Studio, llama.cpp — the traffic never leaves the machine, so it never reaches a gateway</span>
-                        </span>
-                    </div>
-                    <div class="gap-chip">
-                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
-                        <span>
-                            <span class="gap-chip-t">Direct API calls</span>
-                            <span class="gap-chip-s">Code hitting a provider's REST endpoint isn't speaking MCP, so there's nothing at the protocol layer to inspect</span>
-                        </span>
-                    </div>
-                    <div class="gap-chip">
-                        <span class="gap-chip-mark"><i class="fa-solid fa-xmark"></i></span>
-                        <span>
-                            <span class="gap-chip-t">Browser AI</span>
-                            <span class="gap-chip-s">An employee pasting into a chat window — the most common AI risk in an enterprise, and entirely outside the protocol</span>
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-            <div class="gap-map-foot">
-                <i class="fa-solid fa-shield-halved"></i>
-                Privify FORGE enforces at this boundary — inline in the OS network stack, on the endpoint itself.
-            </div>
-        </div>
-
-        <p class="gap-caption">
-            Three kinds of AI activity, none of which pass through a protocol gateway. Privify FORGE catches all
-            three because it runs where the code runs, not where the traffic is supposed to go.
-        </p>
 
         <!-- Consequence, not mechanism — written for the CISO / risk / compliance
              reader. The diagram's chips state the technical gap; these state what
@@ -676,60 +622,14 @@
             <div class="section-eyebrow">How it works</div>
             <h2 class="section-title">How Privify FORGE actually works</h2>
             <p class="section-sub">
-                Three stages, running continuously on every endpoint in your environment. No agent registry to
-                maintain, no cooperation required from the tools you're trying to govern.
+                Three stages, running continuously on every endpoint in your environment — discover every
+                agent, observe what it touches, govern what it's allowed to do. No agent registry to maintain,
+                no cooperation required from the tools you're trying to govern.
             </p>
+            <a href="forge/index.html#platform" class="btn btn-forge" style="margin-top:1.5rem;display:inline-flex;">
+                See how each stage works <i class="fa-solid fa-arrow-right fa-xs"></i>
+            </a>
         </div>
-
-        <ol class="rail">
-            <li class="rail-step">
-                <div class="rail-node">01</div>
-                <div class="rail-stage">Stage 01</div>
-                <h3>Discover</h3>
-                <p>
-                    Four probes run on each host and fingerprint AI activity from the inside — no
-                    self-reporting, no allowlist to keep current.
-                </p>
-                <ul class="step-detail">
-                    <li>Process probe: AI library signatures in running processes</li>
-                    <li>Network probe: outbound connections to AI API endpoints</li>
-                    <li>Endpoint probe: local model runtimes — Ollama, LM Studio, llama.cpp</li>
-                    <li>File probe: model weights and agent configs on disk</li>
-                </ul>
-            </li>
-            <li class="rail-step">
-                <div class="rail-node">02</div>
-                <div class="rail-stage">Stage 02</div>
-                <h3>Observe</h3>
-                <p>
-                    Every call becomes a node in a trace graph, so you can answer "what did this agent
-                    touch?" instead of guessing from logs.
-                </p>
-                <ul class="step-detail">
-                    <li>Interaction DAG: human → agent → agent → tool</li>
-                    <li>Full trace replay for incident review</li>
-                    <li>Per-agent cost and token attribution</li>
-                    <li>Export to 11 SIEM platforms — CEF, LEEF, STIX 2.1, ECS</li>
-                </ul>
-            </li>
-            <li class="rail-step">
-                <div class="rail-node">03</div>
-                <div class="rail-stage">Stage 03</div>
-                <h3>Govern</h3>
-                <p>
-                    Policies compile down to enforcement that runs inline, at the moment the agent acts —
-                    not in a report you read the next morning.
-                </p>
-                <ul class="step-detail">
-                    <li>12 DLP patterns scanned in real time — SSN, PHI, keys, secrets</li>
-                    <li>10 threat signatures — prompt injection, jailbreak, exfiltration</li>
-                    <li>Kernel-level blocking on Windows (WFP callout driver)</li>
-                    <li>Human-in-the-loop approval queue for high-risk actions</li>
-                </ul>
-            </li>
-        </ol>
-
-
 
     </div>
 </section>
@@ -772,7 +672,6 @@
                 <span class="pi-chip"><i class="fa-solid fa-check"></i> All three pillars included</span>
                 <span class="pi-chip"><i class="fa-solid fa-check"></i> 13 compliance frameworks</span>
                 <span class="pi-chip"><i class="fa-solid fa-check"></i> 11 SIEM integrations</span>
-                <span class="pi-chip"><i class="fa-solid fa-check"></i> No per-seat licensing</span>
             </div>
 
             <a href="contact.html?product=forge&amp;intent=pricing" class="btn btn-forge" onclick="track('CTA_ContactPricing')">
@@ -972,6 +871,7 @@
                     <div class="footer-col-title">Company</div>
                     <a href="careers.html" class="footer-link">Careers</a>
                     <a href="contact.html" class="footer-link">Contact</a>
+                    <a href="blog/index.html" class="footer-link">Blog</a>
                 </div>
                 <div class="footer-col">
                     <div class="footer-col-title">Legal &amp; Trust</div>
@@ -997,6 +897,9 @@
             <div class="fu-right">
                 <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
                 <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in Privify FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+                <img src="images/nvidia-inception-badge.svg" alt="NVIDIA Inception Program member" height="42" style="display:block;flex-shrink:0;border-radius:3px">
+                <img src="images/google-cloud-logo.svg" alt="Google Cloud Partner" height="25" class="gcp-logo-light" style="flex-shrink:0">
+                <img src="images/google-cloud-logo-reverse.svg" alt="Google Cloud Partner" height="25" class="gcp-logo-dark" style="flex-shrink:0">
             </div>
         </div>
         <div class="footer-bottom">
@@ -1007,6 +910,29 @@
 </footer>
 
 <script>
+/*  INTRO SPLASH
+    The dot-to-logo animation plays alone, full-screen and centered, before
+    the page is revealed — scroll is locked and the page (with its resting
+    logo mark already in place to the right of the headline) sits ready
+    underneath while it plays. The source APNG loops internally, so this
+    fades the splash away once its one authored playthrough (127 frames,
+    measured total 3400ms) has elapsed, rather than trying to intercept or
+    disable the loop mid-file. Reduced-motion users skip the splash entirely
+    (CSS display:none on .intro-splash) so this just no-ops for them.       */
+(function introSplash(){
+    const splash = document.getElementById('introSplash');
+    if (!splash) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.body.classList.add('intro-active');
+    setTimeout(() => {
+        splash.classList.add('hide');
+        setTimeout(() => {
+            splash.remove();
+            document.body.classList.remove('intro-active');
+        }, 700);
+    }, 3400);
+})();
+
 /*  HERO DISCOVERY FIELD
     A scatter of marks representing AI activity across an environment. Most sit
     at near-zero opacity — running, unseen. On load a sweep crosses the field and
@@ -1021,6 +947,10 @@
     const ctx = cv.getContext('2d');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const ACCENT = '232,93,84';
+    // Non-accent marks were hardcoded white — invisible on light mode's pale
+    // background. Read the theme at paint time instead of once, so a live
+    // toggle (via the MutationObserver below) recolors them correctly too.
+    function isLight(){ return document.documentElement.getAttribute('data-theme') === 'light'; }
     let marks = [], W = 0, H = 0, raf = null;
 
     function build(){
@@ -1065,9 +995,15 @@
         for (const m of marks) {
             const target = sweep === null ? 1 : (m.x < sweep ? 1 : 0);
             m.lit += (target - m.lit) * 0.14;
-            const a = (0.05 + m.lit * (m.accent ? 0.62 : 0.22)) * m.gain;
+            // A dark stroke needs considerably more alpha than a white one to
+            // read at the same visual weight against light mode's near-white
+            // background (#F2F2F6) as white reads against dark mode's black —
+            // equal alpha values do not mean equal contrast here.
+            const light = isLight();
+            const boost = light ? 2.3 : 1;
+            const a = (0.05 + m.lit * (m.accent ? 0.62 : 0.22)) * m.gain * boost;
             ctx.strokeStyle = m.accent ? 'rgba(' + ACCENT + ',' + a + ')'
-                                       : 'rgba(255,255,255,' + a + ')';
+                                       : 'rgba(' + (light ? '20,20,25' : '255,255,255') + ',' + a + ')';
             ctx.lineWidth = m.accent ? 1.6 : 1;
             ctx.beginPath();
             ctx.moveTo(m.x, m.y - m.h / 2);
@@ -1100,6 +1036,11 @@
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
     else run();
+
+    // Repaint on a live theme toggle so the marks recolor immediately
+    // instead of only on next page load.
+    new MutationObserver(() => { if (marks.length) paint(null); })
+        .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 })();
 
 
@@ -1142,7 +1083,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //  the elements are then simply visible, never hidden by JS in the first place.
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);} }), {threshold:0.08});
-    document.querySelectorAll('.rail-step, .gap-chip, .diff-card, .m-stat, .price-factor').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
+    document.querySelectorAll('.diff-card, .m-stat, .price-factor').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(a => {

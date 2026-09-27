@@ -121,7 +121,7 @@
         }
         
         .di-title { font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px; }
-        .di-sub { font-size:0.75rem;color:var(--text-3); }
+        .di-sub { font-size:0.75rem;color:var(--gray-500); }
         .dropdown-item:hover { background:rgba(255,255,255,0.05); color:var(--white); }
         .mobile-menu-btn { display:none; background:none; border:none; color:var(--white); cursor:pointer; padding:0.5rem; }
         .mobile-menu {
@@ -741,6 +741,9 @@
         .fu-trust { display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;color:var(--pf-text);
                     border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.65rem;white-space:nowrap; }
         .fu-trust svg { color:var(--red);opacity:0.9;flex-shrink:0; }
+        img.gcp-logo-dark { display:none; }
+        html:not([data-theme="light"]) img.gcp-logo-light { display:none; }
+        html:not([data-theme="light"]) img.gcp-logo-dark { display:block; }
         .fu-cap { color:var(--gray-500); }
         @media(max-width:900px){
             .footer-utility{flex-direction:column;align-items:flex-start;gap:1rem;}
@@ -962,7 +965,7 @@
         /* ── SCOUT animated scan / report widget ──────────────────────────
            Deliberately not a screenshot of the real CLI or the real HTML
            report — an original, looping illustration of the same shape:
-           13 surfaces checked in sequence, then a connected-findings view
+           17 surfaces checked in sequence, then a connected-findings view
            echoing the real report's hub-and-spoke style. */
         .scout-frame { animation: float 8s ease-in-out infinite; }
         .scout-status { margin-left:auto; font-family:var(--mono); font-size:0.68rem; color:var(--gray-500); letter-spacing:0.02em; }
@@ -1050,11 +1053,11 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="../forge/index.html">
                             <div class="di-title">Privify FORGE</div>
-                            <div class="di-sub">AI agent discovery, observability &amp; governance</div>
+                            <div class="di-sub"><u>F</u>ederated <u>O</u>versight &amp; <u>R</u>isk <u>G</u>overnance <u>E</u>ngine</div>
                         </a>
                         <a class="dropdown-item" href="../shield/index.html">
                             <div class="di-title">Privify SHIELD</div>
-                            <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
+                            <div class="di-sub"><u>S</u>overeignty <u>H</u>ub for <u>I</u>ndividual <u>L</u>iberty and <u>D</u>ata</div>
                         </a>
                         <a class="dropdown-item" href="index.html">
                             <div class="di-title">Privify SCOUT</div>
@@ -1133,7 +1136,7 @@
                     </div>
                     <div class="scout-report-view" id="scoutReportView">
                         <svg class="scout-report-svg" id="scoutReportSvg" viewBox="0 0 560 320" aria-hidden="true"></svg>
-                        <div class="scout-report-caption" id="scoutReportCaption">Report generated &mdash; 8 of 13 surfaces active</div>
+                        <div class="scout-report-caption" id="scoutReportCaption">Report generated &mdash; 8 of 17 surfaces active</div>
                     </div>
                 </div>
             </div>
@@ -1172,7 +1175,7 @@
                 <div class="pillar-num">01 /</div>
                 <div class="pillar-icon blue"><i class="fa-solid fa-magnifying-glass" style="color:var(--red)"></i></div>
                 <h3>Scan</h3>
-                <p>13 surfaces, checked in sequence: CLI tools, environment and file-based API keys, MCP servers, IDE extensions, local model servers, running processes, Python and npm packages, shell and browser history, Docker containers, and your local subnet.</p>
+                <p>17 surfaces, checked in sequence: CLI tools, environment and file-based API keys, MCP servers, IDE extensions, local model servers, running processes, Python and npm packages, shell and browser history, AI model and config files, Docker containers, Kubernetes AI workloads, and your local subnet.</p>
                 <ul class="pillar-features">
                     <li>Agentless — reads what's already on the machine</li>
                     <li>No account, no cloud upload — everything runs locally</li>
@@ -1231,7 +1234,7 @@
                             <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
                             <i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i>
                         </div>
-                        <div class="dgap-fig">8<span>of 13 surfaces active</span></div>
+                        <div class="dgap-fig">8<span>of 17 surfaces active</span></div>
                         <div class="dgap-sub">3 MCP servers &middot; 1 unauthenticated</div>
                     </div>
                 </div>
@@ -1246,7 +1249,7 @@
     <div class="container">
         <div class="section-header">
             <div class="section-eyebrow">Coverage</div>
-            <h2 class="section-title">13 surfaces. One free scan.</h2>
+            <h2 class="section-title">17 surfaces. One free scan.</h2>
             <p class="section-sub">Every place shadow AI actually hides on an endpoint and the network around it.</p>
         </div>
         <div class="scout-surface-grid">
@@ -1262,6 +1265,9 @@
             <div class="scout-surface-card"><i class="fa-solid fa-clock-rotate-left"></i><h4>Shell History</h4><p>Past commands that invoked an AI tool or model</p></div>
             <div class="scout-surface-card"><i class="fa-solid fa-globe"></i><h4>Browser History</h4><p>Visits to AI chat and API console domains</p></div>
             <div class="scout-surface-card"><i class="fa-brands fa-docker"></i><h4>Docker Containers</h4><p>Containers running model servers or AI tooling</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-weight-hanging"></i><h4>AI Model Files</h4><p>Downloaded model weights sitting on disk — fully offline LLMs nobody tracked</p></div>
+            <div class="scout-surface-card"><i class="fa-solid fa-file-code"></i><h4>AI Config Files</h4><p>Claude, Copilot and other AI tool config and instruction files on the machine</p></div>
+            <div class="scout-surface-card"><i class="fa-brands fa-kubernetes"></i><h4>Kubernetes AI</h4><p>AI workloads running as pods in any cluster the machine can reach</p></div>
             <div class="scout-surface-card"><i class="fa-solid fa-network-wired"></i><h4>Network Scan</h4><p>Every reachable host on the subnet, probed for AI ports and MCP endpoints</p></div>
         </div>
     </div>
@@ -1345,7 +1351,7 @@ window.addEventListener('scroll', () => {
 });
 
 //  SCOUT animated scan → report widget
-// Grounded in the real 13 surfaces forge-scout.py checks (see
+// Grounded in the real 17 surfaces forge-scout.py checks (see
 // forge-context.md §7.3); the specific findings below are illustrative,
 // not a real customer's data — same "representative first-scan result"
 // framing the discovery-gap panel above states explicitly.
@@ -1491,7 +1497,7 @@ async function runScoutScan() {
     scanView.style.display = 'none';
     reportView.style.display = 'flex';
     drawScoutReport();
-    if (captionEl) captionEl.textContent = 'Report generated — 8 of 13 surfaces active';
+    if (captionEl) captionEl.textContent = 'Report generated — 8 of 17 surfaces active';
     await scoutWait(2200);
 
     statusEl.textContent = 'drilling in…';
@@ -1501,7 +1507,7 @@ async function runScoutScan() {
 
     clearScoutDrilldown();
     statusEl.textContent = 'report ready';
-    if (captionEl) captionEl.textContent = 'Report generated — 8 of 13 surfaces active';
+    if (captionEl) captionEl.textContent = 'Report generated — 8 of 17 surfaces active';
     await scoutWait(1600);
     runScoutScan();
 }
@@ -1636,6 +1642,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
                     <div class="footer-col-title">Company</div>
                     <a href="../careers.html" class="footer-link">Careers</a>
                     <a href="../contact.html" class="footer-link">Contact</a>
+                    <a href="../blog/index.html" class="footer-link">Blog</a>
                 </div>
                 <div class="footer-col">
                     <div class="footer-col-title">Legal &amp; Trust</div>
@@ -1661,6 +1668,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
             <div class="fu-right">
                 <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
                 <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Agentless &mdash; nothing leaves the machine</span>
+                <img src="/images/nvidia-inception-badge.svg" alt="NVIDIA Inception Program member" height="42" style="display:block;flex-shrink:0;border-radius:3px">
+                <img src="/images/google-cloud-logo.svg" alt="Google Cloud Partner" height="25" class="gcp-logo-light" style="flex-shrink:0">
+                <img src="/images/google-cloud-logo-reverse.svg" alt="Google Cloud Partner" height="25" class="gcp-logo-dark" style="flex-shrink:0">
             </div>
         </div>
         <div class="footer-bottom">

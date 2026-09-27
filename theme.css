@@ -462,7 +462,6 @@
 [data-theme="light"] .stat-num                { color: #0A0A0A; }
 [data-theme="light"] .stat-label              { color: #6B7280; }
 [data-theme="light"] .hero-expand             { color: #6B7280; }
-[data-theme="light"] .hero-field              { opacity: 0.12; }
 
 /* ── Section / track backgrounds ── */
 [data-theme="light"] .track-gap               { background: #EAEAF2; }
