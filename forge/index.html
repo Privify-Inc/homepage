@@ -121,7 +121,7 @@
         }
         
         .di-title { font-size:0.85rem;font-weight:600;color:var(--white);margin-bottom:2px; }
-        .di-sub { font-size:0.75rem;color:var(--text-3); }
+        .di-sub { font-size:0.75rem;color:var(--gray-500); }
         .dropdown-item:hover { background:rgba(255,255,255,0.05); color:var(--white); }
         .mobile-menu-btn { display:none; background:none; border:none; color:var(--white); cursor:pointer; padding:0.5rem; }
         .mobile-menu {
@@ -155,6 +155,13 @@
         }
         .hero-eyebrow .dot { width:6px; height:6px; background:var(--red); border-radius:50%; animation:pulse 2s infinite; }
         @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+        .patent-badge {
+            display:inline-flex; align-items:center;
+            background:var(--surface); border:1px solid var(--border);
+            color:var(--gray-400); padding:0.375rem 0.875rem; border-radius:999px;
+            font-size:0.8rem; font-weight:600; letter-spacing:0.04em;
+            text-transform:uppercase; margin-bottom:1.5rem; margin-left:0.6rem;
+        }
 
         h1 {
             font-size:clamp(2.25rem,4.5vw,3.75rem);
@@ -740,6 +747,9 @@
         .fu-trust { display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;color:var(--pf-text);
                     border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.65rem;white-space:nowrap; }
         .fu-trust svg { color:var(--red);opacity:0.9;flex-shrink:0; }
+        img.gcp-logo-dark { display:none; }
+        html:not([data-theme="light"]) img.gcp-logo-light { display:none; }
+        html:not([data-theme="light"]) img.gcp-logo-dark { display:block; }
         .fu-cap { color:var(--gray-500); }
         @media(max-width:900px){
             .footer-utility{flex-direction:column;align-items:flex-start;gap:1rem;}
@@ -987,11 +997,11 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="index.html">
                             <div class="di-title">Privify FORGE</div>
-                            <div class="di-sub">AI agent discovery, observability &amp; governance</div>
+                            <div class="di-sub"><u>F</u>ederated <u>O</u>versight &amp; <u>R</u>isk <u>G</u>overnance <u>E</u>ngine</div>
                         </a>
                         <a class="dropdown-item" href="../shield/index.html">
                             <div class="di-title">Privify SHIELD</div>
-                            <div class="di-sub">Sovereignty Hub for Individual Liberty and Data</div>
+                            <div class="di-sub"><u>S</u>overeignty <u>H</u>ub for <u>I</u>ndividual <u>L</u>iberty and <u>D</u>ata</div>
                         </a>
                         <a class="dropdown-item" href="../scout/index.html">
                             <div class="di-title">Privify SCOUT</div>
@@ -1026,7 +1036,7 @@
             <div class="hero-eyebrow fade-in">
                 <span class="dot"></span>
                 Now in early access
-            </div>
+            </div><span class="patent-badge fade-in">Patent Pending</span>
             <h1 class="fade-in delay-1">
                 Govern every<br>
                 <span class="highlight">AI agent</span><br>
@@ -1208,7 +1218,7 @@
                 <p>Stop bad things before they complete. Policy evaluation on every interaction, mid-flight intervention, human approval gates, and quality SLAs.</p>
                 <ul class="pillar-features">
                     <li>Policy engine: condition DSL, simulation mode, versioned rules</li>
-                    <li>DLP scanning: 12 patterns including SSN, PHI, API keys</li>
+                    <li>DLP scanning: 13 patterns including SSN, PHI, API keys</li>
                     <li>AI firewall: 10 threat signatures including prompt injection & jailbreak</li>
                     <li>Human-in-the-loop: pause any interaction for approval</li>
                 </ul>
@@ -1321,7 +1331,7 @@
             <div class="feature-card">
                 <div class="feature-icon"></div>
                 <h4>DLP scanning</h4>
-                <p>12 patterns scan all interaction content: SSN, credit cards, API keys (OpenAI sk-*, AWS AKIA*), PHI, connection strings. Catches data in agent↔agent messages too.</p>
+                <p>13 patterns scan all interaction content: SSN, credit cards, API keys (OpenAI sk-*, AWS AKIA*), PHI, connection strings. Catches data in agent↔agent messages too.</p>
                 <span class="feature-tag">Security</span>
             </div>
             <div class="feature-card">
@@ -1512,7 +1522,7 @@
             <div class="advantage">
                 <div class="adv-icon"></div>
                 <h4>SIEM-native, not SIEM-replacing</h4>
-                <p>11 SIEM platforms supported across 6 export formats — CEF for Splunk, LEEF for QRadar, ECS for Elastic, STIX 2.1 for threat intel platforms. Every event auto-forwards in real time. Your SOC team gets AI agent telemetry in the platform they already use.</p>
+                <p>11 SIEM platforms supported across 5 export formats — CEF for Splunk, LEEF for QRadar, Syslog RFC 5424 for any receiver, ECS for Elastic, STIX 2.1 for threat intel platforms. Every event auto-forwards in real time. Your SOC team gets AI agent telemetry in the platform they already use.</p>
                 <span class="adv-tag adv-parity">Enterprise ready</span>
             </div>
         </div>
@@ -1641,7 +1651,7 @@
                     <tr>
                         <td class="cmp-cap">DLP scanning</td>
                         <td class="cmp-others"><span class="cmp-partial">Limited or vendor-locked</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">12 patterns &middot; real-time</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">13 patterns &middot; real-time</span></td>
                     </tr>
                     <tr>
                         <td class="cmp-cap">AI firewall &amp; intervention</td>
@@ -1906,8 +1916,8 @@
             <div class="cta-trust">
                 <div class="trust-item"><i class="fa-solid fa-lock"></i> Self-hosted available</div>
                 <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Data never leaves your network</div>
-                <div class="trust-item"><i class="fa-solid fa-clock"></i> Deploy in under 15 minutes</div>
-                <div class="trust-item"><i class="fa-solid fa-code"></i> API-first, 66 endpoints</div>
+                <div class="trust-item"><i class="fa-solid fa-clock"></i> Deploy in minutes, not months</div>
+                <div class="trust-item"><i class="fa-solid fa-code"></i> API-first, 150+ endpoints</div>
             </div>
         </div>
     </div>
@@ -2087,6 +2097,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
                     <div class="footer-col-title">Company</div>
                     <a href="../careers.html" class="footer-link">Careers</a>
                     <a href="../contact.html" class="footer-link">Contact</a>
+                    <a href="../blog/index.html" class="footer-link">Blog</a>
                 </div>
                 <div class="footer-col">
                     <div class="footer-col-title">Legal &amp; Trust</div>
@@ -2112,6 +2123,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
             <div class="fu-right">
                 <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
                 <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in Privify FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+                <img src="/images/nvidia-inception-badge.svg" alt="NVIDIA Inception Program member" height="42" style="display:block;flex-shrink:0;border-radius:3px">
+                <img src="/images/google-cloud-logo.svg" alt="Google Cloud Partner" height="25" class="gcp-logo-light" style="flex-shrink:0">
+                <img src="/images/google-cloud-logo-reverse.svg" alt="Google Cloud Partner" height="25" class="gcp-logo-dark" style="flex-shrink:0">
             </div>
         </div>
         <div class="footer-bottom">

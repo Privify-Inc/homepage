@@ -2,3 +2,4 @@
 # This repo is published straight to GitHub Pages, so anything committed here
 # is public — keep dev scaffolding out of it.
 sentry-dev.html
+.DS_Store
