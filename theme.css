@@ -444,6 +444,15 @@
 /* ── Feature tags ── */
 [data-theme="light"] .feature-tag             { background: rgba(232,93,84,0.08); color: var(--red); }
 
+/* ── Industries / compliance tabs ── */
+[data-theme="light"] .ind-tab                 { background: #FFFFFF; border-color: rgba(0,0,0,0.10); color: #4B5563; }
+[data-theme="light"] .ind-tab:hover           { border-color: rgba(0,0,0,0.2); color: #0A0A0A; }
+[data-theme="light"] .ind-tab.active          { background: rgba(232,93,84,0.10); border-color: rgba(232,93,84,0.3); color: var(--red); }
+[data-theme="light"] .ind-chip                { background: #FFFFFF; border-color: rgba(0,0,0,0.10); color: #4B5563; }
+[data-theme="light"] .ind-steps li            { color: #374151; }
+[data-theme="light"] .ind-num                 { background: rgba(232,93,84,0.08); border-color: rgba(232,93,84,0.25); color: var(--red); }
+[data-theme="light"] .ind-footnote            { color: #6B7280; }
+
 /* ── Rail / how-it-works ── */
 [data-theme="light"] .rail-node               { background: #FFFFFF; }
 [data-theme="light"] .rail-stage              { color: #6B7280; }
