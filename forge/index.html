@@ -401,20 +401,28 @@
         .int-item:last-child{border-bottom:none;}
         .int-dot { width:6px; height:6px; border-radius:50%; background:var(--red); flex-shrink:0; }
 
-        /*  COMPLIANCE  */
-        .compliance-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; margin-bottom:3rem; }
-        .compliance-card {
-            background:var(--surface-2); border:1px solid var(--border);
-            border-radius:12px; padding:1.5rem; text-align:center; transition:all 0.2s;
-        }
-        .compliance-card:hover { border-color:var(--border-hover); transform:translateY(-2px); }
-        .compliance-name { font-size:1.25rem; font-weight:800; margin-bottom:0.375rem; }
-        .compliance-controls { font-size:0.75rem; color:var(--gray-500); margin-bottom:0.875rem; }
-        .compliance-bar { background:var(--surface-3); height:4px; border-radius:2px; overflow:hidden; }
-        .compliance-fill { height:100%; background:var(--red); border-radius:2px; }
-        .compliance-status { font-size:0.7rem; font-weight:600; margin-top:0.5rem; color:var(--ok); }
-        .compliance-badges { display:flex; justify-content:center; flex-wrap:wrap; gap:0.5rem; }
-        .compliance-badge { font-size:0.75rem; font-weight:600; padding:0.375rem 0.875rem; border-radius:6px; }
+        /*  COMPLIANCE — INDUSTRY TABS  */
+        .ind-tabs { display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem;margin-bottom:2.25rem; }
+        .ind-tab { background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400);
+                   padding:0.65rem 1.2rem;border-radius:999px;font-size:0.85rem;font-weight:600;
+                   font-family:inherit;cursor:pointer;transition:all 0.2s; }
+        .ind-tab:hover { border-color:var(--border-hover);color:var(--white); }
+        .ind-tab.active { background:var(--red-dim);border-color:rgba(232,93,84,0.35);color:var(--red); }
+        .ind-panel { display:none; }
+        .ind-panel.active { display:block; }
+        .ind-frameworks { display:flex;flex-wrap:wrap;justify-content:center;gap:0.55rem;margin-bottom:2rem; }
+        .ind-chip { background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400);
+                    padding:0.35rem 0.85rem;border-radius:999px;font-size:0.73rem;font-weight:600;
+                    font-family:var(--mono);letter-spacing:0.02em; }
+        .ind-steps { list-style:none;display:grid;gap:1.1rem;max-width:760px;margin:0 auto;text-align:left; }
+        .ind-steps li { display:flex;gap:1rem;align-items:flex-start;font-size:0.95rem;
+                        color:var(--gray-400);line-height:1.65; }
+        .ind-num { flex-shrink:0;font-family:var(--mono);font-size:0.72rem;font-weight:700;color:var(--red);
+                   background:var(--red-dim);border:1px solid rgba(232,93,84,0.25);border-radius:7px;
+                   width:26px;height:26px;display:flex;align-items:center;justify-content:center;margin-top:0.1rem; }
+        .ind-footnote { margin-top:2.25rem;font-size:0.83rem;color:var(--text-3);max-width:700px;
+                        line-height:1.6;margin-left:auto;margin-right:auto;text-align:center; }
+        .ind-footnote a { color:var(--red);text-decoration:underline;text-underline-offset:2px; }
 
         /*  ADVANTAGES  */
         .advantages-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
@@ -499,7 +507,6 @@
             .hero-subtitle{margin:0 auto 2.5rem;}
             .pillars-grid{grid-template-columns:1fr;}
             .features-grid{grid-template-columns:repeat(2,1fr);}
-            .compliance-grid{grid-template-columns:repeat(3,1fr);}
             .advantages-grid{grid-template-columns:1fr;}
             .integration-steps{grid-template-columns:repeat(2,1fr);}
             .int-grid{grid-template-columns:repeat(2,1fr);}
@@ -520,7 +527,6 @@
             /* Grids */
             .deployment-grid{grid-template-columns:1fr;}
             .features-grid{grid-template-columns:1fr;}
-            .compliance-grid{grid-template-columns:repeat(2,1fr);}
             .integration-steps{grid-template-columns:1fr;}
             .int-grid{grid-template-columns:1fr;}
             /* Dashboard mockup */
@@ -542,7 +548,6 @@
         @media(max-width:480px) {
             h1{font-size:2rem;}
             .hero{padding:4.5rem 1rem 2.5rem;}
-            .compliance-grid{grid-template-columns:1fr;}
             .advantages-grid{grid-template-columns:1fr;}
             .section-title{font-size:1.5rem;}
             .deploy-specs{grid-template-columns:repeat(2,1fr);}
@@ -1053,22 +1058,25 @@
                 </a>
             </div>
             <div class="hero-stats fade-in delay-4">
-                <!-- Counts verified against ../AgentDiscovery: PROVIDERS (116),
-                     FRAMEWORKS (13), DLP_PATTERNS (12), SIEM connectors (11). -->
+                <!-- Counts verified against core_engine: _SEED_PROVIDERS (116),
+                     compliance.py FRAMEWORKS (19), forge-codebook.yaml event_types (22),
+                     /siem/supported platforms (17). DLP/threat-signature counts are
+                     deliberately not shown as a stat here — see "configurable DLP engine"
+                     language elsewhere on this page and forge-context.md §31. -->
                 <div class="stat">
                     <div class="stat-num">116</div>
                     <div class="stat-label">AI providers tracked</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-num">13</div>
+                    <div class="stat-num">19</div>
                     <div class="stat-label">Compliance frameworks</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-num">12</div>
-                    <div class="stat-label">DLP patterns, live</div>
+                    <div class="stat-num">22</div>
+                    <div class="stat-label">Event types tracked</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-num">11</div>
+                    <div class="stat-num">17</div>
                     <div class="stat-label">SIEM platforms</div>
                 </div>
             </div>
@@ -1215,8 +1223,8 @@
                 <p>Stop bad things before they complete. Policy evaluation on every interaction, mid-flight intervention, human approval gates, and quality SLAs.</p>
                 <ul class="pillar-features">
                     <li>Policy engine: condition DSL, simulation mode, versioned rules</li>
-                    <li>DLP scanning: 13 patterns including SSN, PHI, API keys</li>
-                    <li>AI firewall: 10 threat signatures including prompt injection & jailbreak</li>
+                    <li>Configurable DLP engine: SSN, PHI, API keys, and more</li>
+                    <li>AI firewall: configurable threat signatures including prompt injection &amp; jailbreak</li>
                     <li>Human-in-the-loop: pause any interaction for approval</li>
                 </ul>
                 <div class="pillar-glow"></div>
@@ -1236,7 +1244,7 @@
         <div class="dashboard-showcase">
             <div class="dash-topbar">
                 <div class="dash-dots"><div class="dash-dot r"></div><div class="dash-dot y"></div><div class="dash-dot g"></div></div>
-                <div class="dash-url">forge.privify.io — Privify FORGE</div>
+                <div class="dash-url">privify.io — Privify FORGE</div>
             </div>
             <!-- Real capture, not a mock: infra/scripts/capture.py in the Privify FORGE repo,
                  logged into the live deployment with the API key. Re-run it and swap
@@ -1327,14 +1335,14 @@
             </div>
             <div class="feature-card">
                 <div class="feature-icon"></div>
-                <h4>DLP scanning</h4>
-                <p>13 patterns scan all interaction content: SSN, credit cards, API keys (OpenAI sk-*, AWS AKIA*), PHI, connection strings. Catches data in agent↔agent messages too.</p>
+                <h4>Configurable DLP engine</h4>
+                <p>Scans all interaction content for SSN, credit cards, API keys (OpenAI sk-*, AWS AKIA*), PHI, connection strings, and more — tune or extend detection to match your own data. Catches data in agent↔agent messages too.</p>
                 <span class="feature-tag">Security</span>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"></div>
                 <h4>AI firewall</h4>
-                <p>10 threat signatures covering the OWASP LLM Top 10: prompt injection, jailbreak (DAN), system prompt extraction, data exfiltration, indirect injection via tools.</p>
+                <p>Configurable threat signatures covering the OWASP LLM Top 10: prompt injection, jailbreak (DAN), system prompt extraction, data exfiltration, indirect injection via tools.</p>
                 <span class="feature-tag">Security</span>
             </div>
             <div class="feature-card">
@@ -1352,7 +1360,7 @@
             <div class="feature-card">
                 <div class="feature-icon"></div>
                 <h4>Compliance reporting</h4>
-                <p>13 frameworks: GDPR, HIPAA, SOC 2, PCI DSS, DPDP Act (India), PDPA (Singapore/Thailand), PIPEDA (Canada), EU AI Act, DSA, CA SB 53/AB 853, NIST AI RMF, ISO 42001, CCPA/CPRA. Tamper-evident SHA256 audit chain. CSV export.</p>
+                <p>19 frameworks: GDPR, HIPAA, SOC 2, PCI DSS, DPDP Act (India), PDPA (Singapore/Thailand), PIPEDA (Canada), EU AI Act, DSA, CA SB 53/AB 853, NIST AI RMF, ISO 42001, CCPA/CPRA, SR 11-7, NYDFS 500, GLBA, DORA, FINRA AI Guidance, Colorado AI Act. Tamper-evident SHA256 audit chain. CSV export.</p>
                 <span class="feature-tag">Compliance</span>
             </div>
         </div>
@@ -1404,7 +1412,7 @@
                         <div class="topo-col topo-col-end">
                             <div class="topo-col-label">Your stack</div>
                             <div class="topo-node">SIEM</div>
-                            <div class="topo-note">11 platforms</div>
+                            <div class="topo-note">17 platforms</div>
                         </div>
                     </div>
 
@@ -1443,7 +1451,7 @@
                 </div>
                 <div class="deploy-specs">
                     <div class="deploy-spec"><div class="deploy-spec-val">1–2 days</div><div class="deploy-spec-label">Full deployment</div></div>
-                    <div class="deploy-spec"><div class="deploy-spec-val">11 SIEMs</div><div class="deploy-spec-label">Supported</div></div>
+                    <div class="deploy-spec"><div class="deploy-spec-val">17 SIEMs</div><div class="deploy-spec-label">Supported</div></div>
                     <a class="deploy-spec deploy-spec-link" href="../contact.html?intent=pricing&amp;tier=mid-market" onclick="if(window.plausible)plausible('CTA_TierPricing',{props:{tier:'mid-market'}})" aria-label="Contact us about pricing for Mid-market, 50 to 500 agents"><div class="deploy-spec-val">Contact us <i class="fa-solid fa-arrow-right fa-2xs"></i></div><div class="deploy-spec-label">Pricing</div></a>
                 </div>
             </div>
@@ -1519,7 +1527,7 @@
             <div class="advantage">
                 <div class="adv-icon"></div>
                 <h4>SIEM-native, not SIEM-replacing</h4>
-                <p>11 SIEM platforms supported across 5 export formats — CEF for Splunk, LEEF for QRadar, Syslog RFC 5424 for any receiver, ECS for Elastic, STIX 2.1 for threat intel platforms. Every event auto-forwards in real time. Your SOC team gets AI agent telemetry in the platform they already use.</p>
+                <p>17 SIEM &amp; security platforms supported across 5 export formats — CEF for Splunk, LEEF for QRadar, Syslog RFC 5424 for any receiver, ECS for Elastic, STIX 2.1 for threat intel platforms. Every event auto-forwards in real time. Your SOC team gets AI agent telemetry in the platform they already use.</p>
                 <span class="adv-tag adv-parity">Enterprise ready</span>
             </div>
         </div>
@@ -1648,7 +1656,7 @@
                     <tr>
                         <td class="cmp-cap">DLP scanning</td>
                         <td class="cmp-others"><span class="cmp-partial">Limited or vendor-locked</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">13 patterns &middot; real-time</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">Configurable engine &middot; real-time</span></td>
                     </tr>
                     <tr>
                         <td class="cmp-cap">AI firewall &amp; intervention</td>
@@ -1678,12 +1686,12 @@
                     <tr>
                         <td class="cmp-cap">Compliance frameworks</td>
                         <td class="cmp-others"><span class="cmp-partial">1&ndash;3 frameworks, basic</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">13 frameworks &middot; audit-ready</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">19 frameworks &middot; audit-ready</span></td>
                     </tr>
                     <tr>
                         <td class="cmp-cap">SIEM integration</td>
                         <td class="cmp-others"><span class="cmp-partial">Basic or single platform</span></td>
-                        <td class="cmp-forge-cell"><span class="cmp-yes">11 platforms &middot; real-time forward</span></td>
+                        <td class="cmp-forge-cell"><span class="cmp-yes">17 platforms &middot; real-time forward</span></td>
                     </tr>
                     <tr>
                         <td class="cmp-cap">Deployment model</td>
@@ -1739,7 +1747,7 @@
         <div class="section-header">
             <div class="section-eyebrow">Integrations</div>
             <h2 class="section-title">Fits into your existing stack</h2>
-            <p class="section-sub">116 AI providers seeded. 11 SIEM platforms. Cloud discovery for AWS, GCP, and Azure. You don't rebuild your infrastructure — Privify slots into it.</p>
+            <p class="section-sub">116 AI providers seeded. 17 SIEM platforms. Cloud discovery for AWS, GCP, and Azure. You don't rebuild your infrastructure — Privify slots into it.</p>
         </div>
         <div class="int-grid">
             <div class="int-category">
@@ -1782,59 +1790,113 @@
     </div>
 </section>
 
-<!--  COMPLIANCE  -->
+<!--  COMPLIANCE BY INDUSTRY  -->
 <section id="compliance">
     <div class="container">
         <div class="section-header">
             <div class="section-eyebrow">Compliance</div>
-            <!-- Framework count and list: single source of truth is core_engine/compliance.py -> FRAMEWORKS (13). Update there first. -->
-            <h2 class="section-title">13 frameworks. Audit-ready out of the box.</h2>
-            <p class="section-sub">Every AI agent interaction is mapped to regulatory controls. SHA256 hash chain on every event. CSV export for audit submission. No manual work for your GRC team.</p>
+            <!-- Framework count: single source of truth is core_engine/compliance.py -> FRAMEWORKS (19). Update there first. -->
+            <h2 class="section-title">Regulated differently. Governed accordingly.</h2>
+            <p class="section-sub">Every regulated industry maps AI risk to a different set of controls. Privify FORGE ships with 19 frameworks pre-mapped to the configurable DLP engine and policy evidence — pick your industry to see which ones apply to you.</p>
         </div>
-        <div class="compliance-grid">
-            <div class="compliance-card">
-                <div class="compliance-name">GDPR</div>
-                <div class="compliance-controls">7 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-            <div class="compliance-card">
-                <div class="compliance-name">HIPAA</div>
-                <div class="compliance-controls">6 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-            <div class="compliance-card">
-                <div class="compliance-name">SOC 2</div>
-                <div class="compliance-controls">7 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-            <div class="compliance-card">
-                <div class="compliance-name">PCI-DSS</div>
-                <div class="compliance-controls">5 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
-            <div class="compliance-card" style="position:relative">
-                
-                <div class="compliance-name">DPDP</div>
-                <div class="compliance-controls">6 controls mapped</div>
-                <div class="compliance-bar"><div class="compliance-fill" style="width:100%"></div></div>
-                <div class="compliance-status"> Fully covered</div>
-            </div>
+
+        <div class="ind-tabs" role="tablist" aria-label="Industry">
+            <button class="ind-tab active" data-ind="finance" role="tab" aria-selected="true">Finance &amp; Insurance</button>
+            <button class="ind-tab" data-ind="healthcare" role="tab" aria-selected="false">Healthcare</button>
+            <button class="ind-tab" data-ind="tech" role="tab" aria-selected="false">Technology &amp; SaaS</button>
+            <button class="ind-tab" data-ind="public" role="tab" aria-selected="false">Public Sector</button>
+            <button class="ind-tab" data-ind="privacy" role="tab" aria-selected="false">Global Privacy</button>
         </div>
-        <div style="text-align:center">
-            <div style="font-size:0.8rem;color:var(--gray-600);margin-bottom:1.25rem;">Also covers</div>
-            <div class="compliance-badges">
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127470;&#127475; DPDP Rules 2025</span><span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127466;&#127482; EU AI Act</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; NIST AI RMF</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127760; ISO 42001</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; CCPA</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127466;&#127482; DSA</span>
-                <span class="compliance-badge" style="background:var(--surface-2);border:1px solid var(--border);color:var(--gray-400)">&#127482;&#127480; California SB53</span>
+
+        <div class="ind-panel active" data-ind-panel="finance">
+            <div class="ind-frameworks">
+                <span class="ind-chip">SOC 2</span>
+                <span class="ind-chip">PCI-DSS</span>
+                <span class="ind-chip">GDPR</span>
+                <span class="ind-chip">CCPA</span>
+                <span class="ind-chip">SR 11-7</span>
+                <span class="ind-chip">NYDFS 500</span>
+                <span class="ind-chip">GLBA</span>
+                <span class="ind-chip">DORA</span>
+                <span class="ind-chip">FINRA AI Guidance</span>
             </div>
+            <ol class="ind-steps">
+                <li><span class="ind-num">01</span> SR 11-7 treats an AI model the same as any other model — ongoing monitoring, documented outcomes, an inventory that actually stays current. Most banks can point to the first two and are guessing on the third.</li>
+                <li><span class="ind-num">02</span> Trading desks, underwriting, and customer support have all started running AI agents — usually before the model-risk team has a name for them, let alone a monitoring plan.</li>
+                <li><span class="ind-num">03</span> Privify FORGE closes that gap directly: SOC 2, PCI-DSS, SR 11-7 model-risk monitoring, NYDFS 500 anomaly detection, GLBA safeguards, and FINRA AI supervision controls all draw from the same real-time event stream, with an approval gate in front of anything that touches cardholder or account data.</li>
+                <li><span class="ind-num">04</span> Model-risk and compliance stop reconstructing what happened after the fact — the evidence was already being collected.</li>
+            </ol>
         </div>
+
+        <div class="ind-panel" data-ind-panel="healthcare" hidden>
+            <div class="ind-frameworks">
+                <span class="ind-chip">HIPAA</span>
+                <span class="ind-chip">SOC 2</span>
+                <span class="ind-chip">NIST AI RMF</span>
+            </div>
+            <ol class="ind-steps">
+                <li><span class="ind-num">01</span> HIPAA doesn't distinguish between PHI leaked by human error and PHI leaked by an AI copilot summarizing a chart — the audit-control and breach-detection obligations are identical either way.</li>
+                <li><span class="ind-num">02</span> Clinical and care-ops teams have quietly adopted AI copilots for scheduling, summarization, and triage support — usually with no one from security in the loop.</li>
+                <li><span class="ind-num">03</span> Privify FORGE's DLP layer fingerprints PHI in agent traffic — MRN, date of birth, and other protected fields — and ties every match directly to a HIPAA audit-control requirement, not a generic alert.</li>
+                <li><span class="ind-num">04</span> Security gets exposure evidence they can hand an auditor, instead of reading agent transcripts by hand.</li>
+            </ol>
+        </div>
+
+        <div class="ind-panel" data-ind-panel="tech" hidden>
+            <div class="ind-frameworks">
+                <span class="ind-chip">SOC 2</span>
+                <span class="ind-chip">ISO 42001</span>
+                <span class="ind-chip">EU AI Act</span>
+                <span class="ind-chip">GDPR</span>
+            </div>
+            <ol class="ind-steps">
+                <li><span class="ind-num">01</span> Enterprise customers now put "how do you govern your own AI use" in the security questionnaire — right next to SOC 2, and just as hard to fake.</li>
+                <li><span class="ind-num">02</span> Product and engineering teams are usually the fastest AI adopters inside a SaaS company — copilots, MCP servers, autonomous coding tools — often before security has a full list.</li>
+                <li><span class="ind-num">03</span> Privify FORGE discovers every agent and MCP server actually running across the fleet, sanctioned or shadow, and maps that coverage straight into SOC 2 and ISO 42001 controls.</li>
+                <li><span class="ind-num">04</span> The questionnaire answer becomes a report you export, not a claim you make.</li>
+            </ol>
+        </div>
+
+        <div class="ind-panel" data-ind-panel="public" hidden>
+            <div class="ind-frameworks">
+                <span class="ind-chip">EU AI Act</span>
+                <span class="ind-chip">NIST AI RMF</span>
+                <span class="ind-chip">ISO 42001</span>
+                <span class="ind-chip">CA SB53</span>
+                <span class="ind-chip">EU DSA</span>
+                <span class="ind-chip">Colorado AI Act</span>
+            </div>
+            <ol class="ind-steps">
+                <li><span class="ind-num">01</span> The EU AI Act, Colorado's AI Act, and California SB 53 all share one demand underneath the different names: a documented risk assessment with evidence behind it, not a policy statement.</li>
+                <li><span class="ind-num">02</span> Agencies and large platforms are the first to feel each new rule land, usually with a real penalty attached if the evidence isn't there when it's asked for.</li>
+                <li><span class="ind-num">03</span> Privify FORGE maps agent activity directly to EU AI Act, NIST AI RMF, ISO 42001, California SB53, EU DSA, and Colorado's AI Act controls, off the same event trail used for every other framework.</li>
+                <li><span class="ind-num">04</span> One governance layer produces evidence for every jurisdiction you operate in, instead of one project per regulator.</li>
+            </ol>
+        </div>
+
+        <div class="ind-panel" data-ind-panel="privacy" hidden>
+            <div class="ind-frameworks">
+                <span class="ind-chip">GDPR</span>
+                <span class="ind-chip">CCPA</span>
+                <span class="ind-chip">DPDP</span>
+                <span class="ind-chip">PDPA</span>
+                <span class="ind-chip">PIPEDA</span>
+            </div>
+            <ol class="ind-steps">
+                <li><span class="ind-num">01</span> GDPR, CCPA, India's DPDP, Singapore's PDPA, and Canada's PIPEDA each define processing, consent, and breach notification differently — and one AI conversation can cross all five without anyone noticing.</li>
+                <li><span class="ind-num">02</span> AI agents move customer data across borders by default, which is exactly the scenario none of these regimes were written assuming would happen this fast.</li>
+                <li><span class="ind-num">03</span> Privify FORGE tags PII by type the moment an agent touches it, and maps each match to GDPR, CCPA, DPDP, PDPA, and PIPEDA simultaneously — one DLP pass, five compliance mappings.</li>
+                <li><span class="ind-num">04</span> No separate compliance workstream per region your agents happen to touch.</li>
+            </ol>
+        </div>
+
+        <p class="ind-footnote">
+            Frameworks shown are ones Privify FORGE maps controls to today, across 19 total —
+            GDPR, HIPAA, SOC 2, PCI DSS, DPDP, PDPA, PIPEDA, EU AI Act, DSA, CA SB 53/AB 853, NIST AI RMF,
+            ISO 42001, CCPA/CPRA, SR 11-7, NYDFS 500, GLBA, DORA, FINRA AI Guidance, Colorado AI Act.
+            Tamper-evident SHA256 audit chain on every event. CSV export for audit submission.
+            Don't see a regime you need? <a href="../contact.html">Tell us</a> — a new framework pack is usually the fastest thing we can add.
+        </p>
     </div>
 </section>
 
@@ -1945,6 +2007,24 @@ window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.pageYOffset > 50);
 });
 
+//  Industries tabs (compliance section)
+(function industryTabs(){
+    const tabs = document.querySelectorAll('.ind-tab');
+    const panels = document.querySelectorAll('.ind-panel');
+    if (!tabs.length) return;
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-ind');
+            tabs.forEach(t => { t.classList.toggle('active', t === tab); t.setAttribute('aria-selected', t === tab); });
+            panels.forEach(p => {
+                const match = p.getAttribute('data-ind-panel') === target;
+                p.classList.toggle('active', match);
+                p.hidden = !match;
+            });
+        });
+    });
+})();
+
 //  Animated bars (hero)
 // color accepts either one CSS color (every bar the same, the original
 // behavior) or an array, cycled per bar — used for the hero chart so it
@@ -2045,7 +2125,7 @@ const observer = new IntersectionObserver(entries => {
 //  Skipped when the visitor asks for reduced motion — elements stay visible
 //  rather than being hidden by JS and revealed on scroll.
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.feature-card, .deploy-card, .advantage, .compliance-card, .int-category, .step-card, .pillar').forEach(el => {
+    document.querySelectorAll('.feature-card, .deploy-card, .advantage, .ind-panel, .int-category, .step-card, .pillar').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -2119,7 +2199,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
             </div>
             <div class="fu-right">
                 <span class="fu-trust"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> Aligned with SOC&nbsp;2</span>
-                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 13 frameworks in Privify FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
+                <span class="fu-trust fu-cap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.2-8 11-4.5-1.8-8-6-8-11V5z"/></svg> 19 frameworks in Privify FORGE &mdash; HIPAA, GDPR, EU&nbsp;AI&nbsp;Act</span>
                 <img src="/images/nvidia-inception-badge.svg" alt="NVIDIA Inception Program member" height="42" style="display:block;flex-shrink:0;border-radius:3px">
                 <img src="/images/google-cloud-logo.svg" alt="Google Cloud Partner" height="25" class="gcp-logo-light" style="flex-shrink:0">
                 <img src="/images/google-cloud-logo-reverse.svg" alt="Google Cloud Partner" height="25" class="gcp-logo-dark" style="flex-shrink:0">
