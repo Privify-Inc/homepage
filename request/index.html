@@ -374,6 +374,29 @@ function applyRequestProduct() {
 }
 const requestProduct = applyRequestProduct();
 
+// Common free/personal email providers — request access is meant for a
+// work identity (see the "Work email" placeholder above), so route personal
+// addresses back with a clear message instead of silently accepting them.
+// Not exhaustive by design: catching the handful of providers that make up
+// the overwhelming majority of personal signups is enough; a determined
+// user can still get through with an obscure personal domain, and that's
+// an acceptable tradeoff against false-rejecting real work domains.
+const PERSONAL_EMAIL_DOMAINS = new Set([
+  'gmail.com', 'googlemail.com',
+  'yahoo.com', 'yahoo.co.uk', 'yahoo.co.in', 'ymail.com', 'rocketmail.com',
+  'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'passport.com',
+  'icloud.com', 'me.com', 'mac.com',
+  'aol.com', 'protonmail.com', 'proton.me', 'pm.me',
+  'zoho.com', 'gmx.com', 'gmx.net', 'mail.com', 'yandex.com', 'yandex.ru',
+  'qq.com', '163.com', '126.com', 'naver.com', 'daum.net',
+  'rediffmail.com', 'inbox.com', 'fastmail.com', 'tutanota.com',
+]);
+
+function isPersonalEmail(email) {
+  const domain = email.split('@')[1];
+  return !!domain && PERSONAL_EMAIL_DOMAINS.has(domain.trim().toLowerCase());
+}
+
 async function submitRequest() {
   const name    = document.getElementById('rName').value.trim();
   const email   = document.getElementById('rEmail').value.trim();
@@ -389,6 +412,10 @@ async function submitRequest() {
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     alert('Please enter a valid work email address.');
+    return;
+  }
+  if (isPersonalEmail(email)) {
+    alert('Please use your work email address rather than a personal one — this helps us route your request to the right team.');
     return;
   }
 
