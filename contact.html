@@ -405,6 +405,27 @@ function showError(msg){
     box.scrollIntoView({ behavior:'smooth', block:'center' });
 }
 
+// Common free/personal email providers — this form asks for a work email
+// specifically (see the field label and placeholder above), so route
+// personal addresses back with a clear message instead of silently
+// accepting them. Same list used on request/index.html and the SCOUT
+// portal's download-request form, for consistency across the platform.
+const PERSONAL_EMAIL_DOMAINS = new Set([
+  'gmail.com', 'googlemail.com',
+  'yahoo.com', 'yahoo.co.uk', 'yahoo.co.in', 'ymail.com', 'rocketmail.com',
+  'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'passport.com',
+  'icloud.com', 'me.com', 'mac.com',
+  'aol.com', 'protonmail.com', 'proton.me', 'pm.me',
+  'zoho.com', 'gmx.com', 'gmx.net', 'mail.com', 'yandex.com', 'yandex.ru',
+  'qq.com', '163.com', '126.com', 'naver.com', 'daum.net',
+  'rediffmail.com', 'inbox.com', 'fastmail.com', 'tutanota.com',
+]);
+
+function isPersonalEmail(email) {
+  const domain = email.split('@')[1];
+  return !!domain && PERSONAL_EMAIL_DOMAINS.has(domain.trim().toLowerCase());
+}
+
 async function handleContact() {
     const name    = document.getElementById('cName').value.trim();
     const email   = document.getElementById('cEmail').value.trim();
@@ -423,6 +444,10 @@ async function handleContact() {
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showError('That email address doesn’t look right — please check it.');
+        return;
+    }
+    if (isPersonalEmail(email)) {
+        showError('Please use your work email address rather than a personal one — this helps us route your request to the right team.');
         return;
     }
 
