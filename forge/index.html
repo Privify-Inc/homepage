@@ -156,12 +156,17 @@
         .hero-eyebrow .dot { width:6px; height:6px; background:var(--red); border-radius:50%; animation:pulse 2s infinite; }
         @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
         .patent-badge {
+            position:fixed; left:1.1rem; bottom:1.1rem; z-index:40;
             display:inline-flex; align-items:center;
-            background:var(--red-dim); border:1px solid rgba(232,93,84,0.3);
-            color:var(--red); padding:0.375rem 0.875rem; border-radius:999px;
-            font-size:0.8rem; font-weight:600; letter-spacing:0.04em;
-            text-transform:uppercase; margin-bottom:1.5rem; margin-left:0.6rem;
+            background:var(--surface-2); border:1px solid var(--border);
+            color:var(--gray-500); padding:0.3rem 0.7rem; border-radius:999px;
+            font-size:0.68rem; font-weight:500; letter-spacing:0.04em;
+            text-transform:uppercase; opacity:0.55;
+            backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+            transition:opacity 0.2s ease;
         }
+        .patent-badge:hover { opacity:0.9; }
+        @media (max-width:640px) { .patent-badge { left:0.75rem; bottom:0.75rem; font-size:0.62rem; padding:0.26rem 0.6rem; } }
 
         h1 {
             font-size:clamp(2.25rem,4.5vw,3.75rem);
@@ -1038,7 +1043,7 @@
 <section class="hero">
     <div class="hero-content">
         <div class="hero-text">
-            <span class="patent-badge fade-in">Patent Pending</span>
+            <span class="patent-badge">Patent Pending</span>
             <h1 class="fade-in delay-1">
                 Govern every<br>
                 <span class="highlight">AI agent</span><br>
