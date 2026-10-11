@@ -3,3 +3,16 @@
 # is public — keep dev scaffolding out of it.
 sentry-dev.html
 .DS_Store
+
+# Secrets and local config — never commit
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+.vscode/
+.idea/
+.claude/
+*.local
+local.config.*
