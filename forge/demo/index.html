@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://privify-sentry.azurewebsites.net https://api.privify.io https://formspree.io https://plausible.io https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Privify FORGE interactive demo — see how Privify discovers shadow AI, monitors every LLM interaction, enforces data policies, and proves compliance.">
 <meta property="og:title" content="Privify FORGE Interactive Demo | Privify">
@@ -2118,6 +2119,7 @@ function hideLockedToast() {
 initParticles();
 document.getElementById('dash-time').textContent = new Date().toUTCString().slice(5, 25) + ' UTC';
 </script>
+<div style="position:fixed;bottom:4px;right:10px;z-index:5;font-size:10px;color:var(--text-dim);pointer-events:none">© 2026 Privify Inc. All rights reserved.</div>
 <script src="/theme.js"></script>
 <script>
 /* This simulator mirrors the real Privify FORGE dashboard, which is dark-themed.
