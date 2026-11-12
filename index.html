@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://privify-sentry.azurewebsites.net https://api.privify.io https://formspree.io https://plausible.io https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://privify-sentry.azurewebsites.net https://api.privify.io https://formspree.io https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Privify builds AI control infrastructure. Privify FORGE governs AI agents for enterprises. Privify SHIELD protects individuals from data harvesting.">
     <meta property="og:title" content="Privify — Control Your AI">
@@ -14,8 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha384-t1nt8BQoYMLFN5p42tRAtuAAFQaCQODekUVeKKZrEnEyp4H2R0RHFz0KWpmj7i8g" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="/theme.css">
-    <script async src="https://plausible.io/js/pa-xzJdFIYGn8rdNMNj19f_H.js"></script>
-    <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}</script>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         :root {
@@ -492,7 +490,7 @@
                     <li>13 regulatory frameworks, audit evidence out of the box</li>
                 </ul>
                 <div class="fork-actions">
-                    <a href="contact.html?product=forge" class="btn btn-forge" onclick="track('CTA_ForgeDemo')">
+                    <a href="contact.html?product=forge" class="btn btn-forge">
                         Request a demo <i class="fa-solid fa-arrow-right fa-xs"></i>
                     </a>
                     <a href="forge/index.html" class="btn btn-ghost">Explore Privify FORGE</a>
@@ -518,7 +516,7 @@
                     <li>Works with Google, LinkedIn, Amazon and more</li>
                 </ul>
                 <div class="fork-actions">
-                    <a href="shield/index.html#waitlist" class="btn btn-shield" onclick="track('CTA_ShieldWaitlist')">
+                    <a href="shield/index.html#waitlist" class="btn btn-shield">
                         Join the waitlist <i class="fa-solid fa-arrow-right fa-xs"></i>
                     </a>
                     <a href="shield/index.html" class="btn btn-ghost">Explore Privify SHIELD</a>
@@ -675,7 +673,7 @@
                 <span class="pi-chip"><i class="fa-solid fa-check"></i> 17 SIEM integrations</span>
             </div>
 
-            <a href="contact.html?product=forge&amp;intent=pricing" class="btn btn-forge" onclick="track('CTA_ContactPricing')">
+            <a href="contact.html?product=forge&amp;intent=pricing" class="btn btn-forge">
                 Contact us for pricing <i class="fa-solid fa-arrow-right fa-xs"></i>
             </a>
         </div>
@@ -786,7 +784,7 @@
                 where you can, and get paid when you choose to share it.
             </p>
             <div class="fork-actions" style="margin-top:2rem">
-                <a href="shield/index.html#waitlist" class="btn btn-shield" onclick="track('CTA_ShieldWaitlist_Track')">
+                <a href="shield/index.html#waitlist" class="btn btn-shield">
                     Join the waitlist <i class="fa-solid fa-arrow-right fa-xs"></i>
                 </a>
             </div>
@@ -834,7 +832,7 @@
             deployment on your infrastructure.
         </p>
         <div class="final-actions">
-            <a href="contact.html?product=forge&amp;intent=demo" class="btn btn-forge" onclick="track('CTA_FinalDemo')">
+            <a href="contact.html?product=forge&amp;intent=demo" class="btn btn-forge">
                 Request a demo <i class="fa-solid fa-arrow-right fa-xs"></i>
             </a>
             <a href="forge/demo/index.html" class="btn btn-ghost">&#9654; Try the interactive demo</a>
@@ -1057,8 +1055,6 @@ if (!('name' in document.createElement('details'))) {
         });
     });
 }
-
-function track(name){ if(window.plausible) plausible(name); }
 
 const hdr = document.getElementById('header');
 window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.pageYOffset > 50));
