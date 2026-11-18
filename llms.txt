@@ -85,6 +85,7 @@ capabilities, not certifications held by Privify.
 
 ## Company
 
+- [About](https://privify.io/about.html) — offices: Hayward, California (28724 Vista Grande Dr, Hayward, CA 94544; +1-800-213-1324) and Madhapur, Hyderabad, India; sales@privify.io
 - [Careers](https://privify.io/careers.html)
 - [Contact](https://privify.io/contact.html)
 - General enquiries: sales@privify.io
