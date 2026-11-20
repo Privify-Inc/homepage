@@ -145,8 +145,11 @@
         .backed-by-label { text-align:center;font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;color:var(--gray-400);
             max-width:36rem;margin:0 auto 1.5rem;padding:0 1.5rem;line-height:1.4; }
         .backed-by-row { display:flex;align-items:center;justify-content:center;gap:3.5rem;flex-wrap:wrap;padding:0 1.75rem; }
-        .backed-by-row img { display:block;height:44px;width:auto;flex-shrink:0; }
-        .backed-by-row img.gcp-logo { height:26px; }
+        .backed-by-row { gap:1.25rem; }
+        .partner-logo { display:flex;align-items:center;justify-content:center;width:200px;height:84px;padding:0.9rem 1.1rem;
+            background:#fff;border:1px solid var(--border);border-radius:12px;flex-shrink:0; }
+        .partner-logo img { display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain; }
+        @media (max-width:560px) { .partner-logo { width:calc(50% - 0.625rem);height:72px;padding:0.7rem 0.8rem; } }
         img.gcp-logo-dark { display:none; }
         html:not([data-theme="light"]) img.gcp-logo-light { display:none; }
         html:not([data-theme="light"]) img.gcp-logo-dark { display:block; }
@@ -532,9 +535,10 @@
 <section class="backed-by">
     <div class="backed-by-label">We partner with the world&rsquo;s leading organizations</div>
     <div class="backed-by-row">
-        <img src="images/nvidia-inception-badge-mono.svg" alt="NVIDIA Inception Program member">
-        <img src="images/google-cloud-logo.svg" alt="Google Cloud Partner" class="gcp-logo gcp-logo-light">
-        <img src="images/google-cloud-logo-reverse.svg" alt="Google Cloud Partner" class="gcp-logo gcp-logo-dark">
+        <div class="partner-logo"><img src="images/intel-partner-logo.png" alt="Intel Partner" width="488" height="244" loading="lazy"></div>
+        <div class="partner-logo"><img src="images/google-cloud-partner-logo.png" alt="Google Cloud Partner" width="711" height="182" loading="lazy"></div>
+        <div class="partner-logo"><img src="images/microsoft-ai-cloud-partner-logo.png" alt="Microsoft AI Cloud Partner" width="650" height="138" loading="lazy"></div>
+        <div class="partner-logo"><img src="images/nvidia-inception-program-logo.png" alt="NVIDIA Inception Program member" width="942" height="338" loading="lazy"></div>
     </div>
 </section>
 
