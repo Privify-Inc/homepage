@@ -19,13 +19,13 @@
   font-family: var(--sentry-font);
 
   /* Scrollbars are the only native UI left in here (the textarea and every
-     button carry their own colours), so we paint them directly rather than
+     button carry their own colors), so we paint them directly rather than
      leaning on color-scheme. This block used to say `color-scheme: dark`
      with a `[data-theme='light'] :host` override below it, but that selector
      can never match — inside a shadow stylesheet `:host` is not reachable as
      the descendant of an outside element — so the widget stayed dark-schemed
      and drew a dark scrollbar down the light panel. `:host-context()` would
-     fix Chromium and Safari and leave Firefox exactly as broken; a mid grey
+     fix Chromium and Safari and leave Firefox exactly as broken; a mid gray
      reads against both surfaces and needs neither. scrollbar-color inherits,
      so setting it here reaches the thread and the composer alike; its
      scrollbar-width counterpart does not inherit and lives on the universal
@@ -213,7 +213,7 @@
 
 .icon-btn:hover {
   color: var(--sentry-text);
-  /* Mid grey, not white: a white wash is invisible on the light theme's
+  /* Mid gray, not white: a white wash is invisible on the light theme's
      #F4F4F6 panel, leaving the close button with no hover fill at all. */
   background: rgba(128, 128, 128, 0.14);
 }
