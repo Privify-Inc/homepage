@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Sentry">
   <title>Sentry</title>
   <!--
-    An open aperture with a fixed centre point: watchfulness and focus, not a
+    An open aperture with a fixed center point: watchfulness and focus, not a
     conversation. Deliberately avoids the three clichés in range — a speech
     bubble (what this widget is trying not to be), a shield (SHIELD is a
     product name), and a magnifier (reads as search, and collides with Scout).
@@ -14,7 +14,7 @@
     Drawn with stroke rather than a filled outline. The spec asks for
     fill="currentColor"; stroke="currentColor" satisfies the same requirement
     — one file, inherits the theme, no swap logic — and keeps a monoline
-    editable as a monoline instead of a frozen outline. The centre dot stays a
+    editable as a monoline instead of a frozen outline. The center dot stays a
     separate filled circle rather than a zero-length stroked subpath, because
     matching the arc's stroke-width would shrink it below legibility at 16px.
   -->

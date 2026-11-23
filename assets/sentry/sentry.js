@@ -761,7 +761,7 @@
     // When every slot is in the same zone — the normal case — name it once
     // under the title instead of stamping "PDT" on all six buttons. A
     // fortnight can straddle a DST change though, and then they genuinely
-    // differ, so fall back to labelling each button.
+    // differ, so fall back to labeling each button.
     var zones = result.slots
       .map(function (slot) { return slot.zone; })
       .filter(function (zone, i, all) { return zone && all.indexOf(zone) === i; });
